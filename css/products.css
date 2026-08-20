@@ -1,0 +1,1660 @@
+/* ==========================================================================
+   PRODUCT CATALOG, PLP FILTER LAYOUT, PDP DETAIL PAGE & DYNAMIC PRICING
+   ========================================================================== */
+
+.products-section {
+  background-color: var(--bg-primary);
+  padding: 5rem 0;
+}
+
+/* Category Filter Tabs (Home / Quick Filter) */
+.filter-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  padding: 0.6rem 1.4rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  border-radius: var(--radius-full);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.tab-btn:hover {
+  border-color: var(--gold-primary);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.tab-btn.active {
+  background: var(--text-primary);
+  color: #FFFFFF;
+  border-color: var(--text-primary);
+  box-shadow: var(--shadow-md);
+}
+
+/* ==========================================================================
+   PLP (PRODUCT LISTING PAGE) HERO BANNER & BREADCRUMBS
+   ========================================================================== */
+
+.plp-hero-banner {
+  position: relative;
+  min-height: 280px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border-gold);
+}
+
+.plp-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(30, 24, 20, 0.88) 0%, rgba(61, 44, 33, 0.75) 100%);
+  backdrop-filter: blur(3px);
+}
+
+.plp-hero-content {
+  position: relative;
+  z-index: 2;
+  color: #FFFFFF;
+  padding: 3rem 0;
+  max-width: 800px;
+}
+
+.plp-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 1rem;
+}
+
+.plp-breadcrumb a {
+  color: rgba(255, 255, 255, 0.75);
+  transition: color var(--transition-fast);
+}
+
+.plp-breadcrumb a:hover {
+  color: var(--gold-bright);
+}
+
+.plp-breadcrumb i {
+  font-size: 0.7rem;
+  color: var(--gold-primary);
+}
+
+.plp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-full);
+  background: rgba(212, 168, 83, 0.2);
+  border: 1px solid rgba(212, 168, 83, 0.5);
+  color: var(--gold-bright);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+
+.plp-title {
+  font-family: var(--font-heading);
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 1.15;
+  color: #FFFFFF;
+  margin-bottom: 0.75rem;
+}
+
+.plp-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
+/* Category Quick Stat Chips Bar */
+.plp-stats-bar {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.plp-stat-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+}
+
+.plp-stat-chip i {
+  color: var(--gold-bright);
+}
+
+/* ==========================================================================
+   PLP TWO-COLUMN LAYOUT & SIDEBAR FILTERS
+   ========================================================================== */
+
+.plp-layout-container {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  margin-bottom: 4rem;
+  width: 100%;
+}
+
+/* Sticky Filter Sidebar */
+.plp-sidebar {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 100px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 1.25rem;
+}
+
+.sidebar-title {
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-primary);
+}
+
+.btn-reset-filters {
+  font-size: 0.78rem;
+  color: var(--rose-gold);
+  background: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+.btn-reset-filters:hover {
+  text-decoration: underline;
+}
+
+/* Filter Groups */
+.filter-group {
+  margin-bottom: 1.35rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.filter-group:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.filter-group-title {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Checkbox Items */
+.filter-checkbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-checkbox-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  user-select: none;
+  padding: 0.15rem 0;
+}
+
+.filter-checkbox-item:hover {
+  color: var(--text-primary);
+}
+
+.filter-checkbox-item input[type="checkbox"] {
+  accent-color: var(--gold-deep);
+  width: 15px;
+  height: 15px;
+  margin-right: 0.35rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.filter-checkbox-item span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+}
+
+.filter-item-count {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* Price Range Slider */
+.price-slider-wrap {
+  margin-top: 0.5rem;
+}
+
+.price-slider-range {
+  width: 100%;
+  accent-color: var(--gold-deep);
+  cursor: pointer;
+}
+
+.price-slider-values {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 0.4rem;
+}
+
+/* Color Filter Chips in Sidebar - 2x2 Grid so nothing overflows */
+.filter-color-dots {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  width: 100%;
+}
+
+.filter-color-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  background: var(--bg-card-subtle);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.filter-color-pill.active {
+  border-color: var(--gold-deep);
+  background: var(--bg-tint-gold);
+  font-weight: 600;
+  color: var(--gold-deep);
+}
+
+/* ==========================================================================
+   PLP MAIN CONTENT AREA & TOOLBAR
+   ========================================================================== */
+
+.plp-main-content {
+  min-width: 0;
+  width: 100%;
+}
+
+.plp-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.plp-results-count {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.plp-results-count strong {
+  color: var(--text-primary);
+}
+
+.plp-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.plp-sort-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+.plp-sort-select {
+  padding: 0.45rem 1.85rem 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  background: var(--bg-card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23666666'%3E%3Cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3E") no-repeat right 0.6rem center;
+  background-size: 14px;
+  font-size: 0.84rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  appearance: none;
+  outline: none;
+}
+
+.plp-sort-select:focus {
+  border-color: var(--gold-deep);
+}
+
+/* Active Filter Badges Strip */
+.active-filters-chips {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.active-filter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-tint-gold);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-deep);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.active-filter-badge i {
+  cursor: pointer;
+}
+
+/* Products Grid - 4 Columns per Row Guaranteed */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem 1rem;
+  width: 100%;
+}
+
+/* Official Tanishq Luxury Product Card - 100% Uniform Sizing Across Grid */
+.product-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  transition: transform var(--transition-normal);
+  position: relative;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Product Media Box - 1:1 Strict Square Studio Frame on ALL Devices */
+.product-media {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%; /* Guarantees exact 1:1 square ratio */
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  background-color: #F7F3EE;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(28, 25, 23, 0.05);
+  transition: box-shadow var(--transition-normal);
+  flex-shrink: 0;
+}
+
+.product-card:hover .product-media {
+  box-shadow: 0 8px 24px rgba(28, 25, 23, 0.1);
+}
+
+.product-img-primary, .product-img-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: opacity 0.4s ease, transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  display: block;
+}
+
+.product-img-hover {
+  opacity: 0;
+}
+
+.product-card:hover .product-img-primary {
+  transform: scale(1.05);
+}
+
+.product-card:hover .product-img-hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Top-Right Heart Wishlist Button */
+.tanishq-card-wishlist {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.tanishq-card-wishlist:hover,
+.tanishq-card-wishlist.wishlisted {
+  color: #832729;
+  background: #FFFFFF;
+  transform: scale(1.1);
+}
+
+/* Product Info Container */
+.product-info {
+  padding: 0.75rem 0.1rem 0;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-title {
+  font-family: var(--font-sans), 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: #262220;
+  margin: 0 0 0.3rem 0;
+  line-height: 1.35;
+  height: 2.7em; /* Exact 2 lines for every card */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color var(--transition-fast);
+}
+
+.product-card:hover .product-title {
+  color: #832729;
+}
+
+/* Pricing Row */
+.product-pricing-box {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.4rem;
+  min-height: 1.5rem;
+}
+
+.price-current {
+  font-family: var(--font-sans), 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #1C1917;
+  letter-spacing: -0.01em;
+}
+
+.price-original {
+  font-size: 0.86rem;
+  color: #8C827A;
+  text-decoration: line-through;
+  margin-left: 0.15rem;
+}
+
+.stock-urgency-text {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #C2410C;
+  margin-left: 0.25rem;
+}
+
+/* Full Width Peach Offer Ribbon */
+.tanishq-offer-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #FDF3EA;
+  border-radius: 6px;
+  padding: 0.32rem 0.55rem;
+  width: 100%;
+  color: #9C5216;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-top: auto;
+  box-sizing: border-box;
+}
+
+.offer-pct-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #9C5216;
+  color: #FFFFFF;
+  font-size: 0.58rem;
+  font-weight: 700;
+}
+
+
+/* ==========================================================================
+   CATEGORY BUYING GUIDE & FAQ ACCORDION
+   ========================================================================== */
+
+.category-guide-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  margin-top: 3.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.guide-header {
+  max-width: 700px;
+  margin-bottom: 2rem;
+}
+
+.guide-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.guide-title {
+  font-family: var(--font-heading);
+  font-size: 1.9rem;
+  color: var(--text-primary);
+  margin-top: 0.35rem;
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.guide-card {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: all var(--transition-fast);
+}
+
+.guide-card:hover {
+  border-color: var(--gold-primary);
+  transform: translateY(-3px);
+}
+
+.guide-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-tint-gold);
+  color: var(--gold-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.guide-card h4 {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.guide-card p {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   DYNAMIC PRODUCT DETAILS PAGE (PDP) - HIGH CONVERSION DESIGN
+   ========================================================================== */
+
+.pdp-section {
+  padding: 3rem 0 5rem 0;
+  background-color: var(--bg-primary);
+}
+
+.pdp-main-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+/* PDP Gallery Column */
+.pdp-gallery-col {
+  display: flex;
+  gap: 1.25rem;
+  position: sticky;
+  top: 100px;
+}
+
+.pdp-thumb-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.pdp-thumb-item {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--bg-card-subtle);
+  transition: all var(--transition-fast);
+  padding: 0.35rem;
+}
+
+.pdp-thumb-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-xs);
+}
+
+.pdp-thumb-item.active {
+  border-color: var(--gold-deep);
+  box-shadow: 0 0 0 1px var(--gold-deep);
+}
+
+.pdp-main-image-viewport {
+  position: relative;
+  flex-grow: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pdp-main-image-viewport img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.pdp-main-image-viewport:hover img {
+  transform: scale(1.12);
+}
+
+.pdp-ar-float-badge {
+  position: absolute;
+  bottom: 1.25rem;
+  left: 1.25rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-full);
+  padding: 0.45rem 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+}
+
+.pdp-ar-float-badge:hover {
+  background: var(--gold-primary);
+  color: #FFFFFF;
+}
+
+/* PDP Information Pane */
+.pdp-info-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.pdp-collection-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  margin-bottom: 0.5rem;
+}
+
+.pdp-heading-title {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.pdp-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.pdp-stars {
+  color: var(--gold-deep);
+  font-size: 0.88rem;
+}
+
+.pdp-huid-pill {
+  background: var(--bg-tint-gold);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-deep);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-xs);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+/* PDP Dynamic Price Card */
+.pdp-pricing-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.pdp-price-hero-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.pdp-hero-price {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.pdp-hero-original-price {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+.pdp-hero-savings-badge {
+  background: #E8F5E9;
+  color: #2E7D32;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-xs);
+}
+
+.pdp-gst-inclusive-text {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+/* Dynamic 15-Minute Price Lock Ticker on PDP */
+.pdp-price-lock-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card-subtle);
+  border: 1px dashed var(--border-gold);
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+}
+
+.lock-strip-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.lock-strip-timer {
+  font-weight: 700;
+  color: var(--rose-gold);
+  font-family: monospace;
+  font-size: 0.95rem;
+}
+
+/* PDP Customization Groups */
+.pdp-option-card {
+  margin-bottom: 1.5rem;
+}
+
+.pdp-option-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pdp-option-hint {
+  font-size: 0.76rem;
+  color: var(--gold-deep);
+  cursor: pointer;
+}
+
+.pdp-karat-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.pdp-karat-btn {
+  flex: 1;
+  padding: 0.75rem 0.5rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.pdp-karat-btn:hover {
+  border-color: var(--gold-primary);
+}
+
+.pdp-karat-btn.active {
+  border-color: var(--gold-deep);
+  background: var(--bg-tint-gold);
+  box-shadow: 0 0 0 1px var(--gold-deep);
+}
+
+.pdp-karat-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: block;
+}
+
+.pdp-karat-purity {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 0.15rem;
+}
+
+/* Color Options */
+.pdp-color-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.pdp-color-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.pdp-color-btn:hover {
+  border-color: var(--gold-primary);
+}
+
+.pdp-color-btn.active {
+  border-color: var(--gold-deep);
+  background: var(--bg-tint-gold);
+  color: var(--text-primary);
+}
+
+/* Ring Size Selector */
+.pdp-size-select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  background: var(--bg-card);
+  font-size: 0.9rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  outline: none;
+  cursor: pointer;
+}
+
+/* Complimentary Engraving Input */
+.pdp-engraving-wrap {
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+}
+
+.pdp-engraving-input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--border-light);
+  background: #FFFFFF;
+  font-size: 0.88rem;
+  outline: none;
+  margin-top: 0.4rem;
+}
+
+.pdp-engraving-input:focus {
+  border-color: var(--gold-deep);
+}
+
+.engraving-live-preview {
+  margin-top: 0.5rem;
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   PDP LIVE PRICE & MAKING CHARGES CALCULATION TABLE (100% TRANSPARENT ENGINE)
+   ========================================================================== */
+.pdp-live-breakdown-card {
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 6px 24px rgba(135, 101, 56, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.pdp-live-breakdown-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold-primary), var(--gold-light), var(--gold-primary));
+}
+
+.breakdown-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 1.15rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.breakdown-header-title {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.breakdown-header-title i {
+  color: var(--gold-deep);
+  font-size: 1.05rem;
+}
+
+.live-pulse-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  color: #065F46;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10B981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+  animation: pulseDot 1.8s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+/* Interactive Making Charge Customizer Panel */
+.pdp-making-customizer {
+  background: #FAF7F2;
+  border: 1px solid var(--border-gold-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.95rem 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
+.making-cust-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.making-cust-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.making-cust-title i {
+  color: var(--gold-deep);
+}
+
+.making-mode-tabs {
+  display: inline-flex;
+  background: #EFE8DC;
+  border-radius: var(--radius-full);
+  padding: 2px;
+  border: 1px solid var(--border-gold-subtle);
+}
+
+.making-mode-btn {
+  background: transparent;
+  border: none;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.making-mode-btn.active {
+  background: #FFFFFF;
+  color: var(--gold-deep);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  font-weight: 700;
+}
+
+.making-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.making-stepper-box {
+  display: inline-flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 1.5px solid var(--border-gold);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.making-step-btn {
+  width: 32px;
+  height: 32px;
+  background: #F5EFE4;
+  border: none;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast);
+}
+
+.making-step-btn:hover {
+  background: var(--gold-light);
+}
+
+.making-num-input {
+  width: 60px;
+  height: 32px;
+  border: none;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+  outline: none;
+  background: #FFFFFF;
+}
+
+.making-unit-label {
+  padding-right: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+}
+
+.making-presets-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.making-preset-pill {
+  background: #FFFFFF;
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.making-preset-pill:hover {
+  border-color: var(--gold-primary);
+  color: var(--gold-deep);
+  background: #FAF7F2;
+}
+
+.making-preset-pill.active {
+  background: var(--gold-deep);
+  border-color: var(--gold-deep);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.making-helper-note {
+  font-size: 0.71rem;
+  color: var(--text-muted);
+  margin-top: 0.45rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Luxury Live Breakdown Table */
+.pdp-calc-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: #FFFFFF;
+}
+
+.pdp-calc-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.84rem;
+}
+
+.pdp-calc-table thead tr {
+  background: #F7F3EC;
+  border-bottom: 1.5px solid var(--border-gold-subtle);
+}
+
+.pdp-calc-table th {
+  padding: 0.65rem 0.85rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #6B5E51;
+  font-weight: 700;
+}
+
+.pdp-calc-table th:last-child,
+.pdp-calc-table td:last-child {
+  text-align: right;
+}
+
+.pdp-calc-table tbody tr {
+  border-bottom: 1px solid #F1ECE3;
+  transition: background 0.2s ease;
+}
+
+.pdp-calc-table tbody tr:hover {
+  background: #FCFBF9;
+}
+
+.pdp-calc-table td {
+  padding: 0.75rem 0.85rem;
+  color: var(--text-secondary);
+  vertical-align: middle;
+}
+
+.calc-cell-component {
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  white-space: nowrap;
+}
+
+.calc-cell-component i {
+  color: var(--gold-deep);
+  font-size: 0.88rem;
+  width: 16px;
+  text-align: center;
+}
+
+.calc-cell-formula {
+  font-size: 0.78rem;
+  color: #5C5248;
+  line-height: 1.35;
+}
+
+.calc-formula-sub {
+  font-size: 0.71rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.calc-cell-amount {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.calc-strike {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  margin-right: 0.35rem;
+  font-weight: 400;
+}
+
+.calc-discount-pill {
+  display: inline-block;
+  background: #FEF3C7;
+  color: #92400E;
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 0.1rem 0.35rem;
+  border-radius: 3px;
+  margin-left: 0.3rem;
+}
+
+.calc-row-subtotal {
+  background: #FAF7F0 !important;
+  font-weight: 700;
+}
+
+.calc-row-subtotal td {
+  color: var(--text-primary);
+  border-top: 1.5px solid var(--border-gold-subtle);
+  border-bottom: 1px solid var(--border-gold-subtle);
+}
+
+.calc-row-total {
+  background: linear-gradient(135deg, #FAF3E6 0%, #F5E6CC 100%) !important;
+  border-top: 2px solid var(--gold-primary);
+  border-bottom: 2px solid var(--gold-primary);
+}
+
+.calc-row-total td {
+  padding: 0.95rem 0.85rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2D2319;
+}
+
+.calc-total-grand {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--gold-deep) !important;
+}
+
+.huid-mini-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: #FFFFFF;
+  border: 1px solid var(--border-gold);
+  border-radius: 3px;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.68rem;
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--gold-deep);
+}
+
+.breakdown-formula-footer {
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-gold-subtle);
+  font-size: 0.74rem;
+  color: var(--gold-deep);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Pincode Delivery Estimator */
+.pdp-pincode-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.pdp-pincode-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.pdp-pincode-input {
+  flex: 1;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-light);
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.pdp-pincode-btn {
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-sm);
+  background: var(--text-primary);
+  color: #FFFFFF;
+  border: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pdp-delivery-status {
+  margin-top: 0.75rem;
+  font-size: 0.82rem;
+  color: #2E7D32;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* PDP CTA Actions */
+.pdp-actions-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.btn-pdp-cart {
+  flex: 1;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--gold-deep);
+  color: #FFFFFF;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-pdp-cart:hover {
+  background: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.btn-pdp-breakup {
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tint-gold);
+  border: 1px solid var(--border-gold);
+  color: var(--gold-deep);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-pdp-breakup:hover {
+  background: var(--gold-primary);
+  color: #FFFFFF;
+}
+
+/* Secondary Assurances Strip */
+.pdp-trust-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.pdp-trust-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.pdp-trust-item i {
+  color: var(--gold-deep);
+  font-size: 1.1rem;
+}
+
+/* Specifications Table */
+.pdp-specs-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  margin-bottom: 4rem;
+}
+
+.pdp-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.pdp-spec-row {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px dashed var(--border-light);
+  font-size: 0.88rem;
+}
+
+.pdp-spec-label {
+  color: var(--text-secondary);
+}
+
+.pdp-spec-value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Responsive Styles */
+@media (max-width: 1440px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem 1.15rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .plp-layout-container {
+    grid-template-columns: 1fr;
+  }
+  .plp-sidebar {
+    position: static;
+  }
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .pdp-main-grid {
+    grid-template-columns: 1fr;
+  }
+  .pdp-gallery-col {
+    position: static;
+  }
+  .guide-grid {
+    grid-template-columns: 1fr;
+  }
+  .pdp-specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.15rem 0.75rem;
+  }
+  .product-title {
+    font-size: 0.88rem;
+  }
+  .price-current {
+    font-size: 1.05rem;
+  }
+  .price-original {
+    font-size: 0.78rem;
+  }
+  .stock-urgency-text {
+    font-size: 0.7rem;
+  }
+  .tanishq-offer-pill {
+    font-size: 0.66rem;
+    padding: 0.25rem 0.45rem;
+  }
+  .plp-title {
+    font-size: 2rem;
+  }
+  .pdp-gallery-col {
+    flex-direction: column-reverse;
+  }
+  .pdp-thumb-strip {
+    flex-direction: row;
+    width: 100%;
+  }
+  .pdp-actions-row {
+    flex-direction: column;
+  }
+}

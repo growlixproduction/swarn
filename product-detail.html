@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Luxury Jewellery Product Detail | Swarn Mahal Jewellers Ambikapur</title>
+  
+  <meta name="description" content="Customise Karat purity, gold color, ring sizing, and laser engraving with dynamic live gold formula pricing at Swarn Mahal Jewellers Ambikapur." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/hero-bento.css" />
+  <link rel="stylesheet" href="css/products.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/modals.css" />
+  <link rel="stylesheet" href="css/cart-admin.css" />
+</head>
+<body data-page-type="pdp">
+
+  <!-- TANISHQ-STYLE 2-TIER LUXURY HEADER -->
+  <header class="tanishq-header" id="main-header">
+    <div class="tanishq-top-row">
+      <div class="container tanishq-row-inner">
+        <a href="index.html" class="tanishq-logo-wrapper" title="Swarn Mahal Jewellers">
+          <div class="tanishq-crest"><span class="crest-letters">SM</span></div>
+          <div class="tanishq-logo-text">
+            <span class="tanishq-title">SWARN MAHAL</span>
+            <span class="tanishq-tagline">SAWARN LUXURY JEWELS • AMBIKAPUR</span>
+          </div>
+        </a>
+
+        <div class="tanishq-search-box" id="tanishq-search-box">
+          <div class="tanishq-search-input-wrap">
+            <i class="fa-solid fa-magnifying-glass search-icon-left"></i>
+            <input type="text" class="tanishq-search-input" id="search-input" placeholder="Search for gold rani haar, diamond rings, mangalsutra..." autocomplete="off" />
+            <div class="tanishq-search-right-tools">
+              <button type="button" class="tanishq-tool-btn" title="Voice Search" onclick="alert('Voice search listening...')">
+                <i class="fa-solid fa-microphone"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tanishq-actions-row">
+          <a href="index.html#tools-section" class="tanishq-rate-chip" id="header-gold-rate" title="Live Bullion Rate">
+            <span class="tanishq-live-dot"></span>
+            <span class="rate-label-text">22K: ₹6,765/g</span>
+          </a>
+          <a href="diamond.html" class="tanishq-nav-icon-btn" title="Diamond Solitaires"><i class="fa-regular fa-gem"></i></a>
+          <a href="index.html#showroom-section" class="tanishq-nav-icon-btn" title="Ambikapur Showroom"><i class="fa-solid fa-store"></i></a>
+          <button class="tanishq-nav-icon-btn tanishq-cart-btn" id="header-cart-btn" title="Shopping Bag">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="badge-count" id="header-cart-count">0</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Navigation Strip -->
+    <nav class="tanishq-category-strip" id="tanishq-category-bar">
+      <div class="container tanishq-cat-inner">
+        <a href="all-jewellery.html" class="tanishq-cat-item"><i class="fa-solid fa-gem"></i> All Jewellery</a>
+        <a href="gold.html" class="tanishq-cat-item"><i class="fa-solid fa-crown"></i> Gold</a>
+        <a href="diamond.html" class="tanishq-cat-item"><i class="fa-solid fa-ring"></i> Diamond</a>
+        <a href="earrings.html" class="tanishq-cat-item"><i class="fa-solid fa-spa"></i> Earrings</a>
+        <a href="daily-wear.html" class="tanishq-cat-item"><i class="fa-solid fa-circle-nodes"></i> Daily Wear</a>
+        <a href="gemstone.html" class="tanishq-cat-item"><i class="fa-solid fa-certificate"></i> Gemstone</a>
+        <a href="wedding.html" class="tanishq-cat-item"><i class="fa-solid fa-shield-heart"></i> Wedding</a>
+        <a href="gifting.html" class="tanishq-cat-item"><i class="fa-solid fa-gift"></i> Gifting</a>
+        <a href="under-50k.html" class="tanishq-cat-item"><i class="fa-solid fa-tags"></i> Under 50K</a>
+        <a href="index.html#showroom-section" class="tanishq-cat-item"><i class="fa-solid fa-store"></i> Showroom</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- PDP MAIN CONTAINER -->
+  <main class="container pdp-section">
+    
+    <!-- Breadcrumb -->
+    <div class="plp-breadcrumb" style="margin-bottom: 2rem; color: var(--text-muted);">
+      <a href="index.html" style="color: var(--text-secondary);">Home</a> 
+      <i class="fa-solid fa-chevron-right" style="font-size: 0.65rem; margin: 0 0.35rem; color: var(--gold-deep);"></i> 
+      <a href="all-jewellery.html" id="pdp-breadcrumb-category" style="color: var(--text-secondary);">Collection</a> 
+      <i class="fa-solid fa-chevron-right" style="font-size: 0.65rem; margin: 0 0.35rem; color: var(--gold-deep);"></i> 
+      <span id="pdp-breadcrumb-title" style="color: var(--text-primary); font-weight: 600;">Product Title</span>
+    </div>
+
+    <!-- 2-Column Split: Gallery + PDP Config Pane -->
+    <div class="pdp-main-grid">
+      
+      <!-- Left Column: Gallery & Zoom Viewport -->
+      <div class="pdp-gallery-col">
+        <!-- Thumbnail Strip -->
+        <div class="pdp-thumb-strip" id="pdp-thumb-strip">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Main Viewport -->
+        <div class="pdp-main-image-viewport">
+          <img src="" alt="Jewellery Main View" id="pdp-main-img" />
+          <button class="pdp-ar-float-badge" onclick="const urlParams = new URLSearchParams(window.location.search); UI.openARTryOn(urlParams.get('id') || 'SM-101');">
+            <i class="fa-solid fa-camera"></i> AR Virtual Try-On
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Configuration Pane -->
+      <div class="pdp-info-col">
+        <span class="pdp-collection-badge" id="pdp-collection-tag">SOLITAIRE COLLECTION</span>
+        <h1 class="pdp-heading-title" id="pdp-product-title">Product Title</h1>
+
+        <div class="pdp-rating-row">
+          <div class="pdp-stars">★ ★ ★ ★ ★</div>
+          <span style="font-size: 0.85rem; color: var(--text-secondary);" id="pdp-rating-text">4.9 / 5.0 (31 Customer Reviews)</span>
+          <span class="pdp-huid-pill" id="pdp-huid-badge">BIS HUID 916</span>
+        </div>
+
+        <!-- Dynamic Price Hero Card -->
+        <div class="pdp-pricing-card">
+          <div class="pdp-price-hero-row">
+            <span class="pdp-hero-price" id="pdp-hero-price">₹0</span>
+            <span class="pdp-hero-original-price" id="pdp-hero-original-price">₹0</span>
+            <span class="pdp-hero-savings-badge" id="pdp-hero-savings-badge">Save ₹0</span>
+          </div>
+          <div class="pdp-gst-inclusive-text">Inclusive of all taxes (3% GST HSN 7113) with 100% itemized transparency.</div>
+
+          <!-- Dynamic 15-Minute Price Lock Banner -->
+          <div class="pdp-price-lock-strip">
+            <div class="lock-strip-left">
+              <i class="fa-solid fa-lock" style="color: var(--gold-deep);"></i>
+              <span>Live Gold Market Rate Locked:</span>
+            </div>
+            <div class="lock-strip-timer" id="pdp-price-lock-timer-val">15:00</div>
+          </div>
+        </div>
+
+        <p id="pdp-description-text" style="font-size: 0.92rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 2rem;">
+          Handcrafted masterpiece by Swarn Mahal master karigars in Ambikapur.
+        </p>
+
+        <!-- Purity Selector -->
+        <div class="pdp-option-card">
+          <div class="pdp-option-title">
+            <span>Select Gold Purity Karat:</span>
+            <span class="pdp-option-hint" onclick="document.querySelector('#pdp-specs-anchor').scrollIntoView({behavior: 'smooth'})">View Karat Guide</span>
+          </div>
+          <div class="pdp-karat-group" id="pdp-karat-wrap">
+            <!-- Injected via UI.initPDP() -->
+          </div>
+        </div>
+
+        <!-- Color Selector -->
+        <div class="pdp-option-card">
+          <div class="pdp-option-title">
+            <span>Select Precious Metal Tone:</span>
+          </div>
+          <div class="pdp-color-group" id="pdp-color-wrap">
+            <!-- Injected via UI.initPDP() -->
+          </div>
+        </div>
+
+        <!-- Sizing Selector -->
+        <div class="pdp-option-card">
+          <div class="pdp-option-title">
+            <span>Select Ring / Bangle Size:</span>
+            <span class="pdp-option-hint" onclick="alert('Standard Indian Ring Sizes: 10 (Small), 12-14 (Medium), 16-18 (Large). Custom resizing is complimentary at our Ambikapur store.')">Size Guide</span>
+          </div>
+          <select class="pdp-size-select" id="pdp-size-select">
+            <option value="12 (Indian)">Size 12 - 16.5 mm (Standard Small)</option>
+            <option value="14 (Indian)" selected>Size 14 - 17.2 mm (Standard Medium - Most Popular)</option>
+            <option value="16 (Indian)">Size 16 - 17.8 mm (Standard Large)</option>
+            <option value="18 (Indian)">Size 18 - 18.5 mm (Comfort Fit)</option>
+            <option value="Custom Size">Custom Size (Our Stylist will call for sizing)</option>
+          </select>
+        </div>
+
+        <!-- Complimentary Laser Engraving Input -->
+        <div class="pdp-option-card">
+          <div class="pdp-engraving-wrap">
+            <label class="pdp-option-title" for="pdp-engraving-input" style="margin-bottom: 0.25rem;">
+              <span><i class="fa-solid fa-pen-nib" style="color: var(--gold-deep); margin-right: 0.35rem;"></i> Complimentary Inner-Band Laser Engraving:</span>
+            </label>
+            <input type="text" id="pdp-engraving-input" class="pdp-engraving-input" placeholder="e.g. Aryan & Ananya ❤️ 2026" maxlength="22" />
+            <div class="engraving-live-preview" id="pdp-engraving-preview">
+              Laser inner band engraving preview will appear here...
+            </div>
+          </div>
+        </div>
+
+        <!-- REAL-TIME LIVE GOLD PRICE & MAKING CHARGES BREAKUP BOX -->
+        <div class="pdp-live-breakdown-card" id="pdp-live-breakdown-box">
+          <div class="breakdown-card-header">
+            <div class="breakdown-header-title">
+              <i class="fa-solid fa-calculator" style="color: var(--gold-deep);"></i>
+              <span>Live Price & Making Charges Formula</span>
+            </div>
+            <span class="live-pulse-badge"><span class="pulse-dot"></span> 100% Itemized</span>
+          </div>
+
+          <div class="breakdown-card-body" id="pdp-breakdown-card-body">
+            <!-- Dynamically populated via UI.updatePDPPriceHero() -->
+          </div>
+        </div>
+
+        <!-- Pincode Delivery Estimator -->
+        <div class="pdp-pincode-card">
+          <div class="pdp-option-title" style="margin-bottom: 0.2rem;">
+            <span><i class="fa-solid fa-location-dot" style="color: var(--gold-deep); margin-right: 0.35rem;"></i> Check Delivery & Showroom Trial:</span>
+          </div>
+          <div class="pdp-pincode-row">
+            <input type="text" id="pdp-pincode-input" class="pdp-pincode-input" placeholder="Enter 6-Digit PIN Code (e.g. 497001)" value="497001" maxlength="6" />
+            <button type="button" class="pdp-pincode-btn" id="pdp-pincode-btn">Check</button>
+          </div>
+          <div class="pdp-delivery-status" id="pdp-delivery-status">
+            <i class="fa-solid fa-circle-check"></i> <strong>Ambikapur Flagship Express:</strong> Same-day pickup / In-store trial available today at Church Road.
+          </div>
+        </div>
+
+        <!-- Main Purchase Action Buttons -->
+        <div class="pdp-actions-row">
+          <button class="btn-pdp-cart" id="pdp-add-cart-btn">
+            <i class="fa-solid fa-bag-shopping"></i> Add to Shopping Bag
+          </button>
+          <button class="btn-pdp-breakup" onclick="const urlParams = new URLSearchParams(window.location.search); UI.openBreakupModal(urlParams.get('id') || 'SM-101');">
+            <i class="fa-solid fa-receipt"></i> 100% Cost Breakup
+          </button>
+        </div>
+
+        <!-- Secondary Assurances Strip -->
+        <div class="pdp-trust-strip">
+          <div class="pdp-trust-item">
+            <i class="fa-solid fa-stamp"></i>
+            <div><strong>BIS 916 Hallmark</strong><div style="font-size: 0.72rem; color: var(--text-muted);">Verifiable Laser HUID</div></div>
+          </div>
+          <div class="pdp-trust-item">
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+            <div><strong>100% Buyback</strong><div style="font-size: 0.72rem; color: var(--text-muted);">Lifetime Exchange Value</div></div>
+          </div>
+          <div class="pdp-trust-item">
+            <i class="fa-solid fa-truck-fast"></i>
+            <div><strong>Insured Delivery</strong><div style="font-size: 0.72rem; color: var(--text-muted);">Sequel Secure Logistics</div></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Technical Specifications Table Section -->
+    <section class="pdp-specs-section" id="pdp-specs-anchor">
+      <h3 style="font-family: var(--font-heading); font-size: 1.6rem; color: var(--text-primary); margin-bottom: 0.5rem;">
+        Product Specifications & Transparency Sheet
+      </h3>
+      <p style="font-size: 0.88rem; color: var(--text-secondary);">
+        Every single piece from Swarn Mahal Jewellers is manufactured with high-precision micro assay standards and accompanied by legal BIS/IGI certification.
+      </p>
+
+      <div class="pdp-specs-grid" id="pdp-specs-grid">
+        <!-- Injected via UI.populatePDPSpecs() -->
+      </div>
+    </section>
+
+    <!-- Related Jewellery Recommendations -->
+    <section style="margin-top: 4rem;">
+      <div class="section-header">
+        <span class="section-tag">COMPLETE YOUR ENSEMBLE</span>
+        <h2 class="section-title">Matching Jewellery Recommendations</h2>
+        <p class="section-subtitle">Complementary heirlooms selected by Swarn Mahal stylists to pair with your piece.</p>
+      </div>
+      <div class="products-grid" id="pdp-related-grid"></div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <div class="container footer-grid">
+      <div>
+        <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
+          <span class="logo-main">SWARN MAHAL</span>
+          <span class="logo-sub">SAWARN LUXURY JEWELS</span>
+        </a>
+        <p class="footer-address"><strong>Ambikapur Flagship:</strong><br>Church Road, Joda Pipal, Maharaja Gali, Ambikapur, Chhattisgarh - 497001</p>
+        <p style="font-size: 0.84rem; color: var(--text-secondary);"><i class="fa-solid fa-phone" style="color: var(--gold-deep); margin-right: 0.4rem;"></i> +91 9999P-7774 / +91 7774-241216</p>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Explore Collections</h4>
+        <ul class="footer-links">
+          <li><a href="gold.html">22K Gold Jewellery</a></li>
+          <li><a href="diamond.html">Diamond Solitaires</a></li>
+          <li><a href="earrings.html">Earrings & Jhumkas</a></li>
+          <li><a href="daily-wear.html">Daily Wear Luxe</a></li>
+          <li><a href="wedding.html">Bridal Rani Haar Suites</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Customer Care</h4>
+        <ul class="footer-links">
+          <li><a href="index.html#tools-section">Live Gold Rate Calculator</a></li>
+          <li><a href="index.html#tools-section">Old Gold Exchange Scheme</a></li>
+          <li><a href="index.html#showroom-section">Showroom Consultation</a></li>
+          <li><a href="under-50k.html">Affordable Gifts Under 50K</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Secure Payments</h4>
+        <p style="font-size: 0.84rem; margin-bottom: 1rem;">100% Insured Sequel Logistics with 256-bit SSL encrypted checkout.</p>
+        <div style="font-size: 1.6rem; color: var(--gold-deep); display: flex; gap: 0.75rem;">
+          <i class="fa-brands fa-google-pay"></i>
+          <i class="fa-brands fa-cc-visa"></i>
+          <i class="fa-brands fa-cc-mastercard"></i>
+          <i class="fa-solid fa-building-columns"></i>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <div>&copy; 2026 Swarn Mahal Jewellers, Ambikapur. Compliant with Bureau of Indian Standards (BIS).</div>
+      <div>Designed with Smooth Luxury Aesthetics • Sawarn Platform</div>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  <div class="modal-backdrop" id="breakup-modal">
+    <div class="modal-window">
+      <button class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="breakup-modal-header">
+        <img src="" alt="Product" class="breakup-thumb" id="breakup-product-img" />
+        <div class="breakup-title-box">
+          <h3 id="breakup-product-title">Itemized Cost Breakup</h3>
+          <p id="breakup-product-subtitle">18K GOLD • TRANSPARENT PRICING</p>
+        </div>
+      </div>
+      <div class="breakup-modal-body">
+        <table class="breakup-table">
+          <thead><tr><th>Component Specification</th><th style="text-align: right;">Calculated Amount</th></tr></thead>
+          <tbody id="breakup-table-body"></tbody>
+        </table>
+        <div class="huid-badge-box">
+          <div class="huid-text">
+            <i class="fa-solid fa-stamp" style="color: var(--gold-deep); font-size: 1.2rem;"></i>
+            <div><strong>BIS Hallmark Unique Identification (HUID):</strong><div style="font-size: 0.74rem; color: var(--text-muted);">Assayed for 100% legal purity conformity</div></div>
+          </div>
+          <div class="huid-code" id="breakup-huid-code">SM916A8201</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay">
+    <div class="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3><i class="fa-solid fa-bag-shopping" style="color: var(--rose-gold);"></i> Shopping Bag</h3>
+        <button class="modal-close-btn" id="close-cart-btn" style="position: static;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="price-lock-banner">
+        <div class="lock-timer-text"><i class="fa-solid fa-lock" style="color: var(--gold-deep);"></i> Price Locked:</div>
+        <div class="lock-timer-val" id="price-lock-timer-val">15:00</div>
+      </div>
+      <div class="cart-items-list" id="cart-items-list"></div>
+      <div class="cart-drawer-footer">
+        <div class="cart-summary-line"><span>Taxable Subtotal:</span><span id="cart-subtotal">₹0</span></div>
+        <div class="cart-summary-line"><span>Applicable GST (3%):</span><span id="cart-gst">₹0</span></div>
+        <div class="cart-summary-line total"><span>Grand Total:</span><span id="cart-total" style="color: var(--rose-gold);">₹0</span></div>
+        <button class="btn btn-primary btn-lg" style="width: 100%; margin-top: 1.25rem;" onclick="alert('Proceeding to 256-bit Insured Checkout.');">
+          <i class="fa-solid fa-shield-halved"></i> Proceed to Insured Checkout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <button class="admin-rate-float-btn" id="admin-rate-float-btn" title="Simulate Live Gold Rates">
+    <i class="fa-solid fa-sliders" style="color: var(--gold-bright);"></i> Live Rate Simulator
+  </button>
+  <div class="admin-drawer" id="admin-drawer">
+    <div class="admin-drawer-header">
+      <h4><i class="fa-solid fa-bolt" style="color: var(--gold-deep);"></i> GoldAPI Simulator</h4>
+      <button class="modal-close-btn" id="admin-drawer-close" style="position: static;"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="admin-input-group">
+      <label><span>24K Benchmark Rate:</span> <strong id="admin-rate-24k-val" style="color: var(--gold-deep);">₹7,380/g</strong></label>
+      <input type="range" class="admin-slider" id="admin-rate-24k-slider" min="6500" max="8500" value="7380" step="10" />
+    </div>
+    <div class="admin-preset-btns">
+      <button class="btn btn-outline btn-sm" id="admin-spike-btn" style="color: #2E7D32;">+₹150 Spike</button>
+      <button class="btn btn-outline btn-sm" id="admin-dip-btn" style="color: #C62828;">-₹150 Dip</button>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/pricingEngine.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/tools.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Swarn Mahal Jewellers | Sawarn Luxury Jewels & Dynamic Bullion E-Commerce Ambikapur</title>
+  
+  <meta name="description" content="Swarn Mahal Jewellers Ambikapur - Premium 22K/18K Gold, Certified Diamond Jewellery, Dynamic Bullion Pricing, Transparent Making Charges, and BIS 916 Hallmarked Collections." />
+  <meta name="keywords" content="Swarn Mahal Ambikapur, Sawarn Jewellers, Gold rate Ambikapur, 22K Gold, 18K Diamond, Rani Haar, Mangalsutra, Joda Pipal Maharaja Gali" />
+
+  <!-- Google Fonts: Playfair Display, Cormorant Garamond, Outfit, Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/hero-bento.css" />
+  <link rel="stylesheet" href="css/products.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/modals.css" />
+  <link rel="stylesheet" href="css/cart-admin.css" />
+</head>
+<body data-page-type="home">
+
+  <!-- TANISHQ-STYLE 2-TIER LUXURY WHITE & MAROON/GOLD HEADER -->
+  <header class="tanishq-header" id="main-header">
+    
+    <!-- Tier 1: Main Header Row (Logo, Center Search Bar, Right Action Icons) -->
+    <div class="tanishq-top-row">
+      <div class="container tanishq-row-inner">
+        
+        <!-- Left: Brand Logo (Tanishq Crest Inspired) -->
+        <a href="index.html" class="tanishq-logo-wrapper" title="Swarn Mahal Jewellers">
+          <div class="tanishq-crest">
+            <span class="crest-letters">SM</span>
+          </div>
+          <div class="tanishq-logo-text">
+            <span class="tanishq-title">SWARN MAHAL</span>
+            <span class="tanishq-tagline">SAWARN LUXURY JEWELS • AMBIKAPUR</span>
+          </div>
+        </a>
+
+        <!-- Center: Prominent Tanishq Pill Search Bar with Camera & Mic -->
+        <div class="tanishq-search-box" id="tanishq-search-box">
+          <div class="tanishq-search-input-wrap">
+            <i class="fa-solid fa-magnifying-glass search-icon-left"></i>
+            <input type="text" class="tanishq-search-input" id="search-input" placeholder="Search for gold rani haar, diamond rings, mangalsutra..." autocomplete="off" />
+            <div class="tanishq-search-right-tools">
+              <button type="button" class="tanishq-tool-btn" title="AR Virtual Try-On" onclick="UI.openARTryOn('SM-101')">
+                <i class="fa-solid fa-camera"></i>
+              </button>
+              <button type="button" class="tanishq-tool-btn" title="Voice Search" onclick="alert('Voice search listening...')">
+                <i class="fa-solid fa-microphone"></i>
+              </button>
+            </div>
+          </div>
+          <!-- Quick Search Tags Dropdown -->
+          <div class="tanishq-search-dropdown" id="search-quick-tags">
+            <div class="tanishq-dropdown-title">Popular in Ambikapur:</div>
+            <div class="tanishq-tags-flex">
+              <span class="tanishq-quick-pill" onclick="quickFilter('Rani Haar')"><i class="fa-solid fa-crown"></i> Bridal Rani Haar</span>
+              <span class="tanishq-quick-pill" onclick="quickFilter('Solitaire')"><i class="fa-solid fa-ring"></i> Solitaire Ring</span>
+              <span class="tanishq-quick-pill" onclick="quickFilter('Mangalsutra')"><i class="fa-solid fa-heart"></i> Mangalsutra</span>
+              <span class="tanishq-quick-pill" onclick="quickFilter('Bracelet')"><i class="fa-solid fa-gem"></i> Diamond Bracelet</span>
+              <span class="tanishq-quick-pill" onclick="quickFilter('Coin')"><i class="fa-solid fa-coins"></i> 24K Gold Coin</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Tanishq Signature Action Icons & Live Gold Rate -->
+        <div class="tanishq-actions-row">
+          
+          <!-- Live 22K Gold Rate Pill -->
+          <a href="#tools-section" class="tanishq-rate-chip" id="header-gold-rate" title="Click to open Live Rate Calculator">
+            <span class="tanishq-live-dot"></span>
+            <span class="rate-label-text">22K: ₹6,765/g</span>
+          </a>
+
+          <!-- Diamond Solitaire Icon -->
+          <a href="diamond.html" class="tanishq-nav-icon-btn" title="Diamond Solitaires">
+            <i class="fa-regular fa-gem"></i>
+          </a>
+
+          <!-- Showroom Locator Icon -->
+          <a href="#showroom-section" class="tanishq-nav-icon-btn" title="Visit Ambikapur Showroom">
+            <i class="fa-solid fa-store"></i>
+          </a>
+
+          <!-- Wishlist Heart Icon -->
+          <button class="tanishq-nav-icon-btn" title="Wishlist" onclick="document.querySelector('#products-section').scrollIntoView({behavior: 'smooth'})">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+
+          <!-- Profile / Account Icon -->
+          <a href="#reviews-section" class="tanishq-nav-icon-btn" title="Customer Reviews & VIP">
+            <i class="fa-regular fa-user"></i>
+          </a>
+
+          <!-- Shopping Bag with Badge -->
+          <button class="tanishq-nav-icon-btn tanishq-cart-btn" id="header-cart-btn" title="Shopping Bag">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="badge-count" id="header-cart-count">0</span>
+          </button>
+
+          <!-- Mobile Toggle -->
+          <button class="tanishq-nav-icon-btn mobile-menu-toggle" id="mobile-menu-toggle" onclick="document.getElementById('tanishq-category-bar').classList.toggle('active')">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tier 2: Category Navigation Strip with Icons linking to Dedicated Pages -->
+    <nav class="tanishq-category-strip" id="tanishq-category-bar">
+      <div class="container tanishq-cat-inner">
+        <a href="all-jewellery.html" class="tanishq-cat-item">
+          <i class="fa-solid fa-gem"></i> All Jewellery
+        </a>
+        <a href="gold.html" class="tanishq-cat-item">
+          <i class="fa-solid fa-crown"></i> Gold
+        </a>
+        <a href="diamond.html" class="tanishq-cat-item">
+          <i class="fa-solid fa-ring"></i> Diamond
+        </a>
+        <a href="earrings.html" class="tanishq-cat-item">
+          <i class="fa-solid fa-spa"></i> Earrings
+        </a>
+        <a href="daily-wear.html" class="tanishq-cat-item">
+          <i class="fa-solid fa-circle-nodes"></i> Daily Wear
+        </a>
+        <a href="gemstone.html" class="tanishq-cat-item">
+          <i class="fa-solid fa-certificate"></i> Gemstone
+        </a>
+        <a href="wedding.html" class="tanishq-cat-item">
+          <i class="fa-solid fa-shield-heart"></i> Wedding
+        </a>
+        <a href="gifting.html" class="tanishq-cat-item">
+          <i class="fa-solid fa-gift"></i> Gifting
+        </a>
+        <a href="under-50k.html" class="tanishq-cat-item">
+          <i class="fa-solid fa-tags"></i> Under 50K
+        </a>
+        <a href="#showroom-section" class="tanishq-cat-item">
+          <i class="fa-solid fa-store"></i> More <i class="fa-solid fa-chevron-down" style="font-size: 0.6rem; margin-left: 2px;"></i>
+        </a>
+      </div>
+    </nav>
+
+  </header>
+
+  <!-- LUXURY HERO SLIDER SECTION (Tanishq Curved Plaque Aesthetic with No Sharp Cuts) -->
+  <section class="hero-slider-section">
+    <div class="hero-slider-container">
+      <div class="hero-slider-viewport">
+        <!-- Navigation Arrows -->
+        <button class="slider-arrow-btn slider-prev-btn" id="hero-slider-prev" title="Previous Slide">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="slider-arrow-btn slider-next-btn" id="hero-slider-next" title="Next Slide">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- Slider Track -->
+        <div class="hero-slider-track" id="hero-slider-track">
+          <!-- Slide 1: Royal Heirlooms & Bridal Kundan (Matching Aurelia reference) -->
+          <div class="hero-slide active">
+            <div class="slide-media-box">
+              <img class="slide-bg-img" src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85" alt="Royal Heirlooms & Bridal Kundan" />
+              <div class="slide-media-overlay"></div>
+            </div>
+            <div class="slide-hero-content">
+              <div class="hero-tag-badge">BRIDAL COUTURE 2026</div>
+              <h1 class="hero-slide-heading">
+                ROYAL HEIRLOOMS &<br>
+                <span class="italic-gold">BRIDAL KUNDAN</span>
+              </h1>
+              <p class="hero-slide-desc">
+                Intricately woven 22K gold with uncut diamonds, emeralds & pearls crafted for brides.
+              </p>
+              <a href="#products-section" class="btn-hero-luxury">
+                EXPLORE HERITAGE <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Slide 2: Swarn Mahal Festive & Wedding Edit -->
+          <div class="hero-slide">
+            <div class="slide-media-box">
+              <img class="slide-bg-img" src="asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg" alt="Festive Rani Haar & Wedding Edit" />
+              <div class="slide-media-overlay"></div>
+            </div>
+            <div class="slide-hero-content">
+              <div class="hero-tag-badge">FESTIVE COLLECTION • FLAT 20% OFF</div>
+              <h2 class="hero-slide-heading">
+                SWARN MAHAL<br>
+                <span class="italic-gold">THE FESTIVE EDIT</span>
+              </h2>
+              <p class="hero-slide-desc">
+                Flat 20% Off on making charges across all 22K Hallmark gold & bridal rani haar suites.
+              </p>
+              <a href="#products-section" class="btn-hero-luxury">
+                SHOP FESTIVE <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Slide 3: Minimal Solitaires & Daily Luxe -->
+          <div class="hero-slide">
+            <div class="slide-media-box">
+              <img class="slide-bg-img" src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85" alt="Minimal Solitaires & Rings" />
+              <div class="slide-media-overlay"></div>
+            </div>
+            <div class="slide-hero-content">
+              <div class="hero-tag-badge">STARTING FROM ₹14,999</div>
+              <h2 class="hero-slide-heading">
+                MINIMAL LUXE &<br>
+                <span class="italic-gold">SOLITAIRES</span>
+              </h2>
+              <p class="hero-slide-desc">
+                Handcrafted 18K & 22K gold rings and lightweight hoop earrings for dynamic lifestyles.
+              </p>
+              <a href="#products-section" class="btn-hero-luxury">
+                EXPLORE MINIMAL <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Slide 4: Ambikapur Heritage Showroom & Pure Bullion -->
+          <div class="hero-slide">
+            <div class="slide-media-box">
+              <img class="slide-bg-img" src="asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (10).jpeg" alt="Ambikapur Showroom" />
+              <div class="slide-media-overlay"></div>
+            </div>
+            <div class="slide-hero-content">
+              <div class="hero-tag-badge">ESTABLISHED 2015 • AMBIKAPUR</div>
+              <h2 class="hero-slide-heading">
+                TIMELESS TRUST &<br>
+                <span class="italic-gold">100% TRANSPARENCY</span>
+              </h2>
+              <p class="hero-slide-desc">
+                North Chhattisgarh's benchmark showroom on Church Road, Joda Pipal, Maharaja Gali.
+              </p>
+              <a href="#showroom-section" class="btn-hero-luxury">
+                VISIT SHOWROOM <i class="fa-solid fa-store"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slider Pagination Dots -->
+      <div class="slider-pagination-dots" id="hero-slider-dots">
+        <span class="slider-dot active" data-index="0"></span>
+        <span class="slider-dot" data-index="1"></span>
+        <span class="slider-dot" data-index="2"></span>
+        <span class="slider-dot" data-index="3"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIRCULAR CATEGORY STORIES STRIP (Tanishq / Caratlane Inspired) -->
+  <section class="category-stories-section reveal-up">
+    <div class="container">
+      <div class="category-stories-track reveal-stagger">
+        <a href="all-jewellery.html" class="category-story-card">
+          <div class="story-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80" alt="All Jewellery" class="story-avatar-img" />
+          </div>
+          <span class="story-label">All Jewellery</span>
+        </a>
+
+        <a href="gold.html" class="category-story-card">
+          <div class="story-avatar-wrap">
+            <img src="asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg" alt="22K Gold" class="story-avatar-img" />
+          </div>
+          <span class="story-label">22K Gold</span>
+        </a>
+
+        <a href="diamond.html" class="category-story-card">
+          <div class="story-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80" alt="Diamond" class="story-avatar-img" />
+          </div>
+          <span class="story-label">Diamond</span>
+        </a>
+
+        <a href="earrings.html" class="category-story-card">
+          <div class="story-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=200&q=80" alt="Earrings" class="story-avatar-img" />
+          </div>
+          <span class="story-label">Earrings</span>
+        </a>
+
+        <a href="daily-wear.html" class="category-story-card">
+          <div class="story-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=200&q=80" alt="Daily Wear" class="story-avatar-img" />
+          </div>
+          <span class="story-label">Daily Wear</span>
+        </a>
+
+        <a href="gemstone.html" class="category-story-card">
+          <div class="story-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=200&q=80" alt="Gemstone" class="story-avatar-img" />
+          </div>
+          <span class="story-label">Gemstone</span>
+        </a>
+
+        <a href="wedding.html" class="category-story-card">
+          <div class="story-avatar-wrap">
+            <img src="asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg" alt="Wedding" class="story-avatar-img" />
+          </div>
+          <span class="story-label">Wedding</span>
+        </a>
+
+        <a href="gifting.html" class="category-story-card">
+          <div class="story-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=200&q=80" alt="Gifting & Coins" class="story-avatar-img" />
+          </div>
+          <span class="story-label">Gifting & Coins</span>
+        </a>
+
+        <a href="under-50k.html" class="category-story-card">
+          <div class="story-avatar-wrap">
+            <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=200&q=80" alt="Under 50K" class="story-avatar-img" />
+          </div>
+          <span class="story-label">Under 50K</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8-CARD MASTER CATEGORY COLLECTIONS SHOWCASE (Clicking opens that specific collection) -->
+  <section class="home-collections-section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">EXPLORE BY CATEGORY</span>
+        <h2 class="section-title">Curated Jewellery Collections</h2>
+        <p class="section-subtitle">Click on any category to browse its complete exclusive collection with live bullion rates.</p>
+      </div>
+
+      <div class="collections-showcase-grid reveal-stagger">
+        <!-- 1. Gold -->
+        <a href="gold.html" class="collection-tile-card">
+          <img src="asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg" alt="22K Gold Jewellery" class="collection-tile-bg" />
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-info">
+            <span class="collection-tile-tag">BIS 916 HALLMARK</span>
+            <h3 class="collection-tile-title">22K Gold Jewellery</h3>
+            <span class="collection-tile-cta">Shop Gold Collection <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 2. Diamond -->
+        <a href="diamond.html" class="collection-tile-card">
+          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80" alt="Diamond Solitaires" class="collection-tile-bg" />
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-info">
+            <span class="collection-tile-tag">IGI & GIA CERTIFIED</span>
+            <h3 class="collection-tile-title">Diamond & Solitaires</h3>
+            <span class="collection-tile-cta">Shop Diamonds <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 3. Earrings -->
+        <a href="earrings.html" class="collection-tile-card">
+          <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80" alt="Earrings & Jhumkas" class="collection-tile-bg" />
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-info">
+            <span class="collection-tile-tag">50+ HANDCRAFTED STYLES</span>
+            <h3 class="collection-tile-title">Earrings & Jhumkas</h3>
+            <span class="collection-tile-cta">Shop Earrings <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 4. Daily Wear -->
+        <a href="daily-wear.html" class="collection-tile-card">
+          <img src="https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=800&q=80" alt="Daily Wear Luxe" class="collection-tile-bg" />
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-info">
+            <span class="collection-tile-tag">UNDER 10 GRAMS</span>
+            <h3 class="collection-tile-title">Daily Wear Luxe</h3>
+            <span class="collection-tile-cta">Shop Daily Wear <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 5. Gemstone -->
+        <a href="gemstone.html" class="collection-tile-card">
+          <img src="https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=800&q=80" alt="Royal Gemstones" class="collection-tile-bg" />
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-info">
+            <span class="collection-tile-tag">EMERALDS & SAPPHIRES</span>
+            <h3 class="collection-tile-title">Royal Gemstones</h3>
+            <span class="collection-tile-cta">Shop Gemstones <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 6. Wedding -->
+        <a href="wedding.html" class="collection-tile-card">
+          <img src="asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg" alt="Bridal Couture" class="collection-tile-bg" />
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-info">
+            <span class="collection-tile-tag">ROYAL HEIRLOOMS 2026</span>
+            <h3 class="collection-tile-title">Bridal & Wedding</h3>
+            <span class="collection-tile-cta">Shop Wedding Edit <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 7. Gifting -->
+        <a href="gifting.html" class="collection-tile-card">
+          <img src="https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=800&q=80" alt="Luxury Gifting & Coins" class="collection-tile-bg" />
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-info">
+            <span class="collection-tile-tag">24K 999 COINS</span>
+            <h3 class="collection-tile-title">Gifting & Bullion</h3>
+            <span class="collection-tile-cta">Shop Gifts <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+
+        <!-- 8. Under 50K -->
+        <a href="under-50k.html" class="collection-tile-card">
+          <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=800&q=80" alt="Under 50,000" class="collection-tile-bg" />
+          <div class="collection-tile-overlay"></div>
+          <div class="collection-tile-info">
+            <span class="collection-tile-tag">BUDGET LUXURY</span>
+            <h3 class="collection-tile-title">Jewels Under ₹50K</h3>
+            <span class="collection-tile-cta">Shop Under 50K <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4-ITEM TRUST & VALUE PROP STRIP -->
+  <section class="trust-bar">
+    <div class="container trust-grid reveal-stagger">
+      <div class="trust-item">
+        <div class="trust-icon-box"><i class="fa-solid fa-truck-fast"></i></div>
+        <div class="trust-info">
+          <h4>Worldwide & Insured Shipping</h4>
+          <p>100% transit insurance & OTP verified delivery</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon-box"><i class="fa-solid fa-arrow-rotate-left"></i></div>
+        <div class="trust-info">
+          <h4>Money Back & Buyback</h4>
+          <p>Lifetime buyback & 100% exchange value guarantee</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon-box"><i class="fa-solid fa-tags"></i></div>
+        <div class="trust-info">
+          <h4>Offers & Transparent Pricing</h4>
+          <p>Zero hidden charges with itemized formula breakup</p>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon-box"><i class="fa-solid fa-headset"></i></div>
+        <div class="trust-info">
+          <h4>24/7 Expert Gemologist Support</h4>
+          <p>Live video call & in-store consultation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDITORIAL BENTO PROMO GRID (Jubilee 3-Card Style) -->
+  <section class="promo-bento-section">
+    <div class="container">
+      <div class="bento-grid">
+        <!-- Large Left Card: Yellow Gold & Diamond Ring (Slides from Left) -->
+        <div class="bento-card bento-card-large reveal-left" onclick="window.location.href='diamond.html'" style="cursor: pointer;">
+          <img class="bento-bg-image" src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1000&q=80" alt="Yellow Gold and Diamond Ring" />
+          <div class="bento-content">
+            <span class="bento-sub">DIAMOND RING</span>
+            <h3 class="bento-title">Yellow Gold &<br>Diamond Ring</h3>
+            <span class="bento-link">Shop Collection <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <!-- Top Right Card: Infinity Diamond Bracelet (Slides from Right) -->
+        <div class="bento-card reveal-right delay-100" onclick="window.location.href='daily-wear.html'" style="cursor: pointer;">
+          <img class="bento-bg-image" src="https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80" alt="Infinity Diamond Bracelet" />
+          <div class="bento-content light-mode">
+            <span class="bento-sub">DIAMOND BRACELETS</span>
+            <h3 class="bento-title">Infinity Diamond Bracelet</h3>
+            <span class="bento-link">Shop Daily Luxe <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <!-- Bottom Right Card: Teardrop Diamond Pendant (Slides from Right) -->
+        <div class="bento-card reveal-right delay-200" onclick="window.location.href='gemstone.html'" style="cursor: pointer;">
+          <img class="bento-bg-image" src="https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=800&q=80" alt="Teardrop Diamond Pendant" />
+          <div class="bento-content light-mode">
+            <span class="bento-sub">GEMSTONE PENDANT</span>
+            <h3 class="bento-title">Teardrop Gemstone Pendant</h3>
+            <span class="bento-link">Shop Gemstones <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATEST PRODUCTS & DYNAMIC PRICING CATALOG -->
+  <section class="products-section" id="products-section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">LIVE FORMULA DRIVEN CATALOG</span>
+        <h2 class="section-title">Latest Masterpiece Products</h2>
+        <p class="section-subtitle">Switch Karat (14K/18K/22K) & Gold Color in real-time to watch prices recalculate accurately based on live gold market rates.</p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="filter-tabs reveal-scale">
+        <button class="tab-btn active" data-category="all">All Designs</button>
+        <button class="tab-btn" data-category="rings">Rings</button>
+        <button class="tab-btn" data-category="necklaces">Necklaces & Sets</button>
+        <button class="tab-btn" data-category="bangles">Bracelets & Bangles</button>
+        <button class="tab-btn" data-category="pendants">Pendants</button>
+        <button class="tab-btn" data-category="earrings">Earrings</button>
+        <button class="tab-btn" data-category="bullion">Bullion Coins</button>
+      </div>
+
+      <!-- Dynamic Product Cards Grid -->
+      <div class="products-grid reveal-stagger" id="products-grid">
+        <!-- Rendered dynamically via UI.renderProducts() -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORY MOODBOARD SHOWCASE (Jubilee Style) -->
+  <section class="moodboard-section" id="moodboard-section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">DISCOVER BY MOOD</span>
+        <h2 class="section-title">Signature Collections</h2>
+        <p class="section-subtitle">Curated heirlooms handcrafted with love and artisanal perfection.</p>
+      </div>
+
+      <div class="moodboard-grid">
+        <div class="moodboard-card reveal-left" onclick="window.location.href='wedding.html'">
+          <div class="moodboard-img-box">
+            <img src="asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg" alt="Flower Necklace Collection" />
+          </div>
+          <div class="moodboard-info">
+            <h3 class="moodboard-title">Bridal Rani Haar & Wedding Sets</h3>
+            <span class="moodboard-count">Explore Wedding Edit <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="moodboard-card reveal-left delay-100" onclick="window.location.href='diamond.html'">
+          <div class="moodboard-img-box">
+            <img src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=800&q=80" alt="Rose Gold Ring Collection" />
+          </div>
+          <div class="moodboard-info">
+            <h3 class="moodboard-title">Rose Gold & Solitaire Rings</h3>
+            <span class="moodboard-count">Explore Diamond Solitaires <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="moodboard-card reveal-right delay-200" onclick="window.location.href='earrings.html'">
+          <div class="moodboard-img-box">
+            <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80" alt="Drops Earring Collection" />
+          </div>
+          <div class="moodboard-info">
+            <h3 class="moodboard-title">Chandelier Drops & Jhumkas</h3>
+            <span class="moodboard-count">Explore Earrings <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+
+        <div class="moodboard-card reveal-right delay-300" onclick="window.location.href='gemstone.html'">
+          <div class="moodboard-img-box">
+            <img src="https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=800&q=80" alt="Butterfly Pendant Collection" />
+          </div>
+          <div class="moodboard-info">
+            <h3 class="moodboard-title">Royal Gemstones & Pendants</h3>
+            <span class="moodboard-count">Explore Gemstones <i class="fa-solid fa-arrow-right"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21ST.DEV STYLE LUXURY BENTO COLLAGE GALLERY SECTION -->
+  <section class="luxury-collage-section" id="gallery-section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">ARTISANAL MASTERWORKS & SHOWROOM</span>
+        <h2 class="section-title">Curated Heirlooms & Showroom Gallery</h2>
+        <p class="section-subtitle">Explore 22K royal bridal suites, sacred mangalsutras, and authentic moments from our Ambikapur flagship showroom.</p>
+      </div>
+
+      <!-- 21st.dev Style Interactive Category Filter Bar -->
+      <div class="collage-filter-bar reveal-scale">
+        <button class="collage-pill-btn active" data-collage-category="all">
+          <i class="fa-solid fa-gem"></i> All Showcases
+        </button>
+        <button class="collage-pill-btn" data-collage-category="bridal">
+          <i class="fa-solid fa-crown"></i> Bridal & Rani Haar
+        </button>
+        <button class="collage-pill-btn" data-collage-category="showroom">
+          <i class="fa-solid fa-store"></i> Showroom Experience
+        </button>
+        <button class="collage-pill-btn" data-collage-category="solitaire">
+          <i class="fa-solid fa-ring"></i> Diamonds & Solitaires
+        </button>
+        <button class="collage-pill-btn" data-collage-category="mangalsutra">
+          <i class="fa-solid fa-heart"></i> Mangalsutras
+        </button>
+        <button class="collage-pill-btn" data-collage-category="silver">
+          <i class="fa-solid fa-coins"></i> 925 Silverware
+        </button>
+      </div>
+
+      <!-- Asymmetric 12-Column Masonry Bento Grid -->
+      <div class="collage-masonry-grid reveal-stagger" id="collage-grid-container">
+        <!-- Injected dynamically via UI.renderCollageGallery() -->
+      </div>
+    </div>
+  </section>
+
+  <!-- AMBIKAPUR SHOWROOM STORY & HERITAGE (With Real Asset Photos) -->
+  <section class="showroom-story-section" id="showroom-section">
+    <div class="container showroom-grid">
+      <!-- Left Content (Slides in from Left) -->
+      <div class="showroom-text-col reveal-left">
+        <span class="showroom-badge">ESTABLISHED 2015 • AMBIKAPUR, CHHATTISGARH</span>
+        <h2 class="showroom-title">Welcome to Swarn Mahal Luxury Jewellers</h2>
+        <p class="showroom-desc">
+          Located at <strong>Church Road, Joda Pipal, Maharaja Gali, Ambikapur</strong>, Swarn Mahal has been the benchmark of purity, trust, and transparent pricing in North Chhattisgarh for over a decade.
+        </p>
+
+        <ul class="showroom-features-list">
+          <li class="showroom-feature-item">
+            <div class="showroom-feature-icon"><i class="fa-solid fa-stamp"></i></div>
+            <div class="showroom-feature-text">
+              <strong>100% BIS 916 Hallmarked Gold</strong>
+              <span>Every single gold ornament carries a verifiable 6-digit laser HUID stamp.</span>
+            </div>
+          </li>
+          <li class="showroom-feature-item">
+            <div class="showroom-feature-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+            <div class="showroom-feature-text">
+              <strong>Certified Precision Weighing & Assay</strong>
+              <span>Zero wastage manipulation. Digital weights and karat purity tested right in front of you.</span>
+            </div>
+          </li>
+          <li class="showroom-feature-item">
+            <div class="showroom-feature-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+            <div class="showroom-feature-text">
+              <strong>Lowest & Fair Making Charges</strong>
+              <span>Direct artisan pricing with transparent formula billing and zero hidden surcharges.</span>
+            </div>
+          </li>
+        </ul>
+
+        <a href="tel:+919999777740" class="btn btn-gold"><i class="fa-solid fa-phone"></i> Call Store: +91 9999P-7774</a>
+      </div>
+
+      <!-- Right Mosaic Gallery with Real Asset Photos (Slides in from Right) -->
+      <div class="showroom-gallery-mosaic reveal-right reveal-stagger" id="showroom-mosaic">
+        <!-- Rendered dynamically from asset/ folder photos -->
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE CALCULATORS: LIVE GOLD RATE & OLD GOLD EXCHANGE -->
+  <section class="tools-section" id="tools-section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">TRANSPARENT TOOLS</span>
+        <h2 class="section-title">Jewellery Purity & Rate Calculators</h2>
+        <p class="section-subtitle">Calculate real-time jewellery making costs or estimate exchange credit for your old gold ornaments.</p>
+      </div>
+
+      <div class="tools-grid">
+        <!-- Tool 1: Live Custom Gold Estimator (Slides from Left) -->
+        <div class="tool-card reveal-left">
+          <div class="tool-header">
+            <h3><i class="fa-solid fa-calculator" style="color: var(--gold-deep); margin-right: 0.5rem;"></i> Live Gold Rate Estimator</h3>
+            <p>Calculate exact estimated purchase price based on today's live bullion market.</p>
+          </div>
+
+          <div class="tool-form-group">
+            <label>Net Gold Weight (Grams)</label>
+            <input type="number" id="calc-gold-weight" value="10" min="0.1" step="0.1" />
+          </div>
+
+          <div class="tool-form-group">
+            <div class="tool-input-row">
+              <div style="flex: 1;">
+                <label>Gold Purity Karat</label>
+                <select id="calc-gold-karat">
+                  <option value="24K">24K Pure Bullion (99.9%)</option>
+                  <option value="22K" selected>22K Hallmark Gold (91.6%)</option>
+                  <option value="18K">18K Diamond Jewellery (75.0%)</option>
+                  <option value="14K">14K Modern Gold (58.3%)</option>
+                </select>
+              </div>
+              <div style="flex: 1;">
+                <label>Making Charge (%)</label>
+                <select id="calc-making-charge">
+                  <option value="10">10% (Plain Bands & Chains)</option>
+                  <option value="12" selected>12% (Standard Designs)</option>
+                  <option value="16">16% (Intricate Bridal/Rani Haar)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="tool-result-box">
+            <div>
+              <span class="result-label">Estimated Total (Incl. 3% GST)</span>
+              <div style="font-size: 0.76rem; color: var(--text-muted);">Formula: Metal + Making + GST</div>
+            </div>
+            <div class="result-value" id="calc-gold-result">₹78,054</div>
+          </div>
+        </div>
+
+        <!-- Tool 2: Old Gold Exchange Calculator (Slides from Right) -->
+        <div class="tool-card reveal-right">
+          <div class="tool-header">
+            <h3><i class="fa-solid fa-coins" style="color: var(--rose-gold); margin-right: 0.5rem;"></i> Old Gold Exchange Calculator</h3>
+            <p>Exchange your old scrap gold at highest benchmark rates with only 2% refining allowance.</p>
+          </div>
+
+          <div class="tool-form-group">
+            <label>Old Gold Weight (Grams)</label>
+            <input type="number" id="old-gold-weight" value="12.5" min="0.1" step="0.1" />
+          </div>
+
+          <div class="tool-form-group">
+            <label>Existing Ornament Purity</label>
+            <select id="old-gold-karat">
+              <option value="22K" selected>22 Karat (916 Purity)</option>
+              <option value="18K">18 Karat (750 Purity)</option>
+              <option value="14K">14 Karat (585 Purity)</option>
+              <option value="24K">24 Karat (999 Pure Bar/Coin)</option>
+            </select>
+          </div>
+
+          <div class="tool-result-box">
+            <div>
+              <span class="result-label">Net Exchange Credit Value</span>
+              <div id="old-gold-gross" style="font-size: 0.74rem; color: var(--text-muted);">Gross Bullion: ₹84,562 (Refining fee -2%)</div>
+            </div>
+            <div class="result-value" id="old-gold-result" style="color: var(--rose-gold);">₹82,871</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DUAL SPOTLIGHT BANNERS (Jubilee Style) -->
+  <section class="spotlight-section">
+    <div class="container spotlight-grid">
+      <div class="spotlight-card reveal-left">
+        <img class="spotlight-img" src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80" alt="Drop Cut Blue Necklace Set" />
+        <div class="spotlight-content">
+          <span class="spotlight-tag">EXCLUSIVE EDITION</span>
+          <h3 class="spotlight-title">Drop Cut Blue Sapphire & Diamond Necklace Set</h3>
+          <a href="#products-section" class="btn btn-dark btn-sm">Shop Now</a>
+        </div>
+      </div>
+
+      <div class="spotlight-card reveal-right delay-100">
+        <img class="spotlight-img" src="https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=800&q=80" alt="Rose Gold Ring for Women" />
+        <div class="spotlight-content">
+          <span class="spotlight-tag">BEST ETERNAL RING</span>
+          <h3 class="spotlight-title">Rose Gold Ring For Women & Solitaires</h3>
+          <a href="#products-section" class="btn btn-dark btn-sm">Shop Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS FROM JUSTDIAL 5.0 VERIFIED BUYERS -->
+  <section class="testimonials-section" id="reviews-section">
+    <div class="container">
+      <div class="section-header reveal-up">
+        <span class="section-tag">VERIFIED BUYER EXPERIENCES</span>
+        <h2 class="section-title">What Our Ambikapur Clients Say</h2>
+        <p class="section-subtitle">Rated 5.0 / 5.0 on Justdial with 31+ authentic customer testimonials.</p>
+      </div>
+
+      <div class="reviews-grid reveal-stagger" id="reviews-grid">
+        <!-- Injected via UI.renderReviews() -->
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND ASSURANCES & CERTIFICATION LOGOS -->
+  <section class="trust-logos-row">
+    <div class="container">
+      <div class="logos-flex reveal-scale">
+        <div class="trust-logo-item"><i class="fa-solid fa-stamp"></i> BIS 916 Hallmarked</div>
+        <div class="trust-logo-item"><i class="fa-solid fa-gem"></i> IGI Certified Diamonds</div>
+        <div class="trust-logo-item"><i class="fa-solid fa-certificate"></i> GIA Assayed Solitaires</div>
+        <div class="trust-logo-item"><i class="fa-solid fa-shield-halved"></i> Sequel Secure Logistics</div>
+        <div class="trust-logo-item"><i class="fa-solid fa-indian-rupee-sign"></i> 100% Transparent Billing</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LUXURY NEWSLETTER BANNER -->
+  <section class="newsletter-section">
+    <div class="container newsletter-inner reveal-scale">
+      <h2>Subscribe to Swarn Mahal Insider</h2>
+      <p>Receive daily morning bullion rate updates, exclusive VIP festive previews, and zero-making-charge invitations.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to Swarn Mahal VIP updates!');">
+        <input type="email" class="newsletter-input" placeholder="Enter your email or phone number" required />
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- MULTI-COLUMN LUXURY FOOTER -->
+  <footer class="main-footer">
+    <div class="container footer-grid reveal-stagger">
+      <!-- Col 1: Store Bio -->
+      <div>
+        <a href="#" class="brand-logo" style="margin-bottom: 1rem;">
+          <span class="logo-main">SWARN MAHAL</span>
+          <span class="logo-sub">SAWARN LUXURY JEWELS</span>
+        </a>
+        <p class="footer-address">
+          <strong>Showroom Address:</strong><br>
+          Swarn Mahal Jewellers, Church Road, Joda Pipal, Maharaja Gali, Ambikapur, Chhattisgarh - 497001
+        </p>
+        <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 0.5rem;">
+          <i class="fa-solid fa-phone" style="color: var(--gold-deep); margin-right: 0.4rem;"></i> +91 9999P-7774 / +91 7774-241216
+        </p>
+        <p style="font-size: 0.84rem; color: var(--text-secondary);">
+          <i class="fa-solid fa-clock" style="color: var(--gold-deep); margin-right: 0.4rem;"></i> Mon - Sun: 9:00 AM - 9:00 PM
+        </p>
+      </div>
+
+      <!-- Col 2: Online Collections -->
+      <div>
+        <h4 class="footer-col-title">Online Collections</h4>
+        <ul class="footer-links">
+          <li><a href="#products-section" onclick="AppState.activeCategory='rings'; AppState.notify('filter');">Diamond Solitaire Rings</a></li>
+          <li><a href="#products-section" onclick="AppState.activeCategory='necklaces'; AppState.notify('filter');">22K Bridal Rani Haar</a></li>
+          <li><a href="#products-section" onclick="AppState.activeCategory='necklaces'; AppState.notify('filter');">Traditional Mangalsutras</a></li>
+          <li><a href="#products-section" onclick="AppState.activeCategory='bangles'; AppState.notify('filter');">Tennis & Gold Bangles</a></li>
+          <li><a href="#products-section" onclick="AppState.activeCategory='bullion'; AppState.notify('filter');">24K 999 Bullion Coins</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Customer Care -->
+      <div>
+        <h4 class="footer-col-title">Customer Care</h4>
+        <ul class="footer-links">
+          <li><a href="#tools-section">Live Gold Rate Ticker</a></li>
+          <li><a href="#tools-section">Old Gold Exchange Scheme</a></li>
+          <li><a href="#showroom-section">Showroom Video Consultation</a></li>
+          <li><a href="#reviews-section">Justdial Verified Reviews</a></li>
+          <li><a href="#products-section">Certificate Verification</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Ambikapur Store & Legal -->
+      <div>
+        <h4 class="footer-col-title">Assurances & Legal</h4>
+        <ul class="footer-links">
+          <li><a href="#">BIS Hallmarking Verification</a></li>
+          <li><a href="#">Lifetime Exchange & Buyback</a></li>
+          <li><a href="#">PAN Verification Compliance (≥ ₹2 Lakh)</a></li>
+          <li><a href="#">GST Invoice & HSN 7113 Policy</a></li>
+          <li><a href="#">Privacy & Safe Shopping</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 5: Payment & Security -->
+      <div>
+        <h4 class="footer-col-title">Secure Payments</h4>
+        <p style="font-size: 0.84rem; margin-bottom: 1rem;">We accept all verified payment modes with encrypted 256-bit checkout:</p>
+        <div class="payment-icons-row" style="font-size: 1.6rem; color: var(--gold-deep); display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <i class="fa-brands fa-google-pay" title="UPI Google Pay"></i>
+          <i class="fa-solid fa-mobile-screen-button" title="PhonePe / Paytm UPI"></i>
+          <i class="fa-brands fa-cc-visa" title="Visa"></i>
+          <i class="fa-brands fa-cc-mastercard" title="MasterCard"></i>
+          <i class="fa-solid fa-building-columns" title="Net Banking & RTGS"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <div>&copy; 2026 Swarn Mahal Jewellers, Ambikapur. All Rights Reserved. Compliant with Bureau of Indian Standards (BIS).</div>
+      <div>Designed with Smooth Luxury Light Aesthetics • Sawarn Platform</div>
+    </div>
+  </footer>
+
+  <!-- =========================================================================
+       MODALS: 100% COST BREAKUP, PDP QUICK VIEW, AR TRY-ON
+       ========================================================================= -->
+
+  <!-- Modal 1: 100% Transparency Price Breakup Modal -->
+  <div class="modal-backdrop" id="breakup-modal">
+    <div class="modal-window">
+      <button class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="breakup-modal-header">
+        <img src="" alt="Product" class="breakup-thumb" id="breakup-product-img" />
+        <div class="breakup-title-box">
+          <h3 id="breakup-product-title">Itemized Cost Breakup</h3>
+          <p id="breakup-product-subtitle">18K GOLD • TRANSPARENT PRICING</p>
+        </div>
+      </div>
+      <div class="breakup-modal-body">
+        <table class="breakup-table">
+          <thead>
+            <tr>
+              <th>Component Specification</th>
+              <th style="text-align: right;">Calculated Amount</th>
+            </tr>
+          </thead>
+          <tbody id="breakup-table-body">
+            <!-- Dynamic calculation rows injected here -->
+          </tbody>
+        </table>
+
+        <div class="huid-badge-box">
+          <div class="huid-text">
+            <i class="fa-solid fa-stamp" style="color: var(--gold-deep); font-size: 1.2rem;"></i>
+            <div>
+              <strong>BIS Hallmark Unique Identification (HUID):</strong>
+              <div style="font-size: 0.74rem; color: var(--text-muted);">Assayed for 100% legal purity conformity</div>
+            </div>
+          </div>
+          <div class="huid-code" id="breakup-huid-code">SM916A8201</div>
+        </div>
+
+        <div style="margin-top: 1rem; font-size: 0.78rem; color: var(--text-muted); text-align: center;">
+          Certificate: <strong id="breakup-cert-code" style="color: var(--text-primary);">IGI / BIS Certified</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Quick View & PDP Customizer Modal -->
+  <div class="modal-backdrop" id="quickview-modal">
+    <div class="modal-window" style="max-width: 900px;">
+      <button class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      <div class="pdp-modal-grid">
+        <!-- Gallery Left -->
+        <div class="pdp-gallery-side">
+          <img src="" alt="Preview" class="pdp-main-image" id="qv-main-img" />
+        </div>
+
+        <!-- Info Right -->
+        <div class="pdp-info-side">
+          <span class="pdp-tag" id="qv-collection">SOLITAIRE COLLECTION</span>
+          <h2 class="pdp-title" id="qv-title">Product Title</h2>
+          <div class="pdp-price-row">
+            <span class="pdp-current-price" id="qv-price">₹0</span>
+            <span class="badge-tag badge-huid">BIS 916 Hallmarked</span>
+          </div>
+          <p id="qv-desc" style="font-size: 0.88rem; margin-bottom: 1.5rem; color: var(--text-secondary);"></p>
+
+          <!-- Karat Options -->
+          <div class="pdp-option-group">
+            <div class="pdp-option-title">Select Gold Purity Karat:</div>
+            <div class="karat-selector" id="qv-karat-options"></div>
+          </div>
+
+          <!-- Color Options -->
+          <div class="pdp-option-group">
+            <div class="pdp-option-title">Select Gold Color:</div>
+            <div class="color-swatches" id="qv-color-options"></div>
+          </div>
+
+          <!-- Personalized Engraving -->
+          <div class="engraving-box">
+            <label class="pdp-option-title" for="qv-engraving-input">Complimentary Inner-Band Engraving:</label>
+            <input type="text" id="qv-engraving-input" class="engraving-input" placeholder="e.g. Aryan & Ananya ❤️ 2026" maxlength="20" />
+            <div class="engraving-preview-tag">Engraved with precision laser inside the band</div>
+          </div>
+
+          <!-- Actions -->
+          <div style="margin-top: auto; display: flex; gap: 1rem;">
+            <button class="btn btn-primary btn-lg" id="qv-add-to-cart-btn" style="flex: 1;">
+              <i class="fa-solid fa-bag-shopping"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: 21st.dev Luxury Gallery Lightbox Modal -->
+  <div class="lightbox-modal modal-backdrop" id="gallery-lightbox-modal">
+    <div class="lightbox-content-box">
+      <button class="modal-close-btn" style="z-index: 10;"><i class="fa-solid fa-xmark"></i></button>
+      <div class="lightbox-media">
+        <img src="" id="lightbox-img" alt="Jewellery Showcase" />
+      </div>
+      <div class="lightbox-details">
+        <div>
+          <div class="lightbox-tag" id="lightbox-tag">22K BIS 916</div>
+          <h2 class="lightbox-title" id="lightbox-title">Jewellery Title</h2>
+          <div class="lightbox-specs-pill">
+            <i class="fa-solid fa-certificate" style="color: var(--gold-deep);"></i>
+            <span id="lightbox-specs">Net Weight / Specifications</span>
+          </div>
+          <p class="lightbox-desc" id="lightbox-desc">Full handcrafted description...</p>
+        </div>
+
+        <div style="display: flex; gap: 0.85rem; flex-wrap: wrap;">
+          <a href="#" id="lightbox-whatsapp-btn" target="_blank" class="btn btn-primary" style="flex: 1; text-align: center;">
+            <i class="fa-brands fa-whatsapp"></i> Inquire via WhatsApp
+          </a>
+          <a href="#showroom-section" class="btn btn-outline" onclick="document.getElementById('gallery-lightbox-modal').classList.remove('active');" style="flex: 1; text-align: center;">
+            <i class="fa-solid fa-store"></i> Visit Showroom
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       SLIDE-OUT CART DRAWER WITH 15-MINUTE DYNAMIC PRICE LOCK
+       ========================================================================= -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay">
+    <div class="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3><i class="fa-solid fa-bag-shopping" style="color: var(--rose-gold);"></i> Shopping Bag</h3>
+        <button class="modal-close-btn" id="close-cart-btn" style="position: static;"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- 15-Minute Dynamic Price Lock Banner -->
+      <div class="price-lock-banner">
+        <div class="lock-timer-text">
+          <i class="fa-solid fa-lock" style="color: var(--gold-deep);"></i> Price Locked Against Market:
+        </div>
+        <div class="lock-timer-val" id="price-lock-timer-val">15:00</div>
+      </div>
+
+      <!-- Cart Items Scroll List -->
+      <div class="cart-items-list" id="cart-items-list">
+        <!-- Rendered dynamically via UI.renderCart() -->
+      </div>
+
+      <!-- Cart Footer -->
+      <div class="cart-drawer-footer">
+        <!-- High Value PAN Card Alert (for orders >= ₹2 Lakh) -->
+        <div class="pan-verification-alert" id="pan-alert">
+          <i class="fa-solid fa-triangle-exclamation"></i> <strong>Govt KYC Compliance:</strong> As order exceeds ₹2,00,000, PAN Card upload will be required at payment.
+        </div>
+
+        <div class="cart-summary-line">
+          <span>Taxable Metal & Making:</span>
+          <span id="cart-subtotal">₹0</span>
+        </div>
+        <div class="cart-summary-line">
+          <span>Applicable GST (3% HSN 7113):</span>
+          <span id="cart-gst">₹0</span>
+        </div>
+        <div class="cart-summary-line total">
+          <span>Grand Total:</span>
+          <span id="cart-total" style="color: var(--rose-gold);">₹0</span>
+        </div>
+
+        <button class="btn btn-primary btn-lg" style="width: 100%; margin-top: 1.25rem;" onclick="alert('Proceeding to Insured Checkout with 256-bit SSL encryption. All prices locked for 15 minutes.');">
+          <i class="fa-solid fa-shield-halved"></i> Proceed to Insured Checkout
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       FLOATING ADMIN LIVE RATE SIMULATOR WIDGET
+       ========================================================================= -->
+  <button class="admin-rate-float-btn" id="admin-rate-float-btn" title="Simulate Live Gold Rates">
+    <i class="fa-solid fa-sliders" style="color: var(--gold-bright);"></i> Live Rate Simulator
+  </button>
+
+  <div class="admin-drawer" id="admin-drawer">
+    <div class="admin-drawer-header">
+      <h4><i class="fa-solid fa-bolt" style="color: var(--gold-deep);"></i> GoldAPI Simulator</h4>
+      <button class="modal-close-btn" id="admin-drawer-close" style="position: static; width: 28px; height: 28px; font-size: 0.85rem;"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <p style="font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 1rem;">
+      Adjust benchmark 24K gold rate to observe instant formula recalculation across all 14K/18K/22K product cards.
+    </p>
+
+    <div class="admin-input-group">
+      <label>
+        <span>24K Bullion Rate / Gram:</span>
+        <strong id="admin-rate-24k-val" style="color: var(--gold-deep);">₹7,380/g</strong>
+      </label>
+      <input type="range" class="admin-slider" id="admin-rate-24k-slider" min="6500" max="8500" value="7380" step="10" />
+    </div>
+
+    <div class="admin-preset-btns">
+      <button class="btn btn-outline btn-sm" id="admin-spike-btn" style="color: #2E7D32;">
+        <i class="fa-solid fa-arrow-trend-up"></i> Market +₹150
+      </button>
+      <button class="btn btn-outline btn-sm" id="admin-dip-btn" style="color: #C62828;">
+        <i class="fa-solid fa-arrow-trend-down"></i> Market -₹150
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/pricingEngine.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/tools.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

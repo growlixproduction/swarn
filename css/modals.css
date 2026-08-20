@@ -1,0 +1,329 @@
+/* ==========================================================================
+   MODALS: 100% PRICE BREAKUP, PDP QUICK VIEW, AR TRY-ON, CONSULTATION
+   ========================================================================== */
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(22, 20, 18, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-backdrop.active {
+  display: flex;
+  opacity: 1;
+}
+
+/* Modal Window Container */
+.modal-window {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-xl);
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: scale(0.94) translateY(20px);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-backdrop.active .modal-window {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  z-index: 10;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background: var(--rose-gold);
+  color: #FFFFFF;
+  transform: rotate(90deg);
+}
+
+/* Price Breakup Modal Specific */
+.breakup-modal-header {
+  padding: 2rem 2rem 1.25rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.breakup-thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  border: 1px solid var(--border-light);
+  background: var(--bg-card-subtle);
+}
+
+.breakup-title-box h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.2rem;
+}
+
+.breakup-title-box p {
+  font-size: 0.82rem;
+  color: var(--text-gold);
+  font-weight: 600;
+}
+
+.breakup-modal-body {
+  padding: 1.75rem 2rem;
+}
+
+.breakup-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+.breakup-table th {
+  text-align: left;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding: 0.75rem 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.breakup-table td {
+  padding: 0.9rem 0.5rem;
+  font-size: 0.88rem;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.breakup-table td strong {
+  color: var(--text-primary);
+}
+
+.breakup-table tr.total-row td {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-top: 2px solid var(--border-gold);
+  border-bottom: none;
+  padding-top: 1.15rem;
+}
+
+.huid-badge-box {
+  background: var(--bg-tint-gold);
+  border: 1px dashed var(--border-gold);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.huid-text {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.huid-code {
+  font-family: monospace;
+  font-weight: 700;
+  color: var(--gold-deep);
+  background: #FFFFFF;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-gold);
+}
+
+/* Quick View PDP Modal */
+.pdp-modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 540px;
+}
+
+.pdp-gallery-side {
+  padding: 2.5rem;
+  background: var(--bg-card-subtle);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid var(--border-light);
+}
+
+.pdp-main-image {
+  width: 100%;
+  max-width: 320px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+}
+
+.pdp-thumbs-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.pdp-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-sm);
+  border: 2px solid transparent;
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.pdp-thumb.active {
+  border-color: var(--gold-primary);
+}
+
+.pdp-info-side {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdp-tag {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.pdp-title {
+  font-size: 1.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.pdp-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.pdp-current-price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.pdp-option-group {
+  margin-bottom: 1.25rem;
+}
+
+.pdp-option-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.engraving-box {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.engraving-input {
+  width: 100%;
+  font-size: 0.88rem;
+}
+
+.engraving-preview-tag {
+  font-size: 0.75rem;
+  color: var(--gold-deep);
+  margin-top: 0.35rem;
+  font-style: italic;
+}
+
+/* AR Try-On Simulator Modal */
+.ar-modal-body {
+  padding: 2rem;
+  text-align: center;
+}
+
+.ar-stage-container {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  height: 480px;
+  margin: 1.5rem auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: #1A1A1A;
+  box-shadow: var(--shadow-xl);
+}
+
+.ar-model-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ar-jewellery-overlay {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  pointer-events: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+  transition: all 0.2s ease;
+}
+
+.ar-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Responsive Modals */
+@media (max-width: 768px) {
+  .pdp-modal-grid {
+    grid-template-columns: 1fr;
+  }
+  .pdp-gallery-side {
+    border-right: none;
+    border-bottom: 1px solid var(--border-light);
+  }
+}

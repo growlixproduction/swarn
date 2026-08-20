@@ -1,0 +1,301 @@
+/* ==========================================================================
+   CART DRAWER, 15-MIN PRICE LOCK TIMER & ADMIN LIVE RATE SIMULATOR
+   ========================================================================== */
+
+/* Cart Drawer Container */
+.cart-drawer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(22, 20, 18, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 250;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-normal);
+}
+
+.cart-drawer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: -480px;
+  width: 100%;
+  max-width: 440px;
+  height: 100%;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-xl);
+  z-index: 260;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cart-drawer-overlay.active .cart-drawer {
+  right: 0;
+}
+
+.cart-drawer-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-drawer-header h3 {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 15-Minute Dynamic Price Lock Banner */
+.price-lock-banner {
+  background: var(--bg-tint-gold);
+  border-bottom: 1px solid var(--border-gold);
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lock-timer-text {
+  font-size: 0.78rem;
+  color: var(--text-gold);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.lock-timer-val {
+  font-family: monospace;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--rose-gold);
+  background: #FFFFFF;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-gold);
+}
+
+/* Cart Items Scroll List */
+.cart-items-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cart-item-card {
+  display: flex;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+}
+
+.cart-item-thumb {
+  width: 76px;
+  height: 76px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  background: var(--bg-card-subtle);
+  border: 1px solid var(--border-light);
+  flex-shrink: 0;
+}
+
+.cart-item-info {
+  flex-grow: 1;
+}
+
+.cart-item-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.cart-item-meta {
+  font-size: 0.75rem;
+  color: var(--gold-deep);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.cart-item-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-item-price {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 1.05rem;
+}
+
+.cart-qty-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  padding: 0.15rem 0.6rem;
+  font-size: 0.82rem;
+}
+
+.cart-qty-btn {
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text-primary);
+}
+
+.cart-item-remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: var(--text-light);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.cart-item-remove:hover {
+  color: var(--danger);
+}
+
+/* Cart Footer & Checkout */
+.cart-drawer-footer {
+  padding: 1.5rem;
+  background: var(--bg-card-subtle);
+  border-top: 1px solid var(--border-light);
+}
+
+.cart-summary-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.cart-summary-line.total {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  border-top: 1px solid var(--border-light);
+  padding-top: 0.65rem;
+  margin-top: 0.65rem;
+}
+
+.pan-verification-alert {
+  background: var(--warning-bg);
+  border: 1px solid var(--warning);
+  color: #795548;
+  font-size: 0.74rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.pan-verification-alert.active {
+  display: block;
+}
+
+/* Floating Admin Rate Simulator */
+.admin-rate-float-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #1C1917;
+  color: #FFFFFF;
+  border: 2px solid var(--gold-primary);
+  border-radius: var(--radius-full);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-xl);
+  z-index: 150;
+  cursor: pointer;
+  transition: all var(--transition-bounce);
+}
+
+.admin-rate-float-btn:hover {
+  transform: translateY(-4px) scale(1.04);
+  background: #2E2724;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+}
+
+.admin-drawer {
+  position: fixed;
+  bottom: 85px;
+  right: 25px;
+  width: 360px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: 1.5rem;
+  z-index: 160;
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.admin-drawer.active {
+  display: block;
+}
+
+.admin-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.admin-drawer-header h4 {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.admin-input-group {
+  margin-bottom: 1rem;
+}
+
+.admin-input-group label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+}
+
+.admin-slider {
+  width: 100%;
+  accent-color: var(--gold-primary);
+}
+
+.admin-preset-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}

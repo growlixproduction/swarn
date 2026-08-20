@@ -1,0 +1,101 @@
+/* ==========================================================================
+   SAWARN LUXURY JEWELS - DESIGN SYSTEM VARIABLES (LIGHT THEME)
+   Inspired by Jubilee & Surachni High-End Luxury Aesthetic
+   ========================================================================== */
+
+:root {
+  /* Surface & Background Colors */
+  --bg-primary: #FCFAF7;
+  --bg-secondary: #F6F1EB;
+  --bg-card: #FFFFFF;
+  --bg-card-subtle: #FDFBF9;
+  --bg-tint-gold: #FAF4EB;
+  --bg-dark: #161412;
+  --bg-glass: rgba(255, 255, 255, 0.88);
+  --bg-glass-card: rgba(255, 255, 255, 0.94);
+  --bg-glass-gold: rgba(246, 241, 235, 0.85);
+
+  /* Gold & Accent Colors */
+  --gold-primary: #C5A880;
+  --gold-dark: #A48356;
+  --gold-deep: #876538;
+  --gold-light: #DFCAAB;
+  --gold-subtle: #F2E9DE;
+  --gold-bright: #D4AF37;
+  
+  /* Imperial Cyan & Jewel Luxury Accents */
+  --cyan-primary: #06B6D4;
+  --cyan-glow: #00E5FF;
+  --cyan-deep: #082F49;
+  --cyan-dark: #07161A;
+  --cyan-night: #092027;
+  --cyan-glass: rgba(9, 32, 39, 0.94);
+  --cyan-border: rgba(6, 182, 212, 0.28);
+  --cyan-subtle: rgba(6, 182, 212, 0.12);
+
+  /* Rose Gold & Accent Hues */
+  --rose-gold: #C27E6A;
+  --rose-gold-hover: #AF6A56;
+  --rose-gold-subtle: #F7EDE9;
+  --platinum: #9E9E9E;
+  --silver-accent: #B0BEC5;
+
+  /* Typography & Neutral Colors */
+  --text-primary: #1C1917;
+  --text-secondary: #57534E;
+  --text-muted: #8C827A;
+  --text-light: #B5ACA4;
+  --text-white: #FFFFFF;
+  --text-gold: #9A7B4F;
+  --text-cyan: #22D3EE;
+
+  /* Borders & Dividers */
+  --border-light: #EFE9E0;
+  --border-subtle: #F2EDE6;
+  --border-gold: #D8C2A6;
+  --border-gold-subtle: rgba(197, 168, 128, 0.35);
+
+  /* Functional & Status Colors */
+  --success: #2E7D32;
+  --success-bg: #E8F5E9;
+  --danger: #C62828;
+  --danger-bg: #FFEBEE;
+  --warning: #F57F17;
+  --warning-bg: #FFF9C4;
+  --info: #0288D1;
+  --info-bg: #E1F5FE;
+
+  /* Typography Families */
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-hindi: 'Rozha One', 'Playfair Display', serif;
+
+  /* Shadow Elevation System */
+  --shadow-sm: 0 2px 8px rgba(28, 25, 23, 0.04);
+  --shadow-md: 0 8px 24px rgba(28, 25, 23, 0.06);
+  --shadow-lg: 0 16px 36px rgba(28, 25, 23, 0.09);
+  --shadow-xl: 0 24px 50px rgba(28, 25, 23, 0.12);
+  --shadow-gold: 0 8px 30px rgba(197, 168, 128, 0.22);
+  --shadow-gold-lg: 0 16px 45px rgba(197, 168, 128, 0.3);
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions & Easing */
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-normal: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-bounce: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Layout Containers */
+  --max-width: 1560px;
+  --max-width-narrow: 1200px;
+  --header-height: 84px;
+  --ticker-height: 38px;
+  --topbar-height: 34px;
+}

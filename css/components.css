@@ -1,0 +1,1014 @@
+/* ==========================================================================
+   MOODBOARDS, AMBIKAPUR SHOWROOM STORY, CALCULATORS, TESTIMONIALS, FOOTER
+   ========================================================================== */
+
+/* Category Moodboard Showcase */
+.moodboard-section {
+  background-color: var(--bg-secondary);
+  padding: 5rem 0;
+}
+
+.moodboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.moodboard-card {
+  position: relative;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+}
+
+.moodboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--gold-primary);
+}
+
+.moodboard-img-box {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+}
+
+.moodboard-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.moodboard-card:hover .moodboard-img-box img {
+  transform: scale(1.08);
+}
+
+.moodboard-info {
+  padding: 1.25rem 1rem;
+  text-align: center;
+  background: var(--bg-card);
+}
+
+.moodboard-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.moodboard-count {
+  font-size: 0.76rem;
+  color: var(--gold-deep);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ==========================================================================
+   21ST.DEV STYLE LUXURY BENTO COLLAGE GALLERY
+   Asymmetrical Masonry Grid with 3D Tilt, Light Sheen & Glass Badges
+   ========================================================================== */
+.luxury-collage-section {
+  background: linear-gradient(180deg, var(--bg-primary) 0%, #F5ECE0 50%, var(--bg-primary) 100%);
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.luxury-collage-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(197, 168, 128, 0.2) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Category Filter Bar */
+.collage-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-bottom: 2.75rem;
+  flex-wrap: wrap;
+}
+
+.collage-pill-btn {
+  padding: 0.55rem 1.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid var(--border-light);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.collage-pill-btn:hover {
+  border-color: var(--gold-primary);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(197, 168, 128, 0.25);
+}
+
+.collage-pill-btn.active {
+  background: #1C1917;
+  color: #FFFFFF;
+  border-color: #1C1917;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Asymmetric 12-Column Bento Collage Grid */
+.collage-masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 240px;
+  gap: 1.25rem;
+}
+
+/* Dynamic Grid Spans */
+.collage-item {
+  position: relative;
+  border-radius: 24px;
+  /* Smooth curved corner */
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(28, 25, 23, 0.08);
+  border: 1.5px solid rgba(223, 202, 171, 0.4);
+  background: #1A1615;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Asymmetric Grid Placements */
+.collage-item.span-tall {
+  grid-column: span 4;
+  grid-row: span 2;
+  /* 495px height */
+}
+
+.collage-item.span-wide {
+  grid-column: span 8;
+  grid-row: span 1;
+  /* 240px height */
+}
+
+.collage-item.span-square {
+  grid-column: span 4;
+  grid-row: span 1;
+}
+
+.collage-item.span-large-square {
+  grid-column: span 6;
+  grid-row: span 2;
+}
+
+.collage-item.span-medium {
+  grid-column: span 6;
+  grid-row: span 1;
+}
+
+/* 21st.dev Hover Sheen / Reflection Animation */
+.collage-item::after {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: -60%;
+  width: 220%;
+  height: 220%;
+  background: linear-gradient(60deg, transparent 40%, rgba(255, 255, 255, 0.4) 50%, transparent 60%);
+  transform: rotate(25deg) translateY(-100%);
+  transition: transform 0.85s ease;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.collage-item:hover::after {
+  transform: rotate(25deg) translateY(100%);
+}
+
+.collage-item:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 20px 45px rgba(28, 25, 23, 0.2);
+  border-color: var(--gold-primary);
+}
+
+/* Background Image with smooth zoom */
+.collage-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.collage-item:hover .collage-img {
+  transform: scale(1.08);
+}
+
+/* Dark Natural Vignette Overlay */
+.collage-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(14, 11, 9, 0.85) 0%, rgba(14, 11, 9, 0.35) 45%, transparent 80%);
+  z-index: 2;
+  transition: background 0.35s ease;
+}
+
+.collage-item:hover .collage-overlay {
+  background: linear-gradient(to top, rgba(14, 11, 9, 0.92) 0%, rgba(14, 11, 9, 0.5) 55%, transparent 85%);
+}
+
+/* Top Floating Pill Tag */
+.collage-top-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  color: var(--text-primary);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(197, 168, 128, 0.4);
+}
+
+/* Clean Bottom Text Overlay (No Box, No Border, No Dark Card Background) */
+.collage-bottom-plaque {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  color: #FFFFFF;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  z-index: 5;
+  transition: transform 0.35s ease;
+}
+
+.collage-item:hover .collage-bottom-plaque {
+  transform: translateY(-3px);
+}
+
+.collage-info-col h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+  line-height: 1.25;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
+}
+
+.collage-info-col p {
+  font-size: 0.78rem;
+  color: #EADDCF;
+  font-weight: 500;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.65);
+}
+
+.collage-expand-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #1C1917;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transition: all var(--transition-fast);
+}
+
+.collage-item:hover .collage-expand-btn {
+  background: #832729;
+  color: #FFFFFF;
+  border-color: #832729;
+  transform: scale(1.1) rotate(45deg);
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(14, 12, 11, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.lightbox-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.lightbox-content-box {
+  position: relative;
+  max-width: 960px;
+  width: 100%;
+  background: var(--bg-card);
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1.5px solid var(--border-gold);
+  box-shadow: var(--shadow-xl);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  transform: scale(0.95);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox-modal.active .lightbox-content-box {
+  transform: scale(1);
+}
+
+.lightbox-media {
+  background: #14110F;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.lightbox-media img {
+  width: 100%;
+  height: 100%;
+  max-height: 520px;
+  object-fit: cover;
+}
+
+.lightbox-details {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.lightbox-tag {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--gold-deep);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.lightbox-title {
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.lightbox-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+.lightbox-specs-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-tint-gold);
+  border: 1px solid var(--border-gold-subtle);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.75rem;
+}
+
+/* Responsive Collage Grid */
+@media (max-width: 1024px) {
+  .collage-masonry-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .collage-item.span-tall {
+    grid-column: span 3;
+    grid-row: span 2;
+  }
+
+  .collage-item.span-wide {
+    grid-column: span 6;
+    grid-row: span 1;
+  }
+
+  .collage-item.span-square {
+    grid-column: span 3;
+    grid-row: span 1;
+  }
+
+  .collage-item.span-large-square {
+    grid-column: span 6;
+    grid-row: span 2;
+  }
+
+  .collage-item.span-medium {
+    grid-column: span 6;
+    grid-row: span 1;
+  }
+
+  .lightbox-content-box {
+    grid-template-columns: 1fr;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 680px) {
+  .collage-masonry-grid {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 260px;
+  }
+
+  .collage-item.span-tall,
+  .collage-item.span-wide,
+  .collage-item.span-square,
+  .collage-item.span-large-square,
+  .collage-item.span-medium {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
+/* Ambikapur Showroom & Heritage Story */
+.showroom-story-section {
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-tint-gold) 100%);
+  padding: 6rem 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.showroom-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.showroom-text-col {
+  padding-right: 1.5rem;
+}
+
+.showroom-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold-deep);
+  background: var(--bg-card);
+  padding: 0.4rem 1.1rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-gold);
+  margin-bottom: 1.25rem;
+}
+
+.showroom-title {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  line-height: 1.2;
+}
+
+.showroom-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.showroom-features-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  margin-bottom: 2.25rem;
+}
+
+.showroom-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.showroom-feature-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--rose-gold-subtle);
+  color: var(--rose-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.showroom-feature-text strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.showroom-feature-text span {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.showroom-gallery-mosaic {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 210px 210px;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.mosaic-img-card {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 2px solid #FFFFFF;
+}
+
+.mosaic-img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mosaic-img-card:hover img {
+  transform: scale(1.08);
+}
+
+.mosaic-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: linear-gradient(to top, rgba(22, 20, 18, 0.8) 0%, transparent 100%);
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Calculators Interactive Section */
+.tools-section {
+  background-color: var(--bg-primary);
+  padding: 5rem 0;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+}
+
+.tool-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold-primary), var(--rose-gold));
+}
+
+.tool-header {
+  margin-bottom: 1.75rem;
+}
+
+.tool-header h3 {
+  font-size: 1.45rem;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.tool-header p {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.tool-form-group {
+  margin-bottom: 1.25rem;
+}
+
+.tool-form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tool-input-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.tool-result-box {
+  background: var(--bg-tint-gold);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.result-label {
+  font-size: 0.8rem;
+  color: var(--text-gold);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.result-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: var(--font-serif);
+}
+
+/* Spotlight Dual Banners */
+.spotlight-section {
+  padding: 4.5rem 0;
+  background-color: var(--bg-secondary);
+}
+
+.spotlight-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.spotlight-card {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 320px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+}
+
+.spotlight-img {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 55%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1s ease;
+}
+
+.spotlight-card:hover .spotlight-img {
+  transform: scale(1.06);
+}
+
+.spotlight-content {
+  position: relative;
+  z-index: 2;
+  padding: 2.5rem;
+  max-width: 55%;
+}
+
+.spotlight-tag {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--rose-gold);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.spotlight-title {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  line-height: 1.25;
+}
+
+/* Testimonials / Justdial Reviews */
+.testimonials-section {
+  background-color: var(--bg-primary);
+  padding: 5.5rem 0;
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.review-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-gold);
+}
+
+.review-stars {
+  color: var(--gold-bright);
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.review-text {
+  font-size: 0.94rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.reviewer-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-light);
+  padding-top: 1rem;
+}
+
+.reviewer-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--text-primary);
+}
+
+.reviewer-badge {
+  font-size: 0.72rem;
+  color: var(--success);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 600;
+}
+
+/* Trust Logos Row */
+.trust-logos-row {
+  background-color: var(--bg-card);
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.logos-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 2rem;
+  opacity: 0.85;
+}
+
+.trust-logo-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.trust-logo-item i {
+  font-size: 1.5rem;
+  color: var(--gold-deep);
+}
+
+/* Newsletter Section */
+.newsletter-section {
+  background: linear-gradient(135deg, #1C1917 0%, #2E2724 100%);
+  color: #FFFFFF;
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.newsletter-inner {
+  text-align: center;
+  max-width: 650px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.newsletter-inner h2 {
+  color: #FFFFFF;
+  font-size: 2.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.newsletter-inner p {
+  color: #D6CEC7;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: 0.9rem 1.4rem;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+.newsletter-input::placeholder {
+  color: #A89F97;
+}
+
+/* Luxury Multi-Column Footer */
+.main-footer {
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-light);
+  padding: 4.5rem 0 2rem;
+  color: var(--text-secondary);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, 1fr) 1.2fr;
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+}
+
+.footer-col-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer-links a {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.footer-links a:hover {
+  color: var(--gold-deep);
+}
+
+.footer-address {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.footer-address strong {
+  color: var(--text-primary);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.payment-icons-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .moodboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .showroom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tools-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .spotlight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
