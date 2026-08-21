@@ -8,10 +8,9 @@ import { PricingEngine } from "../lib/pricingEngine";
 const ToolsSection: React.FC = () => {
   const { bullionRates } = useApp();
 
-  // Tool 1: Live Gold Rate Estimator
+  // Tool 1: Live Gold Rate Estimator (Pure Bullion Value)
   const [calcWeight, setCalcWeight] = useState<number>(10);
   const [calcKarat, setCalcKarat] = useState<KaratType>("22K");
-  const [calcMakingPct, setCalcMakingPct] = useState<number>(12);
 
   const ratePerGram =
     calcKarat === "24K"
@@ -23,10 +22,8 @@ const ToolsSection: React.FC = () => {
       : bullionRates.gold14k;
 
   const metalCost = calcWeight * ratePerGram;
-  const makingCost = metalCost * (calcMakingPct / 100);
-  const subtotal = metalCost + makingCost;
-  const gst = subtotal * 0.03;
-  const estimatedTotal = Math.round(subtotal + gst);
+  const gst = metalCost * 0.03;
+  const estimatedTotal = Math.round(metalCost + gst);
 
   // Tool 2: Old Gold Exchange Calculator
   const [oldGoldWeight, setOldGoldWeight] = useState<number>(12.5);
@@ -40,7 +37,7 @@ const ToolsSection: React.FC = () => {
           <span className="section-tag">TRANSPARENT TOOLS</span>
           <h2 className="section-title">Jewellery Purity & Rate Calculators</h2>
           <p className="section-subtitle">
-            Calculate real-time jewellery making costs or estimate exchange credit for your old gold ornaments.
+            Calculate real-time pure gold bullion value or estimate exchange credit for your old gold ornaments.
           </p>
         </div>
 
@@ -52,7 +49,7 @@ const ToolsSection: React.FC = () => {
                 <i className="fa-solid fa-calculator" style={{ color: "var(--gold-deep)", marginRight: "0.5rem" }}></i>
                 Live Gold Rate Estimator
               </h3>
-              <p>Calculate exact estimated purchase price based on today&apos;s live bullion market.</p>
+              <p>Calculate exact pure gold value based on today&apos;s live bullion market rates.</p>
             </div>
 
             <div className="tool-form-group">
@@ -67,37 +64,22 @@ const ToolsSection: React.FC = () => {
             </div>
 
             <div className="tool-form-group">
-              <div className="tool-input-row" style={{ display: "flex", gap: "1rem" }}>
-                <div style={{ flex: 1 }}>
-                  <label>Gold Purity Karat</label>
-                  <select
-                    value={calcKarat}
-                    onChange={e => setCalcKarat(e.target.value as KaratType)}
-                  >
-                    <option value="24K">24K Pure Bullion (99.9%)</option>
-                    <option value="22K">22K Hallmark Gold (91.6%)</option>
-                    <option value="18K">18K Diamond Jewellery (75.0%)</option>
-                    <option value="14K">14K Modern Gold (58.3%)</option>
-                  </select>
-                </div>
-                <div style={{ flex: 1 }}>
-                  <label>Making Charge (%)</label>
-                  <select
-                    value={calcMakingPct}
-                    onChange={e => setCalcMakingPct(Number(e.target.value))}
-                  >
-                    <option value="10">10% (Plain Bands & Chains)</option>
-                    <option value="12">12% (Standard Designs)</option>
-                    <option value="16">16% (Intricate Bridal/Rani Haar)</option>
-                  </select>
-                </div>
-              </div>
+              <label>Gold Purity Karat</label>
+              <select
+                value={calcKarat}
+                onChange={e => setCalcKarat(e.target.value as KaratType)}
+              >
+                <option value="24K">24K Pure Bullion (99.9%)</option>
+                <option value="22K">22K Hallmark Gold (91.6%)</option>
+                <option value="18K">18K Diamond Jewellery (75.0%)</option>
+                <option value="14K">14K Modern Gold (58.3%)</option>
+              </select>
             </div>
 
             <div className="tool-result-box">
               <div>
-                <span className="result-label">Estimated Total (Incl. 3% GST)</span>
-                <div style={{ fontSize: "0.76rem", color: "var(--text-muted)" }}>Formula: Metal + Making + GST</div>
+                <span className="result-label">Estimated Pure Gold Value (Incl. 3% GST)</span>
+                <div style={{ fontSize: "0.76rem", color: "var(--text-muted)" }}>Formula: Net Weight × Live Karat Rate (+ 3% GST)</div>
               </div>
               <div className="result-value">{PricingEngine.formatINR(estimatedTotal)}</div>
             </div>
