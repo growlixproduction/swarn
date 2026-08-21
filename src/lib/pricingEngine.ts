@@ -30,7 +30,7 @@ export const PricingEngine = {
     customMaking: MakingChargeConfig | number | null = null
   ): PriceBreakdown {
     const karat: KaratType = selectedKarat || product.defaultKarat || "18K";
-    const base24k = bullionRates?.gold24k || 7380;
+    const base24k = bullionRates?.gold24k || 15928;
     const ratePerGram = this.getKaratRate(karat, base24k);
 
     // 1. Metal Cost = Net Metal Weight * Live Karat Rate
@@ -138,7 +138,7 @@ export const PricingEngine = {
     const weight = typeof weightGrams === "string" ? parseFloat(weightGrams) || 0 : weightGrams;
     if (weight <= 0) return { weight: 0, karat, ratePerGram: 0, grossValue: 0, netExchangeCredit: 0, meltLoss: 0 };
 
-    const base24k = bullionRates?.gold24k || 7380;
+    const base24k = bullionRates?.gold24k || 15928;
     const pureRate = this.getKaratRate(karat, base24k);
     const grossValue = Math.round(weight * pureRate);
     

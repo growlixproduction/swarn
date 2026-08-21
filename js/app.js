@@ -97,7 +97,7 @@ function runGoldCalculator() {
   if (!weightInput) return;
 
   const weight = parseFloat(weightInput.value) || 0;
-  const base24k = (typeof AppState !== "undefined" && AppState.bullionRates) ? AppState.bullionRates.gold24k : 7380;
+  const base24k = (typeof AppState !== "undefined" && AppState.bullionRates) ? AppState.bullionRates.gold24k : 15928;
   const res = PricingEngine.calculateOldGoldValue(weight, selectedCalcKarat, { gold24k: base24k });
 
   const ratePerGramEl = document.getElementById("calc-rate-per-gram-display");

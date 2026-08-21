@@ -23,13 +23,13 @@ const STORE_CONFIG = {
 
 // Live Bullion benchmark rates per gram (INR)
 const INITIAL_BULLION_RATES = {
-  gold24k: 7380, // Base 999 Purity Rate
-  gold22k: 6765, // 916 Hallmark (91.67% of 24K)
-  gold18k: 5535, // 750 Hallmark (75.00% of 24K)
-  gold14k: 4305, // 585 Hallmark (58.33% of 24K)
-  silver925: 89.5, // Fine 925 Silver per gram
+  gold24k: 15928, // Base 2026 999 Purity Rate
+  gold22k: 14601, // 916 Hallmark (91.67% of 24K)
+  gold18k: 11946, // 750 Hallmark (75.00% of 24K)
+  gold14k: 9291,  // 585 Hallmark (58.33% of 24K)
+  silver925: 180, // Fine 925 Silver per gram
   lastUpdated: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-  trend24h: "+0.42%",
+  trend24h: "+0.45%",
   isUp: true
 };
 

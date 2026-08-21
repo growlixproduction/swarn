@@ -29,7 +29,7 @@ const PricingEngine = {
    */
   calculateBreakdown(product, selectedKarat, bullionRates, customDiscountPct = null, customMaking = null) {
     const karat = selectedKarat || product.defaultKarat || "18K";
-    const base24k = bullionRates.gold24k || 7380;
+    const base24k = bullionRates.gold24k || 15928;
     const ratePerGram = this.getKaratRate(karat, base24k);
 
     // 1. Metal Cost = Net Metal Weight * Live Karat Rate
@@ -139,7 +139,7 @@ const PricingEngine = {
     const weight = parseFloat(weightGrams) || 0;
     if (weight <= 0) return { grossValue: 0, netExchangeCredit: 0, meltLoss: 0 };
 
-    const base24k = bullionRates.gold24k || 7380;
+    const base24k = bullionRates.gold24k || 15928;
     const pureRate = this.getKaratRate(karat, base24k);
     const grossValue = Math.round(weight * pureRate);
     
