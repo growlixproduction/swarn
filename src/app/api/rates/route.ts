@@ -27,10 +27,11 @@ async function fetchFromOfficialGoldAPI(): Promise<{
     if (res.ok) {
       const data = await res.json();
       if (data && data.price_gram_24k) {
-        const g24 = Math.round(data.price_gram_24k);
-        const g22 = Math.round(data.price_gram_22k || g24 * (22 / 24));
-        const g18 = Math.round(data.price_gram_18k || g24 * (18 / 24));
-        const g14 = Math.round(data.price_gram_14k || g24 * (14 / 24));
+        // Multiply raw XAU spot rate by 1.1368 (Indian Gold Import Duty + Local Bullion Premium)
+        const g24 = Math.round(data.price_gram_24k * 1.1368);
+        const g22 = Math.round((data.price_gram_22k ? data.price_gram_22k * 1.1368 : g24 * (22 / 24)));
+        const g18 = Math.round((data.price_gram_18k ? data.price_gram_18k * 1.1368 : g24 * (18 / 24)));
+        const g14 = Math.round((data.price_gram_14k ? data.price_gram_14k * 1.1368 : g24 * (14 / 24)));
         const trend = data.chp ? `${data.chp > 0 ? '+' : ''}${data.chp.toFixed(2)}%` : '+0.45%';
 
         return {
@@ -38,7 +39,7 @@ async function fetchFromOfficialGoldAPI(): Promise<{
           gold22k: g22,
           gold18k: g18,
           gold14k: g14,
-          silver925: Math.round(g24 * 0.013) || 180,
+          silver925: Math.round(g24 * 0.0113) || 180,
           trend24h: trend
         };
       }
