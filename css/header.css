@@ -526,24 +526,28 @@
   }
 }
 
-/* Smooth Continuous Right-To-Left Marquee Ticker Ribbon */
+/* Smooth Continuous Right-To-Left Marquee Ticker Ribbon (Ultra-Thin Sleek Strip) */
 .marquee-ticker-container {
   width: 100%;
   overflow: hidden;
   background: #832729;
   color: #FFFFFF;
-  padding: 0.45rem 0;
-  border-top: 1px solid rgba(197, 168, 128, 0.3);
-  border-bottom: 1px solid rgba(197, 168, 128, 0.3);
+  padding: 0.12rem 0;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid rgba(197, 168, 128, 0.25);
+  border-bottom: 1px solid rgba(197, 168, 128, 0.25);
   white-space: nowrap;
   position: relative;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.15);
+  line-height: 1;
 }
 
 .marquee-ticker-track {
   display: inline-flex;
   align-items: center;
-  gap: 2.5rem;
+  gap: 2rem;
   animation: marqueeContinuous 26s linear infinite;
   will-change: transform;
 }
@@ -575,10 +579,10 @@
 .marquee-item {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.82rem;
+  gap: 0.35rem;
+  font-size: 0.70rem;
   font-weight: 600;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   color: #FAF6F2;
 }
 
@@ -587,10 +591,11 @@
 }
 
 .marquee-pill {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 0.15rem 0.55rem;
-  border-radius: 20px;
-  font-size: 0.72rem;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 0.04rem 0.4rem;
+  border-radius: 12px;
+  font-size: 0.62rem;
   color: #FFF;
   font-weight: 700;
+  line-height: 1;
 }
