@@ -17,6 +17,36 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
+  // Dynamic Categories State
+  const [availableCategories, setAvailableCategories] = useState<Array<{ key: string; label: string }>>([
+    { key: "all", label: "All Jewellery" },
+    { key: "gold", label: "22K Gold" },
+    { key: "diamond", label: "Diamond Solitaires" },
+    { key: "earrings", label: "Earrings & Tops" },
+    { key: "daily-wear", label: "Daily Wear" },
+    { key: "gemstone", label: "Gemstone" },
+    { key: "wedding", label: "Bridal / Wedding" },
+    { key: "gifting", label: "Gifting Suite" },
+    { key: "under-50k", label: "Under ₹50,000" }
+  ]);
+
+  useEffect(() => {
+    fetch("/api/categories")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.categories) {
+          const list = Object.values(data.categories).map((cat: any) => ({
+            key: cat.slug,
+            label: cat.title || cat.name
+          }));
+          if (list.length > 0) {
+            setAvailableCategories(list);
+          }
+        }
+      })
+      .catch(err => console.warn("Failed to fetch categories:", err));
+  }, []);
+
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   // Form State
@@ -375,17 +405,7 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
             <div className="admin-form-group">
               <label className="admin-label">Navigational & Filter Collections:</label>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {[
-                  { key: "all", label: "All Jewellery" },
-                  { key: "gold", label: "22K Gold" },
-                  { key: "diamond", label: "Diamond Solitaires" },
-                  { key: "earrings", label: "Earrings" },
-                  { key: "daily-wear", label: "Daily Luxe" },
-                  { key: "gemstone", label: "Gemstone" },
-                  { key: "wedding", label: "Bridal / Wedding" },
-                  { key: "gifting", label: "Gifting Suite" },
-                  { key: "under-50k", label: "Under ₹50,000" }
-                ].map(c => (
+                {availableCategories.map(c => (
                   <button
                     key={c.key}
                     type="button"

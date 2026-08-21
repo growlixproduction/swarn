@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/context/AppContext";
@@ -8,10 +8,41 @@ import { PricingEngine } from "@/lib/pricingEngine";
 import { KaratType, MetalTone, Product } from "@/lib/types";
 import { ImageUploadInput } from "@/components/ImageUploadInput";
 
+const DEFAULT_CATEGORIES = [
+  { key: "all", label: "All Jewellery" },
+  { key: "gold", label: "22K Gold" },
+  { key: "diamond", label: "Diamond Solitaires" },
+  { key: "earrings", label: "Earrings & Tops" },
+  { key: "daily-wear", label: "Daily Wear" },
+  { key: "gemstone", label: "Gemstone" },
+  { key: "wedding", label: "Bridal / Wedding" },
+  { key: "gifting", label: "Gifting Suite" },
+  { key: "under-50k", label: "Under ₹50,000" }
+];
 
 export default function AdminNewProductPage() {
   const router = useRouter();
   const { bullionRates } = useApp();
+
+  // Dynamic Categories State
+  const [availableCategories, setAvailableCategories] = useState<Array<{ key: string; label: string }>>(DEFAULT_CATEGORIES);
+
+  useEffect(() => {
+    fetch("/api/categories")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.categories) {
+          const list = Object.values(data.categories).map((cat: any) => ({
+            key: cat.slug,
+            label: cat.title || cat.name
+          }));
+          if (list.length > 0) {
+            setAvailableCategories(list);
+          }
+        }
+      })
+      .catch(err => console.warn("Failed to fetch categories:", err));
+  }, []);
 
   // Form State
   const [sku, setSku] = useState("SM-120");
@@ -52,7 +83,7 @@ export default function AdminNewProductPage() {
   const [description, setDescription] = useState("Handcrafted pure gold band crowned with an IGI certified solitaire diamond, manufactured with BIS 916 hallmarked assay.");
   const [dimensions, setDimensions] = useState("Band Width: 2.2mm | Crown Height: 5.5mm");
 
-  // Search Tags & Hashtags
+  // Search Keywords & Hashtags
   const [searchKeywords, setSearchKeywords] = useState("solitaire ring, diamond ring, engagement ring, gold ring");
   const [hashtags, setHashtags] = useState("#SolitaireRing #SwarnMahal #AmbikapurJewellery #IGIcertified");
 
@@ -211,17 +242,7 @@ export default function AdminNewProductPage() {
             <div className="admin-form-group">
               <label className="admin-label">Navigational & Filter Collections (Multi-Select):</label>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {[
-                  { key: "all", label: "All Jewellery" },
-                  { key: "gold", label: "22K Gold" },
-                  { key: "diamond", label: "Diamond Solitaires" },
-                  { key: "earrings", label: "Earrings" },
-                  { key: "daily-wear", label: "Daily Luxe" },
-                  { key: "gemstone", label: "Gemstone" },
-                  { key: "wedding", label: "Bridal / Wedding" },
-                  { key: "gifting", label: "Gifting Suite" },
-                  { key: "under-50k", label: "Under ₹50,000" }
-                ].map(c => (
+                {availableCategories.map(c => (
                   <button
                     key={c.key}
                     type="button"
@@ -461,7 +482,6 @@ export default function AdminNewProductPage() {
                 onChange={setImageHover}
               />
             </div>
-
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
               <div className="admin-form-group">
