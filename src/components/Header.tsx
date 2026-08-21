@@ -134,8 +134,8 @@ const Header: React.FC = () => {
       </nav>
 
       {/* Real-time Ticker Ribbon */}
-      <div className="header-ticker-track" style={{ background: "var(--bg-secondary)", padding: "0.25rem 0", borderBottom: "1px solid var(--border-light)" }}>
-        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "1.5rem", fontSize: "0.72rem", color: "var(--text-secondary)", flexWrap: "wrap" }}>
+      <div className="header-ticker-track">
+        <div className="container header-ticker-inner">
           <span><strong>24K Gold:</strong> {rate24k}/g <span style={{ color: "#059669", fontWeight: 700 }}>▲ {bullionRates.trend24h}</span></span>
           <span><strong>22K Hallmark:</strong> {rate22k}/g</span>
           <span><strong>18K Diamond:</strong> {rate18k}/g</span>

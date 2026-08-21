@@ -131,18 +131,9 @@ export default function CollectionPage() {
         </div>
 
         {/* 2-Column Split: Sidebar + Products Grid */}
-        <div style={{ display: "grid", gridTemplateColumns: "260px 1fr", gap: "2.5rem", alignItems: "start" }}>
+        <div className="plp-layout-container">
           {/* Faceted Filter Sidebar */}
-          <aside
-            style={{
-              background: "#FFFFFF",
-              border: "1px solid var(--border-light)",
-              borderRadius: "14px",
-              padding: "1.5rem",
-              position: "sticky",
-              top: "100px"
-            }}
-          >
+          <aside className="plp-sidebar">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem", borderBottom: "1px solid var(--border-light)", paddingBottom: "0.75rem" }}>
               <strong style={{ fontSize: "0.95rem", color: "var(--text-primary)" }}>
                 <i className="fa-solid fa-sliders" style={{ color: "var(--gold-deep)", marginRight: "0.4rem" }}></i>
