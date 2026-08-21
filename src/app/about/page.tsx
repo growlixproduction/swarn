@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { PRODUCTS_CATALOG } from "@/lib/catalogData";
 import { useApp } from "@/context/AppContext";
@@ -12,35 +12,51 @@ type MaterialTab = "gold" | "diamond" | "silver" | "other";
 export default function AboutUsPage() {
   const { bullionRates } = useApp();
   const [activeTab, setActiveTab] = useState<MaterialTab>("gold");
+  const [productsList, setProductsList] = useState<Product[]>(PRODUCTS_CATALOG);
 
-  // Helper to infer product material if not explicitly assigned
+  useEffect(() => {
+    fetch("/api/products")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.products && data.products.length > 0) {
+          setProductsList(data.products);
+        }
+      })
+      .catch(err => console.warn("Failed to fetch live products for About Us:", err));
+  }, []);
+
+  // Helper to infer product material
   const getProductMaterial = (p: Product): MaterialTab => {
     if (p.primaryMaterial) return p.primaryMaterial;
     const title = p.title.toLowerCase();
-    const cat = p.category.toLowerCase();
+    const cat = p.category ? p.category.toLowerCase() : "";
+
+    // 1. Diamonds check
     if (p.diamondSpecs || title.includes("diamond") || title.includes("solitaire")) {
       return "diamond";
     }
+
+    // 2. Silver check
     if (cat === "silverware" || title.includes("silver")) {
       return "silver";
     }
-    if (cat === "bullion" && title.includes("silver")) {
-      return "silver";
-    }
-    if (cat === "rings" || cat === "earrings" || cat === "necklaces" || cat === "chains" || cat === "bangles" || cat === "pendants" || cat === "mangalsutra" || cat === "bullion") {
+
+    // 3. Gold check
+    if (cat === "rings" || cat === "earrings" || cat === "necklaces" || cat === "chains" || cat === "bangles" || cat === "pendants" || cat === "mangalsutra" || cat === "bullion" || title.includes("gold")) {
       return "gold";
     }
+
     return "other";
   };
 
   // Filter catalog by active material tab
-  const tabProducts = PRODUCTS_CATALOG.filter(p => getProductMaterial(p) === activeTab);
+  const tabProducts = productsList.filter(p => getProductMaterial(p) === activeTab);
 
   const tabCounts = {
-    gold: PRODUCTS_CATALOG.filter(p => getProductMaterial(p) === "gold").length,
-    diamond: PRODUCTS_CATALOG.filter(p => getProductMaterial(p) === "diamond").length,
-    silver: PRODUCTS_CATALOG.filter(p => getProductMaterial(p) === "silver").length,
-    other: PRODUCTS_CATALOG.filter(p => getProductMaterial(p) === "other").length
+    gold: productsList.filter(p => getProductMaterial(p) === "gold").length,
+    diamond: productsList.filter(p => getProductMaterial(p) === "diamond").length,
+    silver: productsList.filter(p => getProductMaterial(p) === "silver").length,
+    other: productsList.filter(p => getProductMaterial(p) === "other").length
   };
 
   return (
@@ -103,7 +119,7 @@ export default function AboutUsPage() {
             <span className="section-tag">CURATED COLLECTIONS BY MATERIAL</span>
             <h2 className="section-title">Explore Our Precious Collections</h2>
             <p className="section-subtitle">
-              Browse products automatically categorized by Gold, Diamond, Silver, and Custom Special creations.
+              Browse all {productsList.length} products categorized by Gold, Diamond, Silver, and Custom Special creations.
             </p>
           </div>
 
