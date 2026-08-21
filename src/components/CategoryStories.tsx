@@ -1,9 +1,15 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-const STORIES = [
+interface StoryItem {
+  label: string;
+  href: string;
+  img: string;
+}
+
+const DEFAULT_STORIES: StoryItem[] = [
   { label: "All Jewellery", href: "/collections/all", img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80" },
   { label: "22K Gold", href: "/collections/gold", img: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg" },
   { label: "Diamond", href: "/collections/diamond", img: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80" },
@@ -16,11 +22,31 @@ const STORIES = [
 ];
 
 const CategoryStories: React.FC = () => {
+  const [stories, setStories] = useState<StoryItem[]>(DEFAULT_STORIES);
+
+  useEffect(() => {
+    fetch("/api/categories")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.categories) {
+          const list: StoryItem[] = Object.values(data.categories).map((cat: any) => ({
+            label: cat.title || cat.name,
+            href: `/collections/${cat.slug}`,
+            img: cat.circleImg || cat.thumbnail_image || cat.heroBg || "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80"
+          }));
+          if (list.length > 0) {
+            setStories(list);
+          }
+        }
+      })
+      .catch(err => console.warn("Failed to load category stories from API:", err));
+  }, []);
+
   return (
     <section className="category-stories-section reveal-up">
       <div className="container">
         <div className="category-stories-track reveal-stagger">
-          {STORIES.map((s, idx) => (
+          {stories.map((s, idx) => (
             <Link key={idx} href={s.href} className="category-story-card">
               <div className="story-avatar-wrap">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
