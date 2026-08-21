@@ -534,52 +534,6 @@ const UI = {
       ` : '');
 
       breakdownBody.innerHTML = `
-        <!-- Interactive Making Charge Input & Customizer Bar -->
-        <div class="pdp-making-customizer">
-          <div class="making-cust-header">
-            <span class="making-cust-title">
-              <i class="fa-solid fa-sliders"></i> Adjust Making Charges:
-            </span>
-            <div class="making-mode-tabs">
-              <button type="button" class="making-mode-btn ${isPercent ? 'active' : ''}" onclick="UI.setPDPMakingType('${product.id}', 'percent')">
-                % of Gold
-              </button>
-              <button type="button" class="making-mode-btn ${!isPercent ? 'active' : ''}" onclick="UI.setPDPMakingType('${product.id}', 'per_gram')">
-                ₹ / Gram
-              </button>
-            </div>
-          </div>
-
-          <div class="making-input-row">
-            <div class="making-stepper-box">
-              <button type="button" class="making-step-btn" onclick="UI.stepPDPMaking('${product.id}', -1)" title="Decrease">-</button>
-              <input type="number" 
-                     id="pdp-making-input-val" 
-                     class="making-num-input" 
-                     value="${makingVal}" 
-                     min="0" 
-                     max="${isPercent ? 50 : 3000}" 
-                     step="${isPercent ? 1 : 50}"
-                     oninput="UI.onPDPMakingInputChange('${product.id}', this.value)" />
-              <span class="making-unit-label">${isPercent ? '%' : '₹/g'}</span>
-              <button type="button" class="making-step-btn" onclick="UI.stepPDPMaking('${product.id}', 1)" title="Increase">+</button>
-            </div>
-
-            <div class="making-presets-strip">
-              ${presets.map(pVal => `
-                <button type="button" 
-                        class="making-preset-pill ${makingVal === pVal ? 'active' : ''}" 
-                        onclick="UI.setPDPMakingPreset('${product.id}', ${pVal})">
-                  ${isPercent ? `${pVal}%` : `₹${pVal}`}
-                </button>
-              `).join('')}
-            </div>
-          </div>
-          <div class="making-helper-note">
-            <i class="fa-solid fa-circle-info"></i> Enter custom making charge or select presets to live recalculate total invoice.
-          </div>
-        </div>
-
         <!-- 100% Itemized Live Calculation Table -->
         <div class="pdp-calc-table-wrap">
           <table class="pdp-calc-table">
