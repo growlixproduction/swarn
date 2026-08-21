@@ -1,0 +1,13 @@
+# Swarn Mahal Jewellers - Hostinger Apache Rewrite Rules
+RewriteEngine On
+RewriteBase /
+
+# 1. Admin Section Routing (/admin -> admin.html)
+RewriteRule ^admin/?$ admin.html [L,QSA]
+RewriteRule ^admin/(.*)$ admin.html [L,QSA]
+
+# 2. Serve .html extension transparently for clean URLs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^(.*)$ $1.html [L,QSA]

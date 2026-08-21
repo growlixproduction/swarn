@@ -1,0 +1,539 @@
+/* ==========================================================================
+   SWARN MAHAL - LUXURY ADMIN DASHBOARD STYLESHEET
+   ========================================================================== */
+
+.admin-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background-color: #0E0C0A;
+  color: #EDE8E3;
+  font-family: var(--font-sans);
+}
+
+/* Sidebar */
+.admin-sidebar {
+  width: 280px;
+  background: #14110E;
+  border-right: 1px solid rgba(197, 168, 128, 0.2);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.admin-sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+}
+
+.admin-brand-crest {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.admin-crest-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #C5A880, #876538);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #FFFFFF;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(197, 168, 128, 0.3);
+}
+
+.admin-brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.05em;
+  display: block;
+}
+
+.admin-brand-sub {
+  font-size: 0.68rem;
+  color: #C5A880;
+  letter-spacing: 0.12em;
+  display: block;
+}
+
+/* Nav Menu */
+.admin-nav {
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.admin-nav-group-title {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #8C827A;
+  padding: 0.75rem 0.75rem 0.35rem;
+  font-weight: 700;
+}
+
+.admin-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  color: #B5ACA4;
+  text-decoration: none;
+  font-size: 0.86rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.admin-nav-link i {
+  width: 20px;
+  text-align: center;
+  color: #C5A880;
+}
+
+.admin-nav-link:hover {
+  background: rgba(197, 168, 128, 0.1);
+  color: #FFFFFF;
+}
+
+.admin-nav-link.active {
+  background: linear-gradient(90deg, rgba(197, 168, 128, 0.22), rgba(197, 168, 128, 0.05));
+  border-left: 3px solid #C5A880;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+
+/* Admin Main Content */
+.admin-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* Admin Top Bar */
+.admin-topbar {
+  height: 70px;
+  background: #14110E;
+  border-bottom: 1px solid rgba(197, 168, 128, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.admin-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.admin-live-ticker-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.76rem;
+  color: #10B981;
+}
+
+.admin-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-storefront {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #EDE8E3;
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-storefront:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+}
+
+/* Admin Page Container */
+.admin-content {
+  padding: 2rem;
+  flex: 1;
+}
+
+.admin-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-page-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+}
+
+.admin-page-desc {
+  font-size: 0.86rem;
+  color: #8C827A;
+}
+
+/* Admin KPI Grid */
+.admin-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.admin-kpi-card {
+  background: #181512;
+  border: 1px solid rgba(197, 168, 128, 0.2);
+  border-radius: 12px;
+  padding: 1.35rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-kpi-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #C5A880, #876538);
+}
+
+.admin-kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #8C827A;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.65rem;
+}
+
+.admin-kpi-value {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.admin-kpi-sub {
+  font-size: 0.74rem;
+  color: #C5A880;
+  margin-top: 0.4rem;
+}
+
+/* Admin Tables */
+.admin-card {
+  background: #181512;
+  border: 1px solid rgba(197, 168, 128, 0.2);
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  margin-bottom: 2rem;
+}
+
+.admin-table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-table-search {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: #110E0C;
+  border: 1px solid rgba(197, 168, 128, 0.25);
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  width: 320px;
+}
+
+.admin-table-search input {
+  background: transparent;
+  border: none;
+  color: #FFFFFF;
+  font-size: 0.84rem;
+  width: 100%;
+  outline: none;
+}
+
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+  text-align: left;
+}
+
+.admin-table th {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(197, 168, 128, 0.25);
+  color: #C5A880;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+}
+
+.admin-table td {
+  padding: 0.95rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #EDE8E3;
+}
+
+.admin-table tr:hover td {
+  background: rgba(197, 168, 128, 0.04);
+}
+
+.admin-prod-thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid rgba(197, 168, 128, 0.3);
+}
+
+.admin-badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.admin-badge-gold {
+  background: rgba(197, 168, 128, 0.15);
+  color: #DFCAAB;
+  border: 1px solid rgba(197, 168, 128, 0.3);
+}
+
+.admin-badge-green {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.admin-action-btns {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-icon-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #EDE8E3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.admin-icon-btn:hover {
+  background: #C5A880;
+  color: #14110E;
+  border-color: #C5A880;
+}
+
+/* Forms & Inputs */
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.admin-form-group {
+  margin-bottom: 1.25rem;
+}
+
+.admin-label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #C5A880;
+  margin-bottom: 0.4rem;
+}
+
+.admin-input,
+.admin-select,
+.admin-textarea {
+  width: 100%;
+  background: #110E0C;
+  border: 1px solid rgba(197, 168, 128, 0.25);
+  padding: 0.65rem 0.85rem;
+  border-radius: 8px;
+  color: #FFFFFF;
+  font-size: 0.86rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.admin-input:focus,
+.admin-select:focus,
+.admin-textarea:focus {
+  border-color: #C5A880;
+  box-shadow: 0 0 0 2px rgba(197, 168, 128, 0.15);
+}
+
+.admin-live-calc-box {
+  background: #110E0C;
+  border: 1.5px solid #C5A880;
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: sticky;
+  top: 90px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* EDIT PRODUCT SLIDE-OVER DRAWER MODAL */
+.admin-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  justify-content: flex-end;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.admin-edit-drawer {
+  width: 650px;
+  max-width: 95vw;
+  height: 100vh;
+  background: #14110E;
+  border-left: 1.5px solid rgba(197, 168, 128, 0.3);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
+  animation: slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.admin-drawer-header {
+  padding: 1.25rem 1.75rem;
+  background: #0E0C0A;
+  border-bottom: 1px solid rgba(197, 168, 128, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.admin-close-btn {
+  background: transparent;
+  border: none;
+  color: #C5A880;
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.admin-close-btn:hover {
+  color: #FFFFFF;
+}
+
+.admin-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.admin-form-section {
+  background: rgba(17, 14, 12, 0.8);
+  border: 1px solid rgba(197, 168, 128, 0.15);
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+.admin-form-sec-title {
+  font-size: 0.92rem;
+  color: #C5A880;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(197, 168, 128, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.admin-drawer-body .admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.admin-drawer-footer {
+  padding: 1.25rem 1.75rem;
+  background: #0E0C0A;
+  border-top: 1px solid rgba(197, 168, 128, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}

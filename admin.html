@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Swarn Mahal Luxury Jewellers</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Application Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/cart-admin.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <style>
+    /* Inline enhancements for static admin page */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .admin-modal-backdrop { display: none; }
+    .admin-modal-backdrop.active { display: flex; }
+  </style>
+</head>
+<body>
+
+  <div class="admin-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <a href="index.html" class="admin-brand-crest">
+          <div class="admin-crest-badge">SM</div>
+          <div>
+            <span class="brand-title admin-brand-title">SWARN MAHAL</span>
+            <span class="admin-brand-sub">LUXURY JEWELLERS</span>
+          </div>
+        </a>
+      </div>
+
+      <nav class="admin-nav">
+        <div class="admin-nav-group-title">Executive Control</div>
+        <a href="#dashboard" class="admin-nav-link active" data-tab="tab-dashboard">
+          <i class="fa-solid fa-chart-line"></i> Dashboard Overview
+        </a>
+        <a href="#products" class="admin-nav-link" data-tab="tab-products">
+          <i class="fa-solid fa-gem"></i> Master Inventory
+        </a>
+        <a href="#rates" class="admin-nav-link" data-tab="tab-rates">
+          <i class="fa-solid fa-sliders"></i> Bullion & Making Rates
+        </a>
+
+        <div class="admin-nav-group-title">Marketing & Content</div>
+        <a href="#gifting" class="admin-nav-link" data-tab="tab-gifting">
+          <i class="fa-solid fa-gift"></i> Gifting & Occasions Studio
+        </a>
+        <a href="#banners" class="admin-nav-link" data-tab="tab-banners">
+          <i class="fa-solid fa-image"></i> Hero Slider & Banners
+        </a>
+        <a href="#gallery" class="admin-nav-link" data-tab="tab-gallery">
+          <i class="fa-solid fa-camera-retro"></i> Showroom Vault
+        </a>
+      </nav>
+
+      <div style="padding: 1rem 1.5rem; border-top: 1px solid rgba(197, 168, 128, 0.15); margin-top: auto;">
+        <a href="index.html" class="btn-storefront" style="width: 100%; justify-content: center;">
+          <i class="fa-solid fa-store"></i> View Storefront
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <!-- Topbar -->
+      <header class="admin-topbar">
+        <div class="admin-topbar-left">
+          <div class="admin-live-ticker-chip">
+            <i class="fa-solid fa-pulse fa-circle" style="font-size: 0.5rem;"></i>
+            <span>24K BULLION: <strong id="topbar-gold-rate">₹7,380/g</strong></span>
+          </div>
+          <span style="font-size: 0.78rem; color: #8C827A;">Ambikapur Showroom Portal</span>
+        </div>
+
+        <div class="admin-topbar-actions">
+          <button class="btn btn-gold btn-sm" onclick="openAddProductModal()">
+            <i class="fa-solid fa-plus"></i> Add New Product
+          </button>
+          <a href="index.html" class="btn-storefront">
+            <i class="fa-solid fa-globe"></i> Live Store
+          </a>
+        </div>
+      </header>
+
+      <!-- Admin Page Content -->
+      <div class="admin-content">
+
+        <!-- TAB 1: DASHBOARD OVERVIEW -->
+        <div id="tab-dashboard" class="tab-content active">
+          <div class="admin-page-header">
+            <div>
+              <h1 class="admin-page-title">Showroom Executive Dashboard</h1>
+              <p class="admin-page-desc">
+                Real-time management for Swarn Mahal catalogue, bullion pricing engine, and digital showroom assets.
+              </p>
+            </div>
+          </div>
+
+          <!-- KPI Cards Grid -->
+          <div class="admin-kpi-grid">
+            <div class="admin-kpi-card">
+              <div class="admin-kpi-header">
+                <span>TOTAL MASTERPIECES</span>
+                <i class="fa-solid fa-ring"></i>
+              </div>
+              <div class="admin-kpi-value" id="kpi-total-products">12</div>
+              <div class="admin-kpi-sub">Across 8 Navigational Categories</div>
+            </div>
+
+            <div class="admin-kpi-card">
+              <div class="admin-kpi-header">
+                <span>LIVE CATALOGUE VALUE</span>
+                <i class="fa-solid fa-scale-balanced"></i>
+              </div>
+              <div class="admin-kpi-value" id="kpi-catalog-value">₹14,52,800</div>
+              <div class="admin-kpi-sub" id="kpi-gold-sync">Synchronized with ₹7,380/g 24K Rate</div>
+            </div>
+
+            <div class="admin-kpi-card">
+              <div class="admin-kpi-header">
+                <span>24K BULLION BENCHMARK</span>
+                <i class="fa-solid fa-coins"></i>
+              </div>
+              <div class="admin-kpi-value" id="kpi-gold-rate">₹7,380/g</div>
+              <div class="admin-kpi-sub" style="color: #10B981;" id="kpi-gold-22k">
+                22K Hallmark: ₹6,765/g
+              </div>
+            </div>
+
+            <div class="admin-kpi-card">
+              <div class="admin-kpi-header">
+                <span>VERIFIED REVIEWS</span>
+                <i class="fa-solid fa-star" style="color: #F59E0B;"></i>
+              </div>
+              <div class="admin-kpi-value">5.0 ★</div>
+              <div class="admin-kpi-sub">1,240 Customer Reviews (Justdial)</div>
+            </div>
+          </div>
+
+          <!-- Quick Actions Grid -->
+          <div class="admin-card">
+            <h3 style="font-size: 1.05rem; color: #FFFFFF; margin-bottom: 1rem; font-family: var(--font-serif);">
+              <i class="fa-solid fa-bolt" style="color: #C5A880; margin-right: 0.5rem;"></i>
+              Quick Management Portals
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+              <a href="#" onclick="switchTab('tab-products'); openAddProductModal(); return false;" style="background: #110E0C; border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 8px; padding: 1rem; text-decoration: none; color: #EDE8E3; display: block;">
+                <i class="fa-solid fa-plus-circle" style="color: #C5A880; font-size: 1.2rem; margin-bottom: 0.5rem; display: block;"></i>
+                <strong style="font-size: 0.88rem; display: block;">Add New Jewellery</strong>
+                <span style="font-size: 0.74rem; color: #8C827A;">Weights, stones & multi-tones</span>
+              </a>
+
+              <a href="#" onclick="switchTab('tab-gifting'); return false;" style="background: #110E0C; border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 8px; padding: 1rem; text-decoration: none; color: #EDE8E3; display: block;">
+                <i class="fa-solid fa-gift" style="color: #C5A880; font-size: 1.2rem; margin-bottom: 0.5rem; display: block;"></i>
+                <strong style="font-size: 0.88rem; display: block;">Gifting Studio</strong>
+                <span style="font-size: 0.74rem; color: #8C827A;">24K Coins, Packaging & Cards</span>
+              </a>
+
+              <a href="#" onclick="switchTab('tab-banners'); return false;" style="background: #110E0C; border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 8px; padding: 1rem; text-decoration: none; color: #EDE8E3; display: block;">
+                <i class="fa-solid fa-image" style="color: #C5A880; font-size: 1.2rem; margin-bottom: 0.5rem; display: block;"></i>
+                <strong style="font-size: 0.88rem; display: block;">Hero Slider Banners</strong>
+                <span style="font-size: 0.74rem; color: #8C827A;">Update homepage promotions</span>
+              </a>
+
+              <a href="#" onclick="switchTab('tab-rates'); return false;" style="background: #110E0C; border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 8px; padding: 1rem; text-decoration: none; color: #EDE8E3; display: block;">
+                <i class="fa-solid fa-sliders" style="color: #C5A880; font-size: 1.2rem; margin-bottom: 0.5rem; display: block;"></i>
+                <strong style="font-size: 0.88rem; display: block;">Bullion & Making Policy</strong>
+                <span style="font-size: 0.74rem; color: #8C827A;">Override rates & karigar %</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Active Inventory Table -->
+          <div class="admin-card">
+            <div class="admin-table-toolbar">
+              <h3 style="font-size: 1.05rem; color: #FFFFFF; margin: 0; font-family: var(--font-serif);">
+                Active Inventory Showcase
+              </h3>
+              <a href="#" onclick="switchTab('tab-products'); return false;" style="color: #C5A880; font-size: 0.82rem; text-decoration: none; font-weight: 600;">
+                View Full Inventory Table <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Design / Title</th>
+                    <th>SKU</th>
+                    <th>Category</th>
+                    <th>Net Gold Wt</th>
+                    <th>Karat</th>
+                    <th>Live Price</th>
+                    <th>HUID Assay</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-recent-table-body">
+                  <!-- Populated dynamically via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 2: MASTER INVENTORY MANAGEMENT -->
+        <div id="tab-products" class="tab-content">
+          <div class="admin-page-header">
+            <div>
+              <h1 class="admin-page-title">Master Product Inventory</h1>
+              <p class="admin-page-desc">
+                Manage jewellery pieces, karats, stone specs, pricing formulas, and high-resolution media assets.
+              </p>
+            </div>
+            <button class="btn btn-gold btn-sm" onclick="openAddProductModal()">
+              <i class="fa-solid fa-plus"></i> Add New Product
+            </button>
+          </div>
+
+          <div class="admin-card">
+            <div class="admin-table-toolbar">
+              <div class="admin-table-search">
+                <i class="fa-solid fa-search" style="color: #8C827A;"></i>
+                <input type="text" id="admin-search-input" placeholder="Search by SKU, Title, or HUID..." onkeyup="filterInventoryTable()">
+              </div>
+
+              <div style="display: flex; gap: 0.5rem;">
+                <select id="admin-cat-filter" class="admin-select" style="width: auto; padding: 0.45rem 0.85rem;" onchange="filterInventoryTable()">
+                  <option value="all">All Categories</option>
+                  <option value="rings">Rings</option>
+                  <option value="necklaces">Necklaces</option>
+                  <option value="earrings">Earrings</option>
+                  <option value="bangles">Bangles</option>
+                  <option value="bullion">Bullion / 24K Coins</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="admin-table-wrap">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Design / Title</th>
+                    <th>SKU</th>
+                    <th>Category</th>
+                    <th>Net Gold Wt</th>
+                    <th>Karat</th>
+                    <th>Live Price</th>
+                    <th>Making Charge</th>
+                    <th>HUID Code</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="inventory-table-body">
+                  <!-- Populated dynamically via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 3: BULLION & MAKING RATES ENGINE -->
+        <div id="tab-rates" class="tab-content">
+          <div class="admin-page-header">
+            <div>
+              <h1 class="admin-page-title">Live Bullion Benchmark & Policy Engine</h1>
+              <p class="admin-page-desc">
+                Configure base 24K gold rates, silver per-gram rates, and karigar making charge policies.
+              </p>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+            <!-- Gold Benchmark Override Card -->
+            <div class="admin-card">
+              <h3 style="font-size: 1.1rem; color: #FFFFFF; margin-bottom: 1.25rem; font-family: var(--font-serif); display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-coins" style="color: #C5A880;"></i> 24K Pure Gold Rate Benchmark
+              </h3>
+
+              <div class="admin-form-group">
+                <label class="admin-label">24K Pure Gold Rate (₹ / Gram)</label>
+                <input type="number" id="rate-input-24k" class="admin-input" value="7380" step="10" oninput="updateRatePreviews()">
+              </div>
+
+              <div style="background: #110E0C; border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1.25rem;">
+                <div style="font-size: 0.78rem; color: #8C827A; margin-bottom: 0.5rem;">AUTOMATIC KARAT DERIVATION:</div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
+                  <span>22K Hallmark (91.6%):</span>
+                  <strong style="color: #C5A880;" id="derived-22k">₹6,765/g</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
+                  <span>18K Diamond Gold (75.0%):</span>
+                  <strong style="color: #C5A880;" id="derived-18k">₹5,535/g</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                  <span>14K Luxe Gold (58.3%):</span>
+                  <strong style="color: #C5A880;" id="derived-14k">₹4,305/g</strong>
+                </div>
+              </div>
+
+              <button class="btn btn-gold" style="width: 100%;" onclick="saveBullionRates()">
+                <i class="fa-solid fa-save"></i> Save & Apply Benchmark
+              </button>
+            </div>
+
+            <!-- Silver Rate Card -->
+            <div class="admin-card">
+              <h3 style="font-size: 1.1rem; color: #FFFFFF; margin-bottom: 1.25rem; font-family: var(--font-serif); display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-gem" style="color: #E2E8F0;"></i> 925 Fine Silverware Benchmark
+              </h3>
+
+              <div class="admin-form-group">
+                <label class="admin-label">Fine Silver Rate (₹ / Gram)</label>
+                <input type="number" id="rate-input-silver" class="admin-input" value="89.50" step="0.5" oninput="updateRatePreviews()">
+              </div>
+
+              <div style="background: #110E0C; border: 1px solid rgba(197, 168, 128, 0.2); border-radius: 8px; padding: 1rem; margin-bottom: 1.25rem;">
+                <div style="font-size: 0.78rem; color: #8C827A; margin-bottom: 0.5rem;">SILVER UTENSILS & PUJA ARTICLES:</div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 0.35rem;">
+                  <span>100g Fine Silver Bar:</span>
+                  <strong style="color: #E2E8F0;" id="derived-silver-100g">₹8,950</strong>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.85rem;">
+                  <span>1kg Silver Puja Thali:</span>
+                  <strong style="color: #E2E8F0;" id="derived-silver-1kg">₹89,500</strong>
+                </div>
+              </div>
+
+              <button class="btn btn-gold" style="width: 100%;" onclick="saveBullionRates()">
+                <i class="fa-solid fa-save"></i> Save Silver Rates
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 4: GIFTING STUDIO -->
+        <div id="tab-gifting" class="tab-content">
+          <div class="admin-page-header">
+            <div>
+              <h1 class="admin-page-title">Luxury Gifting & Packaging Studio</h1>
+              <p class="admin-page-desc">
+                Configure gift boxes, complimentary greeting cards, and Dhanteras/Diwali gold coin gifting options.
+              </p>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <h3 style="font-size: 1.1rem; color: #FFFFFF; margin-bottom: 1rem; font-family: var(--font-serif);">
+              Signature Packaging Options
+            </h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;">
+              <div style="background: #110E0C; border: 1px solid rgba(197, 168, 128, 0.2); padding: 1.25rem; border-radius: 10px;">
+                <strong style="color: #C5A880; font-size: 0.95rem; display: block; margin-bottom: 0.3rem;">Royal Swarn Mahal Velvet Box</strong>
+                <p style="font-size: 0.78rem; color: #8C827A; margin-bottom: 0.8rem;">Complimentary with every order. Premium deep burgundy velvet with gold metallic foil crest.</p>
+                <span class="admin-badge admin-badge-green">DEFAULT - ₹0</span>
+              </div>
+
+              <div style="background: #110E0C; border: 1px solid rgba(197, 168, 128, 0.2); padding: 1.25rem; border-radius: 10px;">
+                <strong style="color: #C5A880; font-size: 0.95rem; display: block; margin-bottom: 0.3rem;">Handcrafted Rosewood Chest</strong>
+                <p style="font-size: 0.78rem; color: #8C827A; margin-bottom: 0.8rem;">Bridal trousseau gift box with brass clasp and velvet lining.</p>
+                <span class="admin-badge admin-badge-gold">ADD-ON - ₹750</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TAB 5: HERO BANNERS -->
+        <div id="tab-banners" class="tab-content">
+          <div class="admin-page-header">
+            <div>
+              <h1 class="admin-page-title">Hero Slider & Banner Manager</h1>
+              <p class="admin-page-desc">
+                Update homepage promotional slides, seasonal festive headlines, and spotlight links.
+              </p>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <p style="color: #8C827A; font-size: 0.88rem;">
+              Hero slides configured in <code>js/data.js</code> or <code>src/lib/catalogData.ts</code>. You can preview active slides here.
+            </p>
+          </div>
+        </div>
+
+        <!-- TAB 6: SHOWROOM VAULT -->
+        <div id="tab-gallery" class="tab-content">
+          <div class="admin-page-header">
+            <div>
+              <h1 class="admin-page-title">21st.dev Showroom Vault & Gallery</h1>
+              <p class="admin-page-desc">
+                Upload real showroom photos, electronic scale purity tests, and bridal consultation showcases.
+              </p>
+            </div>
+          </div>
+
+          <div class="admin-card">
+            <p style="color: #8C827A; font-size: 0.88rem;">
+              Showroom imagery is automatically linked to the 12-column bento collage gallery.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ADD / EDIT PRODUCT MODAL DRAWER -->
+  <div id="product-modal" class="admin-modal-backdrop">
+    <div class="admin-edit-drawer">
+      <div class="admin-drawer-header">
+        <h3 style="color: #FFFFFF; font-family: var(--font-serif); font-size: 1.15rem;" id="modal-title">
+          Add New Jewellery Masterpiece
+        </h3>
+        <button class="admin-close-btn" onclick="closeProductModal()">&times;</button>
+      </div>
+
+      <div class="admin-drawer-body">
+        <form id="product-form" onsubmit="handleProductSubmit(event)">
+          <input type="hidden" id="form-product-id">
+
+          <div class="admin-form-section">
+            <div class="admin-form-sec-title">
+              <i class="fa-solid fa-tag"></i> Identity & Categorization
+            </div>
+            <div class="admin-drawer-body">
+              <div class="admin-form-group">
+                <label class="admin-label">Product Title *</label>
+                <input type="text" id="form-title" class="admin-input" required placeholder="e.g. Royal Bridal Rani Haar">
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Category *</label>
+                <select id="form-category" class="admin-select" required>
+                  <option value="rings">Rings</option>
+                  <option value="necklaces">Necklaces</option>
+                  <option value="earrings">Earrings</option>
+                  <option value="bangles">Bangles</option>
+                  <option value="pendants">Pendants</option>
+                  <option value="bullion">Bullion / 24K Coins</option>
+                  <option value="silverware">Silverware</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-form-section">
+            <div class="admin-form-sec-title">
+              <i class="fa-solid fa-scale-balanced"></i> Metal Weight & Karat
+            </div>
+            <div class="admin-drawer-body">
+              <div class="admin-form-group">
+                <label class="admin-label">Net Gold Weight (g) *</label>
+                <input type="number" id="form-gold-wt" class="admin-input" step="0.01" required placeholder="e.g. 4.85">
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">Default Karat *</label>
+                <select id="form-karat" class="admin-select" required>
+                  <option value="22K">22K Hallmark (91.6%)</option>
+                  <option value="18K">18K Diamond Gold (75.0%)</option>
+                  <option value="14K">14K Luxe Gold (58.3%)</option>
+                  <option value="24K">24K Pure Bullion (99.9%)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-form-section">
+            <div class="admin-form-sec-title">
+              <i class="fa-solid fa-hammer"></i> Making Charges & Compliance
+            </div>
+            <div class="admin-drawer-body">
+              <div class="admin-form-group">
+                <label class="admin-label">Making Charge %</label>
+                <input type="number" id="form-making-pct" class="admin-input" value="14" step="0.5">
+              </div>
+              <div class="admin-form-group">
+                <label class="admin-label">BIS HUID Laser Code *</label>
+                <input type="text" id="form-huid" class="admin-input" required placeholder="e.g. SM916A8201">
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-form-section">
+            <div class="admin-form-sec-title">
+              <i class="fa-solid fa-image"></i> Image Asset URL
+            </div>
+            <div class="admin-form-group">
+              <label class="admin-label">Yellow Gold Photo Path</label>
+              <input type="text" id="form-img" class="admin-input" required value="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80">
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="admin-drawer-footer">
+        <button class="btn btn-outline btn-sm" onclick="closeProductModal()">Cancel</button>
+        <button class="btn btn-gold btn-sm" onclick="document.getElementById('product-form').requestSubmit()">
+          <i class="fa-solid fa-check"></i> Save Product
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/pricingEngine.js"></script>
+  <script src="js/state.js"></script>
+  
+  <script>
+    // Local state for admin
+    let currentCatalog = [...PRODUCTS_CATALOG];
+    let currentRates = AppState ? AppState.bullionRates : { gold24k: 7380, gold22k: 6765, gold18k: 5535, gold14k: 4305, silverPerGram: 89.5 };
+
+    document.addEventListener("DOMContentLoaded", () => {
+      // Tab switching setup
+      document.querySelectorAll(".admin-nav-link").forEach(link => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetTab = link.dataset.tab;
+          if (targetTab) switchTab(targetTab);
+        });
+      });
+
+      renderDashboard();
+      renderInventoryTable();
+    });
+
+    function switchTab(tabId) {
+      document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+      document.querySelectorAll(".admin-nav-link").forEach(el => el.classList.remove("active"));
+
+      const targetEl = document.getElementById(tabId);
+      if (targetEl) targetEl.classList.add("active");
+
+      const linkEl = document.querySelector(`.admin-nav-link[data-tab="${tabId}"]`);
+      if (linkEl) linkEl.classList.add("active");
+    }
+
+    function renderDashboard() {
+      const totalProds = currentCatalog.length;
+      let totalVal = 0;
+
+      currentCatalog.forEach(p => {
+        const bd = PricingEngine.calculateBreakdown(p, p.defaultKarat, currentRates);
+        totalVal += bd.finalPrice;
+      });
+
+      document.getElementById("kpi-total-products").textContent = totalProds;
+      document.getElementById("kpi-catalog-value").textContent = PricingEngine.formatINR(totalVal);
+      document.getElementById("topbar-gold-rate").textContent = `₹${currentRates.gold24k.toLocaleString('en-IN')}/g`;
+      document.getElementById("kpi-gold-rate").textContent = `₹${currentRates.gold24k.toLocaleString('en-IN')}/g`;
+      document.getElementById("kpi-gold-22k").textContent = `22K Hallmark: ₹${Math.round(currentRates.gold24k * 22 / 24).toLocaleString('en-IN')}/g`;
+      document.getElementById("kpi-gold-sync").textContent = `Synchronized with ₹${currentRates.gold24k}/g 24K Rate`;
+
+      // Render Dashboard Recent Table
+      const recentTbody = document.getElementById("dashboard-recent-table-body");
+      if (recentTbody) {
+        recentTbody.innerHTML = currentCatalog.slice(0, 6).map(p => {
+          const bd = PricingEngine.calculateBreakdown(p, p.defaultKarat, currentRates);
+          return `
+            <tr>
+              <td>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <img src="${p.images.yellow}" alt="${p.title}" class="admin-prod-thumb" />
+                  <div>
+                    <strong style="display: block; color: #FFFFFF;">${p.title}</strong>
+                    <span style="font-size: 0.72rem; color: #8C827A;">${p.collection || 'Swarn Collection'}</span>
+                  </div>
+                </div>
+              </td>
+              <td><code>${p.id}</code></td>
+              <td><span class="admin-badge admin-badge-gold">${p.category.toUpperCase()}</span></td>
+              <td>${p.netGoldWeightGrams} g</td>
+              <td><span class="admin-badge admin-badge-green">${p.defaultKarat}</span></td>
+              <td><strong style="color: #C5A880;">${PricingEngine.formatINR(bd.finalPrice)}</strong></td>
+              <td><code style="font-size: 0.74rem;">${p.huid}</code></td>
+              <td>
+                <div class="admin-action-btns">
+                  <a href="product-detail.html?id=${p.id}" class="admin-icon-btn" title="View PDP" target="_blank">
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+    }
+
+    function renderInventoryTable() {
+      const tbody = document.getElementById("inventory-table-body");
+      if (!tbody) return;
+
+      tbody.innerHTML = currentCatalog.map(p => {
+        const bd = PricingEngine.calculateBreakdown(p, p.defaultKarat, currentRates);
+        return `
+          <tr data-sku="${p.id.toLowerCase()}" data-title="${p.title.toLowerCase()}" data-cat="${p.category.toLowerCase()}">
+            <td>
+              <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <img src="${p.images.yellow}" alt="${p.title}" class="admin-prod-thumb" />
+                <div>
+                  <strong style="display: block; color: #FFFFFF;">${p.title}</strong>
+                  <span style="font-size: 0.72rem; color: #8C827A;">${p.huid}</span>
+                </div>
+              </div>
+            </td>
+            <td><code>${p.id}</code></td>
+            <td><span class="admin-badge admin-badge-gold">${p.category.toUpperCase()}</span></td>
+            <td>${p.netGoldWeightGrams} g</td>
+            <td><span class="admin-badge admin-badge-green">${p.defaultKarat}</span></td>
+            <td><strong style="color: #C5A880;">${PricingEngine.formatINR(bd.finalPrice)}</strong></td>
+            <td>${p.makingChargePercent || 14}%</td>
+            <td><code>${p.huid}</code></td>
+            <td>
+              <div class="admin-action-btns">
+                <button class="admin-icon-btn" onclick="editProduct('${p.id}')" title="Edit Product">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+                <a href="product-detail.html?id=${p.id}" class="admin-icon-btn" title="View Storefront" target="_blank">
+                  <i class="fa-solid fa-eye"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function filterInventoryTable() {
+      const search = document.getElementById("admin-search-input").value.toLowerCase();
+      const cat = document.getElementById("admin-cat-filter").value.toLowerCase();
+
+      document.querySelectorAll("#inventory-table-body tr").forEach(row => {
+        const title = row.dataset.title || "";
+        const sku = row.dataset.sku || "";
+        const rowCat = row.dataset.cat || "";
+
+        const matchesSearch = !search || title.includes(search) || sku.includes(search);
+        const matchesCat = cat === "all" || rowCat === cat;
+
+        row.style.display = (matchesSearch && matchesCat) ? "" : "none";
+      });
+    }
+
+    function updateRatePreviews() {
+      const val24k = parseFloat(document.getElementById("rate-input-24k").value) || 7380;
+      const valSilver = parseFloat(document.getElementById("rate-input-silver").value) || 89.5;
+
+      document.getElementById("derived-22k").textContent = `₹${Math.round(val24k * 22 / 24).toLocaleString('en-IN')}/g`;
+      document.getElementById("derived-18k").textContent = `₹${Math.round(val24k * 18 / 24).toLocaleString('en-IN')}/g`;
+      document.getElementById("derived-14k").textContent = `₹${Math.round(val24k * 14 / 24).toLocaleString('en-IN')}/g`;
+
+      document.getElementById("derived-silver-100g").textContent = `₹${Math.round(valSilver * 100).toLocaleString('en-IN')}`;
+      document.getElementById("derived-silver-1kg").textContent = `₹${Math.round(valSilver * 1000).toLocaleString('en-IN')}`;
+    }
+
+    function saveBullionRates() {
+      const val24k = parseInt(document.getElementById("rate-input-24k").value) || 7380;
+      const valSilver = parseFloat(document.getElementById("rate-input-silver").value) || 89.5;
+
+      currentRates.gold24k = val24k;
+      currentRates.gold22k = Math.round(val24k * 22 / 24);
+      currentRates.gold18k = Math.round(val24k * 18 / 24);
+      currentRates.gold14k = Math.round(val24k * 14 / 24);
+      currentRates.silverPerGram = valSilver;
+
+      if (AppState && AppState.setBullionRate) {
+        AppState.setBullionRate(val24k);
+      }
+
+      renderDashboard();
+      renderInventoryTable();
+      alert(`Bullion Rates Successfully Updated! 24K Base set to ₹${val24k}/g`);
+    }
+
+    function openAddProductModal() {
+      document.getElementById("modal-title").textContent = "Add New Jewellery Masterpiece";
+      document.getElementById("form-product-id").value = "";
+      document.getElementById("form-title").value = "";
+      document.getElementById("form-category").value = "rings";
+      document.getElementById("form-gold-wt").value = "";
+      document.getElementById("form-karat").value = "22K";
+      document.getElementById("form-making-pct").value = "14";
+      document.getElementById("form-huid").value = "SM916" + Math.floor(1000 + Math.random() * 9000);
+      document.getElementById("product-modal").classList.add("active");
+    }
+
+    function editProduct(id) {
+      const prod = currentCatalog.find(p => p.id === id);
+      if (!prod) return;
+
+      document.getElementById("modal-title").textContent = `Edit Masterpiece: ${prod.id}`;
+      document.getElementById("form-product-id").value = prod.id;
+      document.getElementById("form-title").value = prod.title;
+      document.getElementById("form-category").value = prod.category;
+      document.getElementById("form-gold-wt").value = prod.netGoldWeightGrams;
+      document.getElementById("form-karat").value = prod.defaultKarat;
+      document.getElementById("form-making-pct").value = prod.makingChargePercent || 14;
+      document.getElementById("form-huid").value = prod.huid;
+      document.getElementById("form-img").value = prod.images.yellow;
+      document.getElementById("product-modal").classList.add("active");
+    }
+
+    function closeProductModal() {
+      document.getElementById("product-modal").classList.remove("active");
+    }
+
+    function handleProductSubmit(e) {
+      e.preventDefault();
+      const id = document.getElementById("form-product-id").value || `SM-${Math.floor(100 + Math.random() * 900)}`;
+      const title = document.getElementById("form-title").value;
+      const category = document.getElementById("form-category").value;
+      const netGoldWeightGrams = parseFloat(document.getElementById("form-gold-wt").value) || 0;
+      const defaultKarat = document.getElementById("form-karat").value;
+      const makingChargePercent = parseFloat(document.getElementById("form-making-pct").value) || 14;
+      const huid = document.getElementById("form-huid").value;
+      const img = document.getElementById("form-img").value;
+
+      const existingIndex = currentCatalog.findIndex(p => p.id === id);
+      const newProduct = {
+        id,
+        title,
+        slug: title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+        collection: "Swarn Masterpiece Collection",
+        category,
+        netGoldWeightGrams,
+        grossWeightGrams: netGoldWeightGrams * 1.05,
+        defaultKarat,
+        supportedKarats: ["14K", "18K", "22K"],
+        defaultColor: "yellow",
+        supportedColors: ["yellow", "rose", "white"],
+        makingChargePercent,
+        huid,
+        images: {
+          yellow: img,
+          hover: img,
+          gallery: [img]
+        }
+      };
+
+      if (existingIndex >= 0) {
+        currentCatalog[existingIndex] = { ...currentCatalog[existingIndex], ...newProduct };
+      } else {
+        currentCatalog.unshift(newProduct);
+      }
+
+      closeProductModal();
+      renderDashboard();
+      renderInventoryTable();
+      alert(`Masterpiece ${id} Saved Successfully!`);
+    }
+  </script>
+</body>
+</html>

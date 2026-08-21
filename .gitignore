@@ -30,3 +30,4 @@ scripts/test-goldapi.js
 # OS files
 .DS_Store
 *.pem
+*.zip
