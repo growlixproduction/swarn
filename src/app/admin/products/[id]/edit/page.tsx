@@ -54,6 +54,7 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
   const [title, setTitle] = useState("");
   const [collection, setCollection] = useState("General Collection");
   const [category, setCategory] = useState("rings");
+  const [primaryMaterial, setPrimaryMaterial] = useState<"gold" | "diamond" | "silver" | "other">("gold");
   const [subCategory, setSubCategory] = useState("");
   const [navCategories, setNavCategories] = useState<string[]>(["all"]);
 
@@ -114,6 +115,7 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
           setTitle(targetProduct.title);
           setCollection(targetProduct.collection || "General Collection");
           setCategory(targetProduct.category);
+          setPrimaryMaterial(targetProduct.primaryMaterial || (targetProduct.diamondSpecs ? "diamond" : targetProduct.category === "silverware" ? "silver" : "gold"));
           setNavCategories(targetProduct.navCategories || ["all"]);
           setNetGoldWeight(targetProduct.netGoldWeightGrams);
           setGrossWeight(targetProduct.grossWeightGrams);
@@ -217,6 +219,7 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
       slug: title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       collection,
       category,
+      primaryMaterial,
       netGoldWeightGrams: netGoldWeight,
       grossWeightGrams: grossWeight,
       defaultKarat,
@@ -370,7 +373,21 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
               />
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
+              <div className="admin-form-group">
+                <label className="admin-label">Primary Material Type *</label>
+                <select
+                  className="admin-select"
+                  value={primaryMaterial}
+                  onChange={e => setPrimaryMaterial(e.target.value as any)}
+                >
+                  <option value="gold">🟡 Gold</option>
+                  <option value="diamond">💎 Diamond</option>
+                  <option value="silver">⚪ Silver</option>
+                  <option value="other">✨ Other / Special</option>
+                </select>
+              </div>
+
               <div className="admin-form-group">
                 <label className="admin-label">Physical Category *</label>
                 <select
