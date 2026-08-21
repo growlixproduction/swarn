@@ -141,93 +141,93 @@ export default function ProductDetailPage() {
             {product.title}
           </h1>
 
-          <div className="pdp-rating-row" style={{ display: "flex", alignItems: "center", gap: "0.5rem 0.75rem", marginBottom: "1.25rem", flexWrap: "wrap" }}>
-            <div style={{ color: "#F59E0B", fontSize: "0.95rem" }}>★ ★ ★ ★ ★</div>
-            <span style={{ fontSize: "0.82rem", color: "var(--text-secondary)" }}>
-              {product.rating} / 5.0 ({product.reviews} Verified Customer Reviews)
+          <div className="pdp-rating-row" style={{ display: "flex", alignItems: "center", gap: "0.4rem 0.65rem", marginBottom: "1.15rem", flexWrap: "wrap" }}>
+            <div style={{ color: "#F59E0B", fontSize: "0.9rem" }}>★ ★ ★ ★ ★</div>
+            <span style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}>
+              {product.rating} / 5.0 ({product.reviews} Reviews)
             </span>
-            <span className="huid-mini-tag" style={{ marginLeft: "0" }}>
+            <span className="huid-mini-tag" style={{ marginLeft: "0", fontSize: "0.65rem" }}>
               <i className="fa-solid fa-certificate"></i> BIS HUID: {product.huid}
             </span>
           </div>
 
           {/* Dynamic Price Hero Card */}
-          <div className="pdp-pricing-card" style={{ background: "#FFFFFF", border: "1.5px solid var(--border-gold)", borderRadius: "12px", padding: "1rem", marginBottom: "1.5rem" }}>
-            <div className="pdp-price-hero-row" style={{ display: "flex", alignItems: "center", gap: "0.5rem 0.75rem", flexWrap: "wrap", marginBottom: "0.4rem" }}>
-              <span className="pdp-hero-price" style={{ fontSize: "clamp(1.5rem, 4vw, 2rem)", fontWeight: 700, color: "var(--text-primary)" }}>
+          <div className="pdp-pricing-card" style={{ background: "#FFFFFF", border: "1.5px solid var(--border-gold)", borderRadius: "12px", padding: "0.85rem", marginBottom: "1.25rem" }}>
+            <div className="pdp-price-hero-row" style={{ display: "flex", alignItems: "baseline", gap: "0.4rem 0.6rem", flexWrap: "wrap", marginBottom: "0.35rem" }}>
+              <span className="pdp-hero-price" style={{ fontSize: "clamp(1.4rem, 4vw, 1.9rem)", fontWeight: 700, color: "var(--text-primary)" }}>
                 {PricingEngine.formatINR(breakdown.finalPrice)}
               </span>
               {breakdown.hasDiscount && (
-                <span className="pdp-hero-original-price" style={{ fontSize: "1rem", textDecoration: "line-through", color: "var(--text-muted)" }}>
+                <span className="pdp-hero-original-price" style={{ fontSize: "0.95rem", textDecoration: "line-through", color: "var(--text-muted)" }}>
                   {PricingEngine.formatINR(breakdown.originalPrice)}
                 </span>
               )}
               {breakdown.hasDiscount && (
-                <span className="pdp-hero-savings-badge" style={{ background: "#ECFDF5", color: "#065F46", border: "1px solid #A7F3D0", borderRadius: "4px", padding: "0.2rem 0.5rem", fontSize: "0.72rem", fontWeight: 700 }}>
+                <span className="pdp-hero-savings-badge" style={{ background: "#ECFDF5", color: "#065F46", border: "1px solid #A7F3D0", borderRadius: "4px", padding: "0.15rem 0.45rem", fontSize: "0.68rem", fontWeight: 700 }}>
                   Save {PricingEngine.formatINR(breakdown.savingsAmount)} ({breakdown.discountPct}% OFF Making)
                 </span>
               )}
             </div>
-            <div className="pdp-gst-inclusive-text" style={{ fontSize: "0.76rem", color: "var(--text-muted)", lineHeight: 1.35 }}>
+            <div className="pdp-gst-inclusive-text" style={{ fontSize: "0.74rem", color: "var(--text-muted)", lineHeight: 1.35 }}>
               Inclusive of all taxes (3% GST HSN 7113) with 100% itemized transparency.
             </div>
 
             {/* PROMINENT GOLD WEIGHT & ASSAY HIGHLIGHT BOX */}
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "0.6rem", marginTop: "0.85rem", paddingTop: "0.85rem", borderTop: "1px dashed var(--border-gold)" }}>
-              <div style={{ background: "rgba(197, 168, 128, 0.12)", border: "1.5px solid var(--border-gold)", borderRadius: "8px", padding: "0.55rem 0.65rem" }}>
-                <span style={{ fontSize: "0.68rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", display: "block", fontWeight: 700 }}>
+            <div className="pdp-weight-box-grid" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "0.5rem", marginTop: "0.75rem", paddingTop: "0.75rem", borderTop: "1px dashed var(--border-gold)" }}>
+              <div style={{ background: "rgba(197, 168, 128, 0.12)", border: "1.5px solid var(--border-gold)", borderRadius: "8px", padding: "0.5rem 0.6rem" }}>
+                <span style={{ fontSize: "0.65rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", display: "block", fontWeight: 700 }}>
                   ⚖️ Net Gold Weight
                 </span>
-                <strong style={{ fontSize: "1.05rem", color: "var(--gold-deep)", display: "block", marginTop: "0.15rem", fontWeight: 800 }}>
+                <strong style={{ fontSize: "1rem", color: "var(--gold-deep)", display: "block", marginTop: "0.1rem", fontWeight: 800 }}>
                   {product.netGoldWeightGrams} Grams ({product.netGoldWeightGrams}g)
                 </strong>
               </div>
 
-              <div style={{ background: "rgba(197, 168, 128, 0.08)", border: "1px solid var(--border-gold)", borderRadius: "8px", padding: "0.55rem 0.65rem" }}>
-                <span style={{ fontSize: "0.68rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.06em", display: "block", fontWeight: 700 }}>
+              <div style={{ background: "rgba(197, 168, 128, 0.08)", border: "1px solid var(--border-gold)", borderRadius: "8px", padding: "0.5rem 0.6rem" }}>
+                <span style={{ fontSize: "0.65rem", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.05em", display: "block", fontWeight: 700 }}>
                   📐 Gross Total Weight
                 </span>
-                <strong style={{ fontSize: "1.05rem", color: "var(--text-primary)", display: "block", marginTop: "0.15rem", fontWeight: 700 }}>
+                <strong style={{ fontSize: "1rem", color: "var(--text-primary)", display: "block", marginTop: "0.1rem", fontWeight: 700 }}>
                   {product.grossWeightGrams} Grams ({product.grossWeightGrams}g)
                 </strong>
               </div>
             </div>
 
             {/* Dynamic 15-Minute Price Lock Banner */}
-            <div className="pdp-price-lock-strip" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.4rem", background: "var(--bg-tint-gold)", border: "1px dashed var(--border-gold)", borderRadius: "8px", padding: "0.45rem 0.75rem", marginTop: "0.85rem", fontSize: "0.76rem" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+            <div className="pdp-price-lock-strip" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "0.35rem", background: "var(--bg-tint-gold)", border: "1px dashed var(--border-gold)", borderRadius: "8px", padding: "0.4rem 0.65rem", marginTop: "0.75rem", fontSize: "0.74rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.35rem" }}>
                 <i className="fa-solid fa-lock" style={{ color: "var(--gold-deep)" }}></i>
-                <span>Live Gold Market Rate Locked:</span>
+                <span>Live Market Rate Locked:</span>
               </div>
               <strong style={{ color: "var(--gold-deep)" }}>{formatTimer(priceLockSeconds)}</strong>
             </div>
           </div>
 
 
-          <p style={{ fontSize: "0.92rem", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: "1.5rem" }}>
+          <p style={{ fontSize: "0.88rem", color: "var(--text-secondary)", lineHeight: 1.55, marginBottom: "1.25rem" }}>
             {product.description}
           </p>
 
           {/* Purity Selector */}
-          <div className="pdp-option-card" style={{ marginBottom: "1.25rem" }}>
-            <div className="pdp-option-title" style={{ display: "flex", justifyContent: "space-between", fontSize: "0.82rem", fontWeight: 700, marginBottom: "0.5rem" }}>
+          <div className="pdp-option-card" style={{ marginBottom: "1.15rem" }}>
+            <div className="pdp-option-title" style={{ display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: "0.2rem 0.5rem", fontSize: "0.8rem", fontWeight: 700, marginBottom: "0.45rem" }}>
               <span>Select Gold Purity Karat:</span>
-              <span style={{ color: "var(--gold-deep)", cursor: "pointer", fontSize: "0.76rem" }}>
+              <span style={{ color: "var(--gold-deep)", fontSize: "0.74rem" }}>
                 18K Diamond / 22K Hallmark
               </span>
             </div>
-            <div className="pdp-karat-group" style={{ display: "flex", gap: "0.5rem" }}>
+            <div className="pdp-karat-group" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "0.45rem" }}>
               {product.supportedKarats.map(k => (
                 <div
                   key={k}
                   className={`pdp-karat-btn ${k === currentKarat ? "active" : ""}`}
-                  style={{ flex: 1, padding: "0.6rem", textAlign: "center", cursor: "pointer" }}
+                  style={{ padding: "0.5rem 0.35rem", textAlign: "center", cursor: "pointer", borderRadius: "6px" }}
                   onClick={() => setProductKarat(product.id, k)}
                 >
-                  <span className="pdp-karat-name" style={{ display: "block", fontWeight: 700, fontSize: "0.9rem" }}>
+                  <span className="pdp-karat-name" style={{ display: "block", fontWeight: 700, fontSize: "0.85rem" }}>
                     {k} Gold
                   </span>
-                  <span className="pdp-karat-purity" style={{ display: "block", fontSize: "0.7rem", color: "var(--text-muted)" }}>
+                  <span className="pdp-karat-purity" style={{ display: "block", fontSize: "0.68rem", color: "var(--text-muted)", marginTop: "0.1rem" }}>
                     {k === "24K" ? "99.9% Pure" : k === "22K" ? "91.6% Hallmark" : k === "18K" ? "75.0% Diamond" : "58.3% Luxe"}
                   </span>
                 </div>
@@ -236,20 +236,20 @@ export default function ProductDetailPage() {
           </div>
 
           {/* Color Selector */}
-          <div className="pdp-option-card" style={{ marginBottom: "1.25rem" }}>
-            <div className="pdp-option-title" style={{ fontSize: "0.82rem", fontWeight: 700, marginBottom: "0.5rem" }}>
+          <div className="pdp-option-card" style={{ marginBottom: "1.15rem" }}>
+            <div className="pdp-option-title" style={{ fontSize: "0.8rem", fontWeight: 700, marginBottom: "0.45rem" }}>
               <span>Select Precious Metal Tone:</span>
             </div>
-            <div className="pdp-color-group" style={{ display: "flex", gap: "0.5rem" }}>
+            <div className="pdp-color-group" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))", gap: "0.45rem" }}>
               {product.supportedColors.map(c => (
                 <div
                   key={c}
                   className={`pdp-color-btn ${c === currentColor ? "active" : ""}`}
-                  style={{ flex: 1, padding: "0.5rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.4rem", cursor: "pointer" }}
+                  style={{ padding: "0.45rem 0.35rem", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.35rem", cursor: "pointer", borderRadius: "6px" }}
                   onClick={() => handleColorChange(c)}
                 >
                   <span className={`color-dot ${c}`}></span>
-                  <span style={{ fontSize: "0.78rem", fontWeight: 600 }}>{c.toUpperCase()} GOLD</span>
+                  <span style={{ fontSize: "0.74rem", fontWeight: 600 }}>{c.toUpperCase()} GOLD</span>
                 </div>
               ))}
             </div>

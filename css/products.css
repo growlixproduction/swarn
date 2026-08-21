@@ -1722,6 +1722,22 @@
     padding: 0.15rem 0.4rem !important;
   }
 
+  .container, .container-narrow {
+    padding: 0 0.75rem !important;
+  }
+
+  .pdp-weight-box-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .pdp-karat-group {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .pdp-color-group {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
   .pdp-trust-strip {
     grid-template-columns: 1fr !important;
     gap: 0.65rem !important;
