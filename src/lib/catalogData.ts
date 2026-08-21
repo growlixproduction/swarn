@@ -455,14 +455,12 @@ export const PRODUCTS_CATALOG: Product[] = [
     makingChargePercent: 16,
     discountPercent: 12,
     images: {
-      yellow: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-      rose: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-      white: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-      hover: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg",
+      yellow: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      rose: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      white: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      hover: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=800&q=80",
       gallery: [
-        "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-        "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg",
-        "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (10).jpeg"
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85"
       ]
     },
     huid: "SM916RH285",
@@ -490,13 +488,12 @@ export const PRODUCTS_CATALOG: Product[] = [
     makingChargePercent: 14,
     discountPercent: 10,
     images: {
-      yellow: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (14).jpeg",
-      rose: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (14).jpeg",
-      white: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (14).jpeg",
-      hover: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
+      yellow: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+      rose: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+      white: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+      hover: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
       gallery: [
-        "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (14).jpeg",
-        "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg"
+        "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=85"
       ]
     },
     huid: "SM916MS148",
@@ -529,13 +526,12 @@ export const PRODUCTS_CATALOG: Product[] = [
       pricePerCarat: 14000
     },
     images: {
-      yellow: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg",
-      rose: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg",
-      white: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg",
-      hover: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
+      yellow: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=800&q=80",
+      rose: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=800&q=80",
+      white: "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=800&q=80",
+      hover: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
       gallery: [
-        "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg",
-        "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (10).jpeg"
+        "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=1200&q=85"
       ]
     },
     huid: "SM916KC342",
@@ -603,12 +599,12 @@ export const PRODUCTS_CATALOG: Product[] = [
     makingChargePercent: 15,
     discountPercent: 10,
     images: {
-      yellow: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-      rose: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-      white: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-      hover: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg",
+      yellow: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      rose: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      white: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      hover: "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
       gallery: [
-        "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg"
+        "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1200&q=85"
       ]
     },
     huid: "SM916PJ112",
@@ -648,8 +644,7 @@ export const PRODUCTS_CATALOG: Product[] = [
       white: "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
       hover: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
       gallery: [
-        "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=1200&q=85",
-        "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (2).jpeg"
+        "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=1200&q=85"
       ]
     },
     huid: "SM750B9410",
@@ -677,12 +672,12 @@ export const PRODUCTS_CATALOG: Product[] = [
     makingChargePercent: 14,
     discountPercent: 12,
     images: {
-      yellow: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (2).jpeg",
-      rose: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (2).jpeg",
-      white: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (2).jpeg",
-      hover: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
+      yellow: "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
+      rose: "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
+      white: "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
+      hover: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
       gallery: [
-        "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (2).jpeg"
+        "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=1200&q=85"
       ]
     },
     huid: "SM916KD248",
