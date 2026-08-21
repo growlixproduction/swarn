@@ -9,13 +9,11 @@ const Footer: React.FC = () => {
     <footer className="main-footer">
       <div className="container footer-grid">
         <div>
-          <Link href="/" className="brand-logo" style={{ marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: "0.6rem", textDecoration: "none" }}>
+          <Link href="/" className="brand-logo" style={{ marginBottom: "1rem", display: "inline-flex", alignItems: "center", gap: "0.65rem", textDecoration: "none" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/asset/logo.png" alt="Swarn Mahal Emblem" style={{ height: "42px", width: "auto", objectFit: "contain" }} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/asset/text-logo.png" alt="Swarn Mahal Jewellers" style={{ height: "32px", width: "auto", objectFit: "contain" }} />
+            <img src="/asset/logo.png" alt="Swarn Mahal Emblem" style={{ height: "44px", width: "auto", objectFit: "contain" }} />
             <div>
-              <span className="logo-main" style={{ fontFamily: "var(--font-heading)", fontSize: "1.2rem", fontWeight: 700, letterSpacing: "0.05em", color: "var(--text-primary)", display: "block", lineHeight: 1.1 }}>
+              <span className="logo-main" style={{ fontFamily: "var(--font-heading)", fontSize: "1.25rem", fontWeight: 700, letterSpacing: "0.03em", color: "var(--text-primary)", display: "block", lineHeight: 1.15 }}>
                 स्वर्ण महल
               </span>
               <span className="logo-sub" style={{ display: "block", fontSize: "0.62rem", letterSpacing: "0.15em", color: "var(--gold-deep)" }}>
