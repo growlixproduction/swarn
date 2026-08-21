@@ -507,6 +507,96 @@
     </div>
   </section>
 
+  <!-- TANISHQ-STYLE LIVE GOLD & EXCHANGE VALUE CALCULATOR -->
+  <section class="tanishq-calculator-section" id="gold-calculator-section">
+    <div class="container">
+      <div class="tanishq-calc-card reveal-up">
+        <div class="tanishq-calc-header">
+          <span class="calc-badge"><i class="fa-solid fa-bolt"></i> LIVE BULLION CALCULATOR</span>
+          <h2 class="calc-title">Calculate Your Gold Value & Exchange Rates</h2>
+          <p class="calc-subtitle">Select karat purity and weight in grams to calculate live gold rate & instant exchange credit value.</p>
+        </div>
+
+        <div class="tanishq-calc-body">
+          <!-- Karatage Selector Tabs -->
+          <div class="calc-form-group">
+            <label class="calc-label">Select Karatage Purity</label>
+            <div class="karat-tabs-grid" id="karat-tabs-container">
+              <button class="karat-tab-btn active" data-karat="24K" onclick="selectCalcKarat('24K')">
+                <strong>24K</strong>
+                <span>99.9% Pure</span>
+              </button>
+              <button class="karat-tab-btn" data-karat="22K" onclick="selectCalcKarat('22K')">
+                <strong>22K</strong>
+                <span>91.6% Hallmark</span>
+              </button>
+              <button class="karat-tab-btn" data-karat="18K" onclick="selectCalcKarat('18K')">
+                <strong>18K</strong>
+                <span>75.0% Diamond</span>
+              </button>
+              <button class="karat-tab-btn" data-karat="14K" onclick="selectCalcKarat('14K')">
+                <strong>14K</strong>
+                <span>58.3% Luxe</span>
+              </button>
+              <button class="karat-tab-btn" data-karat="9K" onclick="selectCalcKarat('9K')">
+                <strong>9K</strong>
+                <span>37.5% Alloy</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Weight Input with Quick Preset Weight Chips -->
+          <div class="calc-form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <label class="calc-label" style="margin: 0;">Net Gold Weight (Grams)</label>
+              <span style="font-size: 0.78rem; color: #832729; font-weight: 700;" id="calc-rate-per-gram-display">Rate: ₹7,380 / g</span>
+            </div>
+
+            <div class="weight-input-wrap">
+              <input type="number" id="calc-gold-weight" class="weight-input" value="10" step="0.1" min="0.1" placeholder="e.g. 11.5" oninput="runGoldCalculator()">
+              <span class="weight-unit">Grams</span>
+            </div>
+
+            <!-- Quick Preset Weight Pills -->
+            <div class="weight-presets-flex">
+              <button type="button" class="preset-pill" onclick="setCalcWeight(1)">1g</button>
+              <button type="button" class="preset-pill" onclick="setCalcWeight(5)">5g</button>
+              <button type="button" class="preset-pill active" onclick="setCalcWeight(10)">10g</button>
+              <button type="button" class="preset-pill" onclick="setCalcWeight(20)">20g</button>
+              <button type="button" class="preset-pill" onclick="setCalcWeight(50)">50g</button>
+              <button type="button" class="preset-pill" onclick="setCalcWeight(100)">100g (1 Tola)</button>
+            </div>
+          </div>
+
+          <!-- Live Calculated Result Output Card -->
+          <div class="calc-result-box">
+            <div class="result-row">
+              <span>Gross Gold Value:</span>
+              <strong id="calc-gross-value">₹73,800</strong>
+            </div>
+            <div class="result-row">
+              <span>Melting / Allowance (-2%):</span>
+              <span style="color: #C53030;" id="calc-melt-loss">-₹1,476</span>
+            </div>
+            <div class="result-row total">
+              <span>Net Exchange Credit:</span>
+              <strong class="total-amount" id="calc-net-credit">₹72,324</strong>
+            </div>
+
+            <div style="margin-top: 1rem; display: flex; gap: 0.75rem; flex-wrap: wrap;">
+              <button class="btn btn-gold" style="flex: 1; min-width: 200px;" onclick="openExchangeModal()">
+                <i class="fa-solid fa-lock"></i> Lock Rate for 15 Mins
+              </button>
+              <a href="https://wa.me/919425256220?text=Hello%20Swarn%20Mahal,%20I%20want%20to%20exchange%20gold" target="_blank" class="btn btn-outline" style="flex: 1; min-width: 200px;">
+                <i class="fa-brands fa-whatsapp"></i> Chat with Jewellery Expert
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- LATEST PRODUCTS & DYNAMIC PRICING CATALOG -->
   <section class="products-section" id="products-section">
     <div class="container">
@@ -1107,6 +1197,26 @@
       </button>
     </div>
   </div>
+
+  <!-- FIXED BOTTOM MOBILE APP NAVBAR (4 PRIMARY SECTIONS) -->
+  <nav class="mobile-app-bottom-nav">
+    <a href="all-jewellery.html" class="mobile-app-nav-item active">
+      <i class="fa-solid fa-gem"></i>
+      <span>All Jewellery</span>
+    </a>
+    <a href="gold.html" class="mobile-app-nav-item">
+      <i class="fa-solid fa-crown"></i>
+      <span>Gold</span>
+    </a>
+    <a href="diamond.html" class="mobile-app-nav-item">
+      <i class="fa-solid fa-ring"></i>
+      <span>Diamond</span>
+    </a>
+    <a href="gemstone.html" class="mobile-app-nav-item">
+      <i class="fa-solid fa-sparkles"></i>
+      <span>Silver</span>
+    </a>
+  </nav>
 
   <!-- Scripts -->
   <script src="js/data.js"></script>

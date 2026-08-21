@@ -1012,3 +1012,220 @@
     text-align: center;
   }
 }
+
+/* ==========================================================================
+   TANISHQ-STYLE LIVE GOLD & EXCHANGE VALUE CALCULATOR
+   ========================================================================== */
+.tanishq-calculator-section {
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #FAF6F0 0%, #FFFFFF 100%);
+}
+
+.tanishq-calc-card {
+  background: #FFFFFF;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 12px 40px rgba(131, 39, 41, 0.08);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tanishq-calc-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.calc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(131, 39, 41, 0.08);
+  color: #832729;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  margin-bottom: 0.6rem;
+}
+
+.calc-title {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  color: #1C1917;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.calc-subtitle {
+  font-size: 0.88rem;
+  color: #666666;
+}
+
+.calc-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.calc-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #832729;
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Karat Tabs */
+.karat-tabs-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.6rem;
+}
+
+.karat-tab-btn {
+  background: #FAF6F2;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 12px;
+  padding: 0.75rem 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.karat-tab-btn strong {
+  font-size: 1.1rem;
+  color: #1C1917;
+  display: block;
+}
+
+.karat-tab-btn span {
+  font-size: 0.68rem;
+  color: #777777;
+  margin-top: 0.15rem;
+}
+
+.karat-tab-btn.active,
+.karat-tab-btn:hover {
+  background: #832729;
+  border-color: #832729;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(131, 39, 41, 0.2);
+}
+
+.karat-tab-btn.active strong,
+.karat-tab-btn.active span,
+.karat-tab-btn:hover strong,
+.karat-tab-btn:hover span {
+  color: #FFFFFF;
+}
+
+/* Weight Input */
+.weight-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.weight-input {
+  width: 100%;
+  height: 52px;
+  border: 1.5px solid #EAE3DA;
+  border-radius: 12px;
+  padding: 0 4rem 0 1.25rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1C1917;
+  outline: none;
+  background: #FAFAF8;
+  transition: border-color 0.2s ease;
+}
+
+.weight-input:focus {
+  border-color: #832729;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(131, 39, 41, 0.1);
+}
+
+.weight-unit {
+  position: absolute;
+  right: 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #832729;
+}
+
+.weight-presets-flex {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.preset-pill {
+  background: #FAF6F2;
+  border: 1px solid #EAE3DA;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #444444;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-pill:hover,
+.preset-pill.active {
+  background: #832729;
+  color: #FFFFFF;
+  border-color: #832729;
+}
+
+/* Result Box */
+.calc-result-box {
+  background: linear-gradient(135deg, #FFFDF9 0%, #FAF4EE 100%);
+  border: 1.5px solid #832729;
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #555555;
+  margin-bottom: 0.5rem;
+}
+
+.result-row.total {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1C1917;
+  border-top: 1px dashed #DDD5CC;
+  padding-top: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.total-amount {
+  font-size: 1.5rem;
+  color: #832729;
+  font-family: var(--font-serif);
+}
+
+@media (max-width: 600px) {
+  .tanishq-calc-card {
+    padding: 1.25rem;
+  }
+  .karat-tabs-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .calc-title {
+    font-size: 1.4rem;
+  }
+}

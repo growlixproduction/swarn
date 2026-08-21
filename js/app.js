@@ -68,7 +68,48 @@ document.addEventListener("DOMContentLoaded", () => {
   setupModalBackdrops();
   setupAdminSimulator();
   setupScrollReveal();
+  runGoldCalculator();
 });
+
+let selectedCalcKarat = "24K";
+
+function selectCalcKarat(karat) {
+  selectedCalcKarat = karat;
+  document.querySelectorAll(".karat-tab-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.karat === karat);
+  });
+  runGoldCalculator();
+}
+
+function setCalcWeight(weight) {
+  const input = document.getElementById("calc-gold-weight");
+  if (input) {
+    input.value = weight;
+    document.querySelectorAll(".preset-pill").forEach(pill => {
+      pill.classList.toggle("active", pill.textContent.startsWith(weight + "g"));
+    });
+    runGoldCalculator();
+  }
+}
+
+function runGoldCalculator() {
+  const weightInput = document.getElementById("calc-gold-weight");
+  if (!weightInput) return;
+
+  const weight = parseFloat(weightInput.value) || 0;
+  const base24k = (typeof AppState !== "undefined" && AppState.bullionRates) ? AppState.bullionRates.gold24k : 7380;
+  const res = PricingEngine.calculateOldGoldValue(weight, selectedCalcKarat, { gold24k: base24k });
+
+  const ratePerGramEl = document.getElementById("calc-rate-per-gram-display");
+  const grossEl = document.getElementById("calc-gross-value");
+  const meltEl = document.getElementById("calc-melt-loss");
+  const netEl = document.getElementById("calc-net-credit");
+
+  if (ratePerGramEl) ratePerGramEl.textContent = `Rate: ₹${res.ratePerGram.toLocaleString('en-IN')} / g`;
+  if (grossEl) grossEl.textContent = PricingEngine.formatINR(res.grossValue);
+  if (meltEl) meltEl.textContent = `-₹${res.meltLoss.toLocaleString('en-IN')}`;
+  if (netEl) netEl.textContent = PricingEngine.formatINR(res.netExchangeCredit);
+}
 
 /**
  * PLP Faceted Sidebar & Sort Event Listeners
