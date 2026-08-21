@@ -2,35 +2,61 @@ import { NextResponse } from "next/server";
 import { getCategoriesFromStore, saveCategoryToStore, deleteCategoryFromStore, saveCategoriesOrderToStore } from "../../../lib/jsonStore";
 import pool from "../../../lib/db";
 
-export async function GET() {
+// Helper to sync JSON store categories into MySQL Database
+async function syncStoreToDatabase(categoriesMap: Record<string, any>) {
   try {
-    const [rows]: any = await pool.execute(`SELECT * FROM categories WHERE is_active = 1 ORDER BY display_order ASC`);
+    const validSlugs = Object.keys(categoriesMap);
+    if (validSlugs.length === 0) return;
 
-    if (rows && rows.length > 0) {
-      const categoriesMap: Record<string, any> = {};
-      rows.forEach((r: any) => {
-        categoriesMap[r.slug] = {
-          slug: r.slug,
-          pageTitle: `${r.name} | Swarn Mahal Jewellers Ambikapur`,
-          title: r.name,
-          badge: "BIS 916 HALLMARKED • 100% PURITY",
-          subtitle: r.description || "",
-          heroBg: r.banner_image || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
-          circleImg: r.thumbnail_image || r.banner_image || "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80",
-          thumbnail_image: r.thumbnail_image || r.banner_image,
-          guideTitle: `${r.name} Buying & Purity Guide`,
-          guideDesc: "All Swarn Mahal items come with 100% BIS 916 hallmarking and dynamic bullion price calculations."
-        };
-      });
+    // 1. Delete categories from DB that are no longer present in store
+    const placeholders = validSlugs.map(() => "?").join(",");
+    await pool.execute(
+      `DELETE FROM categories WHERE slug NOT IN (${placeholders})`,
+      validSlugs
+    );
 
-      return NextResponse.json({ success: true, categories: categoriesMap, source: 'database' });
+    // 2. Insert / Update all store categories in DB
+    let order = 0;
+    for (const cat of Object.values(categoriesMap)) {
+      await pool.execute(
+        `INSERT INTO categories (slug, name, description, thumbnail_image, banner_image, display_order, is_active)
+         VALUES (?, ?, ?, ?, ?, ?, 1)
+         ON DUPLICATE KEY UPDATE
+           slug = VALUES(slug),
+           name = VALUES(name),
+           description = VALUES(description),
+           thumbnail_image = VALUES(thumbnail_image),
+           banner_image = VALUES(banner_image),
+           display_order = VALUES(display_order),
+           is_active = 1`,
+        [
+          cat.slug,
+          cat.title || cat.name || cat.slug,
+          cat.subtitle || "",
+          cat.circleImg || cat.thumbnail_image || "",
+          cat.heroBg || "",
+          order++
+        ]
+      );
     }
-  } catch (error) {
-    console.warn("DB categories fetch error, using persistent store fallback:", error);
+  } catch (err: any) {
+    console.warn("Category DB sync warning:", err.message);
   }
+}
 
+export async function GET() {
   const storedCategories = getCategoriesFromStore();
-  return NextResponse.json({ success: true, categories: storedCategories, source: 'file_store' });
+
+  // Async sync store categories to Hostinger MySQL Database if connected
+  syncStoreToDatabase(storedCategories).catch(err =>
+    console.warn("Async DB sync failed:", err)
+  );
+
+  return NextResponse.json({
+    success: true,
+    categories: storedCategories,
+    source: "persistent_json_store"
+  });
 }
 
 export async function POST(request: Request) {
@@ -40,6 +66,7 @@ export async function POST(request: Request) {
     // 1. Reorder Action
     if (body.action === "reorder" && Array.isArray(body.categories)) {
       const updatedStore = await saveCategoriesOrderToStore(body.categories);
+      await syncStoreToDatabase(updatedStore);
       return NextResponse.json({
         success: true,
         message: "Categories reordered successfully!",
@@ -50,6 +77,7 @@ export async function POST(request: Request) {
     // 2. Delete Action
     if (body.action === "delete" && body.slug) {
       const updatedStore = await deleteCategoryFromStore(body.slug);
+      await syncStoreToDatabase(updatedStore);
       return NextResponse.json({
         success: true,
         message: `Category /${body.slug} deleted successfully!`,
@@ -59,6 +87,8 @@ export async function POST(request: Request) {
 
     // 3. Normal Save / Edit Category
     const updatedStore = await saveCategoryToStore(body);
+    await syncStoreToDatabase(updatedStore);
+
     const targetSlug = body.slug ? body.slug.trim().toLowerCase().replace(/\s+/g, '-') : (body.originalSlug || body.title.toLowerCase().replace(/\s+/g, '-'));
     const savedObj = updatedStore[targetSlug] || body;
 
@@ -84,6 +114,7 @@ export async function DELETE(request: Request) {
     }
 
     const updatedStore = await deleteCategoryFromStore(slug);
+    await syncStoreToDatabase(updatedStore);
     return NextResponse.json({
       success: true,
       message: `Category /${slug} deleted successfully!`,
