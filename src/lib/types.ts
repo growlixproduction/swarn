@@ -50,6 +50,7 @@ export interface Product {
   diamondSpecs?: DiamondSpecs;
   gemstoneSpecs?: GemstoneSpecs;
   images: ProductImages;
+  searchKeywords?: string;
 }
 
 export interface BullionRates {

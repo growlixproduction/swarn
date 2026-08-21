@@ -8,6 +8,7 @@ import { useApp } from "../../../context/AppContext";
 import { PricingEngine } from "../../../lib/pricingEngine";
 import { KaratType, MetalTone } from "../../../lib/types";
 import ProductCard from "../../../components/ProductCard";
+import { matchesSearchQuery } from "../../../lib/searchMatcher";
 
 export default function CollectionPage() {
   const params = useParams();
@@ -78,8 +79,7 @@ export default function CollectionPage() {
 
   // Search Filter
   if (searchQuery) {
-    const q = searchQuery.toLowerCase();
-    filtered = filtered.filter(p => p.title.toLowerCase().includes(q) || p.collection.toLowerCase().includes(q));
+    filtered = filtered.filter(p => matchesSearchQuery(p, searchQuery));
   }
 
   // Karat Filter

@@ -8,6 +8,7 @@ import { useApp } from "@/context/AppContext";
 import { PricingEngine } from "@/lib/pricingEngine";
 import { KaratType, MetalTone } from "@/lib/types";
 import ProductCard from "@/components/ProductCard";
+import { matchesSearchQuery } from "@/lib/searchMatcher";
 
 function SearchContent() {
   const searchParams = useSearchParams();
@@ -23,17 +24,7 @@ function SearchContent() {
   const [sortBy, setSortBy] = useState<string>("recommended");
 
   // Filter Catalog by active query
-  let filtered = PRODUCTS_CATALOG.filter(p => {
-    if (!activeQuery.trim()) return true;
-    const q = activeQuery.toLowerCase().trim();
-    return (
-      p.title.toLowerCase().includes(q) ||
-      p.collection.toLowerCase().includes(q) ||
-      p.category.toLowerCase().includes(q) ||
-      p.huid?.toLowerCase().includes(q) ||
-      p.navCategories.some(c => c.toLowerCase().includes(q))
-    );
-  });
+  let filtered = PRODUCTS_CATALOG.filter(p => matchesSearchQuery(p, activeQuery));
 
   // Karat Filter
   if (selectedKarats.length > 0) {

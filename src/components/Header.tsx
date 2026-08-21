@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useApp } from "../context/AppContext";
 import { PRODUCTS_CATALOG } from "../lib/catalogData";
 import { PricingEngine } from "../lib/pricingEngine";
+import { matchesSearchQuery } from "../lib/searchMatcher";
 
 const DEFAULT_NAV_ITEMS = [
   { slug: "all", title: "All Jewellery", icon: "fa-gem" },
@@ -79,11 +80,7 @@ export default function Header() {
 
   // Matching Products Search Results
   const matchingProducts = searchQuery.trim()
-    ? PRODUCTS_CATALOG.filter(p =>
-        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.collection.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.category.toLowerCase().includes(searchQuery.toLowerCase())
-      ).slice(0, 4)
+    ? PRODUCTS_CATALOG.filter(p => matchesSearchQuery(p, searchQuery)).slice(0, 5)
     : [];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
