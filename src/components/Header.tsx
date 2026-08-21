@@ -90,12 +90,7 @@ export default function Header() {
     e.preventDefault();
     if (searchQuery.trim()) {
       setIsSearchFocused(false);
-      const prodSection = document.getElementById("products-section");
-      if (prodSection) {
-        prodSection.scrollIntoView({ behavior: "smooth" });
-      } else {
-        router.push(`/collections/all`);
-      }
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     }
   };
 
@@ -207,8 +202,7 @@ export default function Header() {
                           onClick={() => {
                             setSearchQuery(tag.query);
                             setIsSearchFocused(false);
-                            const prodSection = document.getElementById("products-section");
-                            if (prodSection) prodSection.scrollIntoView({ behavior: "smooth" });
+                            router.push(`/search?q=${encodeURIComponent(tag.query)}`);
                           }}
                         >
                           <i className="fa-solid fa-magnifying-glass"></i> {tag.label}
