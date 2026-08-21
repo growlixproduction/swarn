@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useApp } from "@/context/AppContext";
 import { PricingEngine } from "@/lib/pricingEngine";
+import "./admin.css";
 
 export default function AdminLayout({
   children,

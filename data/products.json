@@ -1,0 +1,577 @@
+[
+  {
+    "id": "SM-101",
+    "title": "Rubans Modern Solitaire Ring",
+    "slug": "rubans-modern-solitaire-ring",
+    "collection": "Solitaire Collection",
+    "category": "rings",
+    "navCategories": [
+      "all",
+      "diamond",
+      "daily-wear",
+      "gifting"
+    ],
+    "isFeatured": true,
+    "isNew": true,
+    "rating": 4.9,
+    "reviews": 24,
+    "netGoldWeightGrams": 4.85,
+    "grossWeightGrams": 5.1,
+    "defaultKarat": "18K",
+    "supportedKarats": [
+      "14K",
+      "18K",
+      "22K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow",
+      "rose",
+      "white"
+    ],
+    "makingChargePercent": 14,
+    "discountPercent": 15,
+    "diamondSpecs": {
+      "stoneCount": 1,
+      "totalCaratWeight": 0.35,
+      "clarity": "VVS-EF",
+      "cut": "Round Brilliant",
+      "pricePerCarat": 68000
+    },
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM916A8201",
+    "certificate": "IGI-LG5829104",
+    "description": "Handcrafted 18K gold band crowned with a certified round brilliant solitaire diamond. Designed with tapered knife-edge shoulders for maximum light return.",
+    "dimensions": "Band Width: 2.2mm | Crown Height: 5.5mm"
+  },
+  {
+    "id": "SM-106",
+    "title": "Floral Diamond Cocktail Ring",
+    "slug": "floral-diamond-cocktail-ring",
+    "collection": "Garden of Eden",
+    "category": "rings",
+    "navCategories": [
+      "all",
+      "diamond",
+      "gifting"
+    ],
+    "isFeatured": false,
+    "isNew": true,
+    "rating": 4.8,
+    "reviews": 11,
+    "netGoldWeightGrams": 5.2,
+    "grossWeightGrams": 5.6,
+    "defaultKarat": "18K",
+    "supportedKarats": [
+      "14K",
+      "18K",
+      "22K"
+    ],
+    "defaultColor": "rose",
+    "supportedColors": [
+      "yellow",
+      "rose",
+      "white"
+    ],
+    "makingChargePercent": 15,
+    "discountPercent": 15,
+    "diamondSpecs": {
+      "stoneCount": 19,
+      "totalCaratWeight": 0.52,
+      "clarity": "VS-GH",
+      "cut": "Brilliant Floral",
+      "pricePerCarat": 58000
+    },
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM750FR520",
+    "certificate": "IGI-CR9210",
+    "description": "Blooming floral motif studded with sparkling GH clarity diamonds set in glowing rose gold. Perfectly balances celebratory volume with lightweight wearability.",
+    "dimensions": "Motif Diameter: 14mm | Shank: 2.0mm"
+  },
+  {
+    "id": "SM-109",
+    "title": "Eternal Diamond Pavé Eternity Band",
+    "slug": "eternal-diamond-pave-eternity-band",
+    "collection": "Infinite Love",
+    "category": "rings",
+    "navCategories": [
+      "all",
+      "diamond",
+      "daily-wear",
+      "under-50k",
+      "gifting"
+    ],
+    "isFeatured": false,
+    "isNew": false,
+    "rating": 4.9,
+    "reviews": 32,
+    "netGoldWeightGrams": 3.1,
+    "grossWeightGrams": 3.35,
+    "defaultKarat": "18K",
+    "supportedKarats": [
+      "14K",
+      "18K"
+    ],
+    "defaultColor": "white",
+    "supportedColors": [
+      "yellow",
+      "rose",
+      "white"
+    ],
+    "makingChargePercent": 12,
+    "discountPercent": 10,
+    "diamondSpecs": {
+      "stoneCount": 22,
+      "totalCaratWeight": 0.3,
+      "clarity": "VS-GH",
+      "cut": "Micro Pavé Round",
+      "pricePerCarat": 54000
+    },
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM750EB310",
+    "certificate": "SGL-EB7490",
+    "description": "A continuous ribbon of micro-pavé set diamonds encircling the band in luminous white gold. Exceptional comfort fit for daily styling.",
+    "dimensions": "Width: 1.8mm | Thickness: 1.6mm"
+  },
+  {
+    "id": "SM-110",
+    "title": "Zambian Emerald Solitaire Halo Ring",
+    "slug": "zambian-emerald-solitaire-halo-ring",
+    "collection": "Royal Gemstone",
+    "category": "rings",
+    "navCategories": [
+      "all",
+      "gemstone",
+      "gifting"
+    ],
+    "isFeatured": true,
+    "isNew": true,
+    "rating": 5,
+    "reviews": 14,
+    "netGoldWeightGrams": 4.6,
+    "grossWeightGrams": 5.15,
+    "defaultKarat": "18K",
+    "supportedKarats": [
+      "18K",
+      "22K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow",
+      "rose"
+    ],
+    "makingChargePercent": 15,
+    "discountPercent": 10,
+    "diamondSpecs": {
+      "stoneCount": 16,
+      "totalCaratWeight": 0.28,
+      "clarity": "VVS-EF",
+      "cut": "Round Halo",
+      "pricePerCarat": 65000
+    },
+    "gemstoneSpecs": {
+      "stoneType": "Natural Zambian Emerald",
+      "weightCarat": 1.25,
+      "pricePerCarat": 22000
+    },
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM750EM460",
+    "certificate": "GIA-GEM-89210",
+    "description": "An untreated certified natural Zambian emerald surrounded by a scintillating diamond halo, set in warm 18K yellow gold.",
+    "dimensions": "Center Stone: 7x5mm Octagon | Band: 2.1mm"
+  },
+  {
+    "id": "SM-104",
+    "title": "Swarn Mahal 22K Royal Rani Haar",
+    "slug": "swarn-mahal-22k-royal-rani-haar",
+    "collection": "Heritage Ambikapur",
+    "category": "necklaces",
+    "navCategories": [
+      "all",
+      "gold",
+      "wedding"
+    ],
+    "isFeatured": true,
+    "isNew": false,
+    "rating": 5,
+    "reviews": 42,
+    "netGoldWeightGrams": 28.5,
+    "grossWeightGrams": 29.2,
+    "defaultKarat": "22K",
+    "supportedKarats": [
+      "22K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow"
+    ],
+    "makingChargePercent": 16,
+    "discountPercent": 12,
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM916RH285",
+    "certificate": "BIS Hallmarked HUID 916",
+    "description": "Authentic 22K gold bridal Rani Haar handcrafted with heritage nakshi, intricate filigree, and floral jali medallions by Swarn Mahal master karigars in Ambikapur.",
+    "dimensions": "Length: 24 Inches Adjustable Dori | Center Pendant: 52mm"
+  },
+  {
+    "id": "SM-105",
+    "title": "Swarn Mahal Traditional Mangalsutra",
+    "slug": "swarn-mahal-traditional-mangalsutra",
+    "collection": "Sacred Vows",
+    "category": "necklaces",
+    "navCategories": [
+      "all",
+      "gold",
+      "wedding",
+      "daily-wear"
+    ],
+    "isFeatured": true,
+    "isNew": true,
+    "rating": 4.9,
+    "reviews": 29,
+    "netGoldWeightGrams": 14.8,
+    "grossWeightGrams": 16.5,
+    "defaultKarat": "22K",
+    "supportedKarats": [
+      "18K",
+      "22K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow",
+      "rose"
+    ],
+    "makingChargePercent": 14,
+    "discountPercent": 10,
+    "images": {
+      "yellow": "/uploads/1787353482628_BIIP0359P04_YAA14DIG6XXXXXXXX_ABCD00-PICS-00004-1024-35451.jpg",
+      "rose": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80"
+    },
+    "huid": "SM916MS148",
+    "certificate": "BIS 916 Hallmarked",
+    "description": "Auspicious black onyx beads interwoven with 22K pure gold pendants, delicate ghungroo drops, and intricate traditional meenakari detailing.",
+    "dimensions": "Length: 18 Inches | Pendant Drop: 32mm",
+    "primaryMaterial": "gold",
+    "makingChargePerGram": 0
+  },
+  {
+    "id": "SM-111",
+    "title": "Royal Kundan & Polki Bridal Choker Set",
+    "slug": "royal-kundan-polki-bridal-choker-set",
+    "collection": "Maharani Trousseau",
+    "category": "necklaces",
+    "navCategories": [
+      "all",
+      "gold",
+      "wedding",
+      "gemstone"
+    ],
+    "isFeatured": true,
+    "isNew": true,
+    "rating": 5,
+    "reviews": 18,
+    "netGoldWeightGrams": 34.2,
+    "grossWeightGrams": 39.8,
+    "defaultKarat": "22K",
+    "supportedKarats": [
+      "22K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow"
+    ],
+    "makingChargePercent": 18,
+    "discountPercent": 15,
+    "gemstoneSpecs": {
+      "stoneType": "Uncut Jadau Polki & Natural Emerald Beads",
+      "weightCarat": 12.4,
+      "pricePerCarat": 14000
+    },
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM916KC342",
+    "certificate": "BIS 916 Hallmark & Artisan Assay",
+    "description": "Opulent bridal choker handcrafted with 22K hallmarked gold, uncut polki stones, suspended emerald beads, and matching chandelier earrings.",
+    "dimensions": "Choker Width: 45mm | Adjustable Silk Dori"
+  },
+  {
+    "id": "SM-107",
+    "title": "Chandelier Diamond Drop Earrings",
+    "slug": "chandelier-diamond-drop-earrings",
+    "collection": "Luminescence",
+    "category": "earrings",
+    "navCategories": [
+      "all",
+      "diamond",
+      "earrings",
+      "wedding"
+    ],
+    "isFeatured": false,
+    "isNew": false,
+    "rating": 4.9,
+    "reviews": 19,
+    "netGoldWeightGrams": 6.8,
+    "grossWeightGrams": 7.3,
+    "defaultKarat": "18K",
+    "supportedKarats": [
+      "14K",
+      "18K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow",
+      "rose",
+      "white"
+    ],
+    "makingChargePercent": 15,
+    "discountPercent": 15,
+    "diamondSpecs": {
+      "stoneCount": 36,
+      "totalCaratWeight": 0.78,
+      "clarity": "VVS-EF",
+      "cut": "Baguette & Round",
+      "pricePerCarat": 64000
+    },
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM750DE680",
+    "certificate": "GIA-ER88410",
+    "description": "Cascading tiers of sparkling baguette and round diamonds designed for royal gala evenings and wedding celebrations.",
+    "dimensions": "Drop Length: 38mm | Width: 12mm"
+  },
+  {
+    "id": "SM-113",
+    "title": "Heritage 22K Royal Peacock Jhumkas",
+    "slug": "heritage-22k-royal-peacock-jhumkas",
+    "collection": "Heritage Ambikapur",
+    "category": "earrings",
+    "navCategories": [
+      "all",
+      "gold",
+      "earrings",
+      "wedding"
+    ],
+    "isFeatured": true,
+    "isNew": true,
+    "rating": 5,
+    "reviews": 27,
+    "netGoldWeightGrams": 11.2,
+    "grossWeightGrams": 11.8,
+    "defaultKarat": "22K",
+    "supportedKarats": [
+      "22K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow"
+    ],
+    "makingChargePercent": 15,
+    "discountPercent": 10,
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM916PJ112",
+    "certificate": "BIS 916 Hallmarked",
+    "description": "Intricately sculpted Mayur (Peacock) studs with dome jhumka bells and dangling micro gold bead fringes in authentic 22K yellow gold.",
+    "dimensions": "Length: 48mm | Bell Diameter: 18mm"
+  },
+  {
+    "id": "SM-102",
+    "title": "Infinity Diamond Tennis Bracelet",
+    "slug": "infinity-diamond-tennis-bracelet",
+    "collection": "Eternal Sparkle",
+    "category": "bangles",
+    "navCategories": [
+      "all",
+      "diamond",
+      "daily-wear",
+      "gifting"
+    ],
+    "isFeatured": true,
+    "isNew": false,
+    "rating": 5,
+    "reviews": 18,
+    "netGoldWeightGrams": 9.4,
+    "grossWeightGrams": 10.2,
+    "defaultKarat": "18K",
+    "supportedKarats": [
+      "14K",
+      "18K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow",
+      "rose",
+      "white"
+    ],
+    "makingChargePercent": 12,
+    "discountPercent": 20,
+    "diamondSpecs": {
+      "stoneCount": 28,
+      "totalCaratWeight": 0.85,
+      "clarity": "VS-GH",
+      "cut": "Round Brilliant",
+      "pricePerCarat": 55000
+    },
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM750B9410",
+    "certificate": "SGL-IN892019",
+    "description": "An infinite loop of sparkling brilliant-cut diamonds encased in sleek gold bezels with a double-safety box clasp.",
+    "dimensions": "Length: 7.0 Inches | Link Width: 3.5mm"
+  },
+  {
+    "id": "SM-116",
+    "title": "Swarn Mahal 22K Handcrafted Gold Kada (Pair)",
+    "slug": "swarn-mahal-22k-handcrafted-gold-kada-pair",
+    "collection": "Heritage Ambikapur",
+    "category": "bangles",
+    "navCategories": [
+      "all",
+      "gold",
+      "wedding"
+    ],
+    "isFeatured": true,
+    "isNew": false,
+    "rating": 5,
+    "reviews": 31,
+    "netGoldWeightGrams": 24.8,
+    "grossWeightGrams": 25,
+    "defaultKarat": "22K",
+    "supportedKarats": [
+      "22K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow"
+    ],
+    "makingChargePercent": 14,
+    "discountPercent": 12,
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM916KD248",
+    "certificate": "BIS 916 Hallmarked",
+    "description": "A pair of traditional solid 22K gold kadas with floral relief engraving, screw-hinge locking mechanism, and antique semi-matte polish.",
+    "dimensions": "Standard Size: 2-6 (2.375 inch diameter)"
+  },
+  {
+    "id": "SM-108",
+    "title": "Pure 24K Gold Laxmi-Ganesh Coin (10g)",
+    "slug": "pure-24k-gold-laxmi-ganesh-coin-10g",
+    "collection": "Bullion & Investment",
+    "category": "bullion",
+    "navCategories": [
+      "all",
+      "gold",
+      "gifting"
+    ],
+    "isFeatured": true,
+    "isNew": false,
+    "rating": 5,
+    "reviews": 65,
+    "netGoldWeightGrams": 10,
+    "grossWeightGrams": 10,
+    "defaultKarat": "24K",
+    "supportedKarats": [
+      "24K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow"
+    ],
+    "makingChargePercent": 3,
+    "discountPercent": 0,
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM999COIN10",
+    "certificate": "NABL Assayed & Tamper-Proof Blister Card",
+    "description": "10 Grams 24 Karat 99.9% fine investment gold coin embossed with Lord Ganesha and Goddess Lakshmi. Sealed in certified tamper-evident packaging.",
+    "dimensions": "Diameter: 22mm | Thickness: 1.4mm"
+  }
+]
