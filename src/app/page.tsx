@@ -31,9 +31,6 @@ export default function HomePage() {
       {/* 2. CIRCULAR CATEGORY STORIES STRIP (Tanishq / Caratlane Inspired) */}
       <CategoryStories />
 
-      {/* 3. 8-CARD MASTER CATEGORY COLLECTIONS SHOWCASE */}
-      <CategoryCollections />
-
       {/* 4. 4-ITEM TRUST & VALUE PROP STRIP */}
       <TrustBar />
 

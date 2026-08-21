@@ -46,5 +46,77 @@
     "thumbnail_image": "/uploads/1787348208245_images.jpg",
     "guideTitle": "Gold Hoops & Balis Buying & Care Guide",
     "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "pendants": {
+    "slug": "pendants",
+    "title": "Pendants",
+    "pageTitle": "Pendants | Swarn Mahal Jewellers Ambikapur",
+    "badge": "NEW CURATION • LUXURY COLLECTION",
+    "subtitle": "Discover elegant daily-wear gold pendants, spiritual lockets, heart motifs, and sparkling diamond pendants. Designed for timeless beauty and everyday grace at Swarn Mahal, Ambikapur.",
+    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/uploads/1787348362518_BIIP0359P04_YAA14DIG6XXXXXXXX_ABCD00-PICS-00004-1024-35451.jpg",
+    "thumbnail_image": "/uploads/1787348362518_BIIP0359P04_YAA14DIG6XXXXXXXX_ABCD00-PICS-00004-1024-35451.jpg",
+    "guideTitle": "Pendants Buying & Care Guide",
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "mangalsutra": {
+    "slug": "mangalsutra",
+    "title": "Mangalsutra",
+    "pageTitle": "Mangalsutra | Swarn Mahal Jewellers Ambikapur",
+    "badge": "NEW CURATION • LUXURY COLLECTION",
+    "subtitle": "Explore handcrafted Mangalsutra in pure BIS 916 gold and authentic gemstones.",
+    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/uploads/1787348617000_A4700723_1.webp",
+    "thumbnail_image": "/uploads/1787348617000_A4700723_1.webp",
+    "guideTitle": "Mangalsutra Buying & Care Guide",
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "chains": {
+    "slug": "chains",
+    "title": "Chains",
+    "pageTitle": "Chains | Swarn Mahal Jewellers Ambikapur",
+    "badge": "NEW CURATION • LUXURY COLLECTION",
+    "subtitle": "Explore precision-crafted 22K yellow gold chains, durable daily links, classic rope designs, and elegant machine chains. Crafted for unmatched strength, lightweight comfort, and timeless grace at Swarn Mahal, Ambikapur.",
+    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/uploads/1787348725596_513220CLQAA00_1.webp",
+    "thumbnail_image": "/uploads/1787348725596_513220CLQAA00_1.webp",
+    "guideTitle": "Chains Buying & Care Guide",
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "bangles": {
+    "slug": "bangles",
+    "title": "Bangles",
+    "pageTitle": "Bangles | Swarn Mahal Jewellers Ambikapur",
+    "badge": "NEW CURATION • LUXURY COLLECTION",
+    "subtitle": "Explore handcrafted Bangles in pure BIS 916 gold and authentic gemstones.",
+    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/uploads/1787348810380_511183VAA2A00_1.webp",
+    "thumbnail_image": "/uploads/1787348810380_511183VAA2A00_1.webp",
+    "guideTitle": "Bangles Buying & Care Guide",
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "necklace": {
+    "slug": "necklace",
+    "title": "Necklace",
+    "pageTitle": "Necklace | Swarn Mahal Jewellers Ambikapur",
+    "badge": "NEW CURATION • LUXURY COLLECTION",
+    "subtitle": "Explore handcrafted Necklace in pure BIS 916 gold and authentic gemstones.",
+    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/uploads/1787348852881_red_white.avif",
+    "thumbnail_image": "/uploads/1787348852881_red_white.avif",
+    "guideTitle": "Necklace Buying & Care Guide",
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "bracelet": {
+    "slug": "bracelet",
+    "title": "Bracelet",
+    "pageTitle": "Bracelet | Swarn Mahal Jewellers Ambikapur",
+    "badge": "NEW CURATION • LUXURY COLLECTION",
+    "subtitle": "Explore handcrafted Bracelet in pure BIS 916 gold and authentic gemstones.",
+    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/uploads/1787348950913_JT02841-1YS300_1_lar.jpg",
+    "thumbnail_image": "/uploads/1787348950913_JT02841-1YS300_1_lar.jpg",
+    "guideTitle": "Bracelet Buying & Care Guide",
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
   }
 }
