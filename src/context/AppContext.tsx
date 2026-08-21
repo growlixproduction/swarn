@@ -45,6 +45,8 @@ interface AppContextType {
   closeARTryOn: () => void;
   getCartTotal: () => number;
   getCartCount: () => number;
+  cartCount: number;
+  openCartDrawer: () => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -324,7 +326,9 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         openARTryOn,
         closeARTryOn,
         getCartTotal,
-        getCartCount
+        getCartCount,
+        cartCount: cart.reduce((sum, item) => sum + item.quantity, 0),
+        openCartDrawer: () => setIsCartOpen(true)
       }}
     >
       {children}
