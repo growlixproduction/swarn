@@ -1651,14 +1651,94 @@
   .plp-title {
     font-size: 2rem;
   }
+
+  /* PDP (Product Detail Page) Phone Optimization */
+  .pdp-main-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+    margin-bottom: 2.5rem !important;
+  }
+
   .pdp-gallery-col {
-    flex-direction: column-reverse;
+    flex-direction: column !important;
+    gap: 0.65rem !important;
+    position: static !important;
   }
+
+  .pdp-main-image-viewport {
+    padding: 1rem !important;
+    border-radius: 12px !important;
+    width: 100% !important;
+    background: #FFFFFF !important;
+  }
+
   .pdp-thumb-strip {
-    flex-direction: row;
-    width: 100%;
+    flex-direction: row !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    gap: 0.5rem !important;
+    padding-bottom: 0.35rem !important;
+    justify-content: flex-start !important;
+    -webkit-overflow-scrolling: touch;
   }
+
+  .pdp-thumb-item {
+    width: 58px !important;
+    height: 58px !important;
+    flex-shrink: 0 !important;
+    padding: 0.2rem !important;
+    border-radius: 6px !important;
+  }
+
+  .pdp-ar-float-badge {
+    bottom: 0.65rem !important;
+    left: 0.65rem !important;
+    padding: 0.3rem 0.65rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  .pdp-heading-title {
+    font-size: 1.35rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  .pdp-pricing-card {
+    padding: 0.85rem !important;
+    margin-bottom: 1.15rem !important;
+    border-radius: 10px !important;
+  }
+
+  .pdp-hero-price {
+    font-size: 1.55rem !important;
+  }
+
+  .pdp-hero-original-price {
+    font-size: 0.95rem !important;
+  }
+
+  .pdp-hero-savings-badge {
+    font-size: 0.68rem !important;
+    padding: 0.15rem 0.4rem !important;
+  }
+
+  .pdp-trust-strip {
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
+  }
+
+  .pdp-specs-section {
+    padding: 1rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .pdp-specs-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.65rem !important;
+  }
+
   .pdp-actions-row {
-    flex-direction: column;
+    flex-direction: column !important;
+    gap: 0.65rem !important;
   }
 }
