@@ -149,6 +149,25 @@ const Header: React.FC = () => {
           <span style={{ color: "var(--text-muted)" }}><i className="fa-regular fa-clock"></i> Synced: {bullionRates.lastUpdated}</span>
         </div>
       </div>
+      {/* FIXED BOTTOM MOBILE APP NAVBAR (4 PRIMARY SECTIONS) */}
+      <nav className="mobile-app-bottom-nav">
+        <Link href="/collections/all" className="mobile-app-nav-item">
+          <i className="fa-solid fa-gem"></i>
+          <span>All Jewellery</span>
+        </Link>
+        <Link href="/collections/gold" className="mobile-app-nav-item">
+          <i className="fa-solid fa-crown"></i>
+          <span>Gold</span>
+        </Link>
+        <Link href="/collections/diamond" className="mobile-app-nav-item">
+          <i className="fa-solid fa-ring"></i>
+          <span>Diamond</span>
+        </Link>
+        <Link href="/collections/gemstone" className="mobile-app-nav-item">
+          <i className="fa-solid fa-sparkles"></i>
+          <span>Silver</span>
+        </Link>
+      </nav>
     </header>
   );
 };
