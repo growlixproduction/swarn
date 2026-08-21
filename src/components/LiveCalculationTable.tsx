@@ -84,59 +84,6 @@ const LiveCalculationTable: React.FC<LiveCalculationTableProps> = ({ product }) 
       </div>
 
       <div className="breakdown-card-body" id="pdp-breakdown-card-body">
-        {/* INTERACTIVE GOLD WEIGHT ADJUSTER BAR */}
-        <div className="pdp-making-customizer" style={{ marginBottom: "1rem", background: "var(--bg-tint-gold)", border: "1.5px solid var(--border-gold)" }}>
-          <div className="making-cust-header">
-            <span className="making-cust-title" style={{ color: "var(--gold-deep)", fontWeight: 700 }}>
-              <i className="fa-solid fa-scale-balanced"></i> Adjust Gold Weight (Grams):
-            </span>
-            {adjustedWeight !== product.netGoldWeightGrams && (
-              <button
-                type="button"
-                style={{ background: "transparent", border: "none", color: "#EF4444", fontSize: "0.75rem", cursor: "pointer", fontWeight: 600 }}
-                onClick={() => setAdjustedWeight(product.netGoldWeightGrams)}
-              >
-                <i className="fa-solid fa-rotate-left"></i> Reset ({product.netGoldWeightGrams}g)
-              </button>
-            )}
-          </div>
-
-          <div className="making-input-row">
-            <div className="making-stepper-box" style={{ background: "#FFFFFF", borderColor: "var(--border-gold)", minWidth: "170px", padding: "0.25rem 0.5rem" }}>
-              <button type="button" className="making-step-btn" onClick={() => handleWeightStep(-1)} title="Decrease Weight" style={{ width: "32px", height: "32px", fontSize: "1.1rem" }}>
-                -
-              </button>
-              <input
-                type="number"
-                className="making-num-input"
-                value={adjustedWeight}
-                min="0.1"
-                step="0.1"
-                style={{ fontWeight: 800, color: "var(--gold-deep)", fontSize: "1.1rem", width: "65px", textAlign: "center", border: "none", padding: "0 2px" }}
-                onChange={e => setAdjustedWeight(Math.max(0.1, parseFloat(e.target.value) || 0.1))}
-              />
-              <span className="making-unit-label" style={{ fontWeight: 700, color: "var(--text-secondary)", fontSize: "0.85rem", paddingRight: "0.25rem" }}>g</span>
-              <button type="button" className="making-step-btn" onClick={() => handleWeightStep(1)} title="Increase Weight" style={{ width: "32px", height: "32px", fontSize: "1.1rem" }}>
-                +
-              </button>
-            </div>
-
-
-            <div className="making-presets-strip">
-              {[5, 10, 15, 20, 25, 30].map(wVal => (
-                <button
-                  key={wVal}
-                  type="button"
-                  className={`making-preset-pill ${adjustedWeight === wVal ? "active" : ""}`}
-                  onClick={() => setAdjustedWeight(wVal)}
-                >
-                  {wVal}g
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
         {/* 100% Itemized Live Calculation Table */}
         <div className="pdp-calc-table-wrap">
           <table className="pdp-calc-table">
