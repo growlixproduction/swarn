@@ -5,6 +5,7 @@ import Link from "next/link";
 import { PRODUCTS_CATALOG } from "@/lib/catalogData";
 import { useApp } from "@/context/AppContext";
 import ProductCard from "@/components/ProductCard";
+import ShowroomSection from "@/components/ShowroomSection";
 import { Product } from "@/lib/types";
 
 type MaterialTab = "gold" | "diamond" | "silver" | "other";
@@ -61,58 +62,10 @@ export default function AboutUsPage() {
 
   return (
     <div>
-      {/* Hero Heritage Section */}
-      <section
-        style={{
-          background: "linear-gradient(135deg, #1C1917 0%, #110E0C 100%)",
-          padding: "4rem 1rem",
-          color: "#FFFFFF",
-          textAlign: "center",
-          borderBottom: "1px solid var(--border-gold-subtle)"
-        }}
-      >
-        <div className="container" style={{ maxWidth: "850px" }}>
-          <span
-            style={{
-              display: "inline-block",
-              background: "rgba(197, 168, 128, 0.2)",
-              border: "1px solid var(--gold-primary)",
-              padding: "0.3rem 0.85rem",
-              borderRadius: "20px",
-              fontSize: "0.72rem",
-              letterSpacing: "0.15em",
-              color: "var(--gold-light)",
-              marginBottom: "1rem"
-            }}
-          >
-            OUR HERITAGE & CRAFTSMANSHIP
-          </span>
-          <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 700, marginBottom: "1rem" }}>
-            Swarn Mahal Jewellers, Ambikapur
-          </h1>
-          <p style={{ fontSize: "1.05rem", lineHeight: 1.7, color: "rgba(255,255,255,0.85)", marginBottom: "1.5rem" }}>
-            Welcome to <strong>Swarn Mahal Jewellers</strong> — Ambikapur&apos;s most trusted luxury destination for BIS 916 hallmarked pure gold, certified solitaire diamonds, and fine silver heirlooms. We combine generational karigari with complete 100% transparent formula pricing.
-          </p>
+      {/* 1. Showroom Story & Heritage Section (Moved from Homepage) */}
+      <ShowroomSection />
 
-          {/* Quick Metrics */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: "1rem", marginTop: "2rem" }}>
-            <div style={{ background: "rgba(255,255,255,0.05)", padding: "1rem", borderRadius: "10px", border: "1px solid rgba(197, 168, 128, 0.2)" }}>
-              <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "var(--gold-light)" }}>100%</div>
-              <div style={{ fontSize: "0.76rem", color: "#A8A29E" }}>BIS 916 Hallmarked</div>
-            </div>
-            <div style={{ background: "rgba(255,255,255,0.05)", padding: "1rem", borderRadius: "10px", border: "1px solid rgba(197, 168, 128, 0.2)" }}>
-              <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "var(--gold-light)" }}>₹{bullionRates.gold24k}/g</div>
-              <div style={{ fontSize: "0.76rem", color: "#A8A29E" }}>Live Daily Rates</div>
-            </div>
-            <div style={{ background: "rgba(255,255,255,0.05)", padding: "1rem", borderRadius: "10px", border: "1px solid rgba(197, 168, 128, 0.2)" }}>
-              <div style={{ fontSize: "1.4rem", fontWeight: 700, color: "var(--gold-light)" }}>Zero</div>
-              <div style={{ fontSize: "0.76rem", color: "#A8A29E" }}>Hidden Charges</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Material Collection Tabs Section */}
+      {/* 2. Material Collection Tabs Section */}
       <section style={{ padding: "3.5rem 1rem", background: "#FAF6F2" }}>
         <div className="container">
           <div className="section-header" style={{ textAlign: "center", marginBottom: "2rem" }}>
@@ -218,21 +171,6 @@ export default function AboutUsPage() {
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      {/* Showroom Visit CTA */}
-      <section style={{ padding: "4rem 1rem", background: "linear-gradient(135deg, #1C1917, #110E0C)", color: "#FFFFFF", textAlign: "center" }}>
-        <div className="container" style={{ maxWidth: "700px" }}>
-          <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "2rem", marginBottom: "1rem" }}>
-            Visit Ambikapur Flagship Showroom
-          </h2>
-          <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.8)", marginBottom: "1.5rem" }}>
-            Experience our full inventory of over 5,000+ designs in person with private lounge consultation and live karatometer purity testing.
-          </p>
-          <Link href="/#showroom-section" className="btn btn-gold">
-            <i className="fa-solid fa-location-dot" style={{ marginRight: "0.5rem" }}></i> View Showroom Details & Map
-          </Link>
         </div>
       </section>
     </div>

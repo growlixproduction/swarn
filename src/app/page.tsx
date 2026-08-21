@@ -3,12 +3,10 @@
 import React, { useState } from "react";
 import HeroSection from "../components/HeroSection";
 import CategoryStories from "../components/CategoryStories";
-import CategoryCollections from "../components/CategoryCollections";
 import TrustBar from "../components/TrustBar";
 import BentoPromo from "../components/BentoPromo";
 import MoodboardSection from "../components/MoodboardSection";
 import CollageGallerySection from "../components/CollageGallerySection";
-import ShowroomSection from "../components/ShowroomSection";
 import ToolsSection from "../components/ToolsSection";
 import DualSpotlightSection from "../components/DualSpotlightSection";
 import ReviewsSection from "../components/ReviewsSection";
@@ -25,19 +23,19 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* 1. LUXURY HERO SLIDER SECTION (Tanishq Curved Plaque Aesthetic with No Sharp Cuts) */}
+      {/* 1. LUXURY HERO SLIDER SECTION */}
       <HeroSection />
 
-      {/* 2. CIRCULAR CATEGORY STORIES STRIP (Tanishq / Caratlane Inspired) */}
+      {/* 2. CIRCULAR CATEGORY STORIES STRIP */}
       <CategoryStories />
 
-      {/* 4. 4-ITEM TRUST & VALUE PROP STRIP */}
+      {/* 3. 4-ITEM TRUST & VALUE PROP STRIP */}
       <TrustBar />
 
-      {/* 5. EDITORIAL BENTO PROMO GRID (Jubilee 3-Card Style) */}
+      {/* 4. EDITORIAL BENTO PROMO GRID */}
       <BentoPromo />
 
-      {/* 6. LATEST PRODUCTS & DYNAMIC PRICING CATALOG */}
+      {/* 5. LATEST PRODUCTS & DYNAMIC PRICING CATALOG */}
       <section className="products-section" id="products-section">
         <div className="container">
           <div className="section-header reveal-up">
@@ -78,25 +76,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. CATEGORY MOODBOARD SHOWCASE (Jubilee Style) */}
+      {/* 6. CATEGORY MOODBOARD SHOWCASE */}
       <MoodboardSection />
 
-      {/* 8. 21ST.DEV STYLE LUXURY BENTO COLLAGE GALLERY SECTION */}
+      {/* 7. LUXURY BENTO COLLAGE GALLERY SECTION */}
       <CollageGallerySection />
 
-      {/* 9. AMBIKAPUR SHOWROOM STORY & HERITAGE (With Real Asset Photos) */}
-      <ShowroomSection />
-
-      {/* 10. INTERACTIVE CALCULATORS: LIVE GOLD RATE & OLD GOLD EXCHANGE */}
+      {/* 8. INTERACTIVE CALCULATORS: LIVE GOLD RATE & OLD GOLD EXCHANGE */}
       <ToolsSection />
 
-      {/* 11. DUAL SPOTLIGHT BANNERS (Jubilee Style) */}
+      {/* 9. DUAL SPOTLIGHT BANNERS */}
       <DualSpotlightSection />
 
-      {/* 12. TESTIMONIALS FROM JUSTDIAL 5.0 VERIFIED BUYERS */}
+      {/* 10. TESTIMONIALS FROM JUSTDIAL 5.0 VERIFIED BUYERS */}
       <ReviewsSection />
 
-      {/* 13. BRAND ASSURANCES & CERTIFICATION LOGOS */}
+      {/* 11. BRAND ASSURANCES & CERTIFICATION LOGOS */}
       <section className="trust-logos-row" style={{ background: "var(--bg-secondary)", padding: "2.5rem 0", borderTop: "1px solid var(--border-light)" }}>
         <div className="container" style={{ display: "flex", justifyContent: "space-around", alignItems: "center", flexWrap: "wrap", gap: "2rem", color: "var(--text-secondary)", fontSize: "0.85rem", fontWeight: 600 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
