@@ -2,7 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useApp } from "../context/AppContext";
+import { PRODUCTS_CATALOG } from "../lib/catalogData";
+import { PricingEngine } from "../lib/pricingEngine";
 
 const DEFAULT_NAV_ITEMS = [
   { slug: "all", title: "All Jewellery", icon: "fa-gem" },
@@ -30,9 +33,20 @@ const CATEGORY_ICONS: Record<string, string> = {
   "bracelet": "fa-ring"
 };
 
+const POPULAR_SEARCH_TAGS = [
+  { label: "Solitaire Ring", query: "ring" },
+  { label: "Rani Haar", query: "haar" },
+  { label: "22K Jhumka", query: "jhumka" },
+  { label: "Gold Chain", query: "chain" },
+  { label: "Nose Pin", query: "nose" },
+  { label: "Mangalsutra", query: "mangalsutra" }
+];
+
 export default function Header() {
+  const router = useRouter();
   const { bullionRates, cartCount, openCartDrawer, searchQuery, setSearchQuery } = useApp();
   const [navCategories, setNavCategories] = useState<Array<{ slug: string; title: string; icon: string }>>(DEFAULT_NAV_ITEMS);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
 
   useEffect(() => {
     fetch("/api/categories")
@@ -63,6 +77,28 @@ export default function Header() {
   const rate24k = formatCurrency(bullionRates.gold24k);
   const rate22k = formatCurrency(bullionRates.gold22k);
 
+  // Matching Products Search Results
+  const matchingProducts = searchQuery.trim()
+    ? PRODUCTS_CATALOG.filter(p =>
+        p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.collection.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.category.toLowerCase().includes(searchQuery.toLowerCase())
+      ).slice(0, 4)
+    : [];
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      setIsSearchFocused(false);
+      const prodSection = document.getElementById("products-section");
+      if (prodSection) {
+        prodSection.scrollIntoView({ behavior: "smooth" });
+      } else {
+        router.push(`/collections/all`);
+      }
+    }
+  };
+
   return (
     <header className="tanishq-header sticky-top" id="header">
       {/* Tier 1: Main Top Row */}
@@ -79,18 +115,110 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Center Search Box */}
+          {/* Center Search Box with Live Auto-Complete Dropdown */}
           <div className="tanishq-search-box">
-            <div className="tanishq-search-input-wrap">
+            <form onSubmit={handleSearchSubmit} className="tanishq-search-input-wrap">
               <i className="fa-solid fa-magnifying-glass search-icon-left"></i>
               <input
                 type="text"
                 placeholder="Search for gold rani haar, diamond rings, solitaire..."
                 className="tanishq-search-input"
                 value={searchQuery}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
                 onChange={e => setSearchQuery(e.target.value)}
               />
-            </div>
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery("")}
+                  style={{ background: "none", border: "none", color: "#832729", cursor: "pointer", fontSize: "0.85rem", marginRight: "0.4rem" }}
+                >
+                  <i className="fa-solid fa-xmark"></i>
+                </button>
+              )}
+            </form>
+
+            {/* Live Search Results Dropdown Overlay */}
+            {isSearchFocused && (
+              <div className="tanishq-search-dropdown" style={{ display: "block" }}>
+                {searchQuery.trim() ? (
+                  <div>
+                    <div className="tanishq-dropdown-title">
+                      Matching Products ({matchingProducts.length}):
+                    </div>
+
+                    {matchingProducts.length === 0 ? (
+                      <div style={{ padding: "0.75rem", fontSize: "0.82rem", color: "var(--text-muted)", textAlign: "center" }}>
+                        No matching jewellery items found for &quot;{searchQuery}&quot;.
+                      </div>
+                    ) : (
+                      <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                        {matchingProducts.map(p => {
+                          const bd = PricingEngine.calculateBreakdown(p, p.defaultKarat, bullionRates);
+                          return (
+                            <Link
+                              key={p.id}
+                              href={`/product/${p.id}`}
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "0.75rem",
+                                textDecoration: "none",
+                                padding: "0.4rem 0.6rem",
+                                borderRadius: "8px",
+                                background: "#FAF6F2",
+                                transition: "background 0.2s ease"
+                              }}
+                              onClick={() => setIsSearchFocused(false)}
+                            >
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
+                                src={p.images.yellow}
+                                alt={p.title}
+                                style={{ width: "40px", height: "40px", borderRadius: "6px", objectFit: "cover" }}
+                              />
+                              <div style={{ flex: 1, minWidth: 0 }}>
+                                <strong style={{ display: "block", fontSize: "0.82rem", color: "var(--text-primary)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                                  {p.title}
+                                </strong>
+                                <span style={{ fontSize: "0.72rem", color: "var(--gold-deep)" }}>
+                                  {p.defaultKarat} Gold • {p.netGoldWeightGrams}g
+                                </span>
+                              </div>
+                              <strong style={{ fontSize: "0.85rem", color: "#832729" }}>
+                                {PricingEngine.formatINR(bd.finalPrice)}
+                              </strong>
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div>
+                    <div className="tanishq-dropdown-title">Trending Searches:</div>
+                    <div className="tanishq-tags-flex">
+                      {POPULAR_SEARCH_TAGS.map((tag, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          className="tanishq-quick-pill"
+                          onClick={() => {
+                            setSearchQuery(tag.query);
+                            setIsSearchFocused(false);
+                            const prodSection = document.getElementById("products-section");
+                            if (prodSection) prodSection.scrollIntoView({ behavior: "smooth" });
+                          }}
+                        >
+                          <i className="fa-solid fa-magnifying-glass"></i> {tag.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Right Actions */}
