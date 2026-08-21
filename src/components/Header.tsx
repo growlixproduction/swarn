@@ -48,6 +48,7 @@ export default function Header() {
   const { bullionRates, cartCount, openCartDrawer, searchQuery, setSearchQuery } = useApp();
   const [navCategories, setNavCategories] = useState<Array<{ slug: string; title: string; icon: string }>>(DEFAULT_NAV_ITEMS);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     fetch("/api/categories")
@@ -77,6 +78,9 @@ export default function Header() {
 
   const rate24k = formatCurrency(bullionRates.gold24k);
   const rate22k = formatCurrency(bullionRates.gold22k);
+  const rate18k = formatCurrency(bullionRates.gold18k);
+  const rate14k = formatCurrency(bullionRates.gold14k);
+  const rateSilver = formatCurrency(bullionRates.silver925);
 
   // Matching Products Search Results
   const matchingProducts = searchQuery.trim()
@@ -91,25 +95,88 @@ export default function Header() {
     }
   };
 
+  const TickerItems = (
+    <>
+      <span className="marquee-item">
+        <span className="marquee-pill">LIVE</span>
+        <span><strong>24K Pure Gold:</strong> {rate24k}/g</span>
+        <span style={{ color: "#4ADE80" }}>▲ {bullionRates.trend24h}</span>
+      </span>
+      <span className="marquee-item">•</span>
+      <span className="marquee-item">
+        <span><strong>22K Hallmark:</strong> {rate22k}/g</span>
+      </span>
+      <span className="marquee-item">•</span>
+      <span className="marquee-item">
+        <span><strong>18K Diamond:</strong> {rate18k}/g</span>
+      </span>
+      <span className="marquee-item">•</span>
+      <span className="marquee-item">
+        <span><strong>14K Luxe:</strong> {rate14k}/g</span>
+      </span>
+      <span className="marquee-item">•</span>
+      <span className="marquee-item">
+        <span><strong>925 Silver:</strong> {rateSilver}/g</span>
+      </span>
+      <span className="marquee-item">•</span>
+      <span className="marquee-item">
+        <span><i className="fa-solid fa-stamp" style={{ color: "#F3E5AB" }}></i> 100% BIS 916 Hallmarked & HUID Stamped</span>
+      </span>
+      <span className="marquee-item">•</span>
+      <span className="marquee-item">
+        <span><i className="fa-solid fa-location-dot" style={{ color: "#F3E5AB" }}></i> Ambikapur Flagship Store • Church Road</span>
+      </span>
+      <span className="marquee-item">•</span>
+    </>
+  );
+
   return (
     <header className="tanishq-header sticky-top" id="header">
       {/* Tier 1: Main Top Row */}
       <div className="tanishq-top-row">
         <div className="tanishq-row-inner">
-          {/* Brand Logo (Official Logo Crest + Clean Typography) */}
-          <Link href="/" className="tanishq-logo-wrapper" title="Swarn Mahal Jewellers" style={{ display: "flex", alignItems: "center", gap: "0.65rem", textDecoration: "none" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src="/asset/logo.png" 
-              alt="Swarn Mahal Emblem" 
-              className="tanishq-logo-img" 
-              style={{ height: "48px", width: "auto", objectFit: "contain" }} 
-            />
-            <div className="tanishq-logo-text" style={{ display: "flex", flexDirection: "column" }}>
-              <span className="tanishq-title" style={{ fontFamily: "serif", fontWeight: 700, fontSize: "1.25rem", color: "#832729", lineHeight: 1.15, letterSpacing: "0.02em" }}>स्वर्ण महल</span>
-              <span className="tanishq-tagline" style={{ fontSize: "0.62rem", letterSpacing: "1.2px", color: "#C59B27", textTransform: "uppercase", fontWeight: 600 }}>SWARN MAHAL JEWELLERS</span>
-            </div>
-          </Link>
+          
+          {/* Left Block: Hamburger ☰ Button + Brand Logo */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+            {/* ☰ 3-Line Hamburger Menu Button */}
+            <button
+              type="button"
+              className="mobile-hamburger-btn"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open Navigation Menu"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "38px",
+                height: "38px",
+                borderRadius: "8px",
+                border: "1px solid #EAE3DA",
+                background: "#FAF6F2",
+                color: "#832729",
+                fontSize: "1.15rem",
+                cursor: "pointer",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.04)"
+              }}
+            >
+              <i className="fa-solid fa-bars"></i>
+            </button>
+
+            {/* Brand Logo (Official Crest + Typography) */}
+            <Link href="/" className="tanishq-logo-wrapper" title="Swarn Mahal Jewellers" style={{ display: "flex", alignItems: "center", gap: "0.65rem", textDecoration: "none" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="/asset/logo.png" 
+                alt="Swarn Mahal Emblem" 
+                className="tanishq-logo-img" 
+                style={{ height: "46px", width: "auto", objectFit: "contain" }} 
+              />
+              <div className="tanishq-logo-text" style={{ display: "flex", flexDirection: "column" }}>
+                <span className="tanishq-title" style={{ fontFamily: "serif", fontWeight: 700, fontSize: "1.25rem", color: "#832729", lineHeight: 1.15, letterSpacing: "0.02em" }}>स्वर्ण महल</span>
+                <span className="tanishq-tagline" style={{ fontSize: "0.62rem", letterSpacing: "1.2px", color: "#C59B27", textTransform: "uppercase", fontWeight: 600 }}>SWARN MAHAL JEWELLERS</span>
+              </div>
+            </Link>
+          </div>
 
           {/* Center Search Box with Live Auto-Complete Dropdown */}
           <div className="tanishq-search-box">
@@ -218,12 +285,6 @@ export default function Header() {
 
           {/* Right Actions */}
           <div className="tanishq-actions-row">
-            {/* Live Gold Rate Chip */}
-            <div className="tanishq-rate-chip" title="Live 22K Hallmarked Gold Rate">
-              <span className="tanishq-live-dot"></span>
-              <span>22K: {rate22k}/g</span>
-            </div>
-
             <Link href="/admin/collections" className="tanishq-nav-icon-btn" title="Admin Control Panel">
               <i className="fa-solid fa-gem"></i>
             </Link>
@@ -246,7 +307,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Tier 2: Dynamic Category Navigation Strip */}
+      {/* Tier 2: Dynamic Category Navigation Strip (Desktop Nav) */}
       <nav className="tanishq-category-strip">
         <div className="tanishq-cat-inner">
           {navCategories.map(cat => (
@@ -260,23 +321,124 @@ export default function Header() {
           <Link href="/calculator" className="tanishq-cat-item" style={{ color: "var(--gold-deep)", fontWeight: 700 }}>
             <i className="fa-solid fa-calculator"></i> Gold Calculator
           </Link>
-          <Link href="/#showroom-section" className="tanishq-cat-item">
-            <i className="fa-solid fa-store"></i> Showroom
-          </Link>
         </div>
       </nav>
 
-      {/* Real-Time Ticker Ribbon */}
-      <div className="header-ticker-track">
-        <div className="container header-ticker-inner">
-          <span><strong>24K Gold:</strong> {rate24k}/g <span style={{ color: "#059669", fontWeight: 700 }}>▲ {bullionRates.trend24h}</span></span>
-          <span><strong>22K Hallmark:</strong> {rate22k}/g</span>
-          <span><strong>18K Diamond:</strong> {formatCurrency(bullionRates.gold18k)}/g</span>
-          <span><strong>14K Luxe:</strong> {formatCurrency(bullionRates.gold14k)}/g</span>
-          <span><strong>925 Silver:</strong> {formatCurrency(bullionRates.silver925)}/g</span>
-          <span style={{ color: "var(--text-muted)" }}><i className="fa-regular fa-clock"></i> Synced: {bullionRates.lastUpdated}</span>
+      {/* Tier 3: Smooth Continuous Right-To-Left Announcement Ticker Bar (Phone & Desktop Visible!) */}
+      <div className="marquee-ticker-container">
+        <div className="marquee-ticker-track">
+          {TickerItems}
+          {TickerItems}
         </div>
       </div>
+
+      {/* ☰ 3-Line Hamburger Navigation Drawer Modal (Mobile Drawer) */}
+      {isMobileMenuOpen && (
+        <div style={{ position: "fixed", inset: 0, zIndex: 99999, display: "flex" }}>
+          {/* Dark Backdrop */}
+          <div
+            style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }}
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+
+          {/* Slide-in Drawer */}
+          <div style={{
+            position: "relative",
+            width: "300px",
+            maxWidth: "85vw",
+            height: "100%",
+            background: "#FFFFFF",
+            boxShadow: "6px 0 28px rgba(0,0,0,0.3)",
+            display: "flex",
+            flexDirection: "column",
+            zIndex: 2,
+            animation: "slideInLeft 0.25s ease-out"
+          }}>
+            {/* Drawer Header */}
+            <div style={{ padding: "1.25rem 1rem", borderBottom: "1px solid #F0ECE8", display: "flex", alignItems: "center", justifyContent: "space-between", background: "#FAF6F2" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/asset/logo.png" alt="Swarn Mahal" style={{ height: "38px" }} />
+                <div style={{ display: "flex", flexDirection: "column" }}>
+                  <span style={{ fontFamily: "serif", fontWeight: 700, color: "#832729", fontSize: "1.1rem", lineHeight: 1.1 }}>स्वर्ण महल</span>
+                  <span style={{ fontSize: "0.58rem", color: "#C59B27", letterSpacing: "1px", fontWeight: 600 }}>SWARN MAHAL</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsMobileMenuOpen(false)}
+                style={{ width: "32px", height: "32px", borderRadius: "50%", border: "none", background: "#EAE3DA", color: "#832729", cursor: "pointer", fontSize: "1rem" }}
+              >
+                <i className="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            {/* Drawer Navigation Links (Exact list requested by user) */}
+            <div style={{ padding: "1.25rem 1rem", display: "flex", flexDirection: "column", gap: "0.6rem", flex: 1, overflowY: "auto" }}>
+              <div style={{ fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "1.2px", color: "#8C827A", fontWeight: 700, marginBottom: "0.35rem", paddingLeft: "0.5rem" }}>
+                Menu & Sections
+              </div>
+
+              {/* 1. About Us */}
+              <Link
+                href="/about"
+                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.85rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#832729", fontWeight: 700, textDecoration: "none", fontSize: "0.95rem" }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <i className="fa-solid fa-circle-info" style={{ color: "#C59B27", fontSize: "1.15rem" }}></i>
+                <span>About Us</span>
+              </Link>
+
+              {/* 2. Gold Calculator */}
+              <Link
+                href="/calculator"
+                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.85rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#832729", fontWeight: 700, textDecoration: "none", fontSize: "0.95rem" }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <i className="fa-solid fa-calculator" style={{ color: "#C59B27", fontSize: "1.15rem" }}></i>
+                <span>Gold Calculator</span>
+              </Link>
+
+              {/* 3. Gold Section */}
+              <Link
+                href="/collections/gold"
+                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.85rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#1C1917", fontWeight: 600, textDecoration: "none", fontSize: "0.95rem" }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span style={{ fontSize: "1.15rem" }}>🟡</span>
+                <span>Gold Section</span>
+              </Link>
+
+              {/* 4. Diamond Section */}
+              <Link
+                href="/collections/diamond"
+                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.85rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#1C1917", fontWeight: 600, textDecoration: "none", fontSize: "0.95rem" }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span style={{ fontSize: "1.15rem" }}>💎</span>
+                <span>Diamond Section</span>
+              </Link>
+
+              {/* 5. Silver Section */}
+              <Link
+                href="/collections/silverware"
+                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.85rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#1C1917", fontWeight: 600, textDecoration: "none", fontSize: "0.95rem" }}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span style={{ fontSize: "1.15rem" }}>⚪</span>
+                <span>Silver Section</span>
+              </Link>
+            </div>
+
+            {/* Drawer Footer Call & Store Action */}
+            <div style={{ padding: "1rem", borderTop: "1px solid #F0ECE8", background: "#FAF6F2" }}>
+              <a href="tel:+919999777740" className="btn btn-gold" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", width: "100%", padding: "0.75rem", borderRadius: "8px", textDecoration: "none", fontSize: "0.85rem", fontWeight: 700 }}>
+                <i className="fa-solid fa-phone"></i> Call Store: +91 9999P-7774
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }
