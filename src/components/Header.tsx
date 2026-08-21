@@ -337,27 +337,27 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* ☰ 3-Line Hamburger Navigation Drawer Modal (Mobile Drawer) */}
+      {/* ☰ 3-Line Hamburger Navigation Drawer Modal (Mobile Drawer - Opens From Right!) */}
       {isMobileMenuOpen && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 99999, display: "flex" }}>
+        <div style={{ position: "fixed", inset: 0, zIndex: 99999, display: "flex", justifyContent: "flex-end" }}>
           {/* Dark Backdrop */}
           <div
             style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }}
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
-          {/* Slide-in Drawer */}
+          {/* Slide-in Drawer FROM RIGHT */}
           <div style={{
             position: "relative",
             width: "300px",
             maxWidth: "85vw",
             height: "100%",
             background: "#FFFFFF",
-            boxShadow: "6px 0 28px rgba(0,0,0,0.3)",
+            boxShadow: "-6px 0 28px rgba(0,0,0,0.3)",
             display: "flex",
             flexDirection: "column",
             zIndex: 2,
-            animation: "slideInLeft 0.25s ease-out"
+            animation: "slideInRight 0.25s ease-out"
           }}>
             {/* Drawer Header */}
             <div style={{ padding: "1.25rem 1rem", borderBottom: "1px solid #F0ECE8", display: "flex", alignItems: "center", justifyContent: "space-between", background: "#FAF6F2" }}>
