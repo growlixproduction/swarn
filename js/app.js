@@ -33,6 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
     setupCollageFilters();
   }
 
+  setupScrollReveal();
+
   // Subscribe UI updates to AppState changes
   AppState.subscribe((changeType, state) => {
     if (changeType === "rates") {

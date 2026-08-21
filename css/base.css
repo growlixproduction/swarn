@@ -367,20 +367,27 @@ img {
 /* Staggered Children for Grid Containers */
 .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
-.reveal-stagger.active > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.04s; }
-.reveal-stagger.active > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.10s; }
-.reveal-stagger.active > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.16s; }
-.reveal-stagger.active > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.22s; }
-.reveal-stagger.active > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.28s; }
-.reveal-stagger.active > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.34s; }
-.reveal-stagger.active > *:nth-child(7) { opacity: 1; transform: translateY(0); transition-delay: 0.40s; }
-.reveal-stagger.active > *:nth-child(8) { opacity: 1; transform: translateY(0); transition-delay: 0.46s; }
-.reveal-stagger.active > *:nth-child(9) { opacity: 1; transform: translateY(0); transition-delay: 0.52s; }
-.reveal-stagger.active > *:nth-child(10) { opacity: 1; transform: translateY(0); transition-delay: 0.58s; }
+.reveal-stagger.active > *,
+.reveal-stagger > .product-card,
+.products-grid > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger.active > *:nth-child(1) { transition-delay: 0.04s; }
+.reveal-stagger.active > *:nth-child(2) { transition-delay: 0.08s; }
+.reveal-stagger.active > *:nth-child(3) { transition-delay: 0.12s; }
+.reveal-stagger.active > *:nth-child(4) { transition-delay: 0.16s; }
+.reveal-stagger.active > *:nth-child(5) { transition-delay: 0.20s; }
+.reveal-stagger.active > *:nth-child(6) { transition-delay: 0.24s; }
+.reveal-stagger.active > *:nth-child(7) { transition-delay: 0.28s; }
+.reveal-stagger.active > *:nth-child(8) { transition-delay: 0.32s; }
+.reveal-stagger.active > *:nth-child(9) { transition-delay: 0.36s; }
+.reveal-stagger.active > *:nth-child(10) { transition-delay: 0.40s; }
 
 
