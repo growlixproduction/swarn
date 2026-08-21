@@ -11,77 +11,17 @@
     "circleImg": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80",
     "thumbnail_image": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80"
   },
-  "diamond": {
-    "slug": "diamond",
-    "pageTitle": "Certified IGI Diamond Jewellery | Swarn Mahal Ambikapur",
-    "title": "Diamond",
-    "badge": "IGI CERTIFIED • VVS-EF SOLITAIRES",
-    "subtitle": "Brilliant solitaires, diamond tennis bracelets, and diamond drop earrings handset in hallmarked 18K gold.",
-    "heroBg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
-    "guideTitle": "Diamond 4Cs Quality Standard",
-    "guideDesc": "Cut, Color, Clarity, and Carat Weight guide to selecting certified VVS-EF solitaires with maximum brilliance.",
-    "circleImg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
-    "thumbnail_image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80"
-  },
   "earrings": {
     "slug": "earrings",
-    "pageTitle": "Luxury Earrings, Jhumkas & Tops | Swarn Mahal Ambikapur",
     "title": "Earrings & Tops",
+    "pageTitle": "Luxury Earrings, Jhumkas & Tops | Swarn Mahal Ambikapur",
     "badge": "HANDCRAFTED PERFECTION • 50+ STYLES",
     "subtitle": "From grand 22K temple jhumkas for bridal celebrations to lightweight 18K diamond tops and sui-dhaga drops for everyday elegance.",
     "heroBg": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=85",
-    "guideTitle": "Earrings Styling & Face Silhouette Guide",
-    "guideDesc": "Discover which earring shapes best complement oval, round, and heart-shaped faces, along with secure screw-back and push-plug locking mechanisms.",
     "circleImg": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
-    "thumbnail_image": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp"
-  },
-  "daily-wear": {
-    "slug": "daily-wear",
-    "pageTitle": "Lightweight Daily Wear Jewellery | Swarn Mahal Ambikapur",
-    "title": "Daily Wear",
-    "badge": "LIGHTWEIGHT COMFORT • UNDER 10 GRAMS",
-    "subtitle": "Sleek, stackable, and feather-light designs engineered for modern lifestyles, office meetings, and effortless everyday sparkle.",
-    "heroBg": "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=1600&q=85",
-    "guideTitle": "Daily Jewellery Care & Durability Guide",
-    "guideDesc": "14K and 18K gold offer superior scratch resistance for daily active wear while maintaining the warm glow of genuine precious metal.",
-    "circleImg": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=200&q=80",
-    "thumbnail_image": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=200&q=80"
-  },
-  "gemstone": {
-    "slug": "gemstone",
-    "pageTitle": "Precious Gemstone Jewellery & Pearls | Swarn Mahal",
-    "title": "Gemstone",
-    "badge": "NATURAL UNCUT & FACETED GEMS",
-    "subtitle": "Zambian emeralds, Ceylon royal blue sapphires, Burmese rubies, and South Sea pearls handset in handcrafted gold mounts.",
-    "heroBg": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=1600&q=85",
-    "guideTitle": "Gemstone Purity & Astrological Selection",
-    "guideDesc": "Each natural gemstone is tested for authenticity and natural color saturation, bringing astrological balance and timeless regal luxury.",
-    "circleImg": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=200&q=80",
-    "thumbnail_image": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=200&q=80"
-  },
-  "wedding": {
-    "slug": "wedding",
-    "pageTitle": "Royal Bridal Jewellery & Wedding Suites | Swarn Mahal Ambikapur",
-    "title": "Wedding",
-    "badge": "THE GRAND WEDDING EDIT 2026",
-    "subtitle": "Exquisite 22K bridal rani haars, kundan polki chokers, auspicious mangalsutras, and handcrafted wedding kadas for the discerning bride.",
-    "heroBg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-    "guideTitle": "Bridal Jewellery Planning Checklist",
-    "guideDesc": "Tips on coordinating necklace layering (Choker + Rani Haar), matching matha patti, and locking bullion prices ahead of the wedding muhurat.",
-    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg",
-    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg"
-  },
-  "gifting": {
-    "slug": "gifting",
-    "pageTitle": "Luxury Jewellery Gifting & Bullion Coins | Swarn Mahal",
-    "title": "Gifting & Coins",
-    "badge": "ELEGANT VELVET PACKAGING • 24K 999",
-    "subtitle": "Celebrate life's precious milestones with 24K tamper-proof Laxmi Ganesh gold coins, romantic solitaire rings, and timeless gift boxes.",
-    "heroBg": "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=1600&q=85",
-    "guideTitle": "Jewellery Gifting Budget Guide",
-    "guideDesc": "Explore curated gift suggestions tailored by budget from under ₹10,000 to ₹1,00,000+ with complimentary personalized message cards.",
-    "circleImg": "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=200&q=80",
-    "thumbnail_image": "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=200&q=80"
+    "thumbnail_image": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
+    "guideTitle": "Earrings Styling & Face Silhouette Guide",
+    "guideDesc": "Discover which earring shapes best complement oval, round, and heart-shaped faces, along with secure screw-back and push-plug locking mechanisms."
   },
   "under-50k": {
     "slug": "under-50k",
@@ -94,17 +34,5 @@
     "guideDesc": "Discover smart design combinations such as halo solitaire settings and lightweight gold alloys that deliver maximum visual grandeur within ₹50,000.",
     "circleImg": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=200&q=80",
     "thumbnail_image": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=200&q=80"
-  },
-  "earrings-and-tops": {
-    "slug": "earrings-and-tops",
-    "title": "earrings-and-tops",
-    "pageTitle": "22K BIS Hallmarked Gold Jewellery | Swarn Mahal Ambikapur",
-    "badge": "BIS 916 HALLMARKED • 100% PURITY",
-    "subtitle": "Explore handcrafted 22K gold tops, floral studs, lightweight daily wear earrings, and traditional motifs. Designed for all-day comfort, effortless elegance, and everyday shine from Swarn Mahal, Ambikapur.",
-    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
-    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-    "guideTitle": "22K Gold Purity & Hallmark Guide",
-    "guideDesc": "22 Karat (916 purity) is the gold benchmark in India, containing 91.6% pure gold alloyed with 8.4% copper/zinc for strength and lasting heirloom beauty."
   }
 }

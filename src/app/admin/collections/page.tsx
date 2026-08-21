@@ -67,7 +67,7 @@ export default function AdminCollectionsPage() {
 
       const data = await res.json();
       if (res.ok && data.success) {
-        setSaveMessage({ type: "success", text: `Collection "${selectedCat.title}" & Circle Image saved successfully!` });
+        setSaveMessage({ type: "success", text: `Collection "${selectedCat.title}" saved successfully!` });
 
         if (data.categories) {
           const list = Object.values(data.categories);
@@ -121,10 +121,11 @@ export default function AdminCollectionsPage() {
   };
 
   // Delete Category Handler
-  const handleDeleteCategory = async () => {
-    if (!selectedCat) return;
+  const handleDeleteCategory = async (targetCategory?: any) => {
+    const catToDelete = targetCategory || selectedCat;
+    if (!catToDelete) return;
 
-    if (!confirm(`Are you sure you want to delete the collection "${selectedCat.title}" (/${selectedCat.slug})?\n\nThis will remove it from the homepage circle stories and navigation bar.`)) {
+    if (!confirm(`Are you sure you want to delete the collection "${catToDelete.title}" (/${catToDelete.slug})?\n\nThis will remove it from the homepage circle stories and navigation bar.`)) {
       return;
     }
 
@@ -132,13 +133,13 @@ export default function AdminCollectionsPage() {
     setSaveMessage(null);
 
     try {
-      const res = await fetch(`/api/categories?slug=${encodeURIComponent(selectedCat.slug)}`, {
+      const res = await fetch(`/api/categories?slug=${encodeURIComponent(catToDelete.slug)}`, {
         method: "DELETE"
       });
 
       const data = await res.json();
       if (res.ok && data.success) {
-        const remaining = categories.filter(c => c.slug !== selectedCat.slug);
+        const remaining = categories.filter(c => c.slug !== catToDelete.slug);
         setCategories(remaining);
 
         if (remaining.length > 0) {
@@ -150,7 +151,7 @@ export default function AdminCollectionsPage() {
           setSelectedCat(null);
         }
 
-        setSaveMessage({ type: "success", text: `Collection "${selectedCat.title}" (/${selectedCat.slug}) deleted successfully!` });
+        setSaveMessage({ type: "success", text: `Collection "${catToDelete.title}" (/${catToDelete.slug}) deleted successfully!` });
       } else {
         setSaveMessage({ type: "error", text: data.error || "Failed to delete collection." });
       }
@@ -398,14 +399,25 @@ export default function AdminCollectionsPage() {
         </div>
       )}
 
-      <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1.9fr", gap: "2rem" }}>
-        {/* Left: Category List with Reorder & Drag Controls */}
+      <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1.8fr", gap: "2rem" }}>
+        {/* Left: Category List with Direct Edit & Add Controls */}
         <div className="admin-card">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-            <h3 style={{ fontSize: "1.05rem", color: "#FFFFFF", margin: 0, fontFamily: "var(--font-serif)" }}>
-              Active Categories ({categories.length})
-            </h3>
-            <span style={{ fontSize: "0.75rem", color: "#C5A880" }}>Drag or use arrows to reorder</span>
+            <div>
+              <h3 style={{ fontSize: "1.05rem", color: "#FFFFFF", margin: 0, fontFamily: "var(--font-serif)" }}>
+                Active Categories ({categories.length})
+              </h3>
+              <span style={{ fontSize: "0.72rem", color: "#C5A880" }}>Drag or use arrows to reorder</span>
+            </div>
+
+            <button
+              type="button"
+              className="btn btn-gold btn-sm"
+              style={{ padding: "0.35rem 0.75rem", fontSize: "0.78rem" }}
+              onClick={() => setIsAddingNew(true)}
+            >
+              <i className="fa-solid fa-plus"></i> Add New
+            </button>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", maxHeight: "720px", overflowY: "auto", paddingRight: "0.25rem" }}>
@@ -457,14 +469,35 @@ export default function AdminCollectionsPage() {
                     <span style={{ fontSize: "0.7rem", color: "#8C827A", display: "block" }}>/{c.slug}</span>
                   </div>
 
-                  {/* Ordering Arrow Buttons: First, Up, Down, Last */}
-                  <div style={{ display: "flex", gap: "2px", alignItems: "center" }} onClick={(e) => e.stopPropagation()}>
+                  {/* Actions: Edit Button + Ordering Arrows + Delete Icon */}
+                  <div style={{ display: "flex", gap: "4px", alignItems: "center" }} onClick={(e) => e.stopPropagation()}>
+                    <button
+                      type="button"
+                      title="Edit Category Details"
+                      onClick={() => handleSelectCategory(c, idx)}
+                      style={{
+                        background: isSelected ? "var(--gold-deep)" : "rgba(197, 168, 128, 0.15)",
+                        border: "1px solid #C5A880",
+                        color: "#FFFFFF",
+                        borderRadius: "4px",
+                        padding: "2px 7px",
+                        fontSize: "0.72rem",
+                        fontWeight: 600,
+                        cursor: "pointer",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "3px"
+                      }}
+                    >
+                      <i className="fa-solid fa-pen-to-square"></i> Edit
+                    </button>
+
                     <button
                       type="button"
                       title="Move to First Position"
                       disabled={idx === 0}
                       onClick={() => handleReorder(idx, 0)}
-                      style={{ background: "none", border: "none", color: idx === 0 ? "#332C26" : "#C5A880", cursor: idx === 0 ? "default" : "pointer", padding: "2px 4px", fontSize: "0.75rem" }}
+                      style={{ background: "none", border: "none", color: idx === 0 ? "#332C26" : "#C5A880", cursor: idx === 0 ? "default" : "pointer", padding: "2px 3px", fontSize: "0.75rem" }}
                     >
                       <i className="fa-solid fa-angles-up"></i>
                     </button>
@@ -473,7 +506,7 @@ export default function AdminCollectionsPage() {
                       title="Move Up"
                       disabled={idx === 0}
                       onClick={() => handleReorder(idx, idx - 1)}
-                      style={{ background: "none", border: "none", color: idx === 0 ? "#332C26" : "#F3E5AB", cursor: idx === 0 ? "default" : "pointer", padding: "2px 4px", fontSize: "0.75rem" }}
+                      style={{ background: "none", border: "none", color: idx === 0 ? "#332C26" : "#F3E5AB", cursor: idx === 0 ? "default" : "pointer", padding: "2px 3px", fontSize: "0.75rem" }}
                     >
                       <i className="fa-solid fa-angle-up"></i>
                     </button>
@@ -482,7 +515,7 @@ export default function AdminCollectionsPage() {
                       title="Move Down"
                       disabled={idx === categories.length - 1}
                       onClick={() => handleReorder(idx, idx + 1)}
-                      style={{ background: "none", border: "none", color: idx === categories.length - 1 ? "#332C26" : "#F3E5AB", cursor: idx === categories.length - 1 ? "default" : "pointer", padding: "2px 4px", fontSize: "0.75rem" }}
+                      style={{ background: "none", border: "none", color: idx === categories.length - 1 ? "#332C26" : "#F3E5AB", cursor: idx === categories.length - 1 ? "default" : "pointer", padding: "2px 3px", fontSize: "0.75rem" }}
                     >
                       <i className="fa-solid fa-angle-down"></i>
                     </button>
@@ -491,9 +524,18 @@ export default function AdminCollectionsPage() {
                       title="Move to Last Position"
                       disabled={idx === categories.length - 1}
                       onClick={() => handleReorder(idx, categories.length - 1)}
-                      style={{ background: "none", border: "none", color: idx === categories.length - 1 ? "#332C26" : "#C5A880", cursor: idx === categories.length - 1 ? "default" : "pointer", padding: "2px 4px", fontSize: "0.75rem" }}
+                      style={{ background: "none", border: "none", color: idx === categories.length - 1 ? "#332C26" : "#C5A880", cursor: idx === categories.length - 1 ? "default" : "pointer", padding: "2px 3px", fontSize: "0.75rem" }}
                     >
                       <i className="fa-solid fa-angles-down"></i>
+                    </button>
+
+                    <button
+                      type="button"
+                      title="Delete Collection"
+                      onClick={() => handleDeleteCategory(c)}
+                      style={{ background: "none", border: "none", color: "#F87171", cursor: "pointer", padding: "2px 3px", fontSize: "0.75rem" }}
+                    >
+                      <i className="fa-solid fa-trash-can"></i>
                     </button>
                   </div>
                 </div>
@@ -518,7 +560,7 @@ export default function AdminCollectionsPage() {
               {/* DELETE COLLECTION BUTTON */}
               <button
                 type="button"
-                onClick={handleDeleteCategory}
+                onClick={() => handleDeleteCategory(selectedCat)}
                 disabled={isDeleting}
                 style={{
                   background: "rgba(239, 68, 68, 0.12)",
@@ -753,7 +795,7 @@ export default function AdminCollectionsPage() {
           </div>
         ) : (
           <div className="admin-card" style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "300px", color: "#8C827A" }}>
-            Select a collection from the left to edit or click "Add New Collection".
+            Select a collection from the left to edit or click "Add New".
           </div>
         )}
       </div>
