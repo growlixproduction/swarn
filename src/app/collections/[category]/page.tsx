@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { CATEGORY_METADATA, PRODUCTS_CATALOG } from "../../../lib/catalogData";
@@ -13,7 +13,41 @@ export default function CollectionPage() {
   const params = useParams();
   const categorySlug = (params?.category as string) || "all";
 
-  const meta = CATEGORY_METADATA[categorySlug] || CATEGORY_METADATA["all"];
+  // Dynamic Category Metadata State
+  const [categoriesMap, setCategoriesMap] = useState<Record<string, any>>(CATEGORY_METADATA);
+
+  useEffect(() => {
+    fetch("/api/categories")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.categories) {
+          setCategoriesMap(data.categories);
+        }
+      })
+      .catch(err => console.warn("Failed to load collection metadata:", err));
+  }, []);
+
+  // Compute active metadata
+  const currentMeta = categoriesMap[categorySlug];
+
+  // Helper to format slug to human readable Title (e.g. "nose-pins" -> "Nose Pins")
+  const formatSlugToTitle = (slug: string) => {
+    return slug
+      .split("-")
+      .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+  };
+
+  const formattedName = currentMeta?.title || (categorySlug !== "all" ? formatSlugToTitle(categorySlug) : "All Jewellery");
+
+  const meta = {
+    title: formattedName,
+    badge: currentMeta?.badge || "BIS 916 HALLMARKED • 100% PURITY",
+    subtitle: currentMeta?.subtitle || `Explore handcrafted ${formattedName} in pure 22K hallmarked gold and certified diamonds.`,
+    heroBg: currentMeta?.heroBg || currentMeta?.circleImg || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    guideTitle: currentMeta?.guideTitle || `${formattedName} Buying & Care Guide`,
+    guideDesc: currentMeta?.guideDesc || "Every Swarn Mahal piece is accompanied by a BIS 916 purity hallmark and authentic certificate of quality."
+  };
 
   const { bullionRates, searchQuery, setSearchQuery } = useApp();
 
@@ -30,8 +64,20 @@ export default function CollectionPage() {
       const bd = PricingEngine.calculateBreakdown(p, p.defaultKarat, bullionRates);
       return bd.finalPrice <= 55000 || p.navCategories.includes("under-50k");
     }
-    return p.navCategories.includes(categorySlug) || p.category === categorySlug;
+
+    const normSlug = categorySlug.toLowerCase();
+    return (
+      p.navCategories.some(c => c.toLowerCase() === normSlug) ||
+      p.category.toLowerCase() === normSlug ||
+      p.title.toLowerCase().includes(normSlug) ||
+      p.collection.toLowerCase().includes(normSlug)
+    );
   });
+
+  // If no specific match found for a custom category, fall back to showing all products so page isn't empty
+  if (filtered.length === 0 && categorySlug !== "all") {
+    filtered = PRODUCTS_CATALOG;
+  }
 
   // Search Filter
   if (searchQuery) {
