@@ -36,14 +36,9 @@ const Header: React.FC = () => {
       {/* Top 2-Tier Header Row */}
       <div className="tanishq-top-row">
         <div className="container tanishq-row-inner">
-          <Link href="/" className="tanishq-logo-wrapper" title="Swarn Mahal Jewellers">
-            <div className="tanishq-crest">
-              <span className="crest-letters">SM</span>
-            </div>
-            <div className="tanishq-logo-text">
-              <span className="tanishq-title">SWARN MAHAL</span>
-              <span className="tanishq-tagline">SAWARN LUXURY JEWELS • AMBIKAPUR</span>
-            </div>
+          <Link href="/" className="tanishq-logo-wrapper" title="Swarn Mahal Jewellers" style={{ display: "flex", alignItems: "center", gap: "0.6rem", textDecoration: "none" }}>
+            <img src="/asset/logo.png" alt="Swarn Mahal Logo" className="tanishq-logo-img" style={{ height: "46px", width: "auto", objectFit: "contain" }} />
+            <img src="/asset/text-logo.png" alt="Swarn Mahal Jewellers" className="tanishq-text-logo-img" style={{ height: "36px", width: "auto", objectFit: "contain" }} />
           </Link>
 
           {/* Search Box */}
@@ -74,22 +69,22 @@ const Header: React.FC = () => {
 
           {/* Actions Row */}
           <div className="tanishq-actions-row">
-            <Link href="/#tools-section" className="tanishq-rate-chip" title="Live Bullion Rate">
+            <Link href="/#tools-section" className="tanishq-rate-chip desktop-only-action" title="Live Bullion Rate">
               <span className="tanishq-live-dot"></span>
               <span className="rate-label-text">22K: {rate22k}/g</span>
             </Link>
 
-            <Link href="/collections/diamond" className="tanishq-nav-icon-btn" title="Diamond Solitaires">
+            <Link href="/collections/diamond" className="tanishq-nav-icon-btn desktop-only-action" title="Diamond Solitaires">
               <i className="fa-regular fa-gem"></i>
             </Link>
 
-            <Link href="/#showroom-section" className="tanishq-nav-icon-btn" title="Ambikapur Showroom">
+            <Link href="/#showroom-section" className="tanishq-nav-icon-btn mobile-showroom-btn" title="Ambikapur Showroom">
               <i className="fa-solid fa-store"></i>
             </Link>
 
             <button
               type="button"
-              className="tanishq-nav-icon-btn tanishq-cart-btn"
+              className="tanishq-nav-icon-btn tanishq-cart-btn desktop-only-action"
               title="Shopping Bag"
               onClick={() => setIsCartOpen(true)}
             >
