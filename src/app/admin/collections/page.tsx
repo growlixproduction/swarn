@@ -19,7 +19,7 @@ export default function AdminCollectionsPage() {
   const [newCategorySlug, setNewCategorySlug] = useState<string>("");
   const [newCategoryCircleImg, setNewCategoryCircleImg] = useState<string>("");
 
-  // Load latest categories from Database API
+  // Load latest categories from API / Store
   useEffect(() => {
     fetch("/api/categories")
       .then(res => res.json())
@@ -33,7 +33,7 @@ export default function AdminCollectionsPage() {
           }
         }
       })
-      .catch(err => console.warn("Failed to load categories from DB:", err));
+      .catch(err => console.warn("Failed to load categories:", err));
   }, []);
 
   const handleSelectCategory = (c: any, idx: number) => {
@@ -63,19 +63,17 @@ export default function AdminCollectionsPage() {
 
       const data = await res.json();
       if (res.ok && data.success) {
-        setSaveMessage({ type: "success", text: `Collection "${selectedCat.title}" & Circle Image saved to Database!` });
+        setSaveMessage({ type: "success", text: `Collection "${selectedCat.title}" & Circle Image saved successfully!` });
 
-        // Update local list
-        setCategories(prev => {
-          const exists = prev.some(c => c.slug === originalSlug || c.slug === selectedCat.slug);
-          if (exists) {
-            return prev.map(c => (c.slug === originalSlug ? selectedCat : c));
-          }
-          return [...prev, selectedCat];
-        });
-        setOriginalSlug(selectedCat.slug);
+        if (data.categories) {
+          const list = Object.values(data.categories);
+          setCategories(list);
+          const updatedSelected = data.category || list.find((item: any) => item.slug === selectedCat.slug) || selectedCat;
+          setSelectedCat(updatedSelected);
+          setOriginalSlug(updatedSelected.slug);
+        }
       } else {
-        setSaveMessage({ type: "error", text: data.error || "Failed to save category changes to database." });
+        setSaveMessage({ type: "error", text: data.error || "Failed to save category changes." });
       }
     } catch (err: any) {
       setSaveMessage({ type: "error", text: err.message || "Network request failed" });
@@ -109,7 +107,7 @@ export default function AdminCollectionsPage() {
         } else {
           setSelectedCat((prev: any) => ({ ...prev, heroBg: data.url }));
         }
-        setSaveMessage({ type: "success", text: `Image "${file.name}" uploaded successfully! Click Save Category below to apply.` });
+        setSaveMessage({ type: "success", text: `Image "${file.name}" uploaded! Click "Save Category & Circle Image" below to apply.` });
       } else {
         setSaveMessage({ type: "error", text: data.error || "Failed to upload image file." });
       }
@@ -138,29 +136,39 @@ export default function AdminCollectionsPage() {
       subtitle: `Explore handcrafted ${newCategoryName.trim()} in pure BIS 916 gold and authentic gemstones.`,
       heroBg: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
       circleImg: circleImage,
+      thumbnail_image: circleImage,
       guideTitle: `${newCategoryName.trim()} Buying & Care Guide`,
       guideDesc: "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
     };
 
-    setCategories(prev => [...prev, newCat]);
-    setSelectedCat(newCat);
-    setSelectedIndex(categories.length);
-    setOriginalSlug(newCat.slug);
-    setNewCategoryName("");
-    setNewCategorySlug("");
-    setNewCategoryCircleImg("");
     setIsAddingNew(false);
 
     // Save directly to API
     try {
-      await fetch("/api/categories", {
+      const res = await fetch("/api/categories", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newCat)
       });
-      setSaveMessage({ type: "success", text: `New collection "${newCat.title}" (/${newCat.slug}) created in Database!` });
+      const data = await res.json();
+      if (data && data.categories) {
+        const list = Object.values(data.categories);
+        setCategories(list);
+        setSelectedCat(newCat);
+        setSelectedIndex(list.length - 1);
+        setOriginalSlug(newCat.slug);
+      }
+      setSaveMessage({ type: "success", text: `New collection "${newCat.title}" (/${newCat.slug}) created!` });
     } catch (err) {
+      setCategories(prev => [...prev, newCat]);
+      setSelectedCat(newCat);
+      setSelectedIndex(categories.length);
+      setOriginalSlug(newCat.slug);
       setSaveMessage({ type: "success", text: `New collection created! Click Save below to confirm.` });
+    } finally {
+      setNewCategoryName("");
+      setNewCategorySlug("");
+      setNewCategoryCircleImg("");
     }
   };
 
@@ -170,14 +178,14 @@ export default function AdminCollectionsPage() {
         <div>
           <h1 className="admin-page-title">Categories & Collections Tree Manager</h1>
           <p className="admin-page-desc">
-            Configure navigational category titles, custom slugs, upload circle story images, hero backgrounds, and buying guides (Saved to Database).
+            Configure navigational category titles, custom slugs, upload circle story images, hero backgrounds, and buying guides (Saved to Database & Store).
           </p>
         </div>
 
         <button
           type="button"
           className="btn btn-gold btn-sm"
-          onClick={() => setIsAddingNew(false)}
+          onClick={() => setIsAddingNew(true)}
         >
           <i className="fa-solid fa-plus"></i> Add New Collection
         </button>
@@ -576,7 +584,7 @@ export default function AdminCollectionsPage() {
             >
               {isSaving ? (
                 <>
-                  <i className="fa-solid fa-spinner fa-spin"></i> Saving to Database...
+                  <i className="fa-solid fa-spinner fa-spin"></i> Saving...
                 </>
               ) : (
                 <>
