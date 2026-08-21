@@ -404,7 +404,7 @@
     max-width: 320px;
   }
   .mobile-menu-toggle {
-    display: flex;
+    display: none !important;
   }
   .tanishq-category-strip {
     overflow-x: auto;
