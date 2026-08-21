@@ -375,8 +375,6 @@
   transform: scale(1.15);
 }
 
-/* Responsive Navigation */
-@media (max-width: 1024px) {
 /* New Asset Logo Styling */
 .tanishq-logo-img {
   height: 48px;
@@ -394,6 +392,7 @@
   display: block;
 }
 
+/* Responsive Navigation */
 @media (max-width: 992px) {
   .tanishq-actions-row {
     gap: 0.85rem;
