@@ -51,6 +51,7 @@ export interface Product {
   gemstoneSpecs?: GemstoneSpecs;
   images: ProductImages;
   searchKeywords?: string;
+  primaryMaterial?: "gold" | "diamond" | "silver" | "other";
 }
 
 export interface BullionRates {

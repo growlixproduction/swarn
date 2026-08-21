@@ -250,6 +250,12 @@ export default function Header() {
               <i className={`fa-solid ${cat.icon}`}></i> {cat.title}
             </Link>
           ))}
+          <Link href="/about" className="tanishq-cat-item" style={{ color: "var(--gold-deep)", fontWeight: 700 }}>
+            <i className="fa-solid fa-circle-info"></i> About Us
+          </Link>
+          <Link href="/calculator" className="tanishq-cat-item" style={{ color: "var(--gold-deep)", fontWeight: 700 }}>
+            <i className="fa-solid fa-calculator"></i> Gold Calculator
+          </Link>
           <Link href="/#showroom-section" className="tanishq-cat-item">
             <i className="fa-solid fa-store"></i> Showroom
           </Link>

@@ -49,6 +49,7 @@ export default function AdminNewProductPage() {
   const [title, setTitle] = useState("Royal Peacock Solitaire Diamond Ring");
   const [collection, setCollection] = useState("Solitaire Collection");
   const [category, setCategory] = useState("rings");
+  const [primaryMaterial, setPrimaryMaterial] = useState<"gold" | "diamond" | "silver" | "other">("gold");
   const [subCategory, setSubCategory] = useState("Solitaire Rings");
   const [navCategories, setNavCategories] = useState<string[]>(["all", "diamond", "gifting"]);
 
@@ -94,6 +95,7 @@ export default function AdminNewProductPage() {
     slug: title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
     collection,
     category: category as any,
+    primaryMaterial,
     navCategories,
     isFeatured: true,
     isNew: true,
@@ -207,7 +209,21 @@ export default function AdminNewProductPage() {
               />
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
+              <div className="admin-form-group">
+                <label className="admin-label">Primary Material Type *</label>
+                <select
+                  className="admin-select"
+                  value={primaryMaterial}
+                  onChange={e => setPrimaryMaterial(e.target.value as any)}
+                >
+                  <option value="gold">🟡 Gold</option>
+                  <option value="diamond">💎 Diamond</option>
+                  <option value="silver">⚪ Silver</option>
+                  <option value="other">✨ Other / Special</option>
+                </select>
+              </div>
+
               <div className="admin-form-group">
                 <label className="admin-label">Physical Category *</label>
                 <select
