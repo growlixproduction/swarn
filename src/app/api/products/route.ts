@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
 import { PRODUCTS_CATALOG } from "../../../lib/catalogData";
 import pool from "../../../lib/db";
+import { getCustomProducts, updateOrAddProduct } from "../../../lib/productsStore";
 
 export async function GET() {
+  // 1. First try MySQL Database
   try {
     const [rows]: any = await pool.execute(`
       SELECT 
@@ -29,6 +31,7 @@ export async function GET() {
           title: r.title,
           slug: r.slug,
           category: r.category,
+          primaryMaterial: r.primary_material || (r.total_carat_weight ? "diamond" : r.category === "silverware" ? "silver" : "gold"),
           navCategories: navCats,
           collection: r.collection_name || "General Collection",
           description: r.description,
@@ -73,11 +76,12 @@ export async function GET() {
       return NextResponse.json({ success: true, products: dbProducts, source: 'database' });
     }
   } catch (error) {
-    console.warn("DB fetch failed, falling back to static catalog:", error);
+    console.warn("DB fetch failed, falling back to persistent JSON store:", error);
   }
 
-  // Fallback to static catalog
-  return NextResponse.json({ success: true, products: PRODUCTS_CATALOG, source: 'static' });
+  // 2. Fallback to persistent JSON store
+  const fileProducts = getCustomProducts();
+  return NextResponse.json({ success: true, products: fileProducts, source: 'file_store' });
 }
 
 export async function POST(request: Request) {
@@ -88,6 +92,7 @@ export async function POST(request: Request) {
       title,
       slug,
       category,
+      primaryMaterial,
       collection,
       description,
       dimensions,
@@ -106,78 +111,79 @@ export async function POST(request: Request) {
 
     const productId = id || `SM-${Math.floor(100 + Math.random() * 900)}`;
 
-    await pool.execute(
-      `INSERT INTO products (
-        id, title, slug, category, collection_name, description, dimensions,
-        net_gold_weight_grams, gross_weight_grams, default_karat, supported_karats,
-        default_color, supported_colors, making_charge_percent, making_charge_per_gram,
-        discount_percent, huid, certificate, rating, reviews_count, is_featured, is_new
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 5.0, 1, 1, 1)
-      ON DUPLICATE KEY UPDATE
-        title = VALUES(title),
-        net_gold_weight_grams = VALUES(net_gold_weight_grams),
-        gross_weight_grams = VALUES(gross_weight_grams)`,
-      [
-        productId,
-        title,
-        slug || title.toLowerCase().replace(/\s+/g, '-'),
-        category || 'rings',
-        collection || 'General Collection',
-        description || '',
-        dimensions || '',
-        Number(netGoldWeightGrams || 0),
-        Number(grossWeightGrams || 0),
-        defaultKarat || '22K',
-        JSON.stringify(["14K", "18K", "22K"]),
-        defaultColor || 'yellow',
-        JSON.stringify(["yellow", "rose", "white"]),
-        Number(makingChargePercent || 15),
-        Number(makingChargePerGram || 0),
-        Number(discountPercent || 0),
-        huid || '',
-        certificate || 'BIS 916'
-      ]
-    );
+    const newProduct = {
+      id: productId,
+      title: title || "New Jewellery Product",
+      slug: slug || title?.toLowerCase().replace(/[^a-z0-9]+/g, '-') || productId.toLowerCase(),
+      category: category || 'rings',
+      primaryMaterial: primaryMaterial || (diamondSpecs ? "diamond" : category === "silverware" ? "silver" : "gold"),
+      navCategories: ["all", category || 'rings'],
+      collection: collection || 'General Collection',
+      description: description || '',
+      dimensions: dimensions || '',
+      netGoldWeightGrams: Number(netGoldWeightGrams || 4.5),
+      grossWeightGrams: Number(grossWeightGrams || 4.8),
+      defaultKarat: defaultKarat || '22K',
+      supportedKarats: ["14K", "18K", "22K"],
+      defaultColor: defaultColor || 'yellow',
+      supportedColors: ["yellow", "rose", "white"],
+      makingChargePercent: Number(makingChargePercent || 15),
+      makingChargePerGram: Number(makingChargePerGram || 0),
+      discountPercent: Number(discountPercent || 0),
+      huid: huid || '',
+      certificate: certificate || 'BIS 916',
+      rating: 5.0,
+      reviews: 1,
+      isFeatured: true,
+      isNew: true,
+      images: images || { yellow: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg" },
+      diamondSpecs
+    };
 
-    if (images) {
+    // 1. Save to persistent JSON store first
+    updateOrAddProduct(newProduct as any);
+
+    // 2. Try MySQL DB insert as secondary sync
+    try {
       await pool.execute(
-        `INSERT INTO product_images (product_id, yellow_gold_image, rose_gold_image, white_gold_image, hover_image, gallery_images)
-         VALUES (?, ?, ?, ?, ?, ?)
-         ON DUPLICATE KEY UPDATE
-           yellow_gold_image = VALUES(yellow_gold_image),
-           rose_gold_image = VALUES(rose_gold_image),
-           white_gold_image = VALUES(white_gold_image),
-           hover_image = VALUES(hover_image)`,
+        `INSERT INTO products (
+          id, title, slug, category, collection_name, description, dimensions,
+          net_gold_weight_grams, gross_weight_grams, default_karat, supported_karats,
+          default_color, supported_colors, making_charge_percent, making_charge_per_gram,
+          discount_percent, huid, certificate, rating, reviews_count, is_featured, is_new
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 5.0, 1, 1, 1)
+        ON DUPLICATE KEY UPDATE
+          title = VALUES(title),
+          net_gold_weight_grams = VALUES(net_gold_weight_grams),
+          gross_weight_grams = VALUES(gross_weight_grams)`,
         [
           productId,
-          images.yellow || "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
-          images.rose || null,
-          images.white || null,
-          images.hover || images.yellow,
-          JSON.stringify([images.yellow])
+          newProduct.title,
+          newProduct.slug,
+          newProduct.category,
+          newProduct.collection,
+          newProduct.description,
+          newProduct.dimensions,
+          newProduct.netGoldWeightGrams,
+          newProduct.grossWeightGrams,
+          newProduct.defaultKarat,
+          JSON.stringify(["14K", "18K", "22K"]),
+          newProduct.defaultColor,
+          JSON.stringify(["yellow", "rose", "white"]),
+          newProduct.makingChargePercent,
+          newProduct.makingChargePerGram,
+          newProduct.discountPercent,
+          newProduct.huid,
+          newProduct.certificate
         ]
       );
+    } catch (dbErr) {
+      console.warn("MySQL DB insert warning (saved to JSON store):", dbErr);
     }
 
-    if (diamondSpecs && diamondSpecs.totalCaratWeight) {
-      await pool.execute(
-        `INSERT INTO diamond_specs (product_id, stone_count, total_carat_weight, clarity, cut, price_per_carat)
-         VALUES (?, ?, ?, ?, ?, ?)`,
-        [
-          productId,
-          Number(diamondSpecs.stoneCount || 1),
-          Number(diamondSpecs.totalCaratWeight || 0),
-          diamondSpecs.clarity || "VVS-EF",
-          diamondSpecs.cut || "Round Brilliant",
-          Number(diamondSpecs.pricePerCarat || 68000)
-        ]
-      );
-    }
-
-    return NextResponse.json({ success: true, message: `Product ${productId} created in database!`, id: productId });
+    return NextResponse.json({ success: true, message: `Product ${productId} created successfully!`, id: productId, product: newProduct });
   } catch (error: any) {
     console.error("POST product failed:", error);
     return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }
-
