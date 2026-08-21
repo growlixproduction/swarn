@@ -11,18 +11,6 @@
     "circleImg": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80",
     "thumbnail_image": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80"
   },
-  "gold": {
-    "slug": "gold",
-    "pageTitle": "22K BIS Hallmarked Gold Jewellery | Swarn Mahal Ambikapur",
-    "title": "22K Gold",
-    "badge": "BIS 916 HALLMARKED • 100% PURITY",
-    "subtitle": "Traditional North Chhattisgarh craftsmanship in 22K yellow gold. Bridal rani haars, handcrafted kadas, solid gold chains, and pure bullion coins.",
-    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
-    "guideTitle": "22K Gold Purity & Hallmark Guide",
-    "guideDesc": "22 Karat (916 purity) is the gold benchmark in India, containing 91.6% pure gold alloyed with 8.4% copper/zinc for strength and lasting heirloom beauty.",
-    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg"
-  },
   "diamond": {
     "slug": "diamond",
     "pageTitle": "Certified IGI Diamond Jewellery | Swarn Mahal Ambikapur",
@@ -106,5 +94,17 @@
     "guideDesc": "Discover smart design combinations such as halo solitaire settings and lightweight gold alloys that deliver maximum visual grandeur within ₹50,000.",
     "circleImg": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=200&q=80",
     "thumbnail_image": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=200&q=80"
+  },
+  "earrings-and-tops": {
+    "slug": "earrings-and-tops",
+    "title": "earrings-and-tops",
+    "pageTitle": "22K BIS Hallmarked Gold Jewellery | Swarn Mahal Ambikapur",
+    "badge": "BIS 916 HALLMARKED • 100% PURITY",
+    "subtitle": "Explore handcrafted 22K gold tops, floral studs, lightweight daily wear earrings, and traditional motifs. Designed for all-day comfort, effortless elegance, and everyday shine from Swarn Mahal, Ambikapur.",
+    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
+    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
+    "guideTitle": "22K Gold Purity & Hallmark Guide",
+    "guideDesc": "22 Karat (916 purity) is the gold benchmark in India, containing 91.6% pure gold alloyed with 8.4% copper/zinc for strength and lasting heirloom beauty."
   }
 }

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getCategoriesFromStore, saveCategoryToStore } from "../../../lib/jsonStore";
+import { getCategoriesFromStore, saveCategoryToStore, deleteCategoryFromStore, saveCategoriesOrderToStore } from "../../../lib/jsonStore";
 import pool from "../../../lib/db";
 
 export async function GET() {
@@ -36,8 +36,29 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const updatedStore = await saveCategoryToStore(body);
 
+    // 1. Reorder Action
+    if (body.action === "reorder" && Array.isArray(body.categories)) {
+      const updatedStore = await saveCategoriesOrderToStore(body.categories);
+      return NextResponse.json({
+        success: true,
+        message: "Categories reordered successfully!",
+        categories: updatedStore
+      });
+    }
+
+    // 2. Delete Action
+    if (body.action === "delete" && body.slug) {
+      const updatedStore = await deleteCategoryFromStore(body.slug);
+      return NextResponse.json({
+        success: true,
+        message: `Category /${body.slug} deleted successfully!`,
+        categories: updatedStore
+      });
+    }
+
+    // 3. Normal Save / Edit Category
+    const updatedStore = await saveCategoryToStore(body);
     const targetSlug = body.slug ? body.slug.trim().toLowerCase().replace(/\s+/g, '-') : (body.originalSlug || body.title.toLowerCase().replace(/\s+/g, '-'));
     const savedObj = updatedStore[targetSlug] || body;
 
@@ -50,5 +71,26 @@ export async function POST(request: Request) {
   } catch (error: any) {
     console.error("POST /api/categories failed:", error);
     return NextResponse.json({ success: false, error: error.message || "Failed to update category" }, { status: 500 });
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const slug = searchParams.get("slug");
+
+    if (!slug) {
+      return NextResponse.json({ success: false, error: "Category slug is required" }, { status: 400 });
+    }
+
+    const updatedStore = await deleteCategoryFromStore(slug);
+    return NextResponse.json({
+      success: true,
+      message: `Category /${slug} deleted successfully!`,
+      categories: updatedStore
+    });
+  } catch (error: any) {
+    console.error("DELETE /api/categories failed:", error);
+    return NextResponse.json({ success: false, error: error.message || "Failed to delete category" }, { status: 500 });
   }
 }

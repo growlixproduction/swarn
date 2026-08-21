@@ -9,9 +9,13 @@ export default function AdminCollectionsPage() {
   const [selectedCat, setSelectedCat] = useState<any>(categories[0]);
   const [originalSlug, setOriginalSlug] = useState<string>(categories[0]?.slug || "all");
   const [isSaving, setIsSaving] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isUploadingCircle, setIsUploadingCircle] = useState(false);
   const [isUploadingHero, setIsUploadingHero] = useState(false);
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
+
+  // Drag and Drop state
+  const [draggedIdx, setDraggedIdx] = useState<number | null>(null);
 
   // New Category Modal State
   const [isAddingNew, setIsAddingNew] = useState<boolean>(false);
@@ -79,6 +83,81 @@ export default function AdminCollectionsPage() {
       setSaveMessage({ type: "error", text: err.message || "Network request failed" });
     } finally {
       setIsSaving(false);
+    }
+  };
+
+  // Reorder Handler: Move First, Up, Down, Last
+  const handleReorder = async (fromIdx: number, toIdx: number) => {
+    if (fromIdx < 0 || fromIdx >= categories.length || toIdx < 0 || toIdx >= categories.length || fromIdx === toIdx) {
+      return;
+    }
+
+    const updated = [...categories];
+    const [movedItem] = updated.splice(fromIdx, 1);
+    updated.splice(toIdx, 0, movedItem);
+
+    setCategories(updated);
+
+    // Update selected index if selected category moved
+    const newSelectedIdx = updated.findIndex(c => c.slug === selectedCat?.slug);
+    if (newSelectedIdx !== -1) {
+      setSelectedIndex(newSelectedIdx);
+    }
+
+    // Persist reorder to API
+    try {
+      const res = await fetch("/api/categories", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "reorder", categories: updated })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSaveMessage({ type: "success", text: `Category position updated! Live order saved.` });
+      }
+    } catch (err) {
+      console.warn("Reorder save error:", err);
+    }
+  };
+
+  // Delete Category Handler
+  const handleDeleteCategory = async () => {
+    if (!selectedCat) return;
+
+    if (!confirm(`Are you sure you want to delete the collection "${selectedCat.title}" (/${selectedCat.slug})?\n\nThis will remove it from the homepage circle stories and navigation bar.`)) {
+      return;
+    }
+
+    setIsDeleting(true);
+    setSaveMessage(null);
+
+    try {
+      const res = await fetch(`/api/categories?slug=${encodeURIComponent(selectedCat.slug)}`, {
+        method: "DELETE"
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success) {
+        const remaining = categories.filter(c => c.slug !== selectedCat.slug);
+        setCategories(remaining);
+
+        if (remaining.length > 0) {
+          const nextIdx = Math.min(selectedIndex, remaining.length - 1);
+          setSelectedCat(remaining[nextIdx]);
+          setSelectedIndex(nextIdx);
+          setOriginalSlug(remaining[nextIdx].slug);
+        } else {
+          setSelectedCat(null);
+        }
+
+        setSaveMessage({ type: "success", text: `Collection "${selectedCat.title}" (/${selectedCat.slug}) deleted successfully!` });
+      } else {
+        setSaveMessage({ type: "error", text: data.error || "Failed to delete collection." });
+      }
+    } catch (err: any) {
+      setSaveMessage({ type: "error", text: err.message || "Delete request failed." });
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -178,7 +257,7 @@ export default function AdminCollectionsPage() {
         <div>
           <h1 className="admin-page-title">Categories & Collections Tree Manager</h1>
           <p className="admin-page-desc">
-            Configure navigational category titles, custom slugs, upload circle story images, hero backgrounds, and buying guides (Saved to Database & Store).
+            Reorder, drag-and-drop, edit titles, custom slugs, upload circle story images, and delete collections (Saved to Database & Store).
           </p>
         </div>
 
@@ -260,7 +339,7 @@ export default function AdminCollectionsPage() {
                 <input
                   type="text"
                   required
-                  placeholder="e.g. Men's Heritage Rings, Silverware"
+                  placeholder="e.g. Earrings & Tops, Men's Rings"
                   className="admin-input"
                   value={newCategoryName}
                   onChange={e => {
@@ -279,7 +358,7 @@ export default function AdminCollectionsPage() {
                   <span style={{ position: "absolute", left: "0.85rem", color: "#C5A880", fontSize: "0.85rem", pointerEvents: "none" }}>/</span>
                   <input
                     type="text"
-                    placeholder="mens-heritage-rings"
+                    placeholder="earrings-and-tops"
                     className="admin-input"
                     style={{ paddingLeft: "1.75rem" }}
                     value={newCategorySlug}
@@ -292,7 +371,7 @@ export default function AdminCollectionsPage() {
                 <label className="admin-label">Homepage Circle Bubble Image URL</label>
                 <input
                   type="text"
-                  placeholder="https://... or /asset/your-image.jpeg"
+                  placeholder="https://... or /uploads/your-image.jpg"
                   className="admin-input"
                   value={newCategoryCircleImg}
                   onChange={e => setNewCategoryCircleImg(e.target.value)}
@@ -319,51 +398,104 @@ export default function AdminCollectionsPage() {
         </div>
       )}
 
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "2rem" }}>
-        {/* Left: Category List */}
+      <div style={{ display: "grid", gridTemplateColumns: "1.1fr 1.9fr", gap: "2rem" }}>
+        {/* Left: Category List with Reorder & Drag Controls */}
         <div className="admin-card">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
             <h3 style={{ fontSize: "1.05rem", color: "#FFFFFF", margin: 0, fontFamily: "var(--font-serif)" }}>
               Active Categories ({categories.length})
             </h3>
-            <span style={{ fontSize: "0.75rem", color: "#C5A880" }}>Click to edit</span>
+            <span style={{ fontSize: "0.75rem", color: "#C5A880" }}>Drag or use arrows to reorder</span>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", maxHeight: "680px", overflowY: "auto", paddingRight: "0.25rem" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", maxHeight: "720px", overflowY: "auto", paddingRight: "0.25rem" }}>
             {categories.map((c, idx) => {
               const circleThumbnail = c.circleImg || c.thumbnail_image || c.heroBg || "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80";
+              const isSelected = selectedIndex === idx;
+
               return (
                 <div
                   key={`${c.slug}-${idx}`}
+                  draggable={true}
+                  onDragStart={() => setDraggedIdx(idx)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={() => {
+                    if (draggedIdx !== null && draggedIdx !== idx) {
+                      handleReorder(draggedIdx, idx);
+                      setDraggedIdx(null);
+                    }
+                  }}
                   onClick={() => handleSelectCategory(c, idx)}
                   style={{
-                    padding: "0.85rem 1rem",
+                    padding: "0.75rem 0.85rem",
                     borderRadius: "8px",
-                    background: selectedIndex === idx ? "rgba(197, 168, 128, 0.18)" : "#110E0C",
-                    border: selectedIndex === idx ? "1px solid #C5A880" : "1px solid rgba(197, 168, 128, 0.15)",
+                    background: isSelected ? "rgba(197, 168, 128, 0.18)" : "#110E0C",
+                    border: isSelected ? "1.5px solid #C5A880" : "1px solid rgba(197, 168, 128, 0.15)",
                     cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
-                    gap: "0.85rem",
+                    gap: "0.65rem",
                     transition: "all 0.2s ease"
                   }}
                 >
-                  <div style={{ width: "42px", height: "42px", borderRadius: "50%", overflow: "hidden", border: "2px solid #C5A880", flexShrink: 0 }}>
+                  {/* Drag Grip Handle */}
+                  <i
+                    className="fa-solid fa-grip-vertical"
+                    style={{ color: isSelected ? "#C5A880" : "#554C44", cursor: "grab", fontSize: "0.85rem" }}
+                    title="Drag to reorder"
+                  ></i>
+
+                  <div style={{ width: "38px", height: "38px", borderRadius: "50%", overflow: "hidden", border: "1.5px solid #C5A880", flexShrink: 0 }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={circleThumbnail} alt={c.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   </div>
-                  <div style={{ flexGrow: 1 }}>
-                    <strong style={{ display: "block", color: "#FFFFFF", fontSize: "0.88rem" }}>{c.title}</strong>
-                    <span style={{ fontSize: "0.72rem", color: "#8C827A" }}>/{c.slug}</span>
+
+                  <div style={{ flexGrow: 1, minWidth: 0 }}>
+                    <strong style={{ display: "block", color: "#FFFFFF", fontSize: "0.86rem", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                      {c.title}
+                    </strong>
+                    <span style={{ fontSize: "0.7rem", color: "#8C827A", display: "block" }}>/{c.slug}</span>
                   </div>
-                  <i
-                    className="fa-solid fa-chevron-right"
-                    style={{
-                      fontSize: "0.75rem",
-                      color: selectedIndex === idx ? "#C5A880" : "#4A433D",
-                      transform: selectedIndex === idx ? "translateX(2px)" : "none"
-                    }}
-                  ></i>
+
+                  {/* Ordering Arrow Buttons: First, Up, Down, Last */}
+                  <div style={{ display: "flex", gap: "2px", alignItems: "center" }} onClick={(e) => e.stopPropagation()}>
+                    <button
+                      type="button"
+                      title="Move to First Position"
+                      disabled={idx === 0}
+                      onClick={() => handleReorder(idx, 0)}
+                      style={{ background: "none", border: "none", color: idx === 0 ? "#332C26" : "#C5A880", cursor: idx === 0 ? "default" : "pointer", padding: "2px 4px", fontSize: "0.75rem" }}
+                    >
+                      <i className="fa-solid fa-angles-up"></i>
+                    </button>
+                    <button
+                      type="button"
+                      title="Move Up"
+                      disabled={idx === 0}
+                      onClick={() => handleReorder(idx, idx - 1)}
+                      style={{ background: "none", border: "none", color: idx === 0 ? "#332C26" : "#F3E5AB", cursor: idx === 0 ? "default" : "pointer", padding: "2px 4px", fontSize: "0.75rem" }}
+                    >
+                      <i className="fa-solid fa-angle-up"></i>
+                    </button>
+                    <button
+                      type="button"
+                      title="Move Down"
+                      disabled={idx === categories.length - 1}
+                      onClick={() => handleReorder(idx, idx + 1)}
+                      style={{ background: "none", border: "none", color: idx === categories.length - 1 ? "#332C26" : "#F3E5AB", cursor: idx === categories.length - 1 ? "default" : "pointer", padding: "2px 4px", fontSize: "0.75rem" }}
+                    >
+                      <i className="fa-solid fa-angle-down"></i>
+                    </button>
+                    <button
+                      type="button"
+                      title="Move to Last Position"
+                      disabled={idx === categories.length - 1}
+                      onClick={() => handleReorder(idx, categories.length - 1)}
+                      style={{ background: "none", border: "none", color: idx === categories.length - 1 ? "#332C26" : "#C5A880", cursor: idx === categories.length - 1 ? "default" : "pointer", padding: "2px 4px", fontSize: "0.75rem" }}
+                    >
+                      <i className="fa-solid fa-angles-down"></i>
+                    </button>
+                  </div>
                 </div>
               );
             })}
@@ -371,7 +503,7 @@ export default function AdminCollectionsPage() {
         </div>
 
         {/* Right: Selected Category Editor */}
-        {selectedCat && (
+        {selectedCat ? (
           <div className="admin-card">
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1.25rem", borderBottom: "1px solid rgba(197, 168, 128, 0.15)", paddingBottom: "1rem" }}>
               <div>
@@ -382,6 +514,30 @@ export default function AdminCollectionsPage() {
                   Live Storefront Route: <span style={{ color: "#C5A880" }}>/collections/{selectedCat.slug}</span>
                 </span>
               </div>
+
+              {/* DELETE COLLECTION BUTTON */}
+              <button
+                type="button"
+                onClick={handleDeleteCategory}
+                disabled={isDeleting}
+                style={{
+                  background: "rgba(239, 68, 68, 0.12)",
+                  border: "1px solid #EF4444",
+                  color: "#F87171",
+                  padding: "0.4rem 0.85rem",
+                  borderRadius: "6px",
+                  fontSize: "0.78rem",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.35rem"
+                }}
+                title="Permanently Delete Collection"
+              >
+                <i className={isDeleting ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-trash-can"}></i>
+                {isDeleting ? "Deleting..." : "Delete Collection"}
+              </button>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
@@ -392,7 +548,7 @@ export default function AdminCollectionsPage() {
                   className="admin-input"
                   value={selectedCat.title || ""}
                   onChange={e => setSelectedCat({ ...selectedCat, title: e.target.value })}
-                  placeholder="e.g. Pure Gold Jewellery & Heirlooms"
+                  placeholder="e.g. Earrings & Tops, Pure Gold"
                 />
               </div>
 
@@ -575,23 +731,29 @@ export default function AdminCollectionsPage() {
               />
             </div>
 
-            <button
-              type="button"
-              className="btn btn-gold btn-sm"
-              onClick={handleSaveCategory}
-              disabled={isSaving}
-              style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-            >
-              {isSaving ? (
-                <>
-                  <i className="fa-solid fa-spinner fa-spin"></i> Saving...
-                </>
-              ) : (
-                <>
-                  <i className="fa-solid fa-floppy-disk"></i> Save Category & Circle Image
-                </>
-              )}
-            </button>
+            <div style={{ display: "flex", gap: "1rem", marginTop: "1.5rem" }}>
+              <button
+                type="button"
+                className="btn btn-gold btn-sm"
+                onClick={handleSaveCategory}
+                disabled={isSaving}
+                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+              >
+                {isSaving ? (
+                  <>
+                    <i className="fa-solid fa-spinner fa-spin"></i> Saving...
+                  </>
+                ) : (
+                  <>
+                    <i className="fa-solid fa-floppy-disk"></i> Save Category & Circle Image
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className="admin-card" style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: "300px", color: "#8C827A" }}>
+            Select a collection from the left to edit or click "Add New Collection".
           </div>
         )}
       </div>

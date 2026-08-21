@@ -56,7 +56,7 @@ export function getCategoriesFromStore(): Record<string, any> {
   }
 }
 
-// Save category to JSON file AND MySQL Database
+// Save single category to JSON file AND MySQL Database
 export async function saveCategoryToStore(catData: any): Promise<Record<string, any>> {
   const { originalSlug, slug, title, subtitle, pageTitle, badge, heroBg, circleImg, thumbnail_image, guideTitle, guideDesc } = catData;
 
@@ -113,4 +113,62 @@ export async function saveCategoryToStore(catData: any): Promise<Record<string, 
   }
 
   return currentStore;
+}
+
+// Delete category from JSON file AND MySQL Database
+export async function deleteCategoryFromStore(slugToDelete: string): Promise<Record<string, any>> {
+  const currentStore = getCategoriesFromStore();
+  if (currentStore[slugToDelete]) {
+    delete currentStore[slugToDelete];
+  }
+
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    fs.writeFileSync(CATEGORIES_FILE, JSON.stringify(currentStore, null, 2), "utf-8");
+  } catch (fsErr) {
+    console.error("Failed to delete from categories JSON file:", fsErr);
+  }
+
+  try {
+    await pool.execute(`DELETE FROM categories WHERE slug = ?`, [slugToDelete]);
+  } catch (dbErr: any) {
+    console.warn("MySQL DB delete warning:", dbErr.message);
+  }
+
+  return currentStore;
+}
+
+// Save reordered categories list to JSON file AND MySQL Database
+export async function saveCategoriesOrderToStore(orderedCategories: any[]): Promise<Record<string, any>> {
+  const newStore: Record<string, any> = {};
+  orderedCategories.forEach(cat => {
+    if (cat && cat.slug) {
+      newStore[cat.slug] = cat;
+    }
+  });
+
+  try {
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+    fs.writeFileSync(CATEGORIES_FILE, JSON.stringify(newStore, null, 2), "utf-8");
+  } catch (fsErr) {
+    console.error("Failed to write ordered categories JSON file:", fsErr);
+  }
+
+  try {
+    for (let i = 0; i < orderedCategories.length; i++) {
+      const c = orderedCategories[i];
+      await pool.execute(
+        `UPDATE categories SET display_order = ? WHERE slug = ?`,
+        [i, c.slug]
+      );
+    }
+  } catch (dbErr: any) {
+    console.warn("MySQL DB order update warning:", dbErr.message);
+  }
+
+  return newStore;
 }
