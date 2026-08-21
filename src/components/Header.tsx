@@ -29,7 +29,7 @@ const CATEGORY_ICONS: Record<string, string> = {
 };
 
 export default function Header() {
-  const { bullionRates, cartCount, openCartDrawer } = useApp();
+  const { bullionRates, cartCount, openCartDrawer, searchQuery, setSearchQuery } = useApp();
   const [navCategories, setNavCategories] = useState<Array<{ slug: string; title: string; icon: string }>>(DEFAULT_NAV_ITEMS);
 
   useEffect(() => {
@@ -60,74 +60,70 @@ export default function Header() {
 
   const rate24k = formatCurrency(bullionRates.gold24k);
   const rate22k = formatCurrency(bullionRates.gold22k);
-  const rate18k = formatCurrency(bullionRates.gold18k);
-  const rate14k = formatCurrency(bullionRates.gold14k);
-  const rateSilver = formatCurrency(bullionRates.silver925);
 
   return (
-    <header className="tanishq-header-root sticky-top" id="header">
-      {/* Top Brand & Utility Header */}
-      <div className="container tanishq-header-inner">
-        <div className="header-col-left">
-          <Link href="/" className="brand-crest-group">
-            <div className="brand-logo-crest">
-              <span className="crest-monogram">SM</span>
+    <header className="tanishq-header sticky-top" id="header">
+      {/* Tier 1: Main Top Row */}
+      <div className="tanishq-top-row">
+        <div className="tanishq-row-inner">
+          {/* Brand Logo */}
+          <Link href="/" className="tanishq-logo-wrapper">
+            <div className="tanishq-crest">
+              <span className="crest-letters">SM</span>
             </div>
-            <div className="brand-title-wrap">
-              <span className="brand-name-main">स्वर्ण महल</span>
-              <span className="brand-subtitle">SWARN MAHAL JEWELLERS</span>
+            <div className="tanishq-logo-text">
+              <span className="tanishq-title">स्वर्ण महल</span>
+              <span className="tanishq-tagline">SWARN MAHAL JEWELLERS</span>
             </div>
           </Link>
-        </div>
 
-        {/* Global Search Bar */}
-        <div className="header-col-center">
+          {/* Center Search Box */}
           <div className="tanishq-search-box">
-            <i className="fa-solid fa-magnifying-glass search-icon"></i>
-            <input
-              type="text"
-              placeholder="Search for gold rani haar, diamond rings, solitaire..."
-              className="tanishq-search-input"
-            />
-            <button type="button" className="tanishq-search-submit">
-              <i className="fa-solid fa-arrow-right"></i>
+            <div className="tanishq-search-input-wrap">
+              <i className="fa-solid fa-magnifying-glass search-icon-left"></i>
+              <input
+                type="text"
+                placeholder="Search for gold rani haar, diamond rings, solitaire..."
+                className="tanishq-search-input"
+                value={searchQuery}
+                onChange={e => setSearchQuery(e.target.value)}
+              />
+            </div>
+          </div>
+
+          {/* Right Actions */}
+          <div className="tanishq-actions-row">
+            {/* Live Gold Rate Chip */}
+            <div className="tanishq-rate-chip" title="Live 22K Hallmarked Gold Rate">
+              <span className="tanishq-live-dot"></span>
+              <span>22K: {rate22k}/g</span>
+            </div>
+
+            <Link href="/admin/collections" className="tanishq-nav-icon-btn" title="Admin Control Panel">
+              <i className="fa-solid fa-gem"></i>
+            </Link>
+
+            <a href="#showroom-section" className="tanishq-nav-icon-btn" title="Visit Showroom">
+              <i className="fa-solid fa-store"></i>
+            </a>
+
+            {/* Cart Trigger */}
+            <button
+              type="button"
+              className="tanishq-nav-icon-btn tanishq-cart-btn"
+              onClick={openCartDrawer}
+              aria-label="Open Shopping Bag"
+            >
+              <i className="fa-solid fa-bag-shopping"></i>
+              <span className="badge-count">{cartCount}</span>
             </button>
           </div>
         </div>
-
-        {/* Action Controls: Live Rate Badge & Cart */}
-        <div className="header-col-right">
-          {/* Live Rate Pill */}
-          <div className="live-rate-pill">
-            <span className="rate-pulse-dot"></span>
-            <span className="rate-label">22K:</span>
-            <strong className="rate-val">{rate22k}/g</strong>
-          </div>
-
-          <Link href="/admin/collections" className="header-icon-action" title="Admin Control Panel">
-            <i className="fa-solid fa-gem"></i>
-          </Link>
-
-          <a href="#showroom-section" className="header-icon-action" title="Visit Showroom">
-            <i className="fa-solid fa-store"></i>
-          </a>
-
-          {/* Cart Trigger */}
-          <button
-            type="button"
-            className="header-icon-action cart-trigger-btn"
-            onClick={openCartDrawer}
-            aria-label="Open Shopping Bag"
-          >
-            <i className="fa-solid fa-bag-shopping"></i>
-            <span className="cart-badge-count">{cartCount}</span>
-          </button>
-        </div>
       </div>
 
-      {/* Dynamic Category Navigation Strip */}
+      {/* Tier 2: Dynamic Category Navigation Strip */}
       <nav className="tanishq-category-strip">
-        <div className="container tanishq-cat-inner">
+        <div className="tanishq-cat-inner">
           {navCategories.map(cat => (
             <Link key={cat.slug} href={`/collections/${cat.slug}`} className="tanishq-cat-item">
               <i className={`fa-solid ${cat.icon}`}></i> {cat.title}
@@ -139,14 +135,14 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Real-time Ticker Ribbon */}
+      {/* Real-Time Ticker Ribbon */}
       <div className="header-ticker-track">
         <div className="container header-ticker-inner">
           <span><strong>24K Gold:</strong> {rate24k}/g <span style={{ color: "#059669", fontWeight: 700 }}>▲ {bullionRates.trend24h}</span></span>
           <span><strong>22K Hallmark:</strong> {rate22k}/g</span>
-          <span><strong>18K Diamond:</strong> {rate18k}/g</span>
-          <span><strong>14K Luxe:</strong> {rate14k}/g</span>
-          <span><strong>925 Silver:</strong> {rateSilver}/g</span>
+          <span><strong>18K Diamond:</strong> {formatCurrency(bullionRates.gold18k)}/g</span>
+          <span><strong>14K Luxe:</strong> {formatCurrency(bullionRates.gold14k)}/g</span>
+          <span><strong>925 Silver:</strong> {formatCurrency(bullionRates.silver925)}/g</span>
           <span style={{ color: "var(--text-muted)" }}><i className="fa-regular fa-clock"></i> Synced: {bullionRates.lastUpdated}</span>
         </div>
       </div>
