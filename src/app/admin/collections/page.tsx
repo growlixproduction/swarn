@@ -9,6 +9,8 @@ export default function AdminCollectionsPage() {
   const [selectedCat, setSelectedCat] = useState<any>(categories[0]);
   const [originalSlug, setOriginalSlug] = useState<string>(categories[0]?.slug || "all");
   const [isSaving, setIsSaving] = useState(false);
+  const [isUploadingCircle, setIsUploadingCircle] = useState(false);
+  const [isUploadingHero, setIsUploadingHero] = useState(false);
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   // New Category Modal State
@@ -82,6 +84,43 @@ export default function AdminCollectionsPage() {
     }
   };
 
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, targetField: "circleImg" | "heroBg") => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (targetField === "circleImg") setIsUploadingCircle(true);
+    else setIsUploadingHero(true);
+
+    setSaveMessage(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success && data.url) {
+        if (targetField === "circleImg") {
+          setSelectedCat((prev: any) => ({ ...prev, circleImg: data.url, thumbnail_image: data.url }));
+        } else {
+          setSelectedCat((prev: any) => ({ ...prev, heroBg: data.url }));
+        }
+        setSaveMessage({ type: "success", text: `Image "${file.name}" uploaded successfully! Click Save Category below to apply.` });
+      } else {
+        setSaveMessage({ type: "error", text: data.error || "Failed to upload image file." });
+      }
+    } catch (err: any) {
+      setSaveMessage({ type: "error", text: err.message || "Image upload failed." });
+    } finally {
+      setIsUploadingCircle(false);
+      setIsUploadingHero(false);
+    }
+  };
+
   const handleAddNewCollection = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newCategoryName.trim()) return;
@@ -131,14 +170,14 @@ export default function AdminCollectionsPage() {
         <div>
           <h1 className="admin-page-title">Categories & Collections Tree Manager</h1>
           <p className="admin-page-desc">
-            Configure navigational category titles, custom slugs, circular story bubble images, hero backgrounds, and buying guides (Saved to Database).
+            Configure navigational category titles, custom slugs, upload circle story images, hero backgrounds, and buying guides (Saved to Database).
           </p>
         </div>
 
         <button
           type="button"
           className="btn btn-gold btn-sm"
-          onClick={() => setIsAddingNew(true)}
+          onClick={() => setIsAddingNew(false)}
         >
           <i className="fa-solid fa-plus"></i> Add New Collection
         </button>
@@ -368,9 +407,9 @@ export default function AdminCollectionsPage() {
               </div>
             </div>
 
-            {/* CIRCULAR HOMEPAGE STORY BUBBLE CONTROL */}
+            {/* CIRCULAR HOMEPAGE STORY BUBBLE CONTROL & DIRECT FOLDER FILE UPLOADER */}
             <div style={{ background: "#110E0C", border: "1.5px solid #C5A880", borderRadius: "12px", padding: "1.25rem", marginBottom: "1.5rem" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "0.85rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "1rem" }}>
                 <div style={{ width: "64px", height: "64px", borderRadius: "50%", border: "2px solid #C5A880", padding: "2px", background: "#000", flexShrink: 0, overflow: "hidden" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -385,21 +424,49 @@ export default function AdminCollectionsPage() {
                     Homepage Circle Story Bubble Image
                   </strong>
                   <span style={{ fontSize: "0.78rem", color: "#8C827A" }}>
-                    This circular thumbnail image and title will display inside the homepage Category Stories strip.
+                    Type URL or click <strong style={{ color: "#C5A880" }}>"Upload File"</strong> to select an image directly from your computer device.
                   </span>
                 </div>
               </div>
 
               <div className="admin-form-group" style={{ marginBottom: 0 }}>
-                <label className="admin-label">Circle Image URL / Asset Path</label>
-                <input
-                  type="text"
-                  className="admin-input"
-                  style={{ background: "#1A1512", color: "#FFFFFF" }}
-                  value={selectedCat.circleImg || selectedCat.thumbnail_image || ""}
-                  onChange={e => setSelectedCat({ ...selectedCat, circleImg: e.target.value, thumbnail_image: e.target.value })}
-                  placeholder="https://... or /asset/your-image.jpeg"
-                />
+                <label className="admin-label">Circle Image URL / Upload Asset</label>
+                <div style={{ display: "flex", gap: "0.6rem", alignItems: "center" }}>
+                  <input
+                    type="text"
+                    className="admin-input"
+                    style={{ background: "#1A1512", color: "#FFFFFF", flexGrow: 1 }}
+                    value={selectedCat.circleImg || selectedCat.thumbnail_image || ""}
+                    onChange={e => setSelectedCat({ ...selectedCat, circleImg: e.target.value, thumbnail_image: e.target.value })}
+                    placeholder="https://... or /uploads/your-image.jpg"
+                  />
+                  <label
+                    style={{
+                      background: "var(--gold-deep)",
+                      color: "#FFFFFF",
+                      padding: "0.65rem 1.1rem",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                      fontSize: "0.82rem",
+                      fontWeight: 600,
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.4rem",
+                      whiteSpace: "nowrap",
+                      flexShrink: 0,
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.3)"
+                    }}
+                  >
+                    <i className={isUploadingCircle ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-cloud-arrow-up"}></i>
+                    {isUploadingCircle ? "Uploading..." : "Upload File"}
+                    <input
+                      type="file"
+                      accept="image/*"
+                      style={{ display: "none" }}
+                      onChange={e => handleFileUpload(e, "circleImg")}
+                    />
+                  </label>
+                </div>
               </div>
             </div>
 
@@ -435,12 +502,42 @@ export default function AdminCollectionsPage() {
 
             <div className="admin-form-group">
               <label className="admin-label">Hero Banner Background Image URL</label>
-              <input
-                type="text"
-                className="admin-input"
-                value={selectedCat.heroBg || ""}
-                onChange={e => setSelectedCat({ ...selectedCat, heroBg: e.target.value })}
-              />
+              <div style={{ display: "flex", gap: "0.6rem", alignItems: "center" }}>
+                <input
+                  type="text"
+                  className="admin-input"
+                  style={{ flexGrow: 1 }}
+                  value={selectedCat.heroBg || ""}
+                  onChange={e => setSelectedCat({ ...selectedCat, heroBg: e.target.value })}
+                  placeholder="https://... or /uploads/hero.jpg"
+                />
+                <label
+                  style={{
+                    background: "rgba(197, 168, 128, 0.2)",
+                    border: "1px solid #C5A880",
+                    color: "#F3E5AB",
+                    padding: "0.65rem 1.1rem",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    fontSize: "0.82rem",
+                    fontWeight: 600,
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.4rem",
+                    whiteSpace: "nowrap",
+                    flexShrink: 0
+                  }}
+                >
+                  <i className={isUploadingHero ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-folder-open"}></i>
+                  {isUploadingHero ? "Uploading..." : "Upload File"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    style={{ display: "none" }}
+                    onChange={e => handleFileUpload(e, "heroBg")}
+                  />
+                </label>
+              </div>
             </div>
 
             {selectedCat.heroBg && (
