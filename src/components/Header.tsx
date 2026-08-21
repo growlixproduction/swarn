@@ -146,44 +146,19 @@ export default function Header() {
         <div className="tanishq-top-row">
           <div className="tanishq-row-inner">
             
-            {/* Left Block: Hamburger ☰ Button + Brand Logo */}
+            {/* Left Block: Brand Logo Emblem & Hindi Typography */}
             <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-              {/* ☰ 3-Line Hamburger Menu Button */}
-              <button
-                type="button"
-                className="mobile-hamburger-btn"
-                onClick={() => setIsMobileMenuOpen(true)}
-                aria-label="Open Navigation Menu"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "38px",
-                  height: "38px",
-                  borderRadius: "8px",
-                  border: "1px solid #EAE3DA",
-                  background: "#FAF6F2",
-                  color: "#832729",
-                  fontSize: "1.15rem",
-                  cursor: "pointer",
-                  boxShadow: "0 2px 6px rgba(0,0,0,0.04)"
-                }}
-              >
-                <i className="fa-solid fa-bars"></i>
-              </button>
-
-              {/* Brand Logo (Official Crest + Typography) */}
               <Link href="/" className="tanishq-logo-wrapper" title="Swarn Mahal Jewellers" style={{ display: "flex", alignItems: "center", gap: "0.65rem", textDecoration: "none" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img 
                   src="/asset/logo.png" 
                   alt="Swarn Mahal Emblem" 
                   className="tanishq-logo-img" 
-                  style={{ height: "46px", width: "auto", objectFit: "contain" }} 
+                  style={{ height: "44px", width: "auto", objectFit: "contain" }} 
                 />
                 <div className="tanishq-logo-text" style={{ display: "flex", flexDirection: "column" }}>
-                  <span className="tanishq-title" style={{ fontFamily: "serif", fontWeight: 700, fontSize: "1.25rem", color: "#832729", lineHeight: 1.15, letterSpacing: "0.02em" }}>स्वर्ण महल</span>
-                  <span className="tanishq-tagline" style={{ fontSize: "0.62rem", letterSpacing: "1.2px", color: "#C59B27", textTransform: "uppercase", fontWeight: 600 }}>SWARN MAHAL JEWELLERS</span>
+                  <span className="tanishq-title" style={{ fontFamily: "serif", fontWeight: 700, fontSize: "1.2rem", color: "#832729", lineHeight: 1.15, letterSpacing: "0.02em" }}>स्वर्ण महल</span>
+                  <span className="tanishq-tagline" style={{ fontSize: "0.6rem", letterSpacing: "1.2px", color: "#C59B27", textTransform: "uppercase", fontWeight: 600 }}>SWARN MAHAL JEWELLERS</span>
                 </div>
               </Link>
             </div>
@@ -295,23 +270,50 @@ export default function Header() {
 
             {/* Right Actions */}
             <div className="tanishq-actions-row">
-              <Link href="/admin/collections" className="tanishq-nav-icon-btn" title="Admin Control Panel">
-                <i className="fa-solid fa-gem"></i>
-              </Link>
+              {/* Desktop Only Actions: Admin Diamond, Visit Showroom, Cart */}
+              <div className="desktop-only-action-group" style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <Link href="/admin/collections" className="tanishq-nav-icon-btn" title="Admin Control Panel">
+                  <i className="fa-solid fa-gem"></i>
+                </Link>
 
-              <a href="#showroom-section" className="tanishq-nav-icon-btn" title="Visit Showroom">
-                <i className="fa-solid fa-store"></i>
-              </a>
+                <a href="#showroom-section" className="tanishq-nav-icon-btn" title="Visit Showroom">
+                  <i className="fa-solid fa-store"></i>
+                </a>
 
-              {/* Cart Trigger */}
+                {/* Cart Trigger */}
+                <button
+                  type="button"
+                  className="tanishq-nav-icon-btn tanishq-cart-btn"
+                  onClick={openCartDrawer}
+                  aria-label="Open Shopping Bag"
+                >
+                  <i className="fa-solid fa-bag-shopping"></i>
+                  <span className="badge-count">{cartCount}</span>
+                </button>
+              </div>
+
+              {/* ☰ 3-Line Hamburger Menu Button (Positioned on the RIGHT for Mobile!) */}
               <button
                 type="button"
-                className="tanishq-nav-icon-btn tanishq-cart-btn"
-                onClick={openCartDrawer}
-                aria-label="Open Shopping Bag"
+                className="mobile-hamburger-btn"
+                onClick={() => setIsMobileMenuOpen(true)}
+                aria-label="Open Navigation Menu"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "38px",
+                  height: "38px",
+                  borderRadius: "8px",
+                  border: "1px solid #EAE3DA",
+                  background: "#FAF6F2",
+                  color: "#832729",
+                  fontSize: "1.15rem",
+                  cursor: "pointer",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.04)"
+                }}
               >
-                <i className="fa-solid fa-bag-shopping"></i>
-                <span className="badge-count">{cartCount}</span>
+                <i className="fa-solid fa-bars"></i>
               </button>
             </div>
           </div>

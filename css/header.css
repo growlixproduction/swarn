@@ -452,13 +452,28 @@
     display: none !important;
   }
 
-  /* HIDE DIAMOND & CART ON TOP RIGHT ON MOBILE (KEEP ONLY SHOWROOM/SHOP BUTTON) */
+  /* HIDE DIAMOND, STORE, AND CART ON TOP RIGHT ON MOBILE (MOBILE USES TOP RIGHT ☰ HAMBURGER MENU) */
+  .desktop-only-action-group,
   .desktop-only-action {
     display: none !important;
   }
 
+  .mobile-hamburger-btn {
+    display: flex !important;
+  }
+
   .tanishq-actions-row {
     gap: 0.5rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-hamburger-btn {
+    display: none !important;
+  }
+
+  .desktop-only-action-group {
+    display: flex !important;
   }
 }
 
