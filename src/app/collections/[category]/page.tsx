@@ -74,10 +74,7 @@ export default function CollectionPage() {
     );
   });
 
-  // If no specific match found for a custom category, fall back to showing all products so page isn't empty
-  if (filtered.length === 0 && categorySlug !== "all") {
-    filtered = PRODUCTS_CATALOG;
-  }
+
 
   // Search Filter
   if (searchQuery) {
