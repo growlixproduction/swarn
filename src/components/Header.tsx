@@ -131,206 +131,209 @@ export default function Header() {
   );
 
   return (
-    <header className="tanishq-header sticky-top" id="header">
-      {/* Tier 1: Main Top Row (Logo, Search Bar, Action Icons) */}
-      <div className="tanishq-top-row">
-        <div className="tanishq-row-inner">
-          
-          {/* Left Block: Hamburger ☰ Button + Brand Logo */}
-          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-            {/* ☰ 3-Line Hamburger Menu Button */}
-            <button
-              type="button"
-              className="mobile-hamburger-btn"
-              onClick={() => setIsMobileMenuOpen(true)}
-              aria-label="Open Navigation Menu"
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                width: "38px",
-                height: "38px",
-                borderRadius: "8px",
-                border: "1px solid #EAE3DA",
-                background: "#FAF6F2",
-                color: "#832729",
-                fontSize: "1.15rem",
-                cursor: "pointer",
-                boxShadow: "0 2px 6px rgba(0,0,0,0.04)"
-              }}
-            >
-              <i className="fa-solid fa-bars"></i>
-            </button>
-
-            {/* Brand Logo (Official Crest + Typography) */}
-            <Link href="/" className="tanishq-logo-wrapper" title="Swarn Mahal Jewellers" style={{ display: "flex", alignItems: "center", gap: "0.65rem", textDecoration: "none" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img 
-                src="/asset/logo.png" 
-                alt="Swarn Mahal Emblem" 
-                className="tanishq-logo-img" 
-                style={{ height: "46px", width: "auto", objectFit: "contain" }} 
-              />
-              <div className="tanishq-logo-text" style={{ display: "flex", flexDirection: "column" }}>
-                <span className="tanishq-title" style={{ fontFamily: "serif", fontWeight: 700, fontSize: "1.25rem", color: "#832729", lineHeight: 1.15, letterSpacing: "0.02em" }}>स्वर्ण महल</span>
-                <span className="tanishq-tagline" style={{ fontSize: "0.62rem", letterSpacing: "1.2px", color: "#C59B27", textTransform: "uppercase", fontWeight: 600 }}>SWARN MAHAL JEWELLERS</span>
-              </div>
-            </Link>
-          </div>
-
-          {/* Center Search Box with Live Auto-Complete Dropdown */}
-          <div className="tanishq-search-box">
-            <form onSubmit={handleSearchSubmit} className="tanishq-search-input-wrap">
-              <i className="fa-solid fa-magnifying-glass search-icon-left"></i>
-              <input
-                type="text"
-                placeholder="Search for gold rani haar, diamond rings, solitaire..."
-                className="tanishq-search-input"
-                value={searchQuery}
-                onFocus={() => setIsSearchFocused(true)}
-                onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
-                onChange={e => setSearchQuery(e.target.value)}
-              />
-              {searchQuery && (
-                <button
-                  type="button"
-                  onClick={() => setSearchQuery("")}
-                  style={{ background: "none", border: "none", color: "#832729", cursor: "pointer", fontSize: "0.85rem", marginRight: "0.4rem" }}
-                >
-                  <i className="fa-solid fa-xmark"></i>
-                </button>
-              )}
-            </form>
-
-            {/* Live Search Results Dropdown Overlay */}
-            {isSearchFocused && (
-              <div className="tanishq-search-dropdown" style={{ display: "block" }}>
-                {searchQuery.trim() ? (
-                  <div>
-                    <div className="tanishq-dropdown-title">
-                      Matching Products ({matchingProducts.length}):
-                    </div>
-
-                    {matchingProducts.length === 0 ? (
-                      <div style={{ padding: "0.75rem", fontSize: "0.82rem", color: "var(--text-muted)", textAlign: "center" }}>
-                        No matching jewellery items found for &quot;{searchQuery}&quot;.
-                      </div>
-                    ) : (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-                        {matchingProducts.map(p => {
-                          const bd = PricingEngine.calculateBreakdown(p, p.defaultKarat, bullionRates);
-                          return (
-                            <Link
-                              key={p.id}
-                              href={`/product/${p.id}`}
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                gap: "0.75rem",
-                                textDecoration: "none",
-                                padding: "0.4rem 0.6rem",
-                                borderRadius: "8px",
-                                background: "#FAF6F2",
-                                transition: "background 0.2s ease"
-                              }}
-                              onClick={() => setIsSearchFocused(false)}
-                            >
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img
-                                src={p.images.yellow}
-                                alt={p.title}
-                                style={{ width: "40px", height: "40px", borderRadius: "6px", objectFit: "cover" }}
-                              />
-                              <div style={{ flex: 1, minWidth: 0 }}>
-                                <strong style={{ display: "block", fontSize: "0.82rem", color: "var(--text-primary)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
-                                  {p.title}
-                                </strong>
-                                <span style={{ fontSize: "0.72rem", color: "var(--gold-deep)" }}>
-                                  {p.defaultKarat} Gold • {p.netGoldWeightGrams}g
-                                </span>
-                              </div>
-                              <strong style={{ fontSize: "0.85rem", color: "#832729" }}>
-                                {PricingEngine.formatINR(bd.finalPrice)}
-                              </strong>
-                            </Link>
-                          );
-                        })}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div>
-                    <div className="tanishq-dropdown-title">Trending Searches:</div>
-                    <div className="tanishq-tags-flex">
-                      {POPULAR_SEARCH_TAGS.map((tag, idx) => (
-                        <button
-                          key={idx}
-                          type="button"
-                          className="tanishq-quick-pill"
-                          onClick={() => {
-                            setSearchQuery(tag.query);
-                            setIsSearchFocused(false);
-                            router.push(`/search?q=${encodeURIComponent(tag.query)}`);
-                          }}
-                        >
-                          <i className="fa-solid fa-magnifying-glass"></i> {tag.label}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Right Actions */}
-          <div className="tanishq-actions-row">
-            <Link href="/admin/collections" className="tanishq-nav-icon-btn" title="Admin Control Panel">
-              <i className="fa-solid fa-gem"></i>
-            </Link>
-
-            <a href="#showroom-section" className="tanishq-nav-icon-btn" title="Visit Showroom">
-              <i className="fa-solid fa-store"></i>
-            </a>
-
-            {/* Cart Trigger */}
-            <button
-              type="button"
-              className="tanishq-nav-icon-btn tanishq-cart-btn"
-              onClick={openCartDrawer}
-              aria-label="Open Shopping Bag"
-            >
-              <i className="fa-solid fa-bag-shopping"></i>
-              <span className="badge-count">{cartCount}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Tier 2: Dynamic Category Navigation Strip (Desktop Nav) */}
-      <nav className="tanishq-category-strip">
-        <div className="tanishq-cat-inner">
-          {navCategories.map(cat => (
-            <Link key={cat.slug} href={`/collections/${cat.slug}`} className="tanishq-cat-item">
-              <i className={`fa-solid ${cat.icon}`}></i> {cat.title}
-            </Link>
-          ))}
-          <Link href="/about" className="tanishq-cat-item" style={{ color: "var(--gold-deep)", fontWeight: 700 }}>
-            <i className="fa-solid fa-circle-info"></i> About Us
-          </Link>
-          <Link href="/calculator" className="tanishq-cat-item" style={{ color: "var(--gold-deep)", fontWeight: 700 }}>
-            <i className="fa-solid fa-calculator"></i> Gold Calculator
-          </Link>
-        </div>
-      </nav>
-
-      {/* Tier 3: Smooth Continuous Right-To-Left Announcement Ticker Bar (Phone & Desktop Visible!) */}
+    <>
+      {/* Non-Sticky Announcement Ticker Bar (Scrolls away naturally when scrolling down!) */}
       <div className="marquee-ticker-container">
         <div className="marquee-ticker-track">
           {TickerItems}
           {TickerItems}
         </div>
       </div>
+
+      {/* Sticky Main Navigation Header (Stays fixed at top when scrolling) */}
+      <header className="tanishq-header sticky-top" id="header">
+        {/* Tier 1: Main Top Row (Logo, Search Bar, Action Icons) */}
+        <div className="tanishq-top-row">
+          <div className="tanishq-row-inner">
+            
+            {/* Left Block: Hamburger ☰ Button + Brand Logo */}
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+              {/* ☰ 3-Line Hamburger Menu Button */}
+              <button
+                type="button"
+                className="mobile-hamburger-btn"
+                onClick={() => setIsMobileMenuOpen(true)}
+                aria-label="Open Navigation Menu"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "38px",
+                  height: "38px",
+                  borderRadius: "8px",
+                  border: "1px solid #EAE3DA",
+                  background: "#FAF6F2",
+                  color: "#832729",
+                  fontSize: "1.15rem",
+                  cursor: "pointer",
+                  boxShadow: "0 2px 6px rgba(0,0,0,0.04)"
+                }}
+              >
+                <i className="fa-solid fa-bars"></i>
+              </button>
+
+              {/* Brand Logo (Official Crest + Typography) */}
+              <Link href="/" className="tanishq-logo-wrapper" title="Swarn Mahal Jewellers" style={{ display: "flex", alignItems: "center", gap: "0.65rem", textDecoration: "none" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img 
+                  src="/asset/logo.png" 
+                  alt="Swarn Mahal Emblem" 
+                  className="tanishq-logo-img" 
+                  style={{ height: "46px", width: "auto", objectFit: "contain" }} 
+                />
+                <div className="tanishq-logo-text" style={{ display: "flex", flexDirection: "column" }}>
+                  <span className="tanishq-title" style={{ fontFamily: "serif", fontWeight: 700, fontSize: "1.25rem", color: "#832729", lineHeight: 1.15, letterSpacing: "0.02em" }}>स्वर्ण महल</span>
+                  <span className="tanishq-tagline" style={{ fontSize: "0.62rem", letterSpacing: "1.2px", color: "#C59B27", textTransform: "uppercase", fontWeight: 600 }}>SWARN MAHAL JEWELLERS</span>
+                </div>
+              </Link>
+            </div>
+
+            {/* Center Search Box with Live Auto-Complete Dropdown */}
+            <div className="tanishq-search-box">
+              <form onSubmit={handleSearchSubmit} className="tanishq-search-input-wrap">
+                <i className="fa-solid fa-magnifying-glass search-icon-left"></i>
+                <input
+                  type="text"
+                  placeholder="Search for gold rani haar, diamond rings, solitaire..."
+                  className="tanishq-search-input"
+                  value={searchQuery}
+                  onFocus={() => setIsSearchFocused(true)}
+                  onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
+                  onChange={e => setSearchQuery(e.target.value)}
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    style={{ background: "none", border: "none", color: "#832729", cursor: "pointer", fontSize: "0.85rem", marginRight: "0.4rem" }}
+                  >
+                    <i className="fa-solid fa-xmark"></i>
+                  </button>
+                )}
+              </form>
+
+              {/* Live Search Results Dropdown Overlay */}
+              {isSearchFocused && (
+                <div className="tanishq-search-dropdown" style={{ display: "block" }}>
+                  {searchQuery.trim() ? (
+                    <div>
+                      <div className="tanishq-dropdown-title">
+                        Matching Products ({matchingProducts.length}):
+                      </div>
+
+                      {matchingProducts.length === 0 ? (
+                        <div style={{ padding: "0.75rem", fontSize: "0.82rem", color: "var(--text-muted)", textAlign: "center" }}>
+                          No matching jewellery items found for &quot;{searchQuery}&quot;.
+                        </div>
+                      ) : (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+                          {matchingProducts.map(p => {
+                            const bd = PricingEngine.calculateBreakdown(p, p.defaultKarat, bullionRates);
+                            return (
+                              <Link
+                                key={p.id}
+                                href={`/product/${p.id}`}
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  gap: "0.75rem",
+                                  textDecoration: "none",
+                                  padding: "0.4rem 0.6rem",
+                                  borderRadius: "8px",
+                                  background: "#FAF6F2",
+                                  transition: "background 0.2s ease"
+                                }}
+                                onClick={() => setIsSearchFocused(false)}
+                              >
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={p.images.yellow}
+                                  alt={p.title}
+                                  style={{ width: "40px", height: "40px", borderRadius: "6px", objectFit: "cover" }}
+                                />
+                                <div style={{ flex: 1, minWidth: 0 }}>
+                                  <strong style={{ display: "block", fontSize: "0.82rem", color: "var(--text-primary)", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                                    {p.title}
+                                  </strong>
+                                  <span style={{ fontSize: "0.72rem", color: "var(--gold-deep)" }}>
+                                    {p.defaultKarat} Gold • {p.netGoldWeightGrams}g
+                                  </span>
+                                </div>
+                                <strong style={{ fontSize: "0.85rem", color: "#832729" }}>
+                                  {PricingEngine.formatINR(bd.finalPrice)}
+                                </strong>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="tanishq-dropdown-title">Trending Searches:</div>
+                      <div className="tanishq-tags-flex">
+                        {POPULAR_SEARCH_TAGS.map((tag, idx) => (
+                          <button
+                            key={idx}
+                            type="button"
+                            className="tanishq-quick-pill"
+                            onClick={() => {
+                              setSearchQuery(tag.query);
+                              setIsSearchFocused(false);
+                              router.push(`/search?q=${encodeURIComponent(tag.query)}`);
+                            }}
+                          >
+                            <i className="fa-solid fa-magnifying-glass"></i> {tag.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Right Actions */}
+            <div className="tanishq-actions-row">
+              <Link href="/admin/collections" className="tanishq-nav-icon-btn" title="Admin Control Panel">
+                <i className="fa-solid fa-gem"></i>
+              </Link>
+
+              <a href="#showroom-section" className="tanishq-nav-icon-btn" title="Visit Showroom">
+                <i className="fa-solid fa-store"></i>
+              </a>
+
+              {/* Cart Trigger */}
+              <button
+                type="button"
+                className="tanishq-nav-icon-btn tanishq-cart-btn"
+                onClick={openCartDrawer}
+                aria-label="Open Shopping Bag"
+              >
+                <i className="fa-solid fa-bag-shopping"></i>
+                <span className="badge-count">{cartCount}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Tier 2: Dynamic Category Navigation Strip (Desktop Nav) */}
+        <nav className="tanishq-category-strip">
+          <div className="tanishq-cat-inner">
+            {navCategories.map(cat => (
+              <Link key={cat.slug} href={`/collections/${cat.slug}`} className="tanishq-cat-item">
+                <i className={`fa-solid ${cat.icon}`}></i> {cat.title}
+              </Link>
+            ))}
+            <Link href="/about" className="tanishq-cat-item" style={{ color: "var(--gold-deep)", fontWeight: 700 }}>
+              <i className="fa-solid fa-circle-info"></i> About Us
+            </Link>
+            <Link href="/calculator" className="tanishq-cat-item" style={{ color: "var(--gold-deep)", fontWeight: 700 }}>
+              <i className="fa-solid fa-calculator"></i> Gold Calculator
+            </Link>
+          </div>
+        </nav>
+      </header>
 
       {/* ☰ 3-Line Hamburger Navigation Drawer Modal (Mobile Drawer) */}
       {isMobileMenuOpen && (
@@ -439,6 +442,6 @@ export default function Header() {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }
