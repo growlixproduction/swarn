@@ -49,11 +49,11 @@ const CategoryStories: React.FC = () => {
         <div className="category-stories-track reveal-stagger">
           {stories.map((s, idx) => (
             <Link key={idx} href={s.href} className="category-story-card">
-              <div className="category-story-ring">
+              <div className="story-avatar-wrap category-story-ring">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={s.img} alt={s.label} className="category-story-img" />
+                <img src={s.img} alt={s.label} className="story-avatar-img category-story-img" />
               </div>
-              <span className="category-story-title">{s.label}</span>
+              <span className="story-label category-story-title">{s.label}</span>
             </Link>
           ))}
         </div>
