@@ -96,14 +96,25 @@ export default function Header() {
       {/* Tier 1: Main Top Row */}
       <div className="tanishq-top-row">
         <div className="tanishq-row-inner">
-          {/* Brand Logo */}
-          <Link href="/" className="tanishq-logo-wrapper">
-            <div className="tanishq-crest">
-              <span className="crest-letters">SM</span>
-            </div>
-            <div className="tanishq-logo-text">
-              <span className="tanishq-title">स्वर्ण महल</span>
-              <span className="tanishq-tagline">SWARN MAHAL JEWELLERS</span>
+          {/* Brand Logo (Official Logo Crest + Text Images) */}
+          <Link href="/" className="tanishq-logo-wrapper" title="Swarn Mahal Jewellers" style={{ display: "flex", alignItems: "center", gap: "0.6rem", textDecoration: "none" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="/asset/logo.png" 
+              alt="Swarn Mahal Emblem" 
+              className="tanishq-logo-img" 
+              style={{ height: "46px", width: "auto", objectFit: "contain" }} 
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src="/asset/text-logo.png" 
+              alt="Swarn Mahal Jewellers" 
+              className="tanishq-text-logo-img" 
+              style={{ height: "36px", width: "auto", objectFit: "contain" }} 
+            />
+            <div className="tanishq-logo-text" style={{ display: "flex", flexDirection: "column" }}>
+              <span className="tanishq-title" style={{ fontFamily: "serif", fontWeight: 700, fontSize: "1.15rem", color: "#832729", lineHeight: 1.1 }}>स्वर्ण महल</span>
+              <span className="tanishq-tagline" style={{ fontSize: "0.6rem", letterSpacing: "1px", color: "#C59B27", textTransform: "uppercase", fontWeight: 600 }}>SWARN MAHAL JEWELLERS</span>
             </div>
           </Link>
 
