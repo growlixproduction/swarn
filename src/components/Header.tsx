@@ -132,7 +132,15 @@ export default function Header() {
 
   return (
     <header className="tanishq-header sticky-top" id="header">
-      {/* Tier 1: Main Top Row */}
+      {/* Tier 1: Smooth Continuous Right-To-Left Announcement Ticker Bar (VERY TOP OF HEADER!) */}
+      <div className="marquee-ticker-container">
+        <div className="marquee-ticker-track">
+          {TickerItems}
+          {TickerItems}
+        </div>
+      </div>
+
+      {/* Tier 2: Main Top Row (Logo, Search Bar, Action Icons) */}
       <div className="tanishq-top-row">
         <div className="tanishq-row-inner">
           
@@ -307,7 +315,7 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Tier 2: Dynamic Category Navigation Strip (Desktop Nav) */}
+      {/* Tier 3: Dynamic Category Navigation Strip (Desktop Nav) */}
       <nav className="tanishq-category-strip">
         <div className="tanishq-cat-inner">
           {navCategories.map(cat => (
@@ -323,14 +331,6 @@ export default function Header() {
           </Link>
         </div>
       </nav>
-
-      {/* Tier 3: Smooth Continuous Right-To-Left Announcement Ticker Bar (Phone & Desktop Visible!) */}
-      <div className="marquee-ticker-container">
-        <div className="marquee-ticker-track">
-          {TickerItems}
-          {TickerItems}
-        </div>
-      </div>
 
       {/* ☰ 3-Line Hamburger Navigation Drawer Modal (Mobile Drawer) */}
       {isMobileMenuOpen && (
