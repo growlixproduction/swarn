@@ -6,26 +6,28 @@ import { useApp } from "../context/AppContext";
 
 const DEFAULT_NAV_ITEMS = [
   { slug: "all", title: "All Jewellery", icon: "fa-gem" },
-  { slug: "gold", title: "Gold", icon: "fa-crown" },
-  { slug: "diamond", title: "Diamond", icon: "fa-ring" },
-  { slug: "earrings", title: "Earrings", icon: "fa-spa" },
-  { slug: "daily-wear", title: "Daily Wear", icon: "fa-circle-nodes" },
-  { slug: "gemstone", title: "Gemstone", icon: "fa-certificate" },
-  { slug: "wedding", title: "Wedding", icon: "fa-shield-heart" },
-  { slug: "gifting", title: "Gifting", icon: "fa-gift" },
-  { slug: "under-50k", title: "Under 50K", icon: "fa-tags" }
+  { slug: "earrings", title: "Earrings & Tops", icon: "fa-spa" },
+  { slug: "nose-pins", title: "Nose Pins", icon: "fa-ring" },
+  { slug: "gold-hoops-balis", title: "Gold Hoops & Balis", icon: "fa-circle-notch" },
+  { slug: "pendants", title: "Pendants", icon: "fa-gem" },
+  { slug: "mangalsutra", title: "Mangalsutra", icon: "fa-heart" },
+  { slug: "chains", title: "Chains", icon: "fa-link" },
+  { slug: "bangles", title: "Bangles", icon: "fa-circle" },
+  { slug: "necklace", title: "Necklace", icon: "fa-crown" },
+  { slug: "bracelet", title: "Bracelet", icon: "fa-ring" }
 ];
 
 const CATEGORY_ICONS: Record<string, string> = {
   "all": "fa-gem",
-  "gold": "fa-crown",
-  "diamond": "fa-ring",
   "earrings": "fa-spa",
-  "daily-wear": "fa-circle-nodes",
-  "gemstone": "fa-certificate",
-  "wedding": "fa-shield-heart",
-  "gifting": "fa-gift",
-  "under-50k": "fa-tags"
+  "nose-pins": "fa-ring",
+  "gold-hoops-balis": "fa-circle-notch",
+  "pendants": "fa-gem",
+  "mangalsutra": "fa-heart",
+  "chains": "fa-link",
+  "bangles": "fa-circle",
+  "necklace": "fa-crown",
+  "bracelet": "fa-ring"
 };
 
 export default function Header() {

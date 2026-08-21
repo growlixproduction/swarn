@@ -11,14 +11,15 @@ interface StoryItem {
 
 const DEFAULT_STORIES: StoryItem[] = [
   { label: "All Jewellery", href: "/collections/all", img: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80" },
-  { label: "22K Gold", href: "/collections/gold", img: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg" },
-  { label: "Diamond", href: "/collections/diamond", img: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80" },
-  { label: "Earrings", href: "/collections/earrings", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=200&q=80" },
-  { label: "Daily Wear", href: "/collections/daily-wear", img: "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=200&q=80" },
-  { label: "Gemstone", href: "/collections/gemstone", img: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=200&q=80" },
-  { label: "Wedding", href: "/collections/wedding", img: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (8).jpeg" },
-  { label: "Gifting & Coins", href: "/collections/gifting", img: "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=200&q=80" },
-  { label: "Under 50K", href: "/collections/under-50k", img: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=200&q=80" }
+  { label: "Earrings & Tops", href: "/collections/earrings", img: "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp" },
+  { label: "Nose Pins", href: "/collections/nose-pins", img: "/uploads/1787346906675_C004610__1_1.webp" },
+  { label: "Gold Hoops & Balis", href: "/collections/gold-hoops-balis", img: "/uploads/1787348208245_images.jpg" },
+  { label: "Pendants", href: "/collections/pendants", img: "/uploads/1787348362518_BIIP0359P04_YAA14DIG6XXXXXXXX_ABCD00-PICS-00004-1024-35451.jpg" },
+  { label: "Mangalsutra", href: "/collections/mangalsutra", img: "/uploads/1787348617000_A4700723_1.webp" },
+  { label: "Chains", href: "/collections/chains", img: "/uploads/1787348725596_513220CLQAA00_1.webp" },
+  { label: "Bangles", href: "/collections/bangles", img: "/uploads/1787348810380_511183VAA2A00_1.webp" },
+  { label: "Necklace", href: "/collections/necklace", img: "/uploads/1787348852881_red_white.avif" },
+  { label: "Bracelet", href: "/collections/bracelet", img: "/uploads/1787348950913_JT02841-1YS300_1_lar.jpg" }
 ];
 
 const CategoryStories: React.FC = () => {
@@ -48,11 +49,11 @@ const CategoryStories: React.FC = () => {
         <div className="category-stories-track reveal-stagger">
           {stories.map((s, idx) => (
             <Link key={idx} href={s.href} className="category-story-card">
-              <div className="story-avatar-wrap">
+              <div className="category-story-ring">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={s.img} alt={s.label} className="story-avatar-img" />
+                <img src={s.img} alt={s.label} className="category-story-img" />
               </div>
-              <span className="story-label">{s.label}</span>
+              <span className="category-story-title">{s.label}</span>
             </Link>
           ))}
         </div>

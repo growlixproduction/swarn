@@ -43,92 +43,102 @@ export const CATEGORY_METADATA: Record<string, CategoryMeta> = {
   "all": {
     slug: "all",
     pageTitle: "All Luxury Jewellery | Swarn Mahal Jewellers Ambikapur",
-    title: "All Jewellery Master Collection",
+    title: "All Jewellery",
     badge: "COMPLETE CURATION • 24+ DESIGNS",
     subtitle: "Explore handcrafted 22K gold heirlooms, certified IGI diamond solitaires, bridal rani haars, and lightweight daily essentials.",
     heroBg: "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1600&q=85",
     guideTitle: "How to Choose Your Perfect Jewellery",
     guideDesc: "Whether investing in 24K pure bullion or purchasing bridal 22K jewellery, our BIS 916 hallmarking and dynamic formula pricing ensure complete transparency."
   },
-  "gold": {
-    slug: "gold",
-    pageTitle: "22K BIS Hallmarked Gold Jewellery | Swarn Mahal Ambikapur",
-    title: "Pure Gold Jewellery & Heirlooms",
-    badge: "BIS 916 HALLMARKED • 100% PURITY",
-    subtitle: "Traditional North Chhattisgarh craftsmanship in 22K yellow gold. Bridal rani haars, handcrafted kadas, solid gold chains, and pure bullion coins.",
-    heroBg: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
-    guideTitle: "22K Gold Purity & Hallmark Guide",
-    guideDesc: "22 Karat (916 purity) is the gold benchmark in India, containing 91.6% pure gold alloyed with 8.4% copper/zinc for strength and lasting heirloom beauty."
-  },
-  "diamond": {
-    slug: "diamond",
-    pageTitle: "Certified Diamond & Solitaire Jewellery | Swarn Mahal",
-    title: "Diamonds & Solitaire Masterpieces",
-    badge: "IGI & GIA CERTIFIED • VVS-EF / VS-GH",
-    subtitle: "Dazzling solitaires and diamond-encrusted bands handcrafted in 18K and 14K gold with precision optical brilliance.",
-    heroBg: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
-    guideTitle: "The 4Cs Diamond Buying Guide",
-    guideDesc: "Learn how Cut, Clarity, Color, and Carat weight determine diamond value. Swarn Mahal provides independent IGI/GIA grading cards with every diamond ornament."
-  },
   "earrings": {
     slug: "earrings",
-    pageTitle: "Luxury Earrings, Jhumkas & Studs | Swarn Mahal Ambikapur",
-    title: "Earrings, Jhumkas & Drops",
+    pageTitle: "Luxury Earrings, Jhumkas & Tops | Swarn Mahal Ambikapur",
+    title: "Earrings & Tops",
     badge: "HANDCRAFTED PERFECTION • 50+ STYLES",
     subtitle: "From grand 22K temple jhumkas for bridal celebrations to lightweight 18K diamond tops and sui-dhaga drops for everyday elegance.",
     heroBg: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=85",
     guideTitle: "Earrings Styling & Face Silhouette Guide",
     guideDesc: "Discover which earring shapes best complement oval, round, and heart-shaped faces, along with secure screw-back and push-plug locking mechanisms."
   },
-  "daily-wear": {
-    slug: "daily-wear",
-    pageTitle: "Lightweight Daily Wear Jewellery | Swarn Mahal Ambikapur",
-    title: "Daily Luxe & Minimalist Jewellery",
-    badge: "LIGHTWEIGHT COMFORT • UNDER 10 GRAMS",
-    subtitle: "Sleek, stackable, and feather-light designs engineered for modern lifestyles, office meetings, and effortless everyday sparkle.",
-    heroBg: "https://images.unsplash.com/photo-1611591475155-4286fa7c2e7f?auto=format&fit=crop&w=1600&q=85",
-    guideTitle: "Daily Jewellery Care & Durability Guide",
-    guideDesc: "14K and 18K gold offer superior scratch resistance for daily active wear while maintaining the warm glow of genuine precious metal."
-  },
-  "gemstone": {
-    slug: "gemstone",
-    pageTitle: "Precious Gemstone Jewellery & Pearls | Swarn Mahal",
-    title: "Royal Gemstone & Pearl Collections",
-    badge: "NATURAL UNCUT & FACETED GEMS",
-    subtitle: "Zambian emeralds, Ceylon royal blue sapphires, Burmese rubies, and South Sea pearls handset in handcrafted gold mounts.",
-    heroBg: "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=1600&q=85",
-    guideTitle: "Gemstone Purity & Astrological Selection",
-    guideDesc: "Each natural gemstone is tested for authenticity and natural color saturation, bringing astrological balance and timeless regal luxury."
-  },
-  "wedding": {
-    slug: "wedding",
-    pageTitle: "Royal Bridal Jewellery & Wedding Suites | Swarn Mahal Ambikapur",
-    title: "Bridal Couture & Royal Heirlooms",
-    badge: "THE GRAND WEDDING EDIT 2026",
-    subtitle: "Exquisite 22K bridal rani haars, kundan polki chokers, auspicious mangalsutras, and handcrafted wedding kadas for the discerning bride.",
-    heroBg: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
-    guideTitle: "Bridal Jewellery Planning Checklist",
-    guideDesc: "Tips on coordinating necklace layering (Choker + Rani Haar), matching matha patti, and locking bullion prices ahead of the wedding muhurat."
-  },
-  "gifting": {
-    slug: "gifting",
-    pageTitle: "Luxury Jewellery Gifting & Bullion Coins | Swarn Mahal",
-    title: "Luxury Gifting & 24K Gold Coins",
-    badge: "ELEGANT VELVET PACKAGING • 24K 999",
-    subtitle: "Celebrate life's precious milestones with 24K tamper-proof Laxmi Ganesh gold coins, romantic solitaire rings, and timeless gift boxes.",
-    heroBg: "https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=1600&q=85",
-    guideTitle: "Jewellery Gifting Budget Guide",
-    guideDesc: "Explore curated gift suggestions tailored by budget from under ₹10,000 to ₹1,00,000+ with complimentary personalized message cards."
-  },
-  "under-50k": {
-    slug: "under-50k",
-    pageTitle: "Fine Jewellery Under ₹50,000 | Swarn Mahal Ambikapur",
-    title: "Affordable Fine Jewellery Under ₹50K",
-    badge: "BUDGET LUXURY • REAL-TIME PRICE LOCK",
-    subtitle: "Precious 18K and 22K gold rings, diamond pendants, delicate gold chains, and ear studs strictly curated under ₹50,000.",
+  "nose-pins": {
+    slug: "nose-pins",
+    pageTitle: "Nose Pins | Swarn Mahal Jewellers Ambikapur",
+    title: "Nose Pins",
+    badge: "BIS 916 HALLMARKED • CERTIFIED DIAMONDS",
+    subtitle: "Discover delicate diamond nose studs, traditional bridal naths, and minimal 22K gold wire nose pins.",
     heroBg: "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1600&q=85",
-    guideTitle: "Maximizing Value Under ₹50K",
-    guideDesc: "Discover smart design combinations such as halo solitaire settings and lightweight gold alloys that deliver maximum visual grandeur within ₹50,000."
+    guideTitle: "Nose Pins Buying & Care Guide",
+    guideDesc: "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "gold-hoops-balis": {
+    slug: "gold-hoops-balis",
+    pageTitle: "Gold Hoops & Balis | Swarn Mahal Jewellers Ambikapur",
+    title: "Gold Hoops & Balis",
+    badge: "BIS 916 HALLMARKED • 100% PURITY",
+    subtitle: "Explore handcrafted Gold Hoops & Balis in pure BIS 916 gold and authentic gemstones.",
+    heroBg: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    guideTitle: "Gold Hoops & Balis Buying & Care Guide",
+    guideDesc: "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "pendants": {
+    slug: "pendants",
+    pageTitle: "Pendants | Swarn Mahal Jewellers Ambikapur",
+    title: "Pendants",
+    badge: "BIS 916 HALLMARKED • 100% PURITY",
+    subtitle: "Discover elegant daily-wear gold pendants, spiritual lockets, heart motifs, and sparkling diamond pendants.",
+    heroBg: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    guideTitle: "Pendants Buying & Care Guide",
+    guideDesc: "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "mangalsutra": {
+    slug: "mangalsutra",
+    pageTitle: "Mangalsutra | Swarn Mahal Jewellers Ambikapur",
+    title: "Mangalsutra",
+    badge: "BIS 916 HALLMARKED • 100% PURITY",
+    subtitle: "Explore handcrafted Mangalsutra in pure BIS 916 gold and authentic gemstones.",
+    heroBg: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    guideTitle: "Mangalsutra Buying & Care Guide",
+    guideDesc: "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "chains": {
+    slug: "chains",
+    pageTitle: "Chains | Swarn Mahal Jewellers Ambikapur",
+    title: "Chains",
+    badge: "BIS 916 HALLMARKED • 100% PURITY",
+    subtitle: "Explore precision-crafted 22K yellow gold chains, durable daily links, classic rope designs, and elegant machine chains.",
+    heroBg: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    guideTitle: "Chains Buying & Care Guide",
+    guideDesc: "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "bangles": {
+    slug: "bangles",
+    pageTitle: "Bangles | Swarn Mahal Jewellers Ambikapur",
+    title: "Bangles",
+    badge: "BIS 916 HALLMARKED • 100% PURITY",
+    subtitle: "Explore handcrafted Bangles in pure BIS 916 gold and authentic gemstones.",
+    heroBg: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    guideTitle: "Bangles Buying & Care Guide",
+    guideDesc: "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "necklace": {
+    slug: "necklace",
+    pageTitle: "Necklace | Swarn Mahal Jewellers Ambikapur",
+    title: "Necklace",
+    badge: "BIS 916 HALLMARKED • 100% PURITY",
+    subtitle: "Explore handcrafted Necklace in pure BIS 916 gold and authentic gemstones.",
+    heroBg: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    guideTitle: "Necklace Buying & Care Guide",
+    guideDesc: "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "bracelet": {
+    slug: "bracelet",
+    pageTitle: "Bracelet | Swarn Mahal Jewellers Ambikapur",
+    title: "Bracelet",
+    badge: "BIS 916 HALLMARKED • 100% PURITY",
+    subtitle: "Explore handcrafted Bracelet in pure BIS 916 gold and authentic gemstones.",
+    heroBg: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    guideTitle: "Bracelet Buying & Care Guide",
+    guideDesc: "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
   }
 };
 
