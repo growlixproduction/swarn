@@ -2,131 +2,137 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useApp } from "../context/AppContext";
-import { PricingEngine } from "../lib/pricingEngine";
 
-const Header: React.FC = () => {
-  const router = useRouter();
-  const { bullionRates, getCartCount, searchQuery, setSearchQuery, setIsCartOpen } = useApp();
-  const [isScrolled, setIsScrolled] = useState(false);
+const DEFAULT_NAV_ITEMS = [
+  { slug: "all", title: "All Jewellery", icon: "fa-gem" },
+  { slug: "gold", title: "Gold", icon: "fa-crown" },
+  { slug: "diamond", title: "Diamond", icon: "fa-ring" },
+  { slug: "earrings", title: "Earrings", icon: "fa-spa" },
+  { slug: "daily-wear", title: "Daily Wear", icon: "fa-circle-nodes" },
+  { slug: "gemstone", title: "Gemstone", icon: "fa-certificate" },
+  { slug: "wedding", title: "Wedding", icon: "fa-shield-heart" },
+  { slug: "gifting", title: "Gifting", icon: "fa-gift" },
+  { slug: "under-50k", title: "Under 50K", icon: "fa-tags" }
+];
+
+const CATEGORY_ICONS: Record<string, string> = {
+  "all": "fa-gem",
+  "gold": "fa-crown",
+  "diamond": "fa-ring",
+  "earrings": "fa-spa",
+  "daily-wear": "fa-circle-nodes",
+  "gemstone": "fa-certificate",
+  "wedding": "fa-shield-heart",
+  "gifting": "fa-gift",
+  "under-50k": "fa-tags"
+};
+
+export default function Header() {
+  const { bullionRates, cartCount, openCartDrawer } = useApp();
+  const [navCategories, setNavCategories] = useState<Array<{ slug: string; title: string; icon: string }>>(DEFAULT_NAV_ITEMS);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 40);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    fetch("/api/categories")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.categories) {
+          const list = Object.values(data.categories).map((cat: any) => ({
+            slug: cat.slug,
+            title: cat.title || cat.name,
+            icon: CATEGORY_ICONS[cat.slug] || "fa-gem"
+          }));
+          if (list.length > 0) {
+            setNavCategories(list);
+          }
+        }
+      })
+      .catch(err => console.warn("Failed to fetch nav categories:", err));
   }, []);
 
-  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
-      router.push(`/collections/all?q=${encodeURIComponent(searchQuery)}`);
-    }
+  const formatCurrency = (val: number) => {
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0
+    }).format(val);
   };
 
-  const rate24k = PricingEngine.formatINR(bullionRates.gold24k);
-  const rate22k = PricingEngine.formatINR(bullionRates.gold22k);
-  const rate18k = PricingEngine.formatINR(bullionRates.gold18k);
-  const rate14k = PricingEngine.formatINR(bullionRates.gold14k);
-  const rateSilver = PricingEngine.formatINR(bullionRates.silver925);
+  const rate24k = formatCurrency(bullionRates.gold24k);
+  const rate22k = formatCurrency(bullionRates.gold22k);
+  const rate18k = formatCurrency(bullionRates.gold18k);
+  const rate14k = formatCurrency(bullionRates.gold14k);
+  const rateSilver = formatCurrency(bullionRates.silver925);
 
   return (
-    <header className={`tanishq-header ${isScrolled ? "scrolled" : ""}`} id="main-header">
-      {/* Top 2-Tier Header Row */}
-      <div className="tanishq-top-row">
-        <div className="container tanishq-row-inner">
-          <Link href="/" className="tanishq-logo-wrapper" title="Swarn Mahal Jewellers" style={{ display: "flex", alignItems: "center", gap: "0.6rem", textDecoration: "none" }}>
-            <img src="/asset/logo.png" alt="Swarn Mahal Logo" className="tanishq-logo-img" style={{ height: "46px", width: "auto", objectFit: "contain" }} />
-            <img src="/asset/text-logo.png" alt="Swarn Mahal Jewellers" className="tanishq-text-logo-img" style={{ height: "36px", width: "auto", objectFit: "contain" }} />
-          </Link>
-
-          {/* Search Box */}
-          <div className="tanishq-search-box">
-            <div className="tanishq-search-input-wrap">
-              <i className="fa-solid fa-magnifying-glass search-icon-left"></i>
-              <input
-                type="text"
-                className="tanishq-search-input"
-                placeholder="Search for gold rani haar, diamond rings, solitaire..."
-                value={searchQuery}
-                onChange={e => setSearchQuery(e.target.value)}
-                onKeyDown={handleSearchKeyDown}
-                autoComplete="off"
-              />
-              <div className="tanishq-search-right-tools">
-                <button
-                  type="button"
-                  className="tanishq-tool-btn"
-                  title="Search Now"
-                  onClick={() => router.push(`/collections/all?q=${encodeURIComponent(searchQuery)}`)}
-                >
-                  <i className="fa-solid fa-arrow-right"></i>
-                </button>
-              </div>
+    <header className="tanishq-header-root sticky-top" id="header">
+      {/* Top Brand & Utility Header */}
+      <div className="container tanishq-header-inner">
+        <div className="header-col-left">
+          <Link href="/" className="brand-crest-group">
+            <div className="brand-logo-crest">
+              <span className="crest-monogram">SM</span>
             </div>
-          </div>
+            <div className="brand-title-wrap">
+              <span className="brand-name-main">स्वर्ण महल</span>
+              <span className="brand-subtitle">SWARN MAHAL JEWELLERS</span>
+            </div>
+          </Link>
+        </div>
 
-          {/* Actions Row */}
-          <div className="tanishq-actions-row">
-            <Link href="/#tools-section" className="tanishq-rate-chip desktop-only-action" title="Live Bullion Rate">
-              <span className="tanishq-live-dot"></span>
-              <span className="rate-label-text">22K: {rate22k}/g</span>
-            </Link>
-
-            <Link href="/collections/diamond" className="tanishq-nav-icon-btn desktop-only-action" title="Diamond Solitaires">
-              <i className="fa-regular fa-gem"></i>
-            </Link>
-
-            <Link href="/#showroom-section" className="tanishq-nav-icon-btn mobile-showroom-btn" title="Ambikapur Showroom">
-              <i className="fa-solid fa-store"></i>
-            </Link>
-
-            <button
-              type="button"
-              className="tanishq-nav-icon-btn tanishq-cart-btn desktop-only-action"
-              title="Shopping Bag"
-              onClick={() => setIsCartOpen(true)}
-            >
-              <i className="fa-solid fa-bag-shopping"></i>
-              <span className="badge-count" id="header-cart-count">
-                {getCartCount()}
-              </span>
+        {/* Global Search Bar */}
+        <div className="header-col-center">
+          <div className="tanishq-search-box">
+            <i className="fa-solid fa-magnifying-glass search-icon"></i>
+            <input
+              type="text"
+              placeholder="Search for gold rani haar, diamond rings, solitaire..."
+              className="tanishq-search-input"
+            />
+            <button type="button" className="tanishq-search-submit">
+              <i className="fa-solid fa-arrow-right"></i>
             </button>
           </div>
         </div>
+
+        {/* Action Controls: Live Rate Badge & Cart */}
+        <div className="header-col-right">
+          {/* Live Rate Pill */}
+          <div className="live-rate-pill">
+            <span className="rate-pulse-dot"></span>
+            <span className="rate-label">22K:</span>
+            <strong className="rate-val">{rate22k}/g</strong>
+          </div>
+
+          <Link href="/admin/collections" className="header-icon-action" title="Admin Control Panel">
+            <i className="fa-solid fa-gem"></i>
+          </Link>
+
+          <a href="#showroom-section" className="header-icon-action" title="Visit Showroom">
+            <i className="fa-solid fa-store"></i>
+          </a>
+
+          {/* Cart Trigger */}
+          <button
+            type="button"
+            className="header-icon-action cart-trigger-btn"
+            onClick={openCartDrawer}
+            aria-label="Open Shopping Bag"
+          >
+            <i className="fa-solid fa-bag-shopping"></i>
+            <span className="cart-badge-count">{cartCount}</span>
+          </button>
+        </div>
       </div>
 
-      {/* Category Navigation Strip */}
+      {/* Dynamic Category Navigation Strip */}
       <nav className="tanishq-category-strip">
         <div className="container tanishq-cat-inner">
-          <Link href="/collections/all" className="tanishq-cat-item">
-            <i className="fa-solid fa-gem"></i> All Jewellery
-          </Link>
-          <Link href="/collections/gold" className="tanishq-cat-item">
-            <i className="fa-solid fa-crown"></i> Gold
-          </Link>
-          <Link href="/collections/diamond" className="tanishq-cat-item">
-            <i className="fa-solid fa-ring"></i> Diamond
-          </Link>
-          <Link href="/collections/earrings" className="tanishq-cat-item">
-            <i className="fa-solid fa-spa"></i> Earrings
-          </Link>
-          <Link href="/collections/daily-wear" className="tanishq-cat-item">
-            <i className="fa-solid fa-circle-nodes"></i> Daily Wear
-          </Link>
-          <Link href="/collections/gemstone" className="tanishq-cat-item">
-            <i className="fa-solid fa-certificate"></i> Gemstone
-          </Link>
-          <Link href="/collections/wedding" className="tanishq-cat-item">
-            <i className="fa-solid fa-shield-heart"></i> Wedding
-          </Link>
-          <Link href="/collections/gifting" className="tanishq-cat-item">
-            <i className="fa-solid fa-gift"></i> Gifting
-          </Link>
-          <Link href="/collections/under-50k" className="tanishq-cat-item">
-            <i className="fa-solid fa-tags"></i> Under 50K
-          </Link>
+          {navCategories.map(cat => (
+            <Link key={cat.slug} href={`/collections/${cat.slug}`} className="tanishq-cat-item">
+              <i className={`fa-solid ${cat.icon}`}></i> {cat.title}
+            </Link>
+          ))}
           <Link href="/#showroom-section" className="tanishq-cat-item">
             <i className="fa-solid fa-store"></i> Showroom
           </Link>
@@ -144,27 +150,6 @@ const Header: React.FC = () => {
           <span style={{ color: "var(--text-muted)" }}><i className="fa-regular fa-clock"></i> Synced: {bullionRates.lastUpdated}</span>
         </div>
       </div>
-      {/* FIXED BOTTOM MOBILE APP NAVBAR (4 PRIMARY SECTIONS) */}
-      <nav className="mobile-app-bottom-nav">
-        <Link href="/collections/all" className="mobile-app-nav-item">
-          <i className="fa-solid fa-gem"></i>
-          <span>All Jewellery</span>
-        </Link>
-        <Link href="/collections/gold" className="mobile-app-nav-item">
-          <i className="fa-solid fa-crown"></i>
-          <span>Gold</span>
-        </Link>
-        <Link href="/collections/diamond" className="mobile-app-nav-item">
-          <i className="fa-solid fa-ring"></i>
-          <span>Diamond</span>
-        </Link>
-        <Link href="/collections/gemstone" className="mobile-app-nav-item">
-          <i className="fa-solid fa-sparkles"></i>
-          <span>Silver</span>
-        </Link>
-      </nav>
     </header>
   );
-};
-
-export default Header;
+}
