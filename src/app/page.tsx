@@ -33,7 +33,10 @@ export default function HomePage() {
       {/* 3. 4-ITEM TRUST & VALUE PROP STRIP */}
       <TrustBar />
 
-      {/* 4. EDITORIAL BENTO PROMO GRID */}
+      {/* 4. GOOGLE VERIFIED REVIEWS INFINITE MARQUEE SLIDER */}
+      <ReviewsSection />
+
+      {/* 5. EDITORIAL BENTO PROMO GRID */}
       <BentoPromo />
 
       {/* 5. LATEST PRODUCTS & DYNAMIC PRICING CATALOG */}
@@ -88,9 +91,6 @@ export default function HomePage() {
 
       {/* 9. DUAL SPOTLIGHT BANNERS */}
       <DualSpotlightSection />
-
-      {/* 10. TESTIMONIALS FROM JUSTDIAL 5.0 VERIFIED BUYERS */}
-      <ReviewsSection />
 
       {/* 11. BRAND ASSURANCES & CERTIFICATION LOGOS */}
       <section className="trust-logos-row" style={{ background: "var(--bg-secondary)", padding: "2.5rem 0", borderTop: "1px solid var(--border-light)" }}>
