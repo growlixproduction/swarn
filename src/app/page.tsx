@@ -10,6 +10,7 @@ import CollageGallerySection from "../components/CollageGallerySection";
 import ToolsSection from "../components/ToolsSection";
 import DualSpotlightSection from "../components/DualSpotlightSection";
 import ReviewsSection from "../components/ReviewsSection";
+import UgcReelsSection from "../components/UgcReelsSection";
 import ProductCard from "../components/ProductCard";
 import { useApp } from "../context/AppContext";
 
@@ -77,8 +78,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* GOOGLE VERIFIED REVIEWS INFINITE MARQUEE SLIDER (PLACED DIRECTLY BELOW PRODUCTS) */}
+      {/* GOOGLE VERIFIED REVIEWS INFINITE MARQUEE SLIDER */}
       <ReviewsSection />
+
+      {/* UGC CLIENT STORIES & YOUTUBE SHORTS REELS SLIDER */}
+      <UgcReelsSection />
 
       {/* 6. CATEGORY MOODBOARD SHOWCASE */}
       <MoodboardSection />
