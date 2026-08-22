@@ -14,10 +14,9 @@ export default function ProductDetailPage() {
   const params = useParams();
   const productId = (params?.id as string) || "SM-101";
 
-  const product = PRODUCTS_CATALOG.find(p => p.id === productId) || PRODUCTS_CATALOG[0];
-
   const {
     bullionRates,
+    products,
     productSelections,
     setProductKarat,
     setProductColor,
@@ -28,6 +27,8 @@ export default function ProductDetailPage() {
     openARTryOn,
     priceLockSeconds
   } = useApp();
+
+  const product = products.find(p => p.id === productId || p.slug === productId) || products[0];
 
   const selection = productSelections[product.id] || {
     karat: product.defaultKarat,
@@ -84,7 +85,7 @@ export default function ProductDetailPage() {
     return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
   };
 
-  const related = PRODUCTS_CATALOG.filter(
+  const related = products.filter(
     p => p.id !== product.id && (p.category === product.category || p.navCategories.some(c => product.navCategories.includes(c)))
   ).slice(0, 4);
 

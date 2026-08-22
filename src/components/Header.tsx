@@ -45,7 +45,7 @@ const POPULAR_SEARCH_TAGS = [
 
 export default function Header() {
   const router = useRouter();
-  const { bullionRates, cartCount, openCartDrawer, searchQuery, setSearchQuery } = useApp();
+  const { bullionRates, products, cartCount, openCartDrawer, searchQuery, setSearchQuery } = useApp();
   const [navCategories, setNavCategories] = useState<Array<{ slug: string; title: string; icon: string }>>(DEFAULT_NAV_ITEMS);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -84,7 +84,7 @@ export default function Header() {
 
   // Matching Products Search Results
   const matchingProducts = searchQuery.trim()
-    ? PRODUCTS_CATALOG.filter(p => matchesSearchQuery(p, searchQuery)).slice(0, 5)
+    ? products.filter(p => matchesSearchQuery(p, searchQuery)).slice(0, 5)
     : [];
 
   const handleSearchSubmit = (e: React.FormEvent) => {

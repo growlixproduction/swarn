@@ -15,6 +15,8 @@ interface ProductSelectionState {
 
 interface AppContextType {
   bullionRates: BullionRates;
+  products: Product[];
+  refreshProducts: () => Promise<void>;
   cart: CartItem[];
   wishlist: string[];
   searchQuery: string;
@@ -53,6 +55,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [bullionRates, setRates] = useState<BullionRates>(INITIAL_BULLION_RATES);
+  const [products, setProducts] = useState<Product[]>(PRODUCTS_CATALOG);
   const [cart, setCart] = useState<CartItem[]>([]);
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -64,25 +67,19 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [arProductId, setArProductId] = useState<string | null>(null);
   const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
 
-  // Initialize Product Selections Map
-  const [productSelections, setProductSelections] = useState<Record<string, ProductSelectionState>>(() => {
-    const initialMap: Record<string, ProductSelectionState> = {};
-    PRODUCTS_CATALOG.forEach(p => {
-      initialMap[p.id] = {
-        karat: p.defaultKarat || "18K",
-        color: p.defaultColor || "yellow",
-        size: "14 (Indian)",
-        engraving: "",
-        makingCharge: {
-          type: "percent",
-          value: p.makingChargePercent || 15
-        }
-      };
-    });
-    return initialMap;
-  });
+  const refreshProducts = async () => {
+    try {
+      const res = await fetch("/api/products");
+      const data = await res.json();
+      if (data && data.success && Array.isArray(data.products) && data.products.length > 0) {
+        setProducts(data.products);
+      }
+    } catch (err) {
+      console.warn("Failed to refresh products in AppContext:", err);
+    }
+  };
 
-  // Load Persisted Storage & Fetch Live Rates from Database API
+  // Load Persisted Storage & Fetch Live Rates + Products from Database / Store API
   useEffect(() => {
     try {
       const savedCart = localStorage.getItem("swarn_next_cart");
@@ -90,6 +87,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
 
       const savedWish = localStorage.getItem("swarn_next_wishlist");
       if (savedWish) setWishlist(JSON.parse(savedWish));
+
+      refreshProducts();
 
       // Fetch live rates from Database API
       fetch("/api/rates")
@@ -297,6 +296,8 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     <AppContext.Provider
       value={{
         bullionRates,
+        products,
+        refreshProducts,
         cart,
         wishlist,
         searchQuery,

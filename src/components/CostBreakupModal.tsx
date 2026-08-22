@@ -11,12 +11,13 @@ const CostBreakupModal: React.FC = () => {
     breakupProductId,
     closeCostBreakup,
     bullionRates,
+    products,
     productSelections
   } = useApp();
 
   if (!isCostBreakupOpen || !breakupProductId) return null;
 
-  const product = PRODUCTS_CATALOG.find(p => p.id === breakupProductId);
+  const product = products.find(p => p.id === breakupProductId || p.slug === breakupProductId);
   if (!product) return null;
 
   const selection = productSelections[product.id] || {

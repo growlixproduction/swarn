@@ -13,7 +13,7 @@ import { matchesSearchQuery } from "@/lib/searchMatcher";
 function SearchContent() {
   const searchParams = useSearchParams();
   const queryParam = searchParams.get("q") || "";
-  const { bullionRates, searchQuery, setSearchQuery } = useApp();
+  const { bullionRates, products, searchQuery, setSearchQuery } = useApp();
 
   const activeQuery = queryParam || searchQuery;
 
@@ -24,7 +24,7 @@ function SearchContent() {
   const [sortBy, setSortBy] = useState<string>("recommended");
 
   // Filter Catalog by active query
-  let filtered = PRODUCTS_CATALOG.filter(p => matchesSearchQuery(p, activeQuery));
+  let filtered = products.filter(p => matchesSearchQuery(p, activeQuery));
 
   // Karat Filter
   if (selectedKarats.length > 0) {

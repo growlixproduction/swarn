@@ -50,7 +50,7 @@ export default function CollectionPage() {
     guideDesc: currentMeta?.guideDesc || "Every Swarn Mahal piece is accompanied by a BIS 916 purity hallmark and authentic certificate of quality."
   };
 
-  const { bullionRates, searchQuery, setSearchQuery } = useApp();
+  const { bullionRates, products, searchQuery, setSearchQuery } = useApp();
 
   // Filters State
   const [maxPrice, setMaxPrice] = useState<number>(350000);
@@ -59,7 +59,7 @@ export default function CollectionPage() {
   const [sortBy, setSortBy] = useState<string>("recommended");
 
   // Filter Catalog
-  let filtered = PRODUCTS_CATALOG.filter(p => {
+  let filtered = products.filter(p => {
     if (categorySlug === "all") return true;
     if (categorySlug === "under-50k") {
       const bd = PricingEngine.calculateBreakdown(p, p.defaultKarat, bullionRates);

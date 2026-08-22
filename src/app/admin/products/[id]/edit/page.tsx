@@ -12,7 +12,7 @@ import { ImageUploadInput } from "@/components/ImageUploadInput";
 
 export default function AdminEditProductPage({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const { bullionRates } = useApp();
+  const { bullionRates, refreshProducts } = useApp();
   const productId = params.id;
 
   const [isLoading, setIsLoading] = useState(true);
@@ -258,6 +258,7 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
       const data = await res.json();
       if (res.ok && data.success) {
         setSaveMessage({ type: "success", text: `Product "${title}" updated successfully in Database!` });
+        await refreshProducts();
         setTimeout(() => {
           router.push("/admin/products");
         }, 1200);

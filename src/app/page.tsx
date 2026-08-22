@@ -11,12 +11,13 @@ import ToolsSection from "../components/ToolsSection";
 import DualSpotlightSection from "../components/DualSpotlightSection";
 import ReviewsSection from "../components/ReviewsSection";
 import ProductCard from "../components/ProductCard";
-import { PRODUCTS_CATALOG } from "../lib/catalogData";
+import { useApp } from "../context/AppContext";
 
 export default function HomePage() {
+  const { products } = useApp();
   const [activeTab, setActiveTab] = useState("all");
 
-  const filteredProducts = PRODUCTS_CATALOG.filter(p => {
+  const filteredProducts = products.filter(p => {
     if (activeTab === "all") return true;
     return p.category === activeTab;
   });
