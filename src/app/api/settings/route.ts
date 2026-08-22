@@ -17,7 +17,8 @@ let runtimeSettings: Record<string, string> = {
   site_logo_subtext: "SAWARN LUXURY JEWELS • AMBIKAPUR",
   site_logo_symbol: "SM",
   site_logo_image: "/asset/logo.png",
-  footer_about: "Ambikapur's premier destination for 22K BIS 916 hallmarked luxury gold heirlooms."
+  footer_about: "Ambikapur's premier destination for 22K BIS 916 hallmarked luxury gold heirlooms.",
+  category_scroll_speed: "25"
 };
 
 export async function GET() {
@@ -51,7 +52,8 @@ export async function GET() {
           logoSubtext: settingsMap.site_logo_subtext || "SAWARN LUXURY JEWELS • AMBIKAPUR",
           logoSymbol: settingsMap.site_logo_symbol || "SM",
           logoImage: settingsMap.site_logo_image || "/asset/logo.png",
-          footerAbout: settingsMap.footer_about || "Ambikapur's premier destination for 22K BIS 916 hallmarked luxury gold heirlooms."
+          footerAbout: settingsMap.footer_about || "Ambikapur's premier destination for 22K BIS 916 hallmarked luxury gold heirlooms.",
+          categoryScrollSpeed: settingsMap.category_scroll_speed || "25"
         },
         source: 'database'
       });
@@ -81,7 +83,8 @@ export async function GET() {
       logoSubtext: runtimeSettings.site_logo_subtext,
       logoSymbol: runtimeSettings.site_logo_symbol,
       logoImage: runtimeSettings.site_logo_image,
-      footerAbout: runtimeSettings.footer_about
+      footerAbout: runtimeSettings.footer_about,
+      categoryScrollSpeed: runtimeSettings.category_scroll_speed || "25"
     },
     source: 'runtime_fallback'
   });
@@ -106,7 +109,8 @@ export async function POST(request: Request) {
       site_logo_subtext: body.logoSubtext || body.site_logo_subtext || "SAWARN LUXURY JEWELS • AMBIKAPUR",
       site_logo_symbol: body.logoSymbol || body.site_logo_symbol || "SM",
       site_logo_image: body.logoImage || body.site_logo_image || "/asset/logo.png",
-      footer_about: body.footerAbout || body.footer_about || "Ambikapur's premier destination for 22K BIS 916 hallmarked luxury gold heirlooms."
+      footer_about: body.footerAbout || body.footer_about || "Ambikapur's premier destination for 22K BIS 916 hallmarked luxury gold heirlooms.",
+      category_scroll_speed: String(body.categoryScrollSpeed || body.category_scroll_speed || "25")
     };
 
     // Update runtime memory

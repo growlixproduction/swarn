@@ -23,7 +23,11 @@ export default function AdminCollectionsPage() {
   const [newCategorySlug, setNewCategorySlug] = useState<string>("");
   const [newCategoryCircleImg, setNewCategoryCircleImg] = useState<string>("");
 
-  // Load latest categories from API / Store
+  // Category Auto-Scroll Speed State
+  const [scrollSpeed, setScrollSpeed] = useState<number>(25);
+  const [isSavingSpeed, setIsSavingSpeed] = useState<boolean>(false);
+
+  // Load latest categories and settings from API
   useEffect(() => {
     fetch("/api/categories")
       .then(res => res.json())
@@ -38,6 +42,18 @@ export default function AdminCollectionsPage() {
         }
       })
       .catch(err => console.warn("Failed to load categories:", err));
+
+    fetch("/api/settings")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.settings && data.settings.categoryScrollSpeed) {
+          const speed = parseInt(data.settings.categoryScrollSpeed, 10);
+          if (!isNaN(speed) && speed > 0) {
+            setScrollSpeed(speed);
+          }
+        }
+      })
+      .catch(err => console.warn("Failed to load settings:", err));
   }, []);
 
   const handleSelectCategory = (c: any, idx: number) => {
@@ -244,11 +260,32 @@ export default function AdminCollectionsPage() {
       setSelectedCat(newCat);
       setSelectedIndex(categories.length);
       setOriginalSlug(newCat.slug);
-      setSaveMessage({ type: "success", text: `New collection created! Click Save below to confirm.` });
     } finally {
       setNewCategoryName("");
       setNewCategorySlug("");
       setNewCategoryCircleImg("");
+      setIsAddingNew(false);
+    }
+  };
+  const handleSaveSpeed = async () => {
+    setIsSavingSpeed(true);
+    setSaveMessage(null);
+    try {
+      const res = await fetch("/api/settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ categoryScrollSpeed: String(scrollSpeed) })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSaveMessage({ type: "success", text: `Homepage Category Auto-Scroll Speed updated to ${scrollSpeed} seconds!` });
+      } else {
+        setSaveMessage({ type: "error", text: "Failed to update category scroll speed." });
+      }
+    } catch (err: any) {
+      setSaveMessage({ type: "error", text: err.message || "Network error" });
+    } finally {
+      setIsSavingSpeed(false);
     }
   };
 
@@ -269,6 +306,58 @@ export default function AdminCollectionsPage() {
         >
           <i className="fa-solid fa-plus"></i> Add New Collection
         </button>
+      </div>
+
+      {/* AUTO-SCROLL SPEED CONTROL CARD */}
+      <div
+        className="admin-card"
+        style={{
+          background: "linear-gradient(135deg, #1C1814 0%, #120F0D 100%)",
+          border: "1px solid var(--border-gold-subtle)",
+          borderRadius: "12px",
+          padding: "1.25rem 1.5rem",
+          marginBottom: "1.75rem",
+          boxShadow: "0 4px 20px rgba(0,0,0,0.3)"
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
+          <div>
+            <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--gold-bright)", margin: "0 0 0.25rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <i className="fa-solid fa-gauge-high"></i> Homepage Collection Auto-Scroll Timing / Speed
+            </h3>
+            <p style={{ fontSize: "0.83rem", color: "var(--text-muted)", margin: 0 }}>
+              Adjust how fast or slow the circular category bubbles move from right to left (In Seconds).
+            </p>
+          </div>
+
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", background: "rgba(255,255,255,0.05)", padding: "0.4rem 0.85rem", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <input
+                type="range"
+                min="5"
+                max="60"
+                step="1"
+                value={scrollSpeed}
+                onChange={e => setScrollSpeed(parseInt(e.target.value, 10))}
+                style={{ cursor: "pointer", accentColor: "var(--gold-primary)" }}
+              />
+              <span style={{ fontSize: "0.9rem", fontWeight: 700, color: "#FFFFFF", minWidth: "45px", textAlign: "right" }}>
+                {scrollSpeed}s
+              </span>
+            </div>
+
+            <button
+              type="button"
+              className="btn btn-gold btn-sm"
+              onClick={handleSaveSpeed}
+              disabled={isSavingSpeed}
+              style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+            >
+              {isSavingSpeed ? <i className="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-floppy-disk"></i>}
+              <span>Save Speed</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       {saveMessage && (

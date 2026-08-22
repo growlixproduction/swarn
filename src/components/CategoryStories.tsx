@@ -24,8 +24,10 @@ const DEFAULT_STORIES: StoryItem[] = [
 
 const CategoryStories: React.FC = () => {
   const [stories, setStories] = useState<StoryItem[]>(DEFAULT_STORIES);
+  const [scrollSpeed, setScrollSpeed] = useState<number>(25);
 
   useEffect(() => {
+    // Load categories
     fetch("/api/categories")
       .then(res => res.json())
       .then(data => {
@@ -41,13 +43,37 @@ const CategoryStories: React.FC = () => {
         }
       })
       .catch(err => console.warn("Failed to load category stories from API:", err));
+
+    // Load scroll speed setting
+    fetch("/api/settings")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.settings && data.settings.categoryScrollSpeed) {
+          const parsed = parseInt(data.settings.categoryScrollSpeed, 10);
+          if (!isNaN(parsed) && parsed > 0) {
+            setScrollSpeed(parsed);
+          }
+        }
+      })
+      .catch(err => console.warn("Failed to load settings:", err));
   }, []);
 
+  // Duplicate list to create a seamless infinite loop
+  const marqueeList = [...stories, ...stories];
+
   return (
-    <section className="category-stories-section reveal-up">
-      <div className="container">
-        <div className="category-stories-track reveal-stagger">
-          {stories.map((s, idx) => (
+    <section className="category-stories-section reveal-up" style={{ overflow: "hidden", position: "relative" }}>
+      <div style={{ width: "100%", overflow: "hidden", position: "relative" }}>
+        {/* Gradient Edge Blurs */}
+        <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: "40px", background: "linear-gradient(to right, var(--bg-primary) 0%, transparent 100%)", zIndex: 3, pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: "40px", background: "linear-gradient(to left, var(--bg-primary) 0%, transparent 100%)", zIndex: 3, pointerEvents: "none" }} />
+
+        {/* Marquee Track */}
+        <div
+          className="category-stories-marquee-track"
+          style={{ animationDuration: `${scrollSpeed}s` }}
+        >
+          {marqueeList.map((s, idx) => (
             <Link key={idx} href={s.href} className="category-story-card">
               <div className="story-avatar-wrap category-story-ring">
                 {/* eslint-disable-next-line @next/next/no-img-element */}

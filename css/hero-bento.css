@@ -502,15 +502,27 @@
   background-color: var(--bg-primary);
 }
 
-.category-stories-track {
+@keyframes categoryStoriesLoop {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.category-stories-marquee-track {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 1.5rem;
-  overflow-x: auto;
-  padding: 0.5rem 0.5rem 1rem;
-  scrollbar-width: thin;
-  -webkit-overflow-scrolling: touch;
+  width: max-content;
+  padding: 0.5rem 0 1rem;
+  animation: categoryStoriesLoop 25s linear infinite;
+  will-change: transform;
+}
+
+.category-stories-marquee-track:hover {
+  animation-play-state: paused;
 }
 
 .category-story-card {
