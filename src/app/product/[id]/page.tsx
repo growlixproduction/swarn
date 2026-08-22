@@ -105,6 +105,11 @@ export default function ProductDetailPage() {
       <div className="pdp-main-grid">
         {/* Left Column: Gallery & Zoom Viewport */}
         <div className="pdp-gallery-col">
+          <div className="pdp-main-image-viewport">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={activeGalleryImg} alt={product.title} id="pdp-main-img" />
+          </div>
+
           <div className="pdp-thumb-strip">
             {galleryImages.map((imgSrc, idx) => (
               <div
@@ -116,18 +121,6 @@ export default function ProductDetailPage() {
                 <img src={imgSrc} alt={`${product.title} angle ${idx + 1}`} />
               </div>
             ))}
-          </div>
-
-          <div className="pdp-main-image-viewport">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={activeGalleryImg} alt={product.title} id="pdp-main-img" />
-            <button
-              type="button"
-              className="pdp-ar-float-badge"
-              onClick={() => openARTryOn(product.id)}
-            >
-              <i className="fa-solid fa-camera"></i> AR Virtual Try-On
-            </button>
           </div>
         </div>
 

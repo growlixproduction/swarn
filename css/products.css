@@ -709,6 +709,7 @@
 /* PDP Gallery Column */
 .pdp-gallery-col {
   display: flex;
+  flex-direction: row-reverse;
   gap: 1.25rem;
   position: sticky;
   top: 100px;
