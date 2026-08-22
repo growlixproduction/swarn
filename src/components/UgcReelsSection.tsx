@@ -98,20 +98,20 @@ export default function UgcReelsSection() {
   };
 
   return (
-    <section className="ugc-reels-section" style={{ background: "linear-gradient(180deg, #181412 0%, #100D0B 100%)", padding: "4.5rem 0", color: "#FFFFFF", position: "relative", overflow: "hidden" }}>
+    <section className="ugc-reels-section" style={{ background: "var(--bg-primary)", padding: "4rem 0 4.5rem", position: "relative", overflow: "hidden" }}>
       <div className="container">
         {/* Header */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2rem", flexWrap: "wrap", gap: "1rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2.25rem", flexWrap: "wrap", gap: "1.25rem" }}>
           <div>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(212, 168, 83, 0.15)", border: "1px solid rgba(212, 168, 83, 0.4)", padding: "0.35rem 0.85rem", borderRadius: "20px", fontSize: "0.74rem", color: "var(--gold-bright)", fontWeight: 700, letterSpacing: "0.06em", marginBottom: "0.75rem" }}>
-              <i className="fa-brands fa-youtube" style={{ color: "#FF0000", fontSize: "0.9rem" }}></i>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "rgba(197, 168, 128, 0.12)", border: "1px solid var(--border-gold)", padding: "0.35rem 0.9rem", borderRadius: "20px", fontSize: "0.75rem", color: "var(--gold-dark)", fontWeight: 700, letterSpacing: "0.06em", marginBottom: "0.75rem" }}>
+              <i className="fa-brands fa-youtube" style={{ color: "#FF0000", fontSize: "0.95rem" }}></i>
               <span>CLIENT STORIES & SHORTS REELS</span>
             </div>
-            <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "#FFFFFF", margin: "0 0 0.4rem" }}>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem, 3.5vw, 2.5rem)", color: "var(--text-primary)", margin: "0 0 0.4rem" }}>
               Real Ambikapur Buyers in Action
             </h2>
-            <p style={{ fontSize: "0.92rem", color: "rgba(255, 255, 255, 0.7)", margin: 0, maxWidth: "600px" }}>
-              Watch authentic unboxings, in-store trial shorts, and client testimonials from Swarn Mahal Jewellers.
+            <p style={{ fontSize: "0.94rem", color: "var(--text-muted)", margin: 0, maxWidth: "620px" }}>
+              Watch authentic customer unboxings, in-store trial shorts, and client testimonials from Swarn Mahal Jewellers.
             </p>
           </div>
 
@@ -121,17 +121,18 @@ export default function UgcReelsSection() {
               type="button"
               onClick={() => handleScroll("left")}
               style={{
-                width: "42px",
-                height: "42px",
+                width: "44px",
+                height: "44px",
                 borderRadius: "50%",
-                background: "rgba(255, 255, 255, 0.1)",
-                border: "1px solid rgba(255, 255, 255, 0.2)",
-                color: "#FFFFFF",
+                background: "var(--bg-card)",
+                border: "1px solid var(--border-gold)",
+                color: "var(--text-primary)",
                 fontSize: "1rem",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 cursor: "pointer",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.04)",
                 transition: "all 0.2s ease"
               }}
               aria-label="Scroll left"
@@ -143,8 +144,8 @@ export default function UgcReelsSection() {
               type="button"
               onClick={() => handleScroll("right")}
               style={{
-                width: "42px",
-                height: "42px",
+                width: "44px",
+                height: "44px",
                 borderRadius: "50%",
                 background: "var(--gold-primary)",
                 border: "none",
@@ -169,10 +170,10 @@ export default function UgcReelsSection() {
           ref={scrollRef}
           style={{
             display: "flex",
-            gap: "1.25rem",
+            gap: "1.35rem",
             overflowX: "auto",
             scrollBehavior: "smooth",
-            paddingBottom: "1.25rem",
+            padding: "0.5rem 0.25rem 1.5rem",
             scrollbarWidth: "none",
             msOverflowStyle: "none"
           }}
@@ -182,16 +183,16 @@ export default function UgcReelsSection() {
               key={reel.id}
               onClick={() => setActiveVideo(reel)}
               style={{
-                width: "240px",
-                height: "410px",
+                width: "245px",
+                height: "415px",
                 flexShrink: 0,
                 position: "relative",
                 borderRadius: "16px",
                 overflow: "hidden",
-                border: "1px solid rgba(212, 168, 83, 0.3)",
-                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.5)",
+                border: "1px solid var(--border-gold-subtle)",
+                boxShadow: "0 10px 25px rgba(197, 168, 128, 0.18)",
                 cursor: "pointer",
-                transition: "transform 0.3s ease, border-color 0.3s ease"
+                transition: "all 0.3s ease"
               }}
               className="ugc-reel-card"
             >
@@ -203,16 +204,16 @@ export default function UgcReelsSection() {
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
 
-              {/* Dark Gradient Overlay */}
+              {/* Dark Gradient Overlay for Readability */}
               <div
                 style={{
                   position: "absolute",
                   inset: 0,
-                  background: "linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.92) 100%)",
+                  background: "linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.3) 40%, rgba(0, 0, 0, 0.88) 100%)",
                   display: "flex",
                   flexDirection: "column",
                   justifyContent: "space-between",
-                  padding: "1rem"
+                  padding: "1.1rem"
                 }}
               >
                 {/* Top Badge: Shorts / YouTube Icon */}
