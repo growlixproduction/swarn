@@ -3,11 +3,9 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useApp } from "../context/AppContext";
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
-  const { cartCount, openCartDrawer } = useApp();
 
   const navItems = [
     { label: "All Jewels", href: "/collections/all", icon: "fa-gem" },
@@ -59,54 +57,6 @@ export default function MobileBottomNav() {
             </Link>
           );
         })}
-
-        {/* Bag / Shopping Cart Button */}
-        <button
-          type="button"
-          onClick={openCartDrawer}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: "0.2rem",
-            background: "none",
-            border: "none",
-            color: "#6B7280",
-            fontSize: "0.68rem",
-            fontWeight: 600,
-            flex: 1,
-            padding: "0.2rem 0",
-            position: "relative",
-            cursor: "pointer"
-          }}
-        >
-          <div style={{ position: "relative" }}>
-            <i className="fa-solid fa-bag-shopping" style={{ fontSize: "1.1rem", color: "var(--gold-deep)" }}></i>
-            {cartCount > 0 && (
-              <span
-                style={{
-                  position: "absolute",
-                  top: "-6px",
-                  right: "-10px",
-                  background: "#832729",
-                  color: "#FFFFFF",
-                  fontSize: "0.6rem",
-                  fontWeight: 800,
-                  width: "16px",
-                  height: "16px",
-                  borderRadius: "50%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  border: "1.5px solid #FFFFFF"
-                }}
-              >
-                {cartCount}
-              </span>
-            )}
-          </div>
-          <span>Bag</span>
-        </button>
       </div>
     </nav>
   );
