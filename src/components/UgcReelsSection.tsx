@@ -92,6 +92,7 @@ export default function UgcReelsSection() {
   const [reels, setReels] = useState<UgcVideo[]>(DEFAULT_UGC_VIDEOS);
   const [activeVideo, setActiveVideo] = useState<UgcVideo | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const isPaused = useRef(false);
 
   useEffect(() => {
     fetch("/api/ugc")
@@ -103,6 +104,29 @@ export default function UgcReelsSection() {
       })
       .catch(err => console.warn("UGC videos fetch warning:", err));
   }, []);
+
+  // Slow continuous auto-scroll right-to-left
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const speed = 0.6; // pixels per frame — slow & smooth
+    let animId: number;
+
+    const step = () => {
+      if (!isPaused.current && el) {
+        el.scrollLeft += speed;
+        // Loop: when scrolled past halfway (duplicate content), reset seamlessly
+        if (el.scrollLeft >= el.scrollWidth / 2) {
+          el.scrollLeft = 0;
+        }
+      }
+      animId = requestAnimationFrame(step);
+    };
+
+    animId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animId);
+  }, [reels]);
 
   const handleScroll = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -179,22 +203,25 @@ export default function UgcReelsSection() {
           </div>
         </div>
 
-        {/* Reels Horizontal Scroll Track */}
+        {/* Reels Horizontal Scroll Track (Duplicated for seamless infinite loop) */}
         <div
           ref={scrollRef}
+          onMouseEnter={() => { isPaused.current = true; }}
+          onMouseLeave={() => { isPaused.current = false; }}
+          onTouchStart={() => { isPaused.current = true; }}
+          onTouchEnd={() => { isPaused.current = false; }}
           style={{
             display: "flex",
             gap: "1.35rem",
             overflowX: "auto",
-            scrollBehavior: "smooth",
             padding: "0.5rem 0.25rem 1.5rem",
             scrollbarWidth: "none",
             msOverflowStyle: "none"
           }}
         >
-          {reels.map(reel => (
+          {[...reels, ...reels].map((reel, idx) => (
             <div
-              key={reel.id}
+              key={`reel-${idx}`}
               onClick={() => setActiveVideo(reel)}
               style={{
                 width: "245px",
