@@ -85,13 +85,13 @@ const LiveCalculationTable: React.FC<LiveCalculationTableProps> = ({ product }) 
 
       <div className="breakdown-card-body" id="pdp-breakdown-card-body">
         {/* 100% Itemized Live Calculation Table */}
-        <div className="pdp-calc-table-wrap">
-          <table className="pdp-calc-table">
+        <div className="pdp-calc-table-wrap" style={{ width: "100%", overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
+          <table className="pdp-calc-table" style={{ width: "100%", borderCollapse: "collapse" }}>
             <thead>
               <tr>
-                <th style={{ width: "32%" }}>Itemized Component</th>
-                <th style={{ width: "44%" }}>Live Rate / Formula</th>
-                <th style={{ width: "24%", textAlign: "right" }}>Amount</th>
+                <th style={{ minWidth: "90px" }}>Itemized Component</th>
+                <th style={{ minWidth: "110px" }}>Live Rate / Formula</th>
+                <th style={{ minWidth: "75px", textAlign: "right" }}>Amount</th>
               </tr>
             </thead>
             <tbody>

@@ -1724,6 +1724,22 @@
 
   .container, .container-narrow {
     padding: 0 0.75rem !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .pdp-info-col, .pdp-section {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+  }
+
+  .pdp-option-title {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.15rem !important;
   }
 
   .pdp-weight-box-grid {
@@ -1731,11 +1747,73 @@
   }
 
   .pdp-karat-group {
+    display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.4rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
 
   .pdp-color-group {
+    display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.4rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .pdp-karat-btn, .pdp-color-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    padding: 0.45rem 0.25rem !important;
+    overflow: hidden !important;
+  }
+
+  .pdp-karat-name {
+    font-size: 0.82rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .pdp-karat-purity {
+    font-size: 0.65rem !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .pdp-live-breakdown-card {
+    padding: 0.75rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .pdp-calc-table-wrap {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    box-sizing: border-box !important;
+  }
+
+  .pdp-calc-table th,
+  .pdp-calc-table td {
+    padding: 0.45rem 0.35rem !important;
+    font-size: 0.72rem !important;
+  }
+
+  .calc-cell-component {
+    font-size: 0.74rem !important;
+    gap: 0.25rem !important;
+  }
+
+  .calc-cell-formula {
+    font-size: 0.68rem !important;
+  }
+
+  .calc-cell-amount {
+    font-size: 0.78rem !important;
   }
 
   .pdp-trust-strip {
