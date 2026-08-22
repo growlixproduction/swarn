@@ -67,6 +67,24 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [arProductId, setArProductId] = useState<string | null>(null);
   const [isAdminOpen, setIsAdminOpen] = useState<boolean>(false);
 
+  // Initialize Product Selections Map
+  const [productSelections, setProductSelections] = useState<Record<string, ProductSelectionState>>(() => {
+    const initialMap: Record<string, ProductSelectionState> = {};
+    PRODUCTS_CATALOG.forEach(p => {
+      initialMap[p.id] = {
+        karat: p.defaultKarat || "18K",
+        color: p.defaultColor || "yellow",
+        size: "14 (Indian)",
+        engraving: "",
+        makingCharge: {
+          type: "percent",
+          value: p.makingChargePercent || 15
+        }
+      };
+    });
+    return initialMap;
+  });
+
   const refreshProducts = async () => {
     try {
       const res = await fetch("/api/products");
