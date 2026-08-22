@@ -23,7 +23,7 @@ export default function AdminLayout({
     { label: "Gifting & Occasion Suite", href: "/admin/gifting", icon: "fa-gift" },
     { label: "Banners & Hero Slider", href: "/admin/banners", icon: "fa-image" },
     { label: "Bullion Rates & Policy", href: "/admin/rates", icon: "fa-coins" },
-    { label: "Showroom & Collage Vault", href: "/admin/gallery", icon: "fa-store" }
+    { label: "UGC Video Reels & Shorts", href: "/admin/gallery", icon: "fa-film" }
   ];
 
   return (
