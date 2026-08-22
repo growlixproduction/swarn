@@ -319,6 +319,29 @@ export default function Header() {
           </div>
         </div>
 
+        {/* Mobile Search Bar Strip (Visible on mobile phones < 768px) */}
+        <div className="mobile-header-search-strip">
+          <form onSubmit={handleSearchSubmit} style={{ position: "relative", display: "flex", alignItems: "center" }}>
+            <input
+              type="text"
+              placeholder="Search 22K Gold, Solitaires, Jhumkas..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              onFocus={() => setIsSearchFocused(true)}
+              style={{
+                width: "100%",
+                padding: "0.55rem 0.85rem 0.55rem 2.3rem",
+                borderRadius: "20px",
+                border: "1px solid var(--border-gold)",
+                fontSize: "0.82rem",
+                background: "#FFFFFF",
+                outline: "none"
+              }}
+            />
+            <i className="fa-solid fa-magnifying-glass" style={{ position: "absolute", left: "0.85rem", color: "#832729", fontSize: "0.85rem" }}></i>
+          </form>
+        </div>
+
         {/* Tier 2: Dynamic Category Navigation Strip (Desktop Nav) */}
         <nav className="tanishq-category-strip">
           <div className="tanishq-cat-inner">

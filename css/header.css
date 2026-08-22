@@ -624,3 +624,22 @@
   font-weight: 700;
   line-height: 1;
 }
+
+.mobile-header-search-strip {
+  display: none;
+  padding: 0.45rem 1rem 0.65rem;
+  background: #FAF6F2;
+  border-bottom: 1px solid var(--border-gold-subtle);
+}
+
+@media (max-width: 768px) {
+  .mobile-header-search-strip {
+    display: block;
+  }
+  .mobile-bottom-app-nav {
+    display: flex !important;
+  }
+  body, main {
+    padding-bottom: 72px !important;
+  }
+}

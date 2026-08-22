@@ -9,6 +9,7 @@ import CostBreakupModal from "./CostBreakupModal";
 import ARTryOnModal from "./ARTryOnModal";
 import LiveRateSimulator from "./LiveRateSimulator";
 import ScrollObserver from "./ScrollObserver";
+import MobileBottomNav from "./MobileBottomNav";
 
 export default function StorefrontShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -28,6 +29,7 @@ export default function StorefrontShell({ children }: { children: React.ReactNod
       <CostBreakupModal />
       <ARTryOnModal />
       <LiveRateSimulator />
+      <MobileBottomNav />
     </>
   );
 }

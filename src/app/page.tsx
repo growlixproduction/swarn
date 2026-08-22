@@ -33,10 +33,7 @@ export default function HomePage() {
       {/* 3. 4-ITEM TRUST & VALUE PROP STRIP */}
       <TrustBar />
 
-      {/* 4. GOOGLE VERIFIED REVIEWS INFINITE MARQUEE SLIDER */}
-      <ReviewsSection />
-
-      {/* 5. EDITORIAL BENTO PROMO GRID */}
+      {/* 4. EDITORIAL BENTO PROMO GRID */}
       <BentoPromo />
 
       {/* 5. LATEST PRODUCTS & DYNAMIC PRICING CATALOG */}
@@ -79,6 +76,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* GOOGLE VERIFIED REVIEWS INFINITE MARQUEE SLIDER (PLACED DIRECTLY BELOW PRODUCTS) */}
+      <ReviewsSection />
 
       {/* 6. CATEGORY MOODBOARD SHOWCASE */}
       <MoodboardSection />
