@@ -8,8 +8,8 @@ const DATA_FILE = path.join(process.cwd(), "data", "ugc_videos.json");
 const DEFAULT_UGC_VIDEOS = [
   {
     id: 1,
-    title: "22K Royal Kundan Bridal Haar Unboxing",
-    videoUrl: "https://www.youtube.com/shorts/5k8t2-jYwDk",
+    title: "22K Royal Kundan Bridal Haar Showcase",
+    videoUrl: "",
     thumbnailUrl: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
     customerName: "Ananya Sharma",
     badge: "Bridal Buyer • Ambikapur",
@@ -19,7 +19,7 @@ const DEFAULT_UGC_VIDEOS = [
   {
     id: 2,
     title: "18K Solitaire Engagement Ring In-Store Trial",
-    videoUrl: "https://www.youtube.com/shorts/5k8t2-jYwDk",
+    videoUrl: "",
     thumbnailUrl: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (2).jpeg",
     customerName: "Priya & Rohan Soni",
     badge: "Verified Buyer • Chhattisgarh",
@@ -29,7 +29,7 @@ const DEFAULT_UGC_VIDEOS = [
   {
     id: 3,
     title: "Swarn Mahal Flagship Store Ambikapur Consultation",
-    videoUrl: "https://www.youtube.com/shorts/5k8t2-jYwDk",
+    videoUrl: "",
     thumbnailUrl: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (3).jpeg",
     customerName: "Meena Agrawal",
     badge: "Church Road Store Visit",
@@ -39,7 +39,7 @@ const DEFAULT_UGC_VIDEOS = [
   {
     id: 4,
     title: "Handcrafted 22K BIS Hallmarked Jhumka Collection",
-    videoUrl: "https://www.youtube.com/shorts/5k8t2-jYwDk",
+    videoUrl: "",
     thumbnailUrl: "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
     customerName: "Sunita Agrawal",
     badge: "Google Verified Review",
@@ -49,7 +49,7 @@ const DEFAULT_UGC_VIDEOS = [
   {
     id: 5,
     title: "Pure 925 Silver Payal & Silverware Showcase",
-    videoUrl: "https://www.youtube.com/shorts/5k8t2-jYwDk",
+    videoUrl: "",
     thumbnailUrl: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
     customerName: "Karan Talukdar",
     badge: "Verified Customer • Ambikapur",

@@ -210,7 +210,7 @@ export default function AdminGalleryPage() {
 {`CREATE TABLE IF NOT EXISTS ugc_videos (
   id INT AUTO_INCREMENT PRIMARY KEY,
   title VARCHAR(255) NOT NULL,
-  video_url VARCHAR(500) NOT NULL,
+  video_url VARCHAR(500) DEFAULT NULL,
   thumbnail_url VARCHAR(500) DEFAULT NULL,
   customer_name VARCHAR(100) DEFAULT 'Ambikapur Client',
   badge VARCHAR(100) DEFAULT 'Google Verified Buyer',

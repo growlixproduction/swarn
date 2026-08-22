@@ -15,8 +15,8 @@ export interface UgcVideo {
 const DEFAULT_UGC_VIDEOS: UgcVideo[] = [
   {
     id: 1,
-    title: "22K Royal Kundan Bridal Haar Unboxing",
-    videoUrl: "https://www.youtube.com/shorts/5k8t2-jYwDk",
+    title: "22K Royal Kundan Bridal Haar Showcase",
+    videoUrl: "",
     thumbnailUrl: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
     customerName: "Ananya Sharma",
     badge: "Bridal Buyer • Ambikapur"
@@ -24,7 +24,7 @@ const DEFAULT_UGC_VIDEOS: UgcVideo[] = [
   {
     id: 2,
     title: "18K Solitaire Engagement Ring In-Store Trial",
-    videoUrl: "https://www.youtube.com/shorts/5k8t2-jYwDk",
+    videoUrl: "",
     thumbnailUrl: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (2).jpeg",
     customerName: "Priya & Rohan Soni",
     badge: "Verified Buyer • Chhattisgarh"
@@ -32,7 +32,7 @@ const DEFAULT_UGC_VIDEOS: UgcVideo[] = [
   {
     id: 3,
     title: "Swarn Mahal Flagship Store Ambikapur Consultation",
-    videoUrl: "https://www.youtube.com/shorts/5k8t2-jYwDk",
+    videoUrl: "",
     thumbnailUrl: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (3).jpeg",
     customerName: "Meena Agrawal",
     badge: "Church Road Store Visit"
@@ -40,7 +40,7 @@ const DEFAULT_UGC_VIDEOS: UgcVideo[] = [
   {
     id: 4,
     title: "Handcrafted 22K BIS Hallmarked Jhumka Collection",
-    videoUrl: "https://www.youtube.com/shorts/5k8t2-jYwDk",
+    videoUrl: "",
     thumbnailUrl: "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
     customerName: "Sunita Agrawal",
     badge: "Google Verified Review"
@@ -48,7 +48,7 @@ const DEFAULT_UGC_VIDEOS: UgcVideo[] = [
   {
     id: 5,
     title: "Pure 925 Silver Payal & Silverware Showcase",
-    videoUrl: "https://www.youtube.com/shorts/5k8t2-jYwDk",
+    videoUrl: "",
     thumbnailUrl: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
     customerName: "Karan Talukdar",
     badge: "Verified Customer • Ambikapur"
@@ -328,8 +328,42 @@ export default function UgcReelsSection() {
               <i className="fa-solid fa-xmark"></i>
             </button>
 
-            {/* Video / Iframe */}
+            {/* Video / Iframe or Image Showcase */}
             {(() => {
+              if (!activeVideo.videoUrl) {
+                return (
+                  <div style={{ position: "relative", width: "100%", height: "100%" }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={activeVideo.thumbnailUrl}
+                      alt={activeVideo.title}
+                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                    />
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        background: "linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.95) 100%)",
+                        padding: "1.5rem",
+                        color: "#FFFFFF"
+                      }}
+                    >
+                      <span style={{ fontSize: "0.75rem", color: "var(--gold-bright)", fontWeight: 700, textTransform: "uppercase" }}>
+                        {activeVideo.badge}
+                      </span>
+                      <h3 style={{ fontSize: "1.1rem", fontWeight: 700, margin: "0.2rem 0 0.5rem" }}>
+                        {activeVideo.title}
+                      </h3>
+                      <span style={{ fontSize: "0.85rem", color: "rgba(255,255,255,0.8)" }}>
+                        <i className="fa-solid fa-user-check" style={{ color: "#34D399" }}></i> {activeVideo.customerName}
+                      </span>
+                    </div>
+                  </div>
+                );
+              }
+
               const { type, embedUrl } = getEmbedUrl(activeVideo.videoUrl);
               if (type === "youtube") {
                 return (
