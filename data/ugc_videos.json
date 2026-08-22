@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1787360897918,
+    "title": "Swarn collecion ",
+    "videoUrl": "https://www.youtube.com/shorts/0qOii0m5Wr8",
+    "thumbnailUrl": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
+    "customerName": "Ananya",
+    "badge": "Google Verified Buyer",
+    "displayOrder": 6,
+    "isActive": true
+  },
+  {
+    "id": 1,
+    "title": "22K Royal Kundan Bridal Haar Showcase",
+    "videoUrl": "",
+    "thumbnailUrl": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
+    "customerName": "Ananya Sharma",
+    "badge": "Bridal Buyer • Ambikapur",
+    "displayOrder": 1,
+    "isActive": true
+  },
+  {
+    "id": 2,
+    "title": "18K Solitaire Engagement Ring In-Store Trial",
+    "videoUrl": "",
+    "thumbnailUrl": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (2).jpeg",
+    "customerName": "Priya & Rohan Soni",
+    "badge": "Verified Buyer • Chhattisgarh",
+    "displayOrder": 2,
+    "isActive": true
+  },
+  {
+    "id": 3,
+    "title": "Swarn Mahal Flagship Store Ambikapur Consultation",
+    "videoUrl": "",
+    "thumbnailUrl": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (3).jpeg",
+    "customerName": "Meena Agrawal",
+    "badge": "Church Road Store Visit",
+    "displayOrder": 3,
+    "isActive": true
+  },
+  {
+    "id": 4,
+    "title": "Handcrafted 22K BIS Hallmarked Jhumka Collection",
+    "videoUrl": "",
+    "thumbnailUrl": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
+    "customerName": "Sunita Agrawal",
+    "badge": "Google Verified Review",
+    "displayOrder": 4,
+    "isActive": true
+  },
+  {
+    "id": 5,
+    "title": "Pure 925 Silver Payal & Silverware Showcase",
+    "videoUrl": "",
+    "thumbnailUrl": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "customerName": "Karan Talukdar",
+    "badge": "Verified Customer • Ambikapur",
+    "displayOrder": 5,
+    "isActive": true
+  }
+]

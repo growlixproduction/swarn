@@ -74,6 +74,20 @@ function getEmbedUrl(url: string): { type: "youtube" | "video"; embedUrl: string
   return { type: "video", embedUrl: url };
 }
 
+// Helper to auto-extract YouTube Shorts default cover thumbnail if custom thumbnail is empty
+function getReelThumbnail(reel: UgcVideo): string {
+  if (reel.thumbnailUrl && reel.thumbnailUrl.trim() !== "") {
+    return reel.thumbnailUrl;
+  }
+  if (reel.videoUrl) {
+    const match = reel.videoUrl.match(/(?:youtube\.com\/shorts\/|youtu\.be\/|youtube\.com\/watch\?v=)([a-zA-Z0-9_-]+)/);
+    if (match && match[1]) {
+      return `https://img.youtube.com/vi/${match[1]}/hqdefault.jpg`;
+    }
+  }
+  return "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg";
+}
+
 export default function UgcReelsSection() {
   const [reels, setReels] = useState<UgcVideo[]>(DEFAULT_UGC_VIDEOS);
   const [activeVideo, setActiveVideo] = useState<UgcVideo | null>(null);
@@ -196,10 +210,10 @@ export default function UgcReelsSection() {
               }}
               className="ugc-reel-card"
             >
-              {/* Background Thumbnail */}
+              {/* Background Thumbnail (Auto-uses YouTube Default Cover if empty) */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={reel.thumbnailUrl}
+                src={getReelThumbnail(reel)}
                 alt={reel.title}
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
               />
@@ -336,7 +350,7 @@ export default function UgcReelsSection() {
                   <div style={{ position: "relative", width: "100%", height: "100%" }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={activeVideo.thumbnailUrl}
+                      src={getReelThumbnail(activeVideo)}
                       alt={activeVideo.title}
                       style={{ width: "100%", height: "100%", objectFit: "cover" }}
                     />
