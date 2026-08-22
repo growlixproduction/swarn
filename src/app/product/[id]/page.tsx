@@ -41,9 +41,25 @@ export default function ProductDetailPage() {
   const currentKarat = selection.karat || product.defaultKarat;
   const currentColor = selection.color || product.defaultColor;
 
-  const [activeGalleryImg, setActiveGalleryImg] = useState<string>(
-    (product.images && product.images[currentColor]) || product.images.yellow
-  );
+  const getProductImage = React.useCallback(() => {
+    if (product && product.images) {
+      if (product.images[currentColor]) return product.images[currentColor];
+      if (product.images.yellow) return product.images.yellow;
+      if (product.images.rose) return product.images.rose;
+      if (product.images.white) return product.images.white;
+      if (product.images.gallery && product.images.gallery.length > 0) return product.images.gallery[0];
+    }
+    return (product && product.images && (product.images.yellow || product.images.rose)) || "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg";
+  }, [product, currentColor]);
+
+  const [activeGalleryImg, setActiveGalleryImg] = useState<string>("");
+
+  React.useEffect(() => {
+    const resolved = getProductImage();
+    if (resolved) {
+      setActiveGalleryImg(resolved);
+    }
+  }, [product.id, currentColor, getProductImage]);
 
   const [pincode, setPincode] = useState("497001");
   const [deliveryStatus, setDeliveryStatus] = useState<string | null>(
@@ -58,14 +74,18 @@ export default function ProductDetailPage() {
     selection.makingCharge
   );
 
-  const galleryImages =
-    product.images && product.images.gallery && product.images.gallery.length > 0
-      ? product.images.gallery
-      : [(product.images && product.images[currentColor]) || product.images.yellow, product.images.hover || product.images.yellow];
+  const galleryImages = React.useMemo(() => {
+    if (product.images && product.images.gallery && product.images.gallery.length > 0) {
+      return product.images.gallery;
+    }
+    const primary = getProductImage();
+    const hover = (product.images && product.images.hover) || primary;
+    return Array.from(new Set([primary, hover].filter(Boolean)));
+  }, [product, currentColor, getProductImage]);
 
   const handleColorChange = (c: MetalTone) => {
     setProductColor(product.id, c);
-    const newImg = (product.images && product.images[c]) || product.images.yellow;
+    const newImg = (product.images && product.images[c]) || product.images?.yellow || getProductImage();
     setActiveGalleryImg(newImg);
   };
 
@@ -108,7 +128,7 @@ export default function ProductDetailPage() {
         <div className="pdp-gallery-col">
           <div className="pdp-main-image-viewport">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={activeGalleryImg} alt={product.title} id="pdp-main-img" />
+            <img src={activeGalleryImg || getProductImage()} alt={product.title} id="pdp-main-img" />
           </div>
 
           <div className="pdp-thumb-strip">

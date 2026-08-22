@@ -700,10 +700,11 @@
 
 .pdp-main-grid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 3.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
   align-items: start;
   margin-bottom: 4rem;
+  width: 100%;
 }
 
 /* PDP Gallery Column */
@@ -713,6 +714,13 @@
   gap: 1.25rem;
   position: sticky;
   top: 100px;
+  width: 100%;
+  min-width: 0;
+}
+
+.pdp-info-col {
+  width: 100%;
+  min-width: 0;
 }
 
 .pdp-thumb-strip {
