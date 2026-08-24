@@ -16,9 +16,12 @@ export default function AdminNewProductPage() {
   const [title, setTitle] = useState("");
   const [primaryMaterial, setPrimaryMaterial] = useState<"gold" | "diamond" | "silver" | "other">("gold");
   const [category, setCategory] = useState("necklaces");
-  const [subCategory, setSubCategory] = useState("Necklace & Rani Haar");
+  const [subCategory, setSubCategory] = useState("");
   const [collection, setCollection] = useState("Gold Collection");
-  const [navCategories, setNavCategories] = useState<string[]>(["all", "gold", "necklace", "necklaces"]);
+  const [navCategories, setNavCategories] = useState<string[]>(["all", "gold"]);
+  // Custom extra sub-collections (user-typed)
+  const [customSubInput, setCustomSubInput] = useState("");
+  const [customSubs, setCustomSubs] = useState<Array<{ slug: string; title: string; category: string }>>([]);
 
   // Pricing & Weights
   const [netGoldWeight, setNetGoldWeight] = useState<number>(10.5);
@@ -45,22 +48,36 @@ export default function AdminNewProductPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
-  // Auto Select / Deselect Sub-Collection Helper (Toggle)
+  // Auto Select / Deselect Sub-Collection Helper (Toggle) - uses slug as unique key
   const handleSelectSubCollection = (sub: { slug: string; title: string; category: string }) => {
-    const isCurrentlySelected = subCategory === sub.title || navCategories.includes(sub.slug);
+    const isCurrentlySelected = navCategories.includes(sub.slug);
     if (isCurrentlySelected) {
-      // Deselect: remove from navCategories
-      setNavCategories(prev => prev.filter(c => c !== sub.slug && c !== sub.category));
+      // Deselect: remove slug and its category from navCategories
+      setNavCategories(prev => prev.filter(c => c !== sub.slug));
       setSubCategory("");
       setCollection(`${primaryMaterial.toUpperCase()} Collection`);
-      setCategory(primaryMaterial === "silver" ? "silverware" : primaryMaterial === "diamond" ? "rings" : "necklaces");
     } else {
-      // Select
+      // Select: clear previous sub-collection slugs first, then add new one
+      const metalSlugs = ["gold", "diamond", "silver"];
+      setNavCategories(prev => {
+        const base = prev.filter(c => metalSlugs.includes(c) || c === "all");
+        return Array.from(new Set([...base, "all", primaryMaterial, sub.slug, sub.category]));
+      });
       setCategory(sub.category);
       setSubCategory(sub.title);
       setCollection(`${primaryMaterial.toUpperCase()} ${sub.title}`);
-      setNavCategories(prev => Array.from(new Set([...prev, "all", primaryMaterial, sub.slug, sub.category])));
     }
+  };
+
+  // Add custom sub-collection typed by user
+  const handleAddCustomSub = () => {
+    const trimmed = customSubInput.trim();
+    if (!trimmed) return;
+    const slug = trimmed.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    const newSub = { slug, title: trimmed, category: slug };
+    setCustomSubs(prev => [...prev, newSub]);
+    setCustomSubInput("");
+    handleSelectSubCollection(newSub);
   };
 
   // Image Upload Handlers
@@ -279,7 +296,11 @@ export default function AdminNewProductPage() {
                       type="button"
                       onClick={() => {
                         setPrimaryMaterial(mat.key as any);
-                        setNavCategories(prev => Array.from(new Set([...prev.filter(c => !["gold", "diamond", "silver"].includes(c)), "all", mat.key])));
+                        // Reset sub-collection on metal switch
+                        setSubCategory("");
+                        setCategory(mat.key === "silver" ? "silverware" : "rings");
+                        setCollection(`${mat.key.toUpperCase()} Collection`);
+                        setNavCategories(["all", mat.key]);
                       }}
                       style={{
                         padding: "0.75rem 0.65rem",
@@ -337,8 +358,8 @@ export default function AdminNewProductPage() {
                     { slug: "bangles", title: "Silver Bangles", category: "bangles" },
                     { slug: "bracelet", title: "Silver Bracelet", category: "bangles" }
                   ]
-                ).map(sub => {
-                  const isSelected = subCategory === sub.title || navCategories.includes(sub.slug);
+                ).concat(customSubs).map(sub => {
+                  const isSelected = navCategories.includes(sub.slug);
                   return (
                     <button
                       key={sub.slug}
@@ -357,9 +378,34 @@ export default function AdminNewProductPage() {
                       }}
                     >
                       <span>{sub.title}</span>
+                      {customSubs.some(cs => cs.slug === sub.slug) && (
+                        <span
+                          onClick={(e) => { e.stopPropagation(); setCustomSubs(prev => prev.filter(cs => cs.slug !== sub.slug)); setNavCategories(prev => prev.filter(c => c !== sub.slug)); }}
+                          style={{ marginLeft: "0.35rem", color: "#EF4444", fontWeight: 900, fontSize: "0.85rem", lineHeight: 1 }}
+                          title="Remove this custom tag"
+                        >×</span>
+                      )}
                     </button>
                   );
                 })}
+                {/* Add Custom Sub-Collection Input */}
+                <div style={{ display: "flex", gap: "0.4rem", alignItems: "center", marginTop: "0.35rem" }}>
+                  <input
+                    type="text"
+                    placeholder="+ Custom (e.g. Maang Tikka)"
+                    value={customSubInput}
+                    onChange={e => setCustomSubInput(e.target.value)}
+                    onKeyDown={e => e.key === "Enter" && (e.preventDefault(), handleAddCustomSub())}
+                    style={{ padding: "0.35rem 0.65rem", borderRadius: "20px", fontSize: "0.78rem", background: "rgba(255,255,255,0.06)", border: "1px dashed rgba(197, 168, 128, 0.4)", color: "#E2D8CC", outline: "none", width: "170px" }}
+                  />
+                  <button
+                    type="button"
+                    onClick={handleAddCustomSub}
+                    style={{ padding: "0.35rem 0.75rem", borderRadius: "20px", fontSize: "0.78rem", background: "#D4B68A", color: "#1A150F", border: "none", cursor: "pointer", fontWeight: 700 }}
+                  >
+                    + Add
+                  </button>
+                </div>
               </div>
             </div>
 
