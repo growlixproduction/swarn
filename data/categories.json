@@ -77,18 +77,18 @@
     "guideTitle": "Necklace Buying & Care Guide",
     "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
   },
-  "earrings": {
-    "slug": "earrings",
+  "gold-hoops-balis": {
+    "slug": "gold-hoops-balis",
     "parentSlug": "gold",
-    "title": "Earrings & Tops",
-    "pageTitle": "Luxury Earrings, Jhumkas & Tops | Swarn Mahal Ambikapur",
-    "badge": "HANDCRAFTED PERFECTION • 50+ STYLES",
-    "subtitle": "From grand 22K temple jhumkas for bridal celebrations to lightweight 18K diamond tops and sui-dhaga drops for everyday elegance.",
-    "heroBg": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=85",
-    "circleImg": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
-    "thumbnail_image": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
-    "guideTitle": "Earrings Styling & Face Silhouette Guide",
-    "guideDesc": "Discover which earring shapes best complement oval, round, and heart-shaped faces."
+    "title": "Gold Hoops & Balis",
+    "pageTitle": "Gold Hoops & Balis | Swarn Mahal Jewellers Ambikapur",
+    "badge": "NEW CURATION • LUXURY COLLECTION",
+    "subtitle": "Explore handcrafted Gold Hoops & Balis in pure BIS 916 gold and authentic gemstones.",
+    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/uploads/1787348208245_images.jpg",
+    "thumbnail_image": "/uploads/1787348208245_images.jpg",
+    "guideTitle": "Gold Hoops & Balis Buying & Care Guide",
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
   },
   "nose-pins": {
     "slug": "nose-pins",
@@ -103,18 +103,18 @@
     "guideTitle": "Nose Pins Buying & Purity Guide",
     "guideDesc": "Discover smart design combinations such as halo solitaire settings and lightweight gold alloys."
   },
-  "gold-hoops-balis": {
-    "slug": "gold-hoops-balis",
+  "earrings": {
+    "slug": "earrings",
     "parentSlug": "gold",
-    "title": "Gold Hoops & Balis",
-    "pageTitle": "Gold Hoops & Balis | Swarn Mahal Jewellers Ambikapur",
-    "badge": "NEW CURATION • LUXURY COLLECTION",
-    "subtitle": "Explore handcrafted Gold Hoops & Balis in pure BIS 916 gold and authentic gemstones.",
-    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
-    "circleImg": "/uploads/1787348208245_images.jpg",
-    "thumbnail_image": "/uploads/1787348208245_images.jpg",
-    "guideTitle": "Gold Hoops & Balis Buying & Care Guide",
-    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
+    "title": "Earrings & Tops",
+    "pageTitle": "Luxury Earrings, Jhumkas & Tops | Swarn Mahal Ambikapur",
+    "badge": "HANDCRAFTED PERFECTION • 50+ STYLES",
+    "subtitle": "From grand 22K temple jhumkas for bridal celebrations to lightweight 18K diamond tops and sui-dhaga drops for everyday elegance.",
+    "heroBg": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
+    "thumbnail_image": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
+    "guideTitle": "Earrings Styling & Face Silhouette Guide",
+    "guideDesc": "Discover which earring shapes best complement oval, round, and heart-shaped faces."
   },
   "pendants": {
     "slug": "pendants",

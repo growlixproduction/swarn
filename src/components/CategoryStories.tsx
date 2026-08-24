@@ -43,37 +43,23 @@ const CategoryStories: React.FC = () => {
   const [scrollSpeed, setScrollSpeed] = useState<number>(25);
 
   useEffect(() => {
-    // Load categories
+    // Load categories from API in exact Admin reordered sequence
     fetch("/api/categories")
       .then(res => res.json())
       .then(data => {
         if (data && data.categories) {
           const catsObj = data.categories;
-          // Filter out main metal parents (gold, diamond, silver) and prefixed duplicates
-          const filteredCats = Object.values(catsObj).filter((cat: any) => {
-            if (EXCLUDED_STORY_SLUGS.includes(cat.slug)) return false;
-            if (MAIN_STORY_ORDER.includes(cat.slug)) return true;
-            if (!cat.parentSlug || cat.parentSlug === "" || cat.parentSlug === "gold") {
-              return !cat.slug.startsWith("silver-") && !cat.slug.startsWith("diamond-");
-            }
-            return false;
-          });
+          const EXCLUDED_SLUGS = ["gold", "diamond", "silver", "other"];
 
-          // Sort according to MAIN_STORY_ORDER
-          filteredCats.sort((a: any, b: any) => {
-            const indexA = MAIN_STORY_ORDER.indexOf(a.slug);
-            const indexB = MAIN_STORY_ORDER.indexOf(b.slug);
-            if (indexA !== -1 && indexB !== -1) return indexA - indexB;
-            if (indexA !== -1) return -1;
-            if (indexB !== -1) return 1;
-            return 0;
-          });
+          // Preserve exact Admin order & respect hidden flag!
+          const list: StoryItem[] = Object.values(catsObj)
+            .filter((cat: any) => !cat.hidden && !EXCLUDED_SLUGS.includes(cat.slug) && !cat.slug.startsWith("silver-") && !cat.slug.startsWith("diamond-"))
+            .map((cat: any) => ({
+              label: cat.title || cat.name,
+              href: `/collections/${cat.slug}`,
+              img: cat.circleImg || cat.thumbnail_image || cat.heroBg || "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80"
+            }));
 
-          const list: StoryItem[] = filteredCats.map((cat: any) => ({
-            label: cat.title || cat.name,
-            href: `/collections/${cat.slug}`,
-            img: cat.circleImg || cat.thumbnail_image || cat.heroBg || "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80"
-          }));
           if (list.length > 0) {
             setStories(list);
           }

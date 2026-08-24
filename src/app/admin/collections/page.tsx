@@ -137,6 +137,32 @@ export default function AdminCollectionsPage() {
     }
   };
 
+  // Toggle Hide / Show on Visitor Page
+  const handleToggleHide = async (slugToToggle: string) => {
+    const updated = categories.map(c => {
+      if (c.slug === slugToToggle) {
+        return { ...c, hidden: !c.hidden };
+      }
+      return c;
+    });
+
+    setCategories(updated);
+
+    try {
+      const res = await fetch("/api/categories", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "reorder", categories: updated })
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setSaveMessage({ type: "success", text: `Visibility updated for /${slugToToggle}!` });
+      }
+    } catch (err) {
+      console.warn("Visibility update error:", err);
+    }
+  };
+
   // Delete Category Handler
   const handleDeleteCategory = async (targetCategory?: any) => {
     const catToDelete = targetCategory || selectedCat;
@@ -359,6 +385,153 @@ export default function AdminCollectionsPage() {
               <span>Save Speed</span>
             </button>
           </div>
+        </div>
+      </div>
+
+      {/* LIVE HOMEPAGE VISITOR CIRCLE REORDER & VISIBILITY SUITE */}
+      <div
+        className="admin-card"
+        style={{
+          background: "linear-gradient(135deg, #181410 0%, #0F0D0B 100%)",
+          border: "1.5px solid #C5A880",
+          borderRadius: "14px",
+          padding: "1.25rem 1.5rem",
+          marginBottom: "1.75rem",
+          boxShadow: "0 8px 30px rgba(0,0,0,0.4)"
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem", flexWrap: "wrap", gap: "0.5rem" }}>
+          <div>
+            <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "#F5EAD6", margin: "0 0 0.25rem", display: "flex", alignItems: "center", gap: "0.5rem", fontFamily: "var(--font-serif)" }}>
+              <i className="fa-solid fa-eye" style={{ color: "#C5A880" }}></i> Live Visitor Story Preview (Saamne Visitor Ko Aise Dikhega)
+            </h3>
+            <p style={{ fontSize: "0.82rem", color: "#A3978B", margin: 0 }}>
+              Homepage slider ke niche pehle kaun sa circle dikhega usko <strong>Drag karke</strong> ya <strong>Arrows (← →)</strong> se reorder karein. Eye icon se Hide/Show karein.
+            </p>
+          </div>
+          <span style={{ fontSize: "0.75rem", background: "rgba(197, 168, 128, 0.15)", border: "1px solid #C5A880", color: "#F3E5AB", padding: "0.3rem 0.75rem", borderRadius: "20px", fontWeight: 600 }}>
+            Live Direct Sync ⚡
+          </span>
+        </div>
+
+        {/* Drag-and-Drop Horizontal Story Circle Strip */}
+        <div
+          style={{
+            display: "flex",
+            gap: "0.85rem",
+            overflowX: "auto",
+            padding: "0.85rem 0.5rem 1rem",
+            background: "#0B0908",
+            borderRadius: "12px",
+            border: "1px solid rgba(197, 168, 128, 0.25)",
+            WebkitOverflowScrolling: "touch"
+          }}
+          className="no-scrollbar"
+        >
+          {categories
+            .filter(c => !["gold", "diamond", "silver", "other"].includes(c.slug) && !c.slug.startsWith("silver-") && !c.slug.startsWith("diamond-"))
+            .map((c, displayIdx) => {
+              const actualIdx = categories.findIndex(item => item.slug === c.slug);
+              const circleImg = c.circleImg || c.thumbnail_image || c.heroBg || "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80";
+              const isHidden = Boolean(c.hidden);
+
+              return (
+                <div
+                  key={c.slug}
+                  draggable={true}
+                  onDragStart={() => setDraggedIdx(actualIdx)}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={() => {
+                    if (draggedIdx !== null && draggedIdx !== actualIdx) {
+                      handleReorder(draggedIdx, actualIdx);
+                      setDraggedIdx(null);
+                    }
+                  }}
+                  style={{
+                    flexShrink: 0,
+                    width: "115px",
+                    background: isHidden ? "#161311" : "linear-gradient(180deg, #221D18 0%, #16120F 100%)",
+                    border: isHidden ? "1px dashed rgba(255,255,255,0.2)" : "1.5px solid #C5A880",
+                    borderRadius: "12px",
+                    padding: "0.75rem 0.5rem",
+                    textAlign: "center",
+                    position: "relative",
+                    opacity: isHidden ? 0.45 : 1,
+                    cursor: "grab",
+                    boxShadow: isHidden ? "none" : "0 4px 12px rgba(0,0,0,0.3)"
+                  }}
+                >
+                  {/* Order Badge */}
+                  <span
+                    style={{
+                      position: "absolute",
+                      top: "6px",
+                      left: "6px",
+                      background: "#C5A880",
+                      color: "#110E0C",
+                      fontSize: "0.65rem",
+                      fontWeight: 800,
+                      padding: "1px 6px",
+                      borderRadius: "10px"
+                    }}
+                  >
+                    #{displayIdx + 1}
+                  </span>
+
+                  {/* Hide Toggle Button */}
+                  <button
+                    type="button"
+                    title={isHidden ? "Unhide for Visitor Page" : "Hide from Visitor Page"}
+                    onClick={() => handleToggleHide(c.slug)}
+                    style={{
+                      position: "absolute",
+                      top: "4px",
+                      right: "6px",
+                      background: "none",
+                      border: "none",
+                      color: isHidden ? "#EF4444" : "#10B981",
+                      cursor: "pointer",
+                      fontSize: "0.8rem"
+                    }}
+                  >
+                    <i className={isHidden ? "fa-solid fa-eye-slash" : "fa-solid fa-eye"}></i>
+                  </button>
+
+                  {/* Story Circle Avatar */}
+                  <div style={{ width: "52px", height: "52px", borderRadius: "50%", overflow: "hidden", margin: "0.8rem auto 0.4rem", border: "2px solid #C5A880", boxShadow: "0 2px 8px rgba(0,0,0,0.5)" }}>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={circleImg} alt={c.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  </div>
+
+                  <strong style={{ display: "block", color: isHidden ? "#888888" : "#FFFFFF", fontSize: "0.78rem", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                    {c.title}
+                  </strong>
+
+                  {/* Directional Move Buttons */}
+                  <div style={{ display: "flex", justifyContent: "center", gap: "0.25rem", marginTop: "0.5rem" }}>
+                    <button
+                      type="button"
+                      disabled={actualIdx === 0}
+                      onClick={() => handleReorder(actualIdx, actualIdx - 1)}
+                      style={{ background: "rgba(197, 168, 128, 0.15)", border: "1px solid rgba(197, 168, 128, 0.3)", color: "#F3E5AB", borderRadius: "4px", padding: "2px 6px", fontSize: "0.68rem", cursor: actualIdx === 0 ? "not-allowed" : "pointer" }}
+                      title="Move Left (Earlier)"
+                    >
+                      &larr;
+                    </button>
+
+                    <button
+                      type="button"
+                      disabled={actualIdx === categories.length - 1}
+                      onClick={() => handleReorder(actualIdx, actualIdx + 1)}
+                      style={{ background: "rgba(197, 168, 128, 0.15)", border: "1px solid rgba(197, 168, 128, 0.3)", color: "#F3E5AB", borderRadius: "4px", padding: "2px 6px", fontSize: "0.68rem", cursor: actualIdx === categories.length - 1 ? "not-allowed" : "pointer" }}
+                      title="Move Right (Later)"
+                    >
+                      &rarr;
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </div>
 

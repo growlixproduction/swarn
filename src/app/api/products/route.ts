@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { PRODUCTS_CATALOG } from "../../../lib/catalogData";
 import pool from "../../../lib/db";
-import { getCustomProducts, updateOrAddProduct } from "../../../lib/productsStore";
+import { getCustomProducts, updateOrAddProduct, saveCustomProducts } from "../../../lib/productsStore";
 import { getCategoriesFromStore, saveCategoryToStore } from "../../../lib/jsonStore";
 
 export async function GET() {
@@ -88,6 +88,12 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
+
+    // Reorder Action
+    if (body.action === "reorder" && Array.isArray(body.products)) {
+      saveCustomProducts(body.products);
+      return NextResponse.json({ success: true, message: "Products reordered successfully!", products: body.products });
+    }
     const {
       id,
       title,
