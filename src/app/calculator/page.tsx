@@ -156,16 +156,18 @@ export default function CalculatorPage() {
       <section
         style={{
           position: "relative",
-          backgroundImage: `url(${pageBanner.backgroundImage || "https://images.unsplash.com/photo-1611591475140-be3a7fcfb088?auto=format&fit=crop&w=1600&q=85"})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          background: pageBanner.backgroundImage
+            ? `url('${pageBanner.backgroundImage}') center/cover no-repeat`
+            : "linear-gradient(135deg, #1C1917 0%, #110E0C 100%)",
           padding: "3.5rem 1rem",
           color: "#FFFFFF",
           textAlign: "center",
           borderBottom: "1px solid var(--border-gold-subtle)"
         }}
       >
-        <div style={{ position: "absolute", inset: 0, background: pageBanner.overlayGradient || "linear-gradient(135deg, rgba(28, 25, 23, 0.95) 0%, rgba(17, 14, 12, 0.88) 100%)" }} />
+        {pageBanner.backgroundImage && (
+          <div style={{ position: "absolute", inset: 0, background: pageBanner.overlayGradient || "linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.72) 100%)" }} />
+        )}
         <div className="container" style={{ position: "relative", zIndex: 2, maxWidth: "850px" }}>
           {pageBanner.badge && (
             <span

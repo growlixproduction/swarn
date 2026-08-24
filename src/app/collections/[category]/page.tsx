@@ -57,7 +57,7 @@ export default function CollectionPage() {
     title: adminBanner?.title || formattedName,
     badge: adminBanner?.badge || currentMeta?.badge || "BIS 916 HALLMARKED • 100% PURITY",
     subtitle: adminBanner?.subtitle || currentMeta?.subtitle || `Explore handcrafted ${formattedName} in pure 22K hallmarked gold and certified diamonds.`,
-    heroBg: adminBanner?.backgroundImage || currentMeta?.heroBg || currentMeta?.circleImg || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    heroBg: adminBanner?.backgroundImage || currentMeta?.heroBg || "",
     guideTitle: currentMeta?.guideTitle || `${formattedName} Buying & Care Guide`,
     guideDesc: currentMeta?.guideDesc || "Every Swarn Mahal piece is accompanied by a BIS 916 purity hallmark and authentic certificate of quality."
   };
@@ -228,10 +228,13 @@ export default function CollectionPage() {
       {/* Category Hero Banner */}
       <section
         style={{
-          background: `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.7)), url('${meta.heroBg}') center/cover no-repeat`,
+          background: meta.heroBg
+            ? `linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.7)), url('${meta.heroBg}') center/cover no-repeat`
+            : "linear-gradient(135deg, #1C1917 0%, #110E0C 100%)",
           padding: "4.5rem 1rem",
           color: "#FFFFFF",
-          textAlign: "center"
+          textAlign: "center",
+          borderBottom: "1px solid var(--border-gold-subtle)"
         }}
       >
         <div className="container" style={{ maxWidth: "800px" }}>
