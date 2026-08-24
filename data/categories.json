@@ -220,6 +220,71 @@
     "guideTitle": "Diamond Pendants Guide",
     "guideDesc": "Certified VVS-VS clarity diamonds set in hallmarked 18K gold."
   },
+  "diamond-necklace": {
+    "slug": "diamond-necklace",
+    "parentSlug": "diamond",
+    "title": "Necklace & Haar",
+    "pageTitle": "Diamond Necklace & Haar | Swarn Mahal Ambikapur",
+    "badge": "FINEST BRILLIANCE • Certified Diamonds",
+    "subtitle": "Exquisite solitaire diamond necklaces and bridal diamond choker sets.",
+    "heroBg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "thumbnail_image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "guideTitle": "Diamond Necklace Guide",
+    "guideDesc": "Certified diamonds set in 18K white and yellow gold."
+  },
+  "diamond-bangles": {
+    "slug": "diamond-bangles",
+    "parentSlug": "diamond",
+    "title": "Diamond Bangles",
+    "pageTitle": "Diamond Bangles | Swarn Mahal Ambikapur",
+    "badge": "FINEST BRILLIANCE • Certified Diamonds",
+    "subtitle": "Handcrafted diamond bangles and single line eternity bangles.",
+    "heroBg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "thumbnail_image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "guideTitle": "Diamond Bangles Guide",
+    "guideDesc": "Certified diamonds set in hallmarked gold."
+  },
+  "diamond-bracelet": {
+    "slug": "diamond-bracelet",
+    "parentSlug": "diamond",
+    "title": "Diamond Bracelet",
+    "pageTitle": "Diamond Tennis Bracelet | Swarn Mahal Ambikapur",
+    "badge": "FINEST BRILLIANCE • Certified Diamonds",
+    "subtitle": "Classic diamond tennis bracelets and delicate solitaire wrist chains.",
+    "heroBg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "thumbnail_image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "guideTitle": "Diamond Bracelet Guide",
+    "guideDesc": "Certified VVS clarity diamonds."
+  },
+  "diamond-mangalsutra": {
+    "slug": "diamond-mangalsutra",
+    "parentSlug": "diamond",
+    "title": "Diamond Mangalsutra",
+    "pageTitle": "Diamond Mangalsutra | Swarn Mahal Ambikapur",
+    "badge": "FINEST BRILLIANCE • Certified Diamonds",
+    "subtitle": "Modern solitaire diamond mangalsutras and traditional black bead diamond pendants.",
+    "heroBg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "thumbnail_image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "guideTitle": "Diamond Mangalsutra Guide",
+    "guideDesc": "Certified diamonds in 18K gold."
+  },
+  "silver-rings": {
+    "slug": "silver-rings",
+    "parentSlug": "silver",
+    "title": "Silver Rings",
+    "pageTitle": "925 Silver Rings | Swarn Mahal Ambikapur",
+    "badge": "PURE 925 STERLING SILVER",
+    "subtitle": "Contemporary 925 sterling silver rings, band rings, and gemstone silver rings.",
+    "heroBg": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "guideTitle": "Silver Rings Care Guide",
+    "guideDesc": "Tarnish-free 925 sterling silver crafted for daily luxury."
+  },
   "silver-payal": {
     "slug": "silver-payal",
     "parentSlug": "silver",
@@ -246,17 +311,56 @@
     "guideTitle": "Silverware Care & Purity Guide",
     "guideDesc": "Authentic 92.5% and 99.9% pure silver products for pooja and auspicious occasions."
   },
-  "silver-rings": {
-    "slug": "silver-rings",
+  "silver-necklace": {
+    "slug": "silver-necklace",
     "parentSlug": "silver",
-    "title": "Silver Rings",
-    "pageTitle": "925 Silver Rings | Swarn Mahal Ambikapur",
+    "title": "Silver Necklace",
+    "pageTitle": "925 Silver Necklace | Swarn Mahal Ambikapur",
     "badge": "PURE 925 STERLING SILVER",
-    "subtitle": "Contemporary 925 sterling silver rings, band rings, and gemstone silver rings.",
+    "subtitle": "Handcrafted 925 silver necklaces, oxidized chokers, and silver pendant chains.",
     "heroBg": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=1600&q=85",
     "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
     "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
-    "guideTitle": "Silver Rings Care Guide",
-    "guideDesc": "Tarnish-free 925 sterling silver crafted for daily luxury."
+    "guideTitle": "Silver Necklace Care Guide",
+    "guideDesc": "Pure 925 hallmarked silver crafted with anti-tarnish protective coating."
+  },
+  "silver-earrings": {
+    "slug": "silver-earrings",
+    "parentSlug": "silver",
+    "title": "Silver Earrings",
+    "pageTitle": "925 Silver Earrings | Swarn Mahal Ambikapur",
+    "badge": "PURE 925 STERLING SILVER",
+    "subtitle": "Oxidized silver jhumkas, sterling silver studs, and contemporary silver drop earrings.",
+    "heroBg": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "guideTitle": "Silver Earrings Care Guide",
+    "guideDesc": "Lightweight 925 silver earrings designed for everyday comfort."
+  },
+  "silver-bangles": {
+    "slug": "silver-bangles",
+    "parentSlug": "silver",
+    "title": "Silver Bangles",
+    "pageTitle": "925 Silver Bangles | Swarn Mahal Ambikapur",
+    "badge": "PURE 925 STERLING SILVER",
+    "subtitle": "Traditional silver kadas, carved chandi bangles, and sleek silver wrist cuffs.",
+    "heroBg": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "guideTitle": "Silver Bangles Care Guide",
+    "guideDesc": "Durable sterling silver kadas and bangles with high polish finish."
+  },
+  "silver-bracelet": {
+    "slug": "silver-bracelet",
+    "parentSlug": "silver",
+    "title": "Silver Bracelet",
+    "pageTitle": "925 Silver Bracelet | Swarn Mahal Ambikapur",
+    "badge": "PURE 925 STERLING SILVER",
+    "subtitle": "Minimalist silver chain bracelets, charm bracelets, and men's chandi bracelets.",
+    "heroBg": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "guideTitle": "Silver Bracelet Care Guide",
+    "guideDesc": "Handcrafted 925 sterling silver bracelets."
   }
 }

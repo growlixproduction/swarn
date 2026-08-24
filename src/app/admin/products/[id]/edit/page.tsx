@@ -407,21 +407,21 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
                     { slug: "bangles", title: "Bangles & Kadas", category: "bangles" },
                     { slug: "bracelet", title: "Bracelet", category: "bangles" }
                   ] : primaryMaterial === "diamond" ? [
-                    { slug: "rings", title: "Rings & Solitaires", category: "rings" },
+                    { slug: "diamond-rings", title: "Rings & Solitaires", category: "rings" },
                     { slug: "diamond-earrings", title: "Diamond Earrings", category: "earrings" },
                     { slug: "diamond-pendants", title: "Diamond Pendants", category: "pendants" },
-                    { slug: "necklace", title: "Necklace & Haar", category: "necklaces" },
-                    { slug: "bangles", title: "Diamond Bangles", category: "bangles" },
-                    { slug: "bracelet", title: "Diamond Bracelet", category: "bangles" },
-                    { slug: "mangalsutra", title: "Diamond Mangalsutra", category: "mangalsutra" }
+                    { slug: "diamond-necklace", title: "Necklace & Haar", category: "necklaces" },
+                    { slug: "diamond-bangles", title: "Diamond Bangles", category: "bangles" },
+                    { slug: "diamond-bracelet", title: "Diamond Bracelet", category: "bangles" },
+                    { slug: "diamond-mangalsutra", title: "Diamond Mangalsutra", category: "mangalsutra" }
                   ] : [
-                    { slug: "rings", title: "Silver Rings", category: "rings" },
+                    { slug: "silver-rings", title: "Silver Rings", category: "rings" },
                     { slug: "silver-payal", title: "Silver Payal & Anklets", category: "silverware" },
                     { slug: "silverware", title: "Silverware & Coins", category: "silverware" },
-                    { slug: "necklace", title: "Silver Necklace", category: "necklaces" },
-                    { slug: "earrings", title: "Silver Earrings", category: "earrings" },
-                    { slug: "bangles", title: "Silver Bangles", category: "bangles" },
-                    { slug: "bracelet", title: "Silver Bracelet", category: "bangles" }
+                    { slug: "silver-necklace", title: "Silver Necklace", category: "necklaces" },
+                    { slug: "silver-earrings", title: "Silver Earrings", category: "earrings" },
+                    { slug: "silver-bangles", title: "Silver Bangles", category: "bangles" },
+                    { slug: "silver-bracelet", title: "Silver Bracelet", category: "bangles" }
                   ]
                 ).concat(customSubs).map(sub => {
                   const isSelected = navCategories.includes(sub.slug);
