@@ -71,7 +71,7 @@ const ReviewsSection: React.FC = () => {
         <div className="section-header reveal-up" style={{ textAlign: "center" }}>
           <div style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "#FFFFFF", border: "1px solid #E5E7EB", borderRadius: "30px", padding: "0.4rem 1rem", boxShadow: "0 2px 8px rgba(0,0,0,0.04)", marginBottom: "1rem" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" style={{ width: "18px", height: "18px" }} />
+            <img src="/asset/Google_G-logo.svg" alt="Google" style={{ width: "18px", height: "18px" }} />
             <span style={{ fontSize: "0.78rem", fontWeight: 700, color: "#374151", letterSpacing: "0.04em" }}>GOOGLE VERIFIED REVIEWS</span>
             <span style={{ color: "#F59E0B", fontSize: "0.85rem", fontWeight: 700 }}>4.9 ★★★★★</span>
           </div>
@@ -91,7 +91,7 @@ const ReviewsSection: React.FC = () => {
             style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", borderRadius: "24px", padding: "0.55rem 1.35rem", fontSize: "0.84rem", fontWeight: 700, textDecoration: "none" }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" style={{ width: "16px", height: "16px", background: "#FFF", borderRadius: "50%", padding: "2px" }} />
+            <img src="/asset/Google_G-logo.svg" alt="Google" style={{ width: "16px", height: "16px", background: "#FFF", borderRadius: "50%", padding: "2px" }} />
             <span>Leave a Review on Google</span>
             <i className="fa-solid fa-arrow-up-right-from-square" style={{ fontSize: "0.74rem" }}></i>
           </a>
@@ -145,7 +145,7 @@ const ReviewsSection: React.FC = () => {
 
                   {/* Google Logo */}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" style={{ width: "20px", height: "20px" }} />
+                  <img src="/asset/Google_G-logo.svg" alt="Google" style={{ width: "20px", height: "20px" }} />
                 </div>
 
                 {/* 5-Star Rating Row */}
