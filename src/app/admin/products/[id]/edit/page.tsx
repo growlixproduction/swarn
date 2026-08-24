@@ -106,12 +106,22 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
     loadProduct();
   }, [productId]);
 
-  // Auto Select Sub-Collection Helper
+  // Auto Select / Deselect Sub-Collection Helper (Toggle)
   const handleSelectSubCollection = (sub: { slug: string; title: string; category: string }) => {
-    setCategory(sub.category);
-    setSubCategory(sub.title);
-    setCollection(`${primaryMaterial.toUpperCase()} ${sub.title}`);
-    setNavCategories(prev => Array.from(new Set([...prev, "all", primaryMaterial, sub.slug, sub.category])));
+    const isCurrentlySelected = subCategory === sub.title || navCategories.includes(sub.slug);
+    if (isCurrentlySelected) {
+      // Deselect: remove from navCategories
+      setNavCategories(prev => prev.filter(c => c !== sub.slug && c !== sub.category));
+      setSubCategory("");
+      setCollection(`${primaryMaterial.toUpperCase()} Collection`);
+      setCategory(primaryMaterial === "silver" ? "silverware" : primaryMaterial === "diamond" ? "rings" : "necklaces");
+    } else {
+      // Select
+      setCategory(sub.category);
+      setSubCategory(sub.title);
+      setCollection(`${primaryMaterial.toUpperCase()} ${sub.title}`);
+      setNavCategories(prev => Array.from(new Set([...prev, "all", primaryMaterial, sub.slug, sub.category])));
+    }
   };
 
   // Image Upload Handlers

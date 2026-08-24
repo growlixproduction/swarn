@@ -1,5 +1,50 @@
 [
   {
+    "id": "SM-378",
+    "title": "gold ring",
+    "slug": "gold-ring",
+    "category": "earrings",
+    "primaryMaterial": "gold",
+    "navCategories": [
+      "all",
+      "earrings"
+    ],
+    "collection": "GOLD Earrings & Tops",
+    "description": "sfcsd",
+    "dimensions": "",
+    "netGoldWeightGrams": 10.5,
+    "grossWeightGrams": 11.025,
+    "defaultKarat": "22K",
+    "supportedKarats": [
+      "14K",
+      "18K",
+      "22K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow",
+      "rose",
+      "white"
+    ],
+    "makingChargePercent": 14,
+    "makingChargePerGram": 0,
+    "discountPercent": 0,
+    "huid": "SM916A8299",
+    "certificate": "BIS 916 Hallmarked",
+    "rating": 5,
+    "reviews": 1,
+    "isFeatured": true,
+    "isNew": true,
+    "images": {
+      "yellow": "/uploads/1787566407842_KCGR030__1.webp",
+      "hover": "/uploads/1787566443655_JT02841-1YS300_1_lar.jpg",
+      "gallery": [
+        "/uploads/1787566407842_KCGR030__1.webp",
+        "/uploads/1787566443655_JT02841-1YS300_1_lar.jpg"
+      ]
+    }
+  },
+  {
     "id": "SM-101",
     "title": "Rubans Modern Solitaire Ring",
     "slug": "rubans-modern-solitaire-ring",
