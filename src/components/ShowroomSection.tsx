@@ -50,21 +50,42 @@ const ShowroomSection: React.FC = () => {
           </a>
         </div>
 
-        {/* Right Mosaic Gallery with Real Asset Photos (Slides in from Right) */}
-        <div className="showroom-gallery-mosaic reveal-right reveal-stagger" id="showroom-mosaic">
+        {/* Right Mosaic Gallery with Real Asset Photos */}
+        <div className="showroom-gallery-mosaic" id="showroom-mosaic">
           <div className="mosaic-img-card card-tall">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (10).jpeg" alt="Main Luxury Showroom Floor" />
+            <img
+              src="/asset/WhatsApp%20Image%202026-08-13%20at%2012.17.43%20PM%20(10).jpeg"
+              onError={(e: any) => {
+                e.target.onerror = null;
+                e.target.src = "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=800&q=80";
+              }}
+              alt="Main Luxury Showroom Floor"
+            />
             <div className="mosaic-tag">Ambikapur Main Floor</div>
           </div>
           <div className="mosaic-img-card card-square">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (11).jpeg" alt="Precision Weighing Counter" />
+            <img
+              src="/asset/WhatsApp%20Image%202026-08-13%20at%2012.17.43%20PM%20(11).jpeg"
+              onError={(e: any) => {
+                e.target.onerror = null;
+                e.target.src = "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80";
+              }}
+              alt="Precision Weighing Counter"
+            />
             <div className="mosaic-tag">Live Karat Assay</div>
           </div>
           <div className="mosaic-img-card card-square">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (3).jpeg" alt="Bridal Consultation Bay" />
+            <img
+              src="/asset/WhatsApp%20Image%202026-08-13%20at%2012.17.43%20PM%20(3).jpeg"
+              onError={(e: any) => {
+                e.target.onerror = null;
+                e.target.src = "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80";
+              }}
+              alt="Bridal Consultation Bay"
+            />
             <div className="mosaic-tag">Bridal Trousseau Lounge</div>
           </div>
         </div>
