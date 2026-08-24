@@ -5,10 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useApp } from "@/context/AppContext";
 import { PricingEngine } from "@/lib/pricingEngine";
-import { KaratType, MetalTone, Product } from "@/lib/types";
+import { KaratType, Product } from "@/lib/types";
 import { PRODUCTS_CATALOG } from "@/lib/catalogData";
-import { ImageUploadInput } from "@/components/ImageUploadInput";
-
 
 export default function AdminEditProductPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -17,81 +15,35 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
 
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
-  // Dynamic Categories State
-  const [availableCategories, setAvailableCategories] = useState<Array<{ key: string; label: string }>>([
-    { key: "all", label: "All Jewellery" },
-    { key: "gold", label: "22K Gold" },
-    { key: "diamond", label: "Diamond Solitaires" },
-    { key: "earrings", label: "Earrings & Tops" },
-    { key: "daily-wear", label: "Daily Wear" },
-    { key: "gemstone", label: "Gemstone" },
-    { key: "wedding", label: "Bridal / Wedding" },
-    { key: "gifting", label: "Gifting Suite" },
-    { key: "under-50k", label: "Under ₹50,000" }
-  ]);
-
-  useEffect(() => {
-    fetch("/api/categories")
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.categories) {
-          const list = Object.values(data.categories).map((cat: any) => ({
-            key: cat.slug,
-            label: cat.title || cat.name
-          }));
-          if (list.length > 0) {
-            setAvailableCategories(list);
-          }
-        }
-      })
-      .catch(err => console.warn("Failed to fetch categories:", err));
-  }, []);
-
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
   // Form State
   const [sku, setSku] = useState(productId);
   const [title, setTitle] = useState("");
-  const [collection, setCollection] = useState("General Collection");
-  const [category, setCategory] = useState("rings");
+  const [collection, setCollection] = useState("Gold Collection");
+  const [category, setCategory] = useState("necklaces");
   const [primaryMaterial, setPrimaryMaterial] = useState<"gold" | "diamond" | "silver" | "other">("gold");
-  const [subCategory, setSubCategory] = useState("");
-  const [navCategories, setNavCategories] = useState<string[]>(["all"]);
+  const [subCategory, setSubCategory] = useState("Necklace & Rani Haar");
+  const [navCategories, setNavCategories] = useState<string[]>(["all", "gold", "necklace"]);
 
-  // Weights & Karats
+  // Pricing & Weights
   const [netGoldWeight, setNetGoldWeight] = useState<number>(4.5);
-  const [grossWeight, setGrossWeight] = useState<number>(4.8);
   const [defaultKarat, setDefaultKarat] = useState<KaratType>("22K");
-  const [defaultColor, setDefaultColor] = useState<MetalTone>("yellow");
-
-  // Making & Discounts
-  const [makingType, setMakingType] = useState<"percent" | "per_gram">("percent");
-  const [makingValue, setMakingValue] = useState<number>(15);
+  const [makingValue, setMakingValue] = useState<number>(14);
   const [discountPercent, setDiscountPercent] = useState<number>(0);
 
-  // Diamonds & Gemstones
+  // Diamonds
   const [hasDiamonds, setHasDiamonds] = useState(false);
-  const [stoneCount, setStoneCount] = useState<number>(1);
   const [diamondCarat, setDiamondCarat] = useState<number>(0.35);
-  const [diamondClarity, setDiamondClarity] = useState("VVS-EF");
-  const [diamondCut, setDiamondCut] = useState("Round Brilliant");
   const [pricePerCarat, setPricePerCarat] = useState<number>(68000);
 
-  // Images
-  const [imageYellow, setImageYellow] = useState("");
-  const [imageRose, setImageRose] = useState("");
-  const [imageWhite, setImageWhite] = useState("");
-  const [imageHover, setImageHover] = useState("");
+  // Images (Multi-Image Array)
+  const [imagesList, setImagesList] = useState<string[]>([]);
+  const [isUploading, setIsUploading] = useState(false);
+  const [imageUrlInput, setImageUrlInput] = useState("");
 
-  // Legal & Descriptions
-  const [huid, setHuid] = useState("");
-  const [certificate, setCertificate] = useState("BIS 916");
+  // Description
   const [description, setDescription] = useState("");
-  const [dimensions, setDimensions] = useState("");
-
-  // Search Tags & Hashtags
-  const [searchKeywords, setSearchKeywords] = useState("");
-  const [hashtags, setHashtags] = useState("");
 
   // Fetch product data on load
   useEffect(() => {
@@ -117,135 +69,144 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
           setCategory(targetProduct.category);
           setPrimaryMaterial(targetProduct.primaryMaterial || (targetProduct.diamondSpecs ? "diamond" : targetProduct.category === "silverware" ? "silver" : "gold"));
           setNavCategories(targetProduct.navCategories || ["all"]);
-          setNetGoldWeight(targetProduct.netGoldWeightGrams);
-          setGrossWeight(targetProduct.grossWeightGrams);
+          setNetGoldWeight(targetProduct.netGoldWeightGrams || 4.5);
           setDefaultKarat(targetProduct.defaultKarat || "22K");
-          setDefaultColor(targetProduct.defaultColor || "yellow");
-          setMakingValue(targetProduct.makingChargePercent || targetProduct.makingChargePerGram || 15);
-          setMakingType(targetProduct.makingChargePerGram ? "per_gram" : "percent");
+          setMakingValue(targetProduct.makingChargePercent || 14);
           setDiscountPercent(targetProduct.discountPercent || 0);
 
           if (targetProduct.diamondSpecs) {
             setHasDiamonds(true);
-            setStoneCount(targetProduct.diamondSpecs.stoneCount || 1);
             setDiamondCarat(targetProduct.diamondSpecs.totalCaratWeight || 0.35);
-            setDiamondClarity(targetProduct.diamondSpecs.clarity || "VVS-EF");
-            setDiamondCut(targetProduct.diamondSpecs.cut || "Round Brilliant");
             setPricePerCarat(targetProduct.diamondSpecs.pricePerCarat || 68000);
           }
 
-          if (targetProduct.images) {
-            setImageYellow(targetProduct.images.yellow || "");
-            setImageRose(targetProduct.images.rose || "");
-            setImageWhite(targetProduct.images.white || "");
-            setImageHover(targetProduct.images.hover || targetProduct.images.yellow || "");
-          }
-
-          setHuid(targetProduct.huid || "");
-          setCertificate(targetProduct.certificate || "BIS 916");
           setDescription(targetProduct.description || "");
-          setDimensions(targetProduct.dimensions || "");
+
+          // Load image gallery
+          const imgs: string[] = [];
+          if (targetProduct.images?.gallery && targetProduct.images.gallery.length > 0) {
+            imgs.push(...targetProduct.images.gallery);
+          } else {
+            if (targetProduct.images?.yellow) imgs.push(targetProduct.images.yellow);
+            if (targetProduct.images?.hover && targetProduct.images.hover !== targetProduct.images?.yellow) imgs.push(targetProduct.images.hover);
+            if (targetProduct.images?.rose) imgs.push(targetProduct.images.rose);
+            if (targetProduct.images?.white) imgs.push(targetProduct.images.white);
+          }
+          if (imgs.length === 0) imgs.push("https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80");
+          setImagesList(Array.from(new Set(imgs)));
+        } else {
+          setSaveMessage({ type: "error", text: `Product "${productId}" not found` });
         }
-      } catch (err) {
-        console.warn("Failed to load product for editing:", err);
+      } catch (err: any) {
+        console.error("Product load error:", err);
       } finally {
         setIsLoading(false);
       }
     }
-
     loadProduct();
   }, [productId]);
 
-  // Product object for live pricing engine computation
+  // Auto Select Sub-Collection Helper
+  const handleSelectSubCollection = (sub: { slug: string; title: string; category: string }) => {
+    setCategory(sub.category);
+    setSubCategory(sub.title);
+    setCollection(`${primaryMaterial.toUpperCase()} ${sub.title}`);
+    setNavCategories(prev => Array.from(new Set([...prev, "all", primaryMaterial, sub.slug, sub.category])));
+  };
+
+  // Image Upload Handlers
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    setIsUploading(true);
+    setSaveMessage(null);
+
+    try {
+      const uploadedUrls: string[] = [];
+      for (let i = 0; i < files.length; i++) {
+        const formData = new FormData();
+        formData.append("file", files[i]);
+        const res = await fetch("/api/upload", { method: "POST", body: formData });
+        const data = await res.json();
+        if (res.ok && data.url) {
+          uploadedUrls.push(data.url);
+        }
+      }
+      if (uploadedUrls.length > 0) {
+        setImagesList(prev => [...prev, ...uploadedUrls]);
+        setSaveMessage({ type: "success", text: `Uploaded ${uploadedUrls.length} image(s)!` });
+      }
+    } catch (err: any) {
+      setSaveMessage({ type: "error", text: err.message || "Failed to upload images" });
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleAddImageUrl = () => {
+    if (imageUrlInput.trim()) {
+      setImagesList(prev => [...prev, imageUrlInput.trim()]);
+      setImageUrlInput("");
+    }
+  };
+
+  const handleRemoveImage = (idx: number) => {
+    setImagesList(prev => prev.filter((_, i) => i !== idx));
+  };
+
+  // Mock product object for pricing engine
   const mockProduct: Product = {
     id: sku,
-    title: title || "Sample Piece",
-    slug: title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+    title: title || "Jewellery Piece",
+    slug: (title || "item").toLowerCase().replace(/[^a-z0-9]+/g, "-"),
     collection,
     category: category as any,
+    primaryMaterial,
     navCategories,
     isFeatured: true,
-    isNew: false,
-    rating: 4.9,
-    reviews: 12,
+    isNew: true,
+    rating: 5.0,
+    reviews: 1,
     netGoldWeightGrams: netGoldWeight,
-    grossWeightGrams: grossWeight,
+    grossWeightGrams: netGoldWeight * 1.05,
     defaultKarat,
     supportedKarats: ["14K", "18K", "22K"],
-    defaultColor,
+    defaultColor: "yellow",
     supportedColors: ["yellow", "rose", "white"],
-    makingChargePercent: makingType === "percent" ? makingValue : undefined,
-    makingChargePerGram: makingType === "per_gram" ? makingValue : undefined,
+    makingChargePercent: makingValue,
     discountPercent,
     diamondSpecs: hasDiamonds
-      ? {
-          stoneCount,
-          totalCaratWeight: diamondCarat,
-          clarity: diamondClarity,
-          cut: diamondCut,
-          pricePerCarat
-        }
+      ? { stoneCount: 1, totalCaratWeight: diamondCarat, clarity: "VVS-EF", cut: "Round", pricePerCarat }
       : undefined,
     images: {
-      yellow: imageYellow || "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
-      rose: imageRose,
-      white: imageWhite,
-      hover: imageHover || imageYellow,
-      gallery: [imageYellow]
+      yellow: imagesList[0] || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      hover: imagesList[1] || imagesList[0] || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      gallery: imagesList
     },
-    huid,
-    certificate,
-    description,
-    dimensions
+    huid: "SM916A8299",
+    certificate: "BIS 916 Hallmarked",
+    description
   };
 
   const breakdown = PricingEngine.calculateBreakdown(mockProduct, defaultKarat, bullionRates, null, {
-    type: makingType,
+    type: "percent",
     value: makingValue
   });
 
-  const toggleNavCategory = (catKey: string) => {
-    setNavCategories(prev => (prev.includes(catKey) ? prev.filter(c => c !== catKey) : [...prev, catKey]));
-  };
-
+  // Save Edit Handler
   const handleSaveProduct = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
     setSaveMessage(null);
 
     const payload = {
-      id: sku,
-      title,
-      slug: title.toLowerCase().replace(/[^a-z0-9]+/g, "-"),
-      collection,
-      category,
-      primaryMaterial,
-      netGoldWeightGrams: netGoldWeight,
-      grossWeightGrams: grossWeight,
-      defaultKarat,
-      defaultColor,
-      makingChargePercent: makingType === "percent" ? makingValue : undefined,
-      makingChargePerGram: makingType === "per_gram" ? makingValue : undefined,
-      discountPercent,
-      huid,
-      certificate,
-      description,
-      dimensions,
+      ...mockProduct,
       images: {
-        yellow: imageYellow,
-        rose: imageRose || undefined,
-        white: imageWhite || undefined,
-        hover: imageHover || imageYellow
-      },
-      diamondSpecs: hasDiamonds
-        ? {
-            stoneCount,
-            totalCaratWeight: diamondCarat,
-            clarity: diamondClarity,
-            cut: diamondCut,
-            pricePerCarat
-          }
-        : undefined
+        yellow: imagesList[0] || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+        hover: imagesList[1] || imagesList[0] || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+        gallery: imagesList
+      }
     };
 
     try {
@@ -257,11 +218,11 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
 
       const data = await res.json();
       if (res.ok && data.success) {
-        setSaveMessage({ type: "success", text: `Product "${title}" updated successfully in Database!` });
+        setSaveMessage({ type: "success", text: `Product "${title}" updated successfully!` });
         await refreshProducts();
         setTimeout(() => {
           router.push("/admin/products");
-        }, 1200);
+        }, 1000);
       } else {
         setSaveMessage({ type: "error", text: data.error || "Failed to update product" });
       }
@@ -276,115 +237,96 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
     return (
       <div style={{ padding: "4rem", textAlign: "center", color: "#C5A880" }}>
         <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: "2rem", marginBottom: "1rem", display: "block" }}></i>
-        Loading product specs for <strong>{productId}</strong>...
+        Loading details for <strong>{productId}</strong>...
       </div>
     );
   }
 
   return (
-    <div>
-      <div className="admin-page-header">
+    <div style={{ maxWidth: "1280px", margin: "0 auto", paddingBottom: "4rem" }}>
+      {/* Header */}
+      <div className="admin-page-header" style={{ marginBottom: "1.5rem" }}>
         <div>
           <div style={{ fontSize: "0.8rem", color: "#8C827A", marginBottom: "0.25rem" }}>
-            <Link href="/admin/products" style={{ color: "#C5A880", textDecoration: "none" }}>Products</Link> / Edit Piece ({sku})
+            <Link href="/admin/products" style={{ color: "#C5A880", textDecoration: "none" }}>Products</Link> / Edit Piece
           </div>
-          <h1 className="admin-page-title">Edit Jewellery Piece: {title || sku}</h1>
-          <p className="admin-page-desc">
-            Modify physical weights, karat purities, making charges, diamond grades, and multi-tone imagery.
+          <h1 className="admin-page-title" style={{ fontSize: "1.6rem" }}>Edit Piece: {sku}</h1>
+          <p className="admin-page-desc" style={{ fontSize: "0.85rem" }}>
+            Update collection, weights, diamond specs, or photos for this item.
           </p>
         </div>
 
-        <div style={{ display: "flex", gap: "0.75rem" }}>
-          <Link href="/admin/products" className="btn btn-outline btn-sm">
-            Cancel
-          </Link>
-          <button type="submit" form="edit-product-form" className="btn btn-gold btn-sm" disabled={isSaving}>
-            {isSaving ? (
-              <>
-                <i className="fa-solid fa-spinner fa-spin"></i> Saving...
-              </>
-            ) : (
-              <>
-                <i className="fa-solid fa-floppy-disk"></i> Save & Publish Changes
-              </>
-            )}
-          </button>
-        </div>
+        <button type="submit" form="edit-product-form" className="btn btn-gold btn-sm" disabled={isSaving}>
+          {isSaving ? <i className="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-floppy-disk"></i>}
+          <span>{isSaving ? "Saving..." : "Save Changes"}</span>
+        </button>
       </div>
 
       {saveMessage && (
         <div
           style={{
-            padding: "0.9rem 1.25rem",
-            marginBottom: "1.5rem",
+            padding: "0.85rem 1.25rem",
             borderRadius: "8px",
+            marginBottom: "1.5rem",
             fontSize: "0.9rem",
-            background: saveMessage.type === "success" ? "rgba(16, 185, 129, 0.2)" : "rgba(239, 68, 68, 0.2)",
+            fontWeight: 600,
+            background: saveMessage.type === "success" ? "rgba(16, 185, 129, 0.18)" : "rgba(239, 68, 68, 0.18)",
             border: `1px solid ${saveMessage.type === "success" ? "#10B981" : "#EF4444"}`,
-            color: saveMessage.type === "success" ? "#A7F3D0" : "#FCA5A5"
+            color: saveMessage.type === "success" ? "#34D399" : "#F87171",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem"
           }}
         >
-          <i className={`fa-solid ${saveMessage.type === "success" ? "fa-circle-check" : "fa-triangle-exclamation"}`} style={{ marginRight: "0.5rem" }}></i>
+          <i className={`fa-solid ${saveMessage.type === "success" ? "fa-circle-check" : "fa-triangle-exclamation"}`}></i>
           {saveMessage.text}
         </div>
       )}
 
       <form id="edit-product-form" onSubmit={handleSaveProduct} className="admin-form-grid">
-        {/* Left Column: Form Fields */}
-        <div>
-          {/* Section 1: Basic Identity & Categorization */}
+        {/* Left Side: Clean Form Fields */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+          
+          {/* Card 1: Title & Category Selection */}
           <div className="admin-card">
-            <h3 style={{ fontSize: "1.05rem", color: "#FFFFFF", marginBottom: "1.25rem", fontFamily: "var(--font-serif)" }}>
-              1. Identity, Category & Collections
+            <h3 style={{ fontSize: "1.05rem", color: "#F5EAD6", marginBottom: "1.1rem", fontFamily: "var(--font-serif)" }}>
+              1. Title & Collections
             </h3>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-              <div className="admin-form-group">
-                <label className="admin-label">Product SKU / Code *</label>
+            <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "1rem", marginBottom: "1.25rem" }}>
+              <div className="admin-form-group" style={{ margin: 0 }}>
+                <label className="admin-label">Product Title *</label>
+                <input
+                  type="text"
+                  required
+                  className="admin-input"
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
+                />
+              </div>
+
+              <div className="admin-form-group" style={{ margin: 0 }}>
+                <label className="admin-label">Product SKU / Code</label>
                 <input
                   type="text"
                   className="admin-input"
                   value={sku}
-                  onChange={e => setSku(e.target.value)}
                   readOnly
-                  style={{ opacity: 0.8, cursor: "not-allowed" }}
-                />
-              </div>
-
-              <div className="admin-form-group">
-                <label className="admin-label">Collection Name *</label>
-                <input
-                  type="text"
-                  className="admin-input"
-                  value={collection}
-                  onChange={e => setCollection(e.target.value)}
-                  required
+                  style={{ opacity: 0.7, cursor: "not-allowed" }}
                 />
               </div>
             </div>
 
-            <div className="admin-form-group">
-              <label className="admin-label">Product Title *</label>
-              <input
-                type="text"
-                className="admin-input"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-                required
-              />
-            </div>
-
-            {/* Primary Metal Collection Selector Cards (Cream/Gold Luxury Theme) */}
+            {/* Main Metal Selector */}
             <div className="admin-form-group">
               <label className="admin-label" style={{ color: "#F5EAD6", fontWeight: 700 }}>
-                1. Select Main Metal Collection *
+                Main Metal / Collection *
               </label>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.75rem" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "0.75rem" }}>
                 {[
-                  { key: "gold", title: "Gold Collection", icon: "🟡", desc: "22K/24K Gold Items" },
-                  { key: "diamond", title: "Diamond Collection", icon: "💎", desc: "Solitaires & VVS Items" },
-                  { key: "silver", title: "Silver Collection", icon: "⚪", desc: "925 Silver & Payal" },
-                  { key: "other", title: "Other / Special", icon: "✨", desc: "Custom Heirlooms" }
+                  { key: "gold", title: "Gold Collection", icon: "🟡" },
+                  { key: "diamond", title: "Diamond Collection", icon: "💎" },
+                  { key: "silver", title: "Silver Collection", icon: "⚪" }
                 ].map(mat => {
                   const isSelected = primaryMaterial === mat.key;
                   return (
@@ -393,92 +335,73 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
                       type="button"
                       onClick={() => {
                         setPrimaryMaterial(mat.key as any);
-                        setNavCategories(prev => {
-                          const base = prev.filter(c => !["gold", "diamond", "silver", "other"].includes(c));
-                          return Array.from(new Set([...base, "all", mat.key]));
-                        });
+                        setNavCategories(prev => Array.from(new Set([...prev.filter(c => !["gold", "diamond", "silver"].includes(c)), "all", mat.key])));
                       }}
                       style={{
-                        padding: "0.85rem 0.65rem",
+                        padding: "0.75rem 0.65rem",
                         borderRadius: "10px",
-                        textAlign: "left",
-                        background: isSelected ? "linear-gradient(135deg, rgba(245, 234, 214, 0.18) 0%, rgba(197, 168, 128, 0.25) 100%)" : "#110E0C",
+                        textAlign: "center",
+                        background: isSelected ? "linear-gradient(135deg, rgba(245, 234, 214, 0.2) 0%, rgba(197, 168, 128, 0.3) 100%)" : "#110E0C",
                         border: isSelected ? "2px solid #D4B68A" : "1px solid rgba(197, 168, 128, 0.2)",
                         color: isSelected ? "#F5EAD6" : "#A3978B",
                         cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        boxShadow: isSelected ? "0 4px 15px rgba(212, 182, 138, 0.2)" : "none"
+                        transition: "all 0.2s ease"
                       }}
                     >
-                      <div style={{ fontSize: "1.2rem", marginBottom: "0.25rem" }}>{mat.icon}</div>
-                      <strong style={{ display: "block", fontSize: "0.85rem", color: isSelected ? "#F5EAD6" : "#E2D8CC" }}>
+                      <span style={{ fontSize: "1.2rem", marginRight: "0.4rem" }}>{mat.icon}</span>
+                      <strong style={{ fontSize: "0.88rem", color: isSelected ? "#F5EAD6" : "#E2D8CC" }}>
                         {mat.title}
                       </strong>
-                      <span style={{ fontSize: "0.68rem", opacity: 0.75 }}>{mat.desc}</span>
                     </button>
                   );
                 })}
               </div>
             </div>
 
-            {/* Sub-Collection Selection Chips (Auto-Maps to Category, SubCategory & NavCategories) */}
-            <div className="admin-form-group">
-              <label className="admin-label" style={{ color: "#F5EAD6", fontWeight: 700, display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                <i className="fa-solid fa-layer-group" style={{ color: "#D4B68A" }}></i>
-                2. Choose Sub-Collection / Category *
+            {/* Sub-Collection Selector Chips */}
+            <div className="admin-form-group" style={{ margin: 0 }}>
+              <label className="admin-label" style={{ color: "#F5EAD6", fontWeight: 700 }}>
+                Sub-Collection / Category *
               </label>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", padding: "0.75rem", background: "#110E0C", border: "1px solid rgba(197, 168, 128, 0.2)", borderRadius: "10px" }}>
                 {(
                   primaryMaterial === "gold" ? [
-                    { slug: "necklace", title: "Necklace & Rani Haar", category: "necklaces", icon: "fa-crown" },
-                    { slug: "earrings", title: "Earrings & Tops", category: "earrings", icon: "fa-spa" },
-                    { slug: "nose-pins", title: "Nose Pins", category: "nose-pins", icon: "fa-ring" },
-                    { slug: "gold-hoops-balis", title: "Gold Hoops & Balis", category: "earrings", icon: "fa-circle-notch" },
-                    { slug: "pendants", title: "Pendants", category: "pendants", icon: "fa-gem" },
-                    { slug: "mangalsutra", title: "Mangalsutra", category: "mangalsutra", icon: "fa-heart" },
-                    { slug: "chains", title: "Chains", category: "chains", icon: "fa-link" },
-                    { slug: "bangles", title: "Bangles & Kadas", category: "bangles", icon: "fa-circle" },
-                    { slug: "bracelet", title: "Bracelet", category: "bangles", icon: "fa-ring" }
+                    { slug: "necklace", title: "Necklace & Rani Haar", category: "necklaces" },
+                    { slug: "earrings", title: "Earrings & Tops", category: "earrings" },
+                    { slug: "nose-pins", title: "Nose Pins", category: "nose-pins" },
+                    { slug: "gold-hoops-balis", title: "Gold Hoops & Balis", category: "earrings" },
+                    { slug: "pendants", title: "Pendants", category: "pendants" },
+                    { slug: "mangalsutra", title: "Mangalsutra", category: "mangalsutra" },
+                    { slug: "chains", title: "Chains", category: "chains" },
+                    { slug: "bangles", title: "Bangles & Kadas", category: "bangles" },
+                    { slug: "bracelet", title: "Bracelet", category: "bangles" }
                   ] : primaryMaterial === "diamond" ? [
-                    { slug: "diamond-rings", title: "Diamond Rings & Solitaires", category: "rings", icon: "fa-ring" },
-                    { slug: "diamond-earrings", title: "Diamond Earrings", category: "earrings", icon: "fa-gem" },
-                    { slug: "diamond-pendants", title: "Diamond Pendants", category: "pendants", icon: "fa-gem" }
-                  ] : primaryMaterial === "silver" ? [
-                    { slug: "silver-payal", title: "Silver Payal & Anklets", category: "silverware", icon: "fa-spa" },
-                    { slug: "silverware", title: "Silverware & Coins", category: "silverware", icon: "fa-coins" }
+                    { slug: "diamond-rings", title: "Diamond Rings & Solitaires", category: "rings" },
+                    { slug: "diamond-earrings", title: "Diamond Earrings", category: "earrings" },
+                    { slug: "diamond-pendants", title: "Diamond Pendants", category: "pendants" }
                   ] : [
-                    { slug: "wedding", title: "Bridal / Wedding", category: "necklaces", icon: "fa-gem" },
-                    { slug: "daily-wear", title: "Daily Wear", category: "chains", icon: "fa-spa" },
-                    { slug: "gifting", title: "Gifting Suite", category: "pendants", icon: "fa-gift" }
+                    { slug: "silver-payal", title: "Silver Payal & Anklets", category: "silverware" },
+                    { slug: "silverware", title: "Silverware & Coins", category: "silverware" }
                   ]
                 ).map(sub => {
-                  const isSubSelected = navCategories.includes(sub.slug) || category === sub.category;
+                  const isSelected = subCategory === sub.title || navCategories.includes(sub.slug);
                   return (
                     <button
                       key={sub.slug}
                       type="button"
-                      onClick={() => {
-                        setCategory(sub.category);
-                        setSubCategory(sub.title);
-                        setCollection(`${primaryMaterial.toUpperCase()} ${sub.title} Curation`);
-                        setNavCategories(prev => Array.from(new Set([...prev, "all", primaryMaterial, sub.slug, sub.category])));
-                      }}
+                      onClick={() => handleSelectSubCollection(sub)}
                       style={{
                         padding: "0.45rem 0.85rem",
                         borderRadius: "20px",
                         fontSize: "0.8rem",
-                        fontWeight: isSubSelected ? 700 : 500,
-                        background: isSubSelected ? "#F5EAD6" : "rgba(255,255,255,0.04)",
-                        color: isSubSelected ? "#832729" : "#C5B6A6",
-                        border: isSubSelected ? "1.5px solid #D4B68A" : "1px solid rgba(197, 168, 128, 0.2)",
+                        fontWeight: isSelected ? 700 : 500,
+                        background: isSelected ? "#F5EAD6" : "rgba(255,255,255,0.04)",
+                        color: isSelected ? "#832729" : "#C5B6A6",
+                        border: isSelected ? "1.5px solid #D4B68A" : "1px solid rgba(197, 168, 128, 0.2)",
                         cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "0.4rem"
+                        transition: "all 0.2s ease"
                       }}
                     >
-                      <i className={`fa-solid ${sub.icon}`} style={{ fontSize: "0.75rem", color: isSubSelected ? "#832729" : "#C5A880" }}></i>
                       <span>{sub.title}</span>
                     </button>
                   );
@@ -486,122 +409,48 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
               </div>
             </div>
 
-            {/* Live Storefront Placement Preview Summary Box (Cream Theme) */}
-            <div style={{ background: "rgba(245, 234, 214, 0.08)", border: "1.5px solid #D4B68A", borderRadius: "10px", padding: "0.85rem 1.1rem", marginBottom: "1.25rem" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#F5EAD6", fontWeight: 700, fontSize: "0.86rem" }}>
-                <i className="fa-solid fa-circle-check" style={{ color: "#4ADE80" }}></i>
-                <span>Storefront Auto-Placement Summary:</span>
-              </div>
-              <p style={{ margin: "0.35rem 0 0", fontSize: "0.8rem", color: "#E2D8CC", lineHeight: 1.5 }}>
-                This piece will automatically show under: <strong style={{ color: "#F5EAD6" }}>{primaryMaterial.toUpperCase()} Collection ➔ {subCategory || category}</strong> (/collections/{navCategories.find(c => c !== "all" && c !== primaryMaterial) || category})
-              </p>
-            </div>
-
-            <div className="admin-form-group">
-              <label className="admin-label">Optional Filter Tags (Multi-Select):</label>
-              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
-                {availableCategories.map(c => (
-                  <button
-                    key={c.key}
-                    type="button"
-                    className={`filter-color-pill ${navCategories.includes(c.key) ? "active" : ""}`}
-                    style={{
-                      padding: "0.35rem 0.75rem",
-                      borderRadius: "6px",
-                      fontSize: "0.75rem",
-                      fontWeight: 600,
-                      border: "1px solid rgba(197, 168, 128, 0.3)",
-                      background: navCategories.includes(c.key) ? "#C5A880" : "#110E0C",
-                      color: navCategories.includes(c.key) ? "#14110E" : "#EDE8E3",
-                      cursor: "pointer"
-                    }}
-                    onClick={() => toggleNavCategory(c.key)}
-                  >
-                    {c.label}
-                  </button>
-                ))}
-              </div>
+            {/* Placement Summary */}
+            <div style={{ marginTop: "1rem", padding: "0.65rem 0.85rem", background: "rgba(245, 234, 214, 0.08)", border: "1px solid #D4B68A", borderRadius: "8px", fontSize: "0.78rem", color: "#E2D8CC" }}>
+              📍 <strong>Live Storefront Placement:</strong> Will show under <strong>{primaryMaterial.toUpperCase()} Collection ➔ {subCategory}</strong>
             </div>
           </div>
 
-          {/* Section 2: Metal, Weights & Making Charges */}
+          {/* Card 2: Weight & Pricing */}
           <div className="admin-card">
-            <h3 style={{ fontSize: "1.05rem", color: "#FFFFFF", marginBottom: "1.25rem", fontFamily: "var(--font-serif)" }}>
-              2. Precious Metal Weights & Making Charges
+            <h3 style={{ fontSize: "1.05rem", color: "#F5EAD6", marginBottom: "1.1rem", fontFamily: "var(--font-serif)" }}>
+              2. Weight & Pricing Factors
             </h3>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-              <div className="admin-form-group">
-                <label className="admin-label">Net Gold Weight (Grams) *</label>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "1rem" }}>
+              <div className="admin-form-group" style={{ margin: 0 }}>
+                <label className="admin-label">Gold Net Weight (Grams) *</label>
                 <input
                   type="number"
-                  step="0.001"
-                  min="0.001"
+                  step="0.01"
+                  min="0.1"
+                  required
                   className="admin-input"
                   value={netGoldWeight}
                   onChange={e => setNetGoldWeight(parseFloat(e.target.value) || 0)}
-                  required
                 />
               </div>
 
-              <div className="admin-form-group">
-                <label className="admin-label">Gross Item Weight (Grams) *</label>
-                <input
-                  type="number"
-                  step="0.001"
-                  min="0.001"
-                  className="admin-input"
-                  value={grossWeight}
-                  onChange={e => setGrossWeight(parseFloat(e.target.value) || 0)}
-                  required
-                />
-              </div>
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-              <div className="admin-form-group">
-                <label className="admin-label">Default Karat Purity *</label>
+              <div className="admin-form-group" style={{ margin: 0 }}>
+                <label className="admin-label">Karat Purity *</label>
                 <select
                   className="admin-select"
                   value={defaultKarat}
                   onChange={e => setDefaultKarat(e.target.value as KaratType)}
                 >
-                  <option value="24K">24K Pure Bullion (99.9%)</option>
-                  <option value="22K">22K BIS 916 Hallmark (91.6%)</option>
-                  <option value="18K">18K Diamond Gold (75.0%)</option>
-                  <option value="14K">14K Luxe Gold (58.3%)</option>
+                  <option value="22K">22K Gold (916 Hallmark)</option>
+                  <option value="18K">18K Gold (750 Hallmark)</option>
+                  <option value="24K">24K Pure Gold (999 Purity)</option>
+                  <option value="14K">14K Luxe Gold (585)</option>
                 </select>
               </div>
 
-              <div className="admin-form-group">
-                <label className="admin-label">Default Metal Tone *</label>
-                <select
-                  className="admin-select"
-                  value={defaultColor}
-                  onChange={e => setDefaultColor(e.target.value as MetalTone)}
-                >
-                  <option value="yellow">Yellow Gold</option>
-                  <option value="rose">Rose Gold</option>
-                  <option value="white">White Gold</option>
-                </select>
-              </div>
-            </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
-              <div className="admin-form-group">
-                <label className="admin-label">Making Charge Mode</label>
-                <select
-                  className="admin-select"
-                  value={makingType}
-                  onChange={e => setMakingType(e.target.value as any)}
-                >
-                  <option value="percent">% of Gold Value</option>
-                  <option value="per_gram">₹ / Gram Gross</option>
-                </select>
-              </div>
-
-              <div className="admin-form-group">
-                <label className="admin-label">Making Charge Value ({makingType === "percent" ? "%" : "₹/g"})</label>
+              <div className="admin-form-group" style={{ margin: 0 }}>
+                <label className="admin-label">Making Charge (%) *</label>
                 <input
                   type="number"
                   step="0.5"
@@ -609,14 +458,14 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
                   className="admin-input"
                   value={makingValue}
                   onChange={e => setMakingValue(parseFloat(e.target.value) || 0)}
-                  required
                 />
               </div>
 
-              <div className="admin-form-group">
-                <label className="admin-label">Festive Discount (%)</label>
+              <div className="admin-form-group" style={{ margin: 0 }}>
+                <label className="admin-label">Discount (%)</label>
                 <input
                   type="number"
+                  step="1"
                   min="0"
                   max="100"
                   className="admin-input"
@@ -625,260 +474,201 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
                 />
               </div>
             </div>
-          </div>
 
-          {/* Section 3: Diamond & Solitaire Specs */}
-          <div className="admin-card">
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem" }}>
-              <h3 style={{ fontSize: "1.05rem", color: "#FFFFFF", margin: 0, fontFamily: "var(--font-serif)" }}>
-                3. Diamonds & Precious Gemstones
-              </h3>
-              <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.82rem", color: "#C5A880", cursor: "pointer" }}>
+            {/* Optional Diamonds Checkbox */}
+            <div style={{ marginTop: "1.25rem", paddingTop: "1rem", borderTop: "1px solid rgba(197, 168, 128, 0.15)" }}>
+              <label style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#F5EAD6", fontSize: "0.86rem", cursor: "pointer" }}>
                 <input
                   type="checkbox"
                   checked={hasDiamonds}
                   onChange={e => setHasDiamonds(e.target.checked)}
+                  style={{ accentColor: "#D4B68A", width: "16px", height: "16px" }}
                 />
-                <span>Include Diamonds / Solitaires</span>
+                <strong>Include Diamond / Solitaire Details</strong>
               </label>
+
+              {hasDiamonds && (
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem", marginTop: "0.85rem" }}>
+                  <div className="admin-form-group" style={{ margin: 0 }}>
+                    <label className="admin-label">Diamond Carat Weight (ct)</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      className="admin-input"
+                      value={diamondCarat}
+                      onChange={e => setDiamondCarat(parseFloat(e.target.value) || 0)}
+                    />
+                  </div>
+
+                  <div className="admin-form-group" style={{ margin: 0 }}>
+                    <label className="admin-label">Diamond Rate (₹ per Carat)</label>
+                    <input
+                      type="number"
+                      step="1000"
+                      className="admin-input"
+                      value={pricePerCarat}
+                      onChange={e => setPricePerCarat(parseFloat(e.target.value) || 0)}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
-
-            {hasDiamonds && (
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "1rem" }}>
-                <div className="admin-form-group">
-                  <label className="admin-label">Stone Count</label>
-                  <input
-                    type="number"
-                    min="1"
-                    className="admin-input"
-                    value={stoneCount}
-                    onChange={e => setStoneCount(parseInt(e.target.value) || 1)}
-                  />
-                </div>
-
-                <div className="admin-form-group">
-                  <label className="admin-label">Total Carat (ct)</label>
-                  <input
-                    type="number"
-                    step="0.01"
-                    min="0.01"
-                    className="admin-input"
-                    value={diamondCarat}
-                    onChange={e => setDiamondCarat(parseFloat(e.target.value) || 0)}
-                  />
-                </div>
-
-                <div className="admin-form-group">
-                  <label className="admin-label">Clarity Grade</label>
-                  <select
-                    className="admin-select"
-                    value={diamondClarity}
-                    onChange={e => setDiamondClarity(e.target.value)}
-                  >
-                    <option value="VVS-EF">VVS-EF (Flawless Colorless)</option>
-                    <option value="VS-GH">VS-GH (Near Colorless)</option>
-                    <option value="SI-IJ">SI-IJ (Commercial Sparkle)</option>
-                  </select>
-                </div>
-
-                <div className="admin-form-group">
-                  <label className="admin-label">Cut Type</label>
-                  <input
-                    type="text"
-                    className="admin-input"
-                    value={diamondCut}
-                    onChange={e => setDiamondCut(e.target.value)}
-                  />
-                </div>
-
-                <div className="admin-form-group">
-                  <label className="admin-label">Rate / Carat (₹/ct)</label>
-                  <input
-                    type="number"
-                    step="500"
-                    min="0"
-                    className="admin-input"
-                    value={pricePerCarat}
-                    onChange={e => setPricePerCarat(parseFloat(e.target.value) || 0)}
-                  />
-                </div>
-              </div>
-            )}
           </div>
 
-          {/* Section 4: Multi-Angle Imagery & Legal Compliance */}
+          {/* Card 3: Multi-Image Photo Upload */}
           <div className="admin-card">
-            <h3 style={{ fontSize: "1.05rem", color: "#FFFFFF", marginBottom: "1.25rem", fontFamily: "var(--font-serif)" }}>
-              4. Photography & Legal BIS Certification
+            <h3 style={{ fontSize: "1.05rem", color: "#F5EAD6", marginBottom: "0.5rem", fontFamily: "var(--font-serif)" }}>
+              3. Product Photography (Multiple Photos)
             </h3>
+            <p style={{ fontSize: "0.8rem", color: "#A3978B", margin: "0 0 1rem" }}>
+              Upload one or more photos directly from your device. First photo will be the main cover image.
+            </p>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-              <ImageUploadInput
-                label="Yellow Gold Image (Choose File / URL) *"
-                value={imageYellow}
-                onChange={setImageYellow}
-                required
-              />
-
-              <ImageUploadInput
-                label="Rose Gold Image (Choose File / URL)"
-                value={imageRose}
-                onChange={setImageRose}
-              />
+            {/* Gallery Preview Thumbnails */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", marginBottom: "1rem" }}>
+              {imagesList.map((imgUrl, idx) => (
+                <div key={idx} style={{ position: "relative", width: "90px", height: "90px", borderRadius: "8px", overflow: "hidden", border: idx === 0 ? "2px solid #D4B68A" : "1px solid rgba(197, 168, 128, 0.3)" }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={imgUrl} alt={`Product ${idx + 1}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+                  <span style={{ position: "absolute", bottom: "4px", left: "4px", background: "rgba(0,0,0,0.75)", color: "#F5EAD6", fontSize: "0.6rem", padding: "1px 4px", borderRadius: "3px", fontWeight: 700 }}>
+                    {idx === 0 ? "Main" : idx === 1 ? "Hover" : `#${idx + 1}`}
+                  </span>
+                  {imagesList.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(idx)}
+                      style={{ position: "absolute", top: "4px", right: "4px", background: "rgba(239, 68, 68, 0.85)", color: "#FFF", border: "none", borderRadius: "50%", width: "20px", height: "20px", cursor: "pointer", fontSize: "0.65rem", display: "flex", alignItems: "center", justifyContent: "center" }}
+                    >
+                      <i className="fa-solid fa-xmark"></i>
+                    </button>
+                  )}
+                </div>
+              ))}
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-              <ImageUploadInput
-                label="White Gold Image (Choose File / URL)"
-                value={imageWhite}
-                onChange={setImageWhite}
-              />
+            {/* Direct Device File Upload Button */}
+            <div style={{ display: "flex", gap: "0.75rem", alignItems: "center", flexWrap: "wrap" }}>
+              <label className="btn btn-outline btn-sm" style={{ cursor: "pointer", background: "rgba(245, 234, 214, 0.1)", borderColor: "#D4B68A", color: "#F5EAD6" }}>
+                <i className={isUploading ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-cloud-arrow-up"}></i>
+                <span>{isUploading ? "Uploading..." : "Upload Photos From Computer"}</span>
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  style={{ display: "none" }}
+                  disabled={isUploading}
+                />
+              </label>
 
-              <ImageUploadInput
-                label="Hover Angle Image (Choose File / URL)"
-                value={imageHover}
-                onChange={setImageHover}
-              />
-            </div>
-
-
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
-              <div className="admin-form-group">
-                <label className="admin-label">BIS Laser HUID Code *</label>
+              {/* OR Image URL */}
+              <div style={{ display: "flex", gap: "0.4rem", flex: 1, minWidth: "240px" }}>
                 <input
                   type="text"
+                  placeholder="Or paste Image URL (https://...)"
                   className="admin-input"
-                  value={huid}
-                  onChange={e => setHuid(e.target.value)}
-                  required
+                  style={{ fontSize: "0.8rem", padding: "0.4rem 0.65rem" }}
+                  value={imageUrlInput}
+                  onChange={e => setImageUrlInput(e.target.value)}
                 />
+                <button
+                  type="button"
+                  onClick={handleAddImageUrl}
+                  className="btn btn-gold btn-sm"
+                  style={{ padding: "0.4rem 0.75rem", fontSize: "0.78rem" }}
+                >
+                  Add Link
+                </button>
               </div>
-
-              <div className="admin-form-group">
-                <label className="admin-label">Lab Assay Certificate</label>
-                <input
-                  type="text"
-                  className="admin-input"
-                  value={certificate}
-                  onChange={e => setCertificate(e.target.value)}
-                />
-              </div>
-            </div>
-
-            <div className="admin-form-group">
-              <label className="admin-label">Detailed Luxury Description *</label>
-              <textarea
-                rows={3}
-                className="admin-textarea"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="admin-form-group">
-              <label className="admin-label">Dimensions / Sizing String</label>
-              <input
-                type="text"
-                className="admin-input"
-                value={dimensions}
-                onChange={e => setDimensions(e.target.value)}
-              />
             </div>
           </div>
+
+          {/* Card 4: Description */}
+          <div className="admin-card">
+            <h3 style={{ fontSize: "1.05rem", color: "#F5EAD6", marginBottom: "0.85rem", fontFamily: "var(--font-serif)" }}>
+              4. Product Description
+            </h3>
+            <textarea
+              rows={3}
+              className="admin-textarea"
+              placeholder="Describe the craftsmanship, hallmarking, and occasion styling details..."
+              value={description}
+              onChange={e => setDescription(e.target.value)}
+            />
+          </div>
+
         </div>
 
-        {/* Right Column: Real-Time Live Calculation Preview Box */}
-        <div className="admin-live-calc-box">
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "1rem", color: "#C5A880" }}>
-            <i className="fa-solid fa-calculator"></i>
-            <strong style={{ fontSize: "0.95rem" }}>Live Price Calculation Preview</strong>
-          </div>
+        {/* Right Side: Live Pricing & Formula Preview */}
+        <div>
+          <div className="admin-live-calc-box">
+            <h3 style={{ fontSize: "1.05rem", color: "#FFFFFF", marginBottom: "0.25rem", fontFamily: "var(--font-serif)" }}>
+              Live Price Calculation
+            </h3>
+            <p style={{ fontSize: "0.75rem", color: "#8C827A", marginBottom: "1rem" }}>
+              Synced with 2026 Live 24K Gold Rate: <strong>{PricingEngine.formatINR(bullionRates.gold24k)}/g</strong>
+            </p>
 
-          <div style={{ fontSize: "0.76rem", color: "#8C827A", marginBottom: "1rem", lineHeight: 1.5 }}>
-            Calculated in real-time synced with today&apos;s 24K benchmark: <strong>₹{bullionRates.gold24k}/g</strong>
-          </div>
-
-          {/* Image Thumbnail Preview */}
-          <div style={{ borderRadius: "8px", overflow: "hidden", height: "180px", marginBottom: "1.25rem", border: "1px solid rgba(197, 168, 128, 0.3)" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={imageYellow || "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg"} alt="Preview" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-          </div>
-
-          <h4 style={{ fontSize: "0.95rem", color: "#FFFFFF", marginBottom: "0.75rem", borderBottom: "1px solid rgba(197, 168, 128, 0.2)", paddingBottom: "0.5rem" }}>
-            {title || "Untitled Piece"}
-          </h4>
-
-          {/* Itemized Calculations */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", fontSize: "0.82rem" }}>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "#B5ACA4" }}>{defaultKarat} Pure Gold ({netGoldWeight}g @ ₹{breakdown.ratePerGram}/g):</span>
-              <strong>{PricingEngine.formatINR(breakdown.metalCost)}</strong>
-            </div>
-
-            {hasDiamonds && (
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span style={{ color: "#B5ACA4" }}>Diamonds ({diamondCarat} ct @ ₹{pricePerCarat}/ct):</span>
-                <strong>{PricingEngine.formatINR(breakdown.diamondCost)}</strong>
-              </div>
-            )}
-
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "#B5ACA4" }}>Making Charges ({makingType === "percent" ? `${makingValue}%` : `₹${makingValue}/g`}):</span>
-              <span>
-                {breakdown.hasDiscount && (
-                  <span style={{ textDecoration: "line-through", color: "#8C827A", marginRight: "0.35rem", fontSize: "0.74rem" }}>
-                    {PricingEngine.formatINR(breakdown.baseMakingCharges)}
-                  </span>
-                )}
-                <strong>{PricingEngine.formatINR(breakdown.effectiveMakingCharges)}</strong>
+            {/* Product Card Image Preview */}
+            <div style={{ width: "100%", height: "200px", borderRadius: "8px", overflow: "hidden", marginBottom: "1rem", position: "relative", border: "1px solid rgba(197, 168, 128, 0.2)" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={imagesList[0] || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80"}
+                alt={title || "Preview"}
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+              <span style={{ position: "absolute", top: "10px", right: "10px", background: "rgba(0,0,0,0.75)", color: "var(--gold-bright)", padding: "0.2rem 0.55rem", borderRadius: "12px", fontSize: "0.7rem", fontWeight: 700 }}>
+                {defaultKarat} Gold
               </span>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "space-between", borderTop: "1px solid rgba(255, 255, 255, 0.1)", paddingTop: "0.4rem" }}>
-              <span style={{ color: "#B5ACA4" }}>Taxable Subtotal:</span>
-              <strong>{PricingEngine.formatINR(breakdown.taxableSubtotal)}</strong>
+            <strong style={{ fontSize: "0.95rem", color: "#FFFFFF", display: "block", marginBottom: "0.85rem" }}>
+              {title || "Jewellery Title Preview"}
+            </strong>
+
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.4rem", fontSize: "0.82rem", color: "#A3978B", borderTop: "1px solid rgba(197, 168, 128, 0.15)", paddingTop: "0.75rem" }}>
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>{defaultKarat} Pure Gold ({netGoldWeight}g):</span>
+                <strong style={{ color: "#FFFFFF" }}>{PricingEngine.formatINR(breakdown.metalCost)}</strong>
+              </div>
+
+              {hasDiamonds && breakdown.diamondCost > 0 && (
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span>Diamonds ({diamondCarat} ct):</span>
+                  <strong style={{ color: "#FFFFFF" }}>{PricingEngine.formatINR(breakdown.diamondCost)}</strong>
+                </div>
+              )}
+
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>Making Charge ({makingValue}%):</span>
+                <strong style={{ color: "#FFFFFF" }}>{PricingEngine.formatINR(breakdown.effectiveMakingCharges)}</strong>
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "space-between" }}>
+                <span>GST (3% HSN 7113):</span>
+                <strong style={{ color: "#FFFFFF" }}>{PricingEngine.formatINR(breakdown.gstAmount)}</strong>
+              </div>
             </div>
 
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <span style={{ color: "#B5ACA4" }}>GST (3% HSN 7113):</span>
-              <strong>{PricingEngine.formatINR(breakdown.gstAmount)}</strong>
+            <div style={{ borderTop: "2px solid #C5A880", marginTop: "1rem", paddingTop: "0.85rem", display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+              <span style={{ color: "#FFFFFF", fontWeight: 700, fontSize: "0.95rem" }}>Grand Total:</span>
+              <strong style={{ color: "var(--gold-bright)", fontSize: "1.35rem", fontWeight: 800 }}>
+                {PricingEngine.formatINR(breakdown.finalPrice)}
+              </strong>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                borderTop: "1.5px solid #C5A880",
-                paddingTop: "0.75rem",
-                marginTop: "0.5rem",
-                fontSize: "1.1rem",
-                fontWeight: 700,
-                color: "#FFFFFF"
-              }}
+            <button
+              type="submit"
+              form="edit-product-form"
+              className="btn btn-gold"
+              style={{ width: "100%", marginTop: "1.25rem", padding: "0.75rem", fontSize: "0.9rem", fontWeight: 700 }}
+              disabled={isSaving}
             >
-              <span>Grand Total:</span>
-              <span style={{ color: "#C5A880" }}>{PricingEngine.formatINR(breakdown.finalPrice)}</span>
-            </div>
+              {isSaving ? "Saving Changes..." : "Save Changes"}
+            </button>
           </div>
-
-          <button
-            type="submit"
-            className="btn btn-gold"
-            style={{ width: "100%", marginTop: "1.5rem", justifyContent: "center" }}
-            disabled={isSaving}
-          >
-            {isSaving ? (
-              <>
-                <i className="fa-solid fa-spinner fa-spin"></i> Saving...
-              </>
-            ) : (
-              <>
-                <i className="fa-solid fa-floppy-disk"></i> Save & Publish Changes
-              </>
-            )}
-          </button>
         </div>
+
       </form>
     </div>
   );
