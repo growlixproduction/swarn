@@ -637,7 +637,7 @@ export default function Header() {
             {/* Drawer Footer Store Call Action */}
             <div style={{ padding: "1rem 1.25rem", borderTop: "1px solid #F0ECE8", background: "#FAF6F2" }}>
               <a
-                href="tel:+919999777740"
+                href="tel:+917566747628"
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -654,7 +654,7 @@ export default function Header() {
                   boxShadow: "0 4px 15px rgba(131, 39, 41, 0.3)"
                 }}
               >
-                <i className="fa-solid fa-phone"></i> Call Store: +91 99997-77740
+                <i className="fa-solid fa-phone"></i> Call Store: +91 75667 47628
               </a>
             </div>
           </div>
