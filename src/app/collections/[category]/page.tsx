@@ -257,28 +257,45 @@ export default function CollectionPage() {
           </div>
         </div>
 
-        {/* Sub-Collection Filter Bar / Pills Strip */}
+        {/* Sub-Collection Filter Bar / Pills Strip (Horizontal Touch Carousel on Mobile) */}
         {subCollections.length > 0 && (
-          <div style={{ marginBottom: "2rem", padding: "1rem 1.25rem", background: "#FAF6F2", borderRadius: "12px", border: "1px solid var(--border-gold-subtle)" }}>
-            <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--gold-dark)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.75rem", display: "flex", alignItems: "center", gap: "0.45rem" }}>
-              <i className="fa-solid fa-layer-group"></i>
-              <span>{parentMeta ? `${parentMeta.title} Sub-Collections` : `${meta.title} Sub-Collections`}:</span>
+          <div style={{ marginBottom: "1.75rem", padding: "0.85rem 1rem", background: "linear-gradient(180deg, #FAF6F2 0%, #F5EAD6 100%)", borderRadius: "14px", border: "1px solid rgba(197, 168, 128, 0.4)", boxShadow: "0 4px 15px rgba(0,0,0,0.03)" }}>
+            <div style={{ fontSize: "0.72rem", fontWeight: 700, color: "#832729", textTransform: "uppercase", letterSpacing: "0.09em", marginBottom: "0.65rem", display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+              <span style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                <i className="fa-solid fa-layer-group" style={{ color: "#C5A880" }}></i>
+                <span>{parentMeta ? `${parentMeta.title} Sub-Collections` : `${meta.title} Sub-Collections`}:</span>
+              </span>
+              <span style={{ fontSize: "0.68rem", color: "#832729", opacity: 0.7, fontWeight: 600 }}>
+                Swipe &rarr;
+              </span>
             </div>
-            <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", alignItems: "center" }}>
+            <div
+              style={{
+                display: "flex",
+                gap: "0.55rem",
+                overflowX: "auto",
+                whiteSpace: "nowrap",
+                alignItems: "center",
+                paddingBottom: "0.25rem",
+                WebkitOverflowScrolling: "touch"
+              }}
+              className="no-scrollbar"
+            >
               {effectiveParentSlug && (
                 <Link
                   href={`/collections/${effectiveParentSlug}`}
                   style={{
+                    flexShrink: 0,
                     padding: "0.45rem 0.95rem",
-                    borderRadius: "20px",
-                    fontSize: "0.82rem",
+                    borderRadius: "25px",
+                    fontSize: "0.8rem",
                     fontWeight: categorySlug === effectiveParentSlug ? 700 : 500,
-                    background: categorySlug === effectiveParentSlug ? "var(--gold-primary)" : "#FFFFFF",
-                    color: categorySlug === effectiveParentSlug ? "#FFFFFF" : "var(--text-primary)",
-                    border: categorySlug === effectiveParentSlug ? "1px solid var(--gold-primary)" : "1px solid var(--border-light)",
+                    background: categorySlug === effectiveParentSlug ? "linear-gradient(135deg, #832729 0%, #5E1A1B 100%)" : "#FFFFFF",
+                    color: categorySlug === effectiveParentSlug ? "#FFFFFF" : "#4A3E3D",
+                    border: categorySlug === effectiveParentSlug ? "1.5px solid #832729" : "1px solid rgba(197, 168, 128, 0.3)",
                     textDecoration: "none",
                     transition: "all 0.2s ease",
-                    boxShadow: "0 2px 5px rgba(0,0,0,0.03)"
+                    boxShadow: categorySlug === effectiveParentSlug ? "0 3px 8px rgba(131, 39, 41, 0.25)" : "0 2px 4px rgba(0,0,0,0.03)"
                   }}
                 >
                   All {parentMeta?.title || meta.title}
@@ -293,16 +310,17 @@ export default function CollectionPage() {
                     key={sub.slug}
                     href={`/collections/${sub.slug}`}
                     style={{
+                      flexShrink: 0,
                       padding: "0.45rem 0.95rem",
-                      borderRadius: "20px",
-                      fontSize: "0.82rem",
+                      borderRadius: "25px",
+                      fontSize: "0.8rem",
                       fontWeight: isActive ? 700 : 500,
-                      background: isActive ? "var(--gold-primary)" : "#FFFFFF",
-                      color: isActive ? "#FFFFFF" : "var(--text-primary)",
-                      border: isActive ? "1px solid var(--gold-primary)" : "1px solid var(--border-light)",
+                      background: isActive ? "linear-gradient(135deg, #832729 0%, #5E1A1B 100%)" : "#FFFFFF",
+                      color: isActive ? "#FFFFFF" : "#4A3E3D",
+                      border: isActive ? "1.5px solid #832729" : "1px solid rgba(197, 168, 128, 0.3)",
                       textDecoration: "none",
                       transition: "all 0.2s ease",
-                      boxShadow: "0 2px 5px rgba(0,0,0,0.03)",
+                      boxShadow: isActive ? "0 3px 8px rgba(131, 39, 41, 0.25)" : "0 2px 4px rgba(0,0,0,0.03)",
                       display: "inline-flex",
                       alignItems: "center",
                       gap: "0.45rem"

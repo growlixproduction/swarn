@@ -5374,3 +5374,12 @@ img {
   padding-left: 1.1rem !important;
 }
 
+/* No Scrollbar Utility for Mobile Carousels & Sub-Collections Bar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
