@@ -51,6 +51,19 @@
     "guideTitle": "925 Silver Purity & Care Guide",
     "guideDesc": "92.5% pure sterling silver crafted with tarnish-resistant coating for lasting brilliance and everyday beauty."
   },
+  "earrings": {
+    "slug": "earrings",
+    "parentSlug": "gold",
+    "title": "Earrings & Tops",
+    "pageTitle": "Luxury Earrings, Jhumkas & Tops | Swarn Mahal Ambikapur",
+    "badge": "HANDCRAFTED PERFECTION • 50+ STYLES",
+    "subtitle": "From grand 22K temple jhumkas for bridal celebrations to lightweight 18K diamond tops and sui-dhaga drops for everyday elegance.",
+    "heroBg": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
+    "thumbnail_image": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
+    "guideTitle": "Earrings Styling & Face Silhouette Guide",
+    "guideDesc": "Discover which earring shapes best complement oval, round, and heart-shaped faces."
+  },
   "rings": {
     "slug": "rings",
     "parentSlug": "gold",
@@ -102,19 +115,6 @@
     "thumbnail_image": "/uploads/1787346906675_C004610__1_1.webp",
     "guideTitle": "Nose Pins Buying & Purity Guide",
     "guideDesc": "Discover smart design combinations such as halo solitaire settings and lightweight gold alloys."
-  },
-  "earrings": {
-    "slug": "earrings",
-    "parentSlug": "gold",
-    "title": "Earrings & Tops",
-    "pageTitle": "Luxury Earrings, Jhumkas & Tops | Swarn Mahal Ambikapur",
-    "badge": "HANDCRAFTED PERFECTION • 50+ STYLES",
-    "subtitle": "From grand 22K temple jhumkas for bridal celebrations to lightweight 18K diamond tops and sui-dhaga drops for everyday elegance.",
-    "heroBg": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=85",
-    "circleImg": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
-    "thumbnail_image": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
-    "guideTitle": "Earrings Styling & Face Silhouette Guide",
-    "guideDesc": "Discover which earring shapes best complement oval, round, and heart-shaped faces."
   },
   "pendants": {
     "slug": "pendants",

@@ -31,14 +31,8 @@ export default function HomePage() {
       {/* 2. CIRCULAR CATEGORY STORIES STRIP */}
       <CategoryStories />
 
-      {/* 3. 4-ITEM TRUST & VALUE PROP STRIP */}
-      <TrustBar />
-
-      {/* 4. EDITORIAL BENTO PROMO GRID */}
-      <BentoPromo />
-
-      {/* 5. LATEST PRODUCTS & DYNAMIC PRICING CATALOG */}
-      <section className="products-section" id="products-section">
+      {/* 3. LATEST PRODUCTS & DYNAMIC PRICING CATALOG (MOVED UP) */}
+      <section className="products-section" id="products-section" style={{ paddingTop: "2rem" }}>
         <div className="container">
           <div className="section-header reveal-up">
             <span className="section-tag">LIVE FORMULA DRIVEN CATALOG</span>
@@ -78,25 +72,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* GOOGLE VERIFIED REVIEWS INFINITE MARQUEE SLIDER */}
+      {/* 4. EDITORIAL BENTO PROMO GRID */}
+      <BentoPromo />
+
+      {/* 5. GOOGLE VERIFIED REVIEWS INFINITE MARQUEE SLIDER */}
       <ReviewsSection />
 
-      {/* UGC CLIENT STORIES & YOUTUBE SHORTS REELS SLIDER */}
+      {/* 6. UGC CLIENT STORIES & YOUTUBE SHORTS REELS SLIDER */}
       <UgcReelsSection />
 
-      {/* 6. CATEGORY MOODBOARD SHOWCASE */}
+      {/* 7. CATEGORY MOODBOARD SHOWCASE */}
       <MoodboardSection />
 
-      {/* 7. LUXURY BENTO COLLAGE GALLERY SECTION */}
+      {/* 8. LUXURY BENTO COLLAGE GALLERY SECTION */}
       <CollageGallerySection />
 
-      {/* 8. INTERACTIVE CALCULATORS: LIVE GOLD RATE & OLD GOLD EXCHANGE */}
+      {/* 9. 4-ITEM TRUST & VALUE PROP STRIP (MOVED DOWN) */}
+      <TrustBar />
+
+      {/* 10. INTERACTIVE CALCULATORS: LIVE GOLD RATE & OLD GOLD EXCHANGE */}
       <ToolsSection />
 
-      {/* 9. DUAL SPOTLIGHT BANNERS */}
+      {/* 11. DUAL SPOTLIGHT BANNERS */}
       <DualSpotlightSection />
 
-      {/* 11. BRAND ASSURANCES & CERTIFICATION LOGOS */}
+      {/* 12. BRAND ASSURANCES & CERTIFICATION LOGOS */}
       <section className="trust-logos-row" style={{ background: "var(--bg-secondary)", padding: "2.5rem 0", borderTop: "1px solid var(--border-light)" }}>
         <div className="container" style={{ display: "flex", justifyContent: "space-around", alignItems: "center", flexWrap: "wrap", gap: "2rem", color: "var(--text-secondary)", fontSize: "0.85rem", fontWeight: 600 }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>

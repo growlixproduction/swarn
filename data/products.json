@@ -55,45 +55,47 @@
     "dimensions": "Band Width: 2.2mm | Crown Height: 5.5mm"
   },
   {
-    "id": "SM-104",
-    "title": "Swarn Mahal 22K Royal Rani Haar",
-    "slug": "swarn-mahal-22k-royal-rani-haar",
-    "collection": "Heritage Ambikapur",
+    "id": "SM-105",
+    "title": "Swarn Mahal Traditional Mangalsutra",
+    "slug": "swarn-mahal-traditional-mangalsutra",
+    "collection": "Sacred Vows",
     "category": "necklaces",
     "navCategories": [
       "all",
       "gold",
-      "wedding"
+      "wedding",
+      "daily-wear"
     ],
     "isFeatured": true,
-    "isNew": false,
-    "rating": 5,
-    "reviews": 42,
-    "netGoldWeightGrams": 28.5,
-    "grossWeightGrams": 29.2,
+    "isNew": true,
+    "rating": 4.9,
+    "reviews": 29,
+    "netGoldWeightGrams": 14.8,
+    "grossWeightGrams": 16.5,
     "defaultKarat": "22K",
     "supportedKarats": [
+      "18K",
       "22K"
     ],
     "defaultColor": "yellow",
     "supportedColors": [
-      "yellow"
+      "yellow",
+      "rose"
     ],
-    "makingChargePercent": 16,
-    "discountPercent": 12,
+    "makingChargePercent": 14,
+    "discountPercent": 10,
     "images": {
-      "yellow": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
-      "rose": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
-      "white": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
-      "hover": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85"
-      ]
+      "yellow": "/uploads/1787353482628_BIIP0359P04_YAA14DIG6XXXXXXXX_ABCD00-PICS-00004-1024-35451.jpg",
+      "rose": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80"
     },
-    "huid": "SM916RH285",
-    "certificate": "BIS Hallmarked HUID 916",
-    "description": "Authentic 22K gold bridal Rani Haar handcrafted with heritage nakshi, intricate filigree, and floral jali medallions by Swarn Mahal master karigars in Ambikapur.",
-    "dimensions": "Length: 24 Inches Adjustable Dori | Center Pendant: 52mm"
+    "huid": "SM916MS148",
+    "certificate": "BIS 916 Hallmarked",
+    "description": "Auspicious black onyx beads interwoven with 22K pure gold pendants, delicate ghungroo drops, and intricate traditional meenakari detailing.",
+    "dimensions": "Length: 18 Inches | Pendant Drop: 32mm",
+    "primaryMaterial": "gold",
+    "makingChargePerGram": 0
   },
   {
     "id": "SM-512",
@@ -345,96 +347,6 @@
     "certificate": "GIA-GEM-89210",
     "description": "An untreated certified natural Zambian emerald surrounded by a scintillating diamond halo, set in warm 18K yellow gold.",
     "dimensions": "Center Stone: 7x5mm Octagon | Band: 2.1mm"
-  },
-  {
-    "id": "SM-105",
-    "title": "Swarn Mahal Traditional Mangalsutra",
-    "slug": "swarn-mahal-traditional-mangalsutra",
-    "collection": "Sacred Vows",
-    "category": "necklaces",
-    "navCategories": [
-      "all",
-      "gold",
-      "wedding",
-      "daily-wear"
-    ],
-    "isFeatured": true,
-    "isNew": true,
-    "rating": 4.9,
-    "reviews": 29,
-    "netGoldWeightGrams": 14.8,
-    "grossWeightGrams": 16.5,
-    "defaultKarat": "22K",
-    "supportedKarats": [
-      "18K",
-      "22K"
-    ],
-    "defaultColor": "yellow",
-    "supportedColors": [
-      "yellow",
-      "rose"
-    ],
-    "makingChargePercent": 14,
-    "discountPercent": 10,
-    "images": {
-      "yellow": "/uploads/1787353482628_BIIP0359P04_YAA14DIG6XXXXXXXX_ABCD00-PICS-00004-1024-35451.jpg",
-      "rose": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
-      "white": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
-      "hover": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80"
-    },
-    "huid": "SM916MS148",
-    "certificate": "BIS 916 Hallmarked",
-    "description": "Auspicious black onyx beads interwoven with 22K pure gold pendants, delicate ghungroo drops, and intricate traditional meenakari detailing.",
-    "dimensions": "Length: 18 Inches | Pendant Drop: 32mm",
-    "primaryMaterial": "gold",
-    "makingChargePerGram": 0
-  },
-  {
-    "id": "SM-111",
-    "title": "Royal Kundan & Polki Bridal Choker Set",
-    "slug": "royal-kundan-polki-bridal-choker-set",
-    "collection": "Maharani Trousseau",
-    "category": "necklaces",
-    "navCategories": [
-      "all",
-      "gold",
-      "wedding",
-      "gemstone"
-    ],
-    "isFeatured": true,
-    "isNew": true,
-    "rating": 5,
-    "reviews": 18,
-    "netGoldWeightGrams": 34.2,
-    "grossWeightGrams": 39.8,
-    "defaultKarat": "22K",
-    "supportedKarats": [
-      "22K"
-    ],
-    "defaultColor": "yellow",
-    "supportedColors": [
-      "yellow"
-    ],
-    "makingChargePercent": 18,
-    "discountPercent": 15,
-    "gemstoneSpecs": {
-      "stoneType": "Uncut Jadau Polki & Natural Emerald Beads",
-      "weightCarat": 12.4,
-      "pricePerCarat": 14000
-    },
-    "images": {
-      "yellow": "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=800&q=80",
-      "rose": "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=800&q=80",
-      "white": "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=800&q=80",
-      "hover": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&w=1200&q=85"
-      ]
-    },
-    "huid": "SM916KC342",
-    "certificate": "BIS 916 Hallmark & Artisan Assay",
-    "description": "Opulent bridal choker handcrafted with 22K hallmarked gold, uncut polki stones, suspended emerald beads, and matching chandelier earrings.",
-    "dimensions": "Choker Width: 45mm | Adjustable Silk Dori"
   },
   {
     "id": "SM-107",
