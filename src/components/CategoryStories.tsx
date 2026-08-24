@@ -22,6 +22,23 @@ const DEFAULT_STORIES: StoryItem[] = [
   { label: "Bracelet", href: "/collections/bracelet", img: "/uploads/1787348950913_JT02841-1YS300_1_lar.jpg" }
 ];
 
+const MAIN_STORY_ORDER = [
+  "all",
+  "gold",
+  "diamond",
+  "silver",
+  "rings",
+  "necklace",
+  "earrings",
+  "nose-pins",
+  "gold-hoops-balis",
+  "pendants",
+  "mangalsutra",
+  "chains",
+  "bangles",
+  "bracelet"
+];
+
 const CategoryStories: React.FC = () => {
   const [stories, setStories] = useState<StoryItem[]>(DEFAULT_STORIES);
   const [scrollSpeed, setScrollSpeed] = useState<number>(25);
@@ -32,7 +49,27 @@ const CategoryStories: React.FC = () => {
       .then(res => res.json())
       .then(data => {
         if (data && data.categories) {
-          const list: StoryItem[] = Object.values(data.categories).map((cat: any) => ({
+          const catsObj = data.categories;
+          // Filter to only main story slugs or categories without parentSlug (or parentSlug === 'gold')
+          const filteredCats = Object.values(catsObj).filter((cat: any) => {
+            if (MAIN_STORY_ORDER.includes(cat.slug)) return true;
+            if (!cat.parentSlug || cat.parentSlug === "" || cat.parentSlug === "gold") {
+              return !cat.slug.startsWith("silver-") && !cat.slug.startsWith("diamond-");
+            }
+            return false;
+          });
+
+          // Sort according to MAIN_STORY_ORDER
+          filteredCats.sort((a: any, b: any) => {
+            const indexA = MAIN_STORY_ORDER.indexOf(a.slug);
+            const indexB = MAIN_STORY_ORDER.indexOf(b.slug);
+            if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+            if (indexA !== -1) return -1;
+            if (indexB !== -1) return 1;
+            return 0;
+          });
+
+          const list: StoryItem[] = filteredCats.map((cat: any) => ({
             label: cat.title || cat.name,
             href: `/collections/${cat.slug}`,
             img: cat.circleImg || cat.thumbnail_image || cat.heroBg || "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80"
