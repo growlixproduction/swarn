@@ -484,11 +484,11 @@ export default function Header() {
                 display: "flex",
                 flexDirection: "column",
                 gap: "0.75rem",
-                flex: 1,
+                flex: "1 1 0%",
+                minHeight: 0,
                 overflowY: "auto",
                 WebkitOverflowScrolling: "touch",
-                overscrollBehavior: "contain",
-                touchAction: "pan-y"
+                overscrollBehaviorY: "contain"
               }}
             >
               <div style={{ fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "1.2px", color: "#832729", fontWeight: 800, marginBottom: "0.1rem" }}>
