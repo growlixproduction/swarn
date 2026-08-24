@@ -30,6 +30,7 @@ export const INITIAL_BULLION_RATES: BullionRates = {
 
 export interface CategoryMeta {
   slug: string;
+  parentSlug?: string;
   pageTitle: string;
   title: string;
   badge: string;

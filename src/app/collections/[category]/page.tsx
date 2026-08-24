@@ -56,7 +56,14 @@ export default function CollectionPage() {
   const [maxPrice, setMaxPrice] = useState<number>(350000);
   const [selectedKarats, setSelectedKarats] = useState<KaratType[]>([]);
   const [selectedColor, setSelectedColor] = useState<string>("all");
-  const [sortBy, setSortBy] = useState<string>("recommended");
+  const [sortBy, setSortBy] = useState<string>("recommended");  // Compute parent & child sub-collections for current category
+  const allCategories = Object.values(categoriesMap);
+  const parentSlug = currentMeta?.parentSlug || "";
+  const effectiveParentSlug = parentSlug || (allCategories.some((c: any) => c.parentSlug === categorySlug) ? categorySlug : "");
+  const subCollections = effectiveParentSlug
+    ? allCategories.filter((c: any) => c.parentSlug === effectiveParentSlug)
+    : [];
+  const parentMeta = parentSlug ? categoriesMap[parentSlug] : null;
 
   // Filter Catalog
   let filtered = products.filter(p => {
@@ -67,6 +74,33 @@ export default function CollectionPage() {
     }
 
     const normSlug = categorySlug.toLowerCase();
+
+    // Main Metal Collection Filters
+    if (normSlug === "gold") {
+      return (
+        p.supportedKarats.some(k => ["24K", "22K", "18K", "14K"].includes(k)) ||
+        p.collection.toLowerCase().includes("gold") ||
+        p.title.toLowerCase().includes("gold") ||
+        p.category.toLowerCase().includes("gold")
+      );
+    }
+    if (normSlug === "diamond") {
+      return (
+        Boolean(p.diamondSpecs) ||
+        p.category.toLowerCase().includes("diamond") ||
+        p.title.toLowerCase().includes("diamond") ||
+        p.collection.toLowerCase().includes("diamond")
+      );
+    }
+    if (normSlug === "silver") {
+      return (
+        p.title.toLowerCase().includes("silver") ||
+        p.category.toLowerCase().includes("silver") ||
+        p.collection.toLowerCase().includes("silver") ||
+        p.title.toLowerCase().includes("payal")
+      );
+    }
+
     return (
       p.navCategories.some(c => c.toLowerCase() === normSlug) ||
       p.category.toLowerCase() === normSlug ||
@@ -74,8 +108,6 @@ export default function CollectionPage() {
       p.collection.toLowerCase().includes(normSlug)
     );
   });
-
-
 
   // Search Filter
   if (searchQuery) {
@@ -146,11 +178,17 @@ export default function CollectionPage() {
       </section>
 
       {/* Main Catalog Area with Faceted Sidebar */}
-      <div className="container" style={{ padding: "3rem 1rem 5rem" }}>
+      <div className="container" style={{ padding: "2.5rem 1rem 5rem" }}>
         {/* Breadcrumb & Results Toolbar */}
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem", flexWrap: "wrap", gap: "1rem" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem", flexWrap: "wrap", gap: "1rem" }}>
           <div style={{ fontSize: "0.85rem", color: "var(--text-muted)" }}>
             <Link href="/" style={{ color: "var(--text-secondary)" }}>Home</Link>
+            {parentMeta && (
+              <>
+                <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.65rem", margin: "0 0.45rem", color: "var(--gold-deep)" }}></i>
+                <Link href={`/collections/${parentMeta.slug}`} style={{ color: "var(--text-secondary)" }}>{parentMeta.title}</Link>
+              </>
+            )}
             <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.65rem", margin: "0 0.45rem", color: "var(--gold-deep)" }}></i>
             <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>{meta.title}</span>
           </div>
@@ -172,6 +210,69 @@ export default function CollectionPage() {
             </select>
           </div>
         </div>
+
+        {/* Sub-Collection Filter Bar / Pills Strip */}
+        {subCollections.length > 0 && (
+          <div style={{ marginBottom: "2rem", padding: "1rem 1.25rem", background: "#FAF6F2", borderRadius: "12px", border: "1px solid var(--border-gold-subtle)" }}>
+            <div style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--gold-dark)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.75rem", display: "flex", alignItems: "center", gap: "0.45rem" }}>
+              <i className="fa-solid fa-layer-group"></i>
+              <span>{parentMeta ? `${parentMeta.title} Sub-Collections` : `${meta.title} Sub-Collections`}:</span>
+            </div>
+            <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap", alignItems: "center" }}>
+              {effectiveParentSlug && (
+                <Link
+                  href={`/collections/${effectiveParentSlug}`}
+                  style={{
+                    padding: "0.45rem 0.95rem",
+                    borderRadius: "20px",
+                    fontSize: "0.82rem",
+                    fontWeight: categorySlug === effectiveParentSlug ? 700 : 500,
+                    background: categorySlug === effectiveParentSlug ? "var(--gold-primary)" : "#FFFFFF",
+                    color: categorySlug === effectiveParentSlug ? "#FFFFFF" : "var(--text-primary)",
+                    border: categorySlug === effectiveParentSlug ? "1px solid var(--gold-primary)" : "1px solid var(--border-light)",
+                    textDecoration: "none",
+                    transition: "all 0.2s ease",
+                    boxShadow: "0 2px 5px rgba(0,0,0,0.03)"
+                  }}
+                >
+                  All {parentMeta?.title || meta.title}
+                </Link>
+              )}
+
+              {subCollections.map((sub: any) => {
+                const isActive = categorySlug === sub.slug;
+                const circleImg = sub.circleImg || sub.thumbnail_image;
+                return (
+                  <Link
+                    key={sub.slug}
+                    href={`/collections/${sub.slug}`}
+                    style={{
+                      padding: "0.45rem 0.95rem",
+                      borderRadius: "20px",
+                      fontSize: "0.82rem",
+                      fontWeight: isActive ? 700 : 500,
+                      background: isActive ? "var(--gold-primary)" : "#FFFFFF",
+                      color: isActive ? "#FFFFFF" : "var(--text-primary)",
+                      border: isActive ? "1px solid var(--gold-primary)" : "1px solid var(--border-light)",
+                      textDecoration: "none",
+                      transition: "all 0.2s ease",
+                      boxShadow: "0 2px 5px rgba(0,0,0,0.03)",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.45rem"
+                    }}
+                  >
+                    {circleImg && (
+                      /* eslint-disable-next-line @next/next/no-img-element */
+                      <img src={circleImg} alt={sub.title} style={{ width: "20px", height: "20px", borderRadius: "50%", objectFit: "cover" }} />
+                    )}
+                    <span>{sub.title}</span>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* 2-Column Split: Sidebar + Products Grid */}
         <div className="plp-layout-container">

@@ -22,6 +22,7 @@ export default function AdminCollectionsPage() {
   const [newCategoryName, setNewCategoryName] = useState<string>("");
   const [newCategorySlug, setNewCategorySlug] = useState<string>("");
   const [newCategoryCircleImg, setNewCategoryCircleImg] = useState<string>("");
+  const [newCategoryParentSlug, setNewCategoryParentSlug] = useState<string>("");
 
   // Category Auto-Scroll Speed State
   const [scrollSpeed, setScrollSpeed] = useState<number>(25);
@@ -227,6 +228,7 @@ export default function AdminCollectionsPage() {
     const newCat = {
       slug: slug || `category-${Date.now()}`,
       title: newCategoryName.trim(),
+      parentSlug: newCategoryParentSlug || "",
       pageTitle: `${newCategoryName.trim()} | Swarn Mahal Jewellers Ambikapur`,
       badge: "NEW CURATION • LUXURY COLLECTION",
       subtitle: `Explore handcrafted ${newCategoryName.trim()} in pure BIS 916 gold and authentic gemstones.`,
@@ -468,6 +470,26 @@ export default function AdminCollectionsPage() {
                 />
               </div>
 
+              <div className="admin-form-group">
+                <label className="admin-label" style={{ color: "#C5A880", fontWeight: 700 }}>
+                  <i className="fa-solid fa-folder-tree" style={{ marginRight: "0.3rem" }}></i>
+                  Parent Collection (Sub-Collection Hierarchy)
+                </label>
+                <select
+                  className="admin-input"
+                  style={{ background: "#1A1512", color: "#F3E5AB", borderColor: "#C5A880" }}
+                  value={newCategoryParentSlug}
+                  onChange={e => setNewCategoryParentSlug(e.target.value)}
+                >
+                  <option value="">None (Top-Level Main Collection)</option>
+                  {categories.filter(c => !c.parentSlug).map(p => (
+                    <option key={p.slug} value={p.slug}>
+                      {p.title} (/{p.slug})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div style={{ display: "flex", gap: "0.75rem", marginTop: "1.5rem", justifyContent: "flex-end" }}>
                 <button
                   type="button"
@@ -553,9 +575,17 @@ export default function AdminCollectionsPage() {
 
                   <div style={{ flexGrow: 1, minWidth: 0 }}>
                     <strong style={{ display: "block", color: "#FFFFFF", fontSize: "0.86rem", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                      {c.parentSlug && <span style={{ color: "#C5A880", marginRight: "4px" }}>└</span>}
                       {c.title}
                     </strong>
-                    <span style={{ fontSize: "0.7rem", color: "#8C827A", display: "block" }}>/{c.slug}</span>
+                    <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "1px" }}>
+                      <span style={{ fontSize: "0.7rem", color: "#8C827A" }}>/{c.slug}</span>
+                      {c.parentSlug && (
+                        <span style={{ fontSize: "0.62rem", background: "rgba(197, 168, 128, 0.15)", border: "1px solid rgba(197, 168, 128, 0.3)", color: "#F3E5AB", padding: "0 0.3rem", borderRadius: "4px" }}>
+                          Under: {c.parentSlug}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   {/* Actions: Edit Button + Ordering Arrows + Delete Icon */}
@@ -699,6 +729,29 @@ export default function AdminCollectionsPage() {
                     placeholder="e.g. gold, diamond, wedding"
                   />
                 </div>
+              </div>
+
+              <div className="admin-form-group" style={{ gridColumn: "1 / -1" }}>
+                <label className="admin-label" style={{ color: "#C5A880", fontWeight: 700 }}>
+                  <i className="fa-solid fa-folder-tree" style={{ marginRight: "0.3rem" }}></i>
+                  Parent Collection (Sub-Collection Hierarchy)
+                </label>
+                <select
+                  className="admin-input"
+                  style={{ background: "#1A1512", color: "#F3E5AB", borderColor: "#C5A880", fontWeight: 600 }}
+                  value={selectedCat.parentSlug || ""}
+                  onChange={e => setSelectedCat({ ...selectedCat, parentSlug: e.target.value })}
+                >
+                  <option value="">None (Top-Level Main Collection)</option>
+                  {categories.filter(c => c.slug !== selectedCat.slug && !c.parentSlug).map(p => (
+                    <option key={p.slug} value={p.slug}>
+                      {p.title} (/{p.slug})
+                    </option>
+                  ))}
+                </select>
+                <span style={{ fontSize: "0.72rem", color: "#8C827A", marginTop: "0.25rem", display: "block" }}>
+                  Select a main collection (like Gold, Diamond, or Silver) to make this collection a sub-category under it.
+                </span>
               </div>
             </div>
 

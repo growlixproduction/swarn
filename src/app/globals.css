@@ -5335,3 +5335,42 @@ img {
   top: 90px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
+
+/* Luxury Category Hover Dropdowns for Sub-Collections */
+.tanishq-cat-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.tanishq-cat-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 210px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-gold);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgba(131, 39, 41, 0.15);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 999;
+}
+
+.tanishq-cat-dropdown-wrapper:hover .tanishq-cat-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tanishq-dropdown-item:hover {
+  background: #FAF6F2 !important;
+  color: var(--gold-deep) !important;
+  padding-left: 1.1rem !important;
+}
+

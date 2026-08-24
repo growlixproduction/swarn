@@ -58,7 +58,7 @@ export function getCategoriesFromStore(): Record<string, any> {
 
 // Save single category to JSON file AND MySQL Database
 export async function saveCategoryToStore(catData: any): Promise<Record<string, any>> {
-  const { originalSlug, slug, title, subtitle, pageTitle, badge, heroBg, circleImg, thumbnail_image, guideTitle, guideDesc } = catData;
+  const { originalSlug, slug, title, subtitle, pageTitle, badge, heroBg, circleImg, thumbnail_image, guideTitle, guideDesc, parentSlug } = catData;
 
   const targetSlug = slug ? slug.trim().toLowerCase().replace(/\s+/g, '-') : (originalSlug || title.toLowerCase().replace(/\s+/g, '-'));
   const categoryName = title || "New Collection";
@@ -69,6 +69,7 @@ export async function saveCategoryToStore(catData: any): Promise<Record<string, 
   const updatedCatObj = {
     slug: targetSlug,
     title: categoryName,
+    parentSlug: parentSlug || "",
     pageTitle: pageTitle || `${categoryName} | Swarn Mahal Jewellers Ambikapur`,
     badge: badge || "BIS 916 HALLMARKED • 100% PURITY",
     subtitle: categoryDesc,

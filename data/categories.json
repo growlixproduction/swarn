@@ -1,6 +1,7 @@
 {
   "all": {
     "slug": "all",
+    "parentSlug": "",
     "pageTitle": "All Luxury Jewellery | Swarn Mahal Jewellers Ambikapur",
     "title": "All Jewellery",
     "badge": "COMPLETE CURATION • 24+ DESIGNS",
@@ -11,8 +12,48 @@
     "circleImg": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80",
     "thumbnail_image": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=200&q=80"
   },
+  "gold": {
+    "slug": "gold",
+    "parentSlug": "",
+    "pageTitle": "22K & 24K Gold Jewellery Collection | Swarn Mahal Ambikapur",
+    "title": "Gold Collection",
+    "badge": "BIS 916 HALLMARKED • 100% PURITY GUARANTEE",
+    "subtitle": "Discover handcrafted 22K hallmarked gold necklaces, traditional temple jhumkas, bridal rani haars, and lightweight daily gold chains.",
+    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
+    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
+    "guideTitle": "Gold Buying & Karat Purity Guide",
+    "guideDesc": "Every piece of gold jewellery at Swarn Mahal comes stamped with a unique 6-digit HUID code and 22K (916) BIS Hallmark."
+  },
+  "diamond": {
+    "slug": "diamond",
+    "parentSlug": "",
+    "pageTitle": "Certified Diamond & Solitaire Collection | Swarn Mahal Ambikapur",
+    "title": "Diamond Collection",
+    "badge": "IGI & SGL CERTIFIED • VVS-VS EXCELLENT CUT",
+    "subtitle": "Exquisite solitaire engagement rings, diamond drop earrings, tennis bracelets, and diamond pendants set in 18K hallmarked gold.",
+    "heroBg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "thumbnail_image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "guideTitle": "Diamond 4Cs Quality & Certification Guide",
+    "guideDesc": "Learn about Cut, Color, Clarity, and Carat weight, certified by international gemological labs IGI & SGL."
+  },
+  "silver": {
+    "slug": "silver",
+    "parentSlug": "",
+    "pageTitle": "925 Chandi & Silverware Collection | Swarn Mahal Ambikapur",
+    "title": "Silver Collection",
+    "badge": "PURE 925 STERLING SILVER • ANTI-TARNISH COATING",
+    "subtitle": "Explore handcrafted 925 silver payal, ghungroo anklets, silver coins & bars, pooja thalis, and contemporary silver jewellery.",
+    "heroBg": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "guideTitle": "925 Silver Purity & Care Guide",
+    "guideDesc": "92.5% pure sterling silver crafted with tarnish-resistant coating for lasting brilliance and everyday beauty."
+  },
   "earrings": {
     "slug": "earrings",
+    "parentSlug": "gold",
     "title": "Earrings & Tops",
     "pageTitle": "Luxury Earrings, Jhumkas & Tops | Swarn Mahal Ambikapur",
     "badge": "HANDCRAFTED PERFECTION • 50+ STYLES",
@@ -21,22 +62,24 @@
     "circleImg": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
     "thumbnail_image": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
     "guideTitle": "Earrings Styling & Face Silhouette Guide",
-    "guideDesc": "Discover which earring shapes best complement oval, round, and heart-shaped faces, along with secure screw-back and push-plug locking mechanisms."
+    "guideDesc": "Discover which earring shapes best complement oval, round, and heart-shaped faces, along with secure screw-back locking mechanisms."
   },
   "nose-pins": {
     "slug": "nose-pins",
+    "parentSlug": "gold",
     "title": "Nose Pins",
-    "pageTitle": "nose-pins",
+    "pageTitle": "Nose Pins & Bridal Naths | Swarn Mahal Ambikapur",
     "badge": "BIS 916 HALLMARKED • CERTIFIED DIAMONDS & GEMSTONES",
-    "subtitle": "Discover delicate diamond nose studs, traditional bridal naths, and minimal 22K gold wire nose pins. Crafted for seamless comfort, everyday grace, and festive elegance at Swarn Mahal, Ambikapur.",
+    "subtitle": "Discover delicate diamond nose studs, traditional bridal naths, and minimal 22K gold wire nose pins. Crafted for seamless comfort.",
     "heroBg": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1600&q=85",
     "circleImg": "/uploads/1787346906675_C004610__1_1.webp",
     "thumbnail_image": "/uploads/1787346906675_C004610__1_1.webp",
     "guideTitle": "Nose Pins Buying & Purity Guide",
-    "guideDesc": "Discover smart design combinations such as halo solitaire settings and lightweight gold alloys that deliver maximum visual grandeur within ₹50,000."
+    "guideDesc": "Discover smart design combinations such as halo solitaire settings and lightweight gold alloys."
   },
   "gold-hoops-balis": {
     "slug": "gold-hoops-balis",
+    "parentSlug": "gold",
     "title": "Gold Hoops & Balis",
     "pageTitle": "Gold Hoops & Balis | Swarn Mahal Jewellers Ambikapur",
     "badge": "NEW CURATION • LUXURY COLLECTION",
@@ -49,10 +92,11 @@
   },
   "pendants": {
     "slug": "pendants",
+    "parentSlug": "gold",
     "title": "Pendants",
     "pageTitle": "Pendants | Swarn Mahal Jewellers Ambikapur",
     "badge": "NEW CURATION • LUXURY COLLECTION",
-    "subtitle": "Discover elegant daily-wear gold pendants, spiritual lockets, heart motifs, and sparkling diamond pendants. Designed for timeless beauty and everyday grace at Swarn Mahal, Ambikapur.",
+    "subtitle": "Discover elegant daily-wear gold pendants, spiritual lockets, heart motifs, and sparkling diamond pendants.",
     "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
     "circleImg": "/uploads/1787348362518_BIIP0359P04_YAA14DIG6XXXXXXXX_ABCD00-PICS-00004-1024-35451.jpg",
     "thumbnail_image": "/uploads/1787348362518_BIIP0359P04_YAA14DIG6XXXXXXXX_ABCD00-PICS-00004-1024-35451.jpg",
@@ -61,6 +105,7 @@
   },
   "mangalsutra": {
     "slug": "mangalsutra",
+    "parentSlug": "gold",
     "title": "Mangalsutra",
     "pageTitle": "Mangalsutra | Swarn Mahal Jewellers Ambikapur",
     "badge": "NEW CURATION • LUXURY COLLECTION",
@@ -73,10 +118,11 @@
   },
   "chains": {
     "slug": "chains",
+    "parentSlug": "gold",
     "title": "Chains",
     "pageTitle": "Chains | Swarn Mahal Jewellers Ambikapur",
     "badge": "NEW CURATION • LUXURY COLLECTION",
-    "subtitle": "Explore precision-crafted 22K yellow gold chains, durable daily links, classic rope designs, and elegant machine chains. Crafted for unmatched strength, lightweight comfort, and timeless grace at Swarn Mahal, Ambikapur.",
+    "subtitle": "Explore precision-crafted 22K yellow gold chains, durable daily links, classic rope designs, and elegant machine chains.",
     "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
     "circleImg": "/uploads/1787348725596_513220CLQAA00_1.webp",
     "thumbnail_image": "/uploads/1787348725596_513220CLQAA00_1.webp",
@@ -85,6 +131,7 @@
   },
   "bangles": {
     "slug": "bangles",
+    "parentSlug": "gold",
     "title": "Bangles",
     "pageTitle": "Bangles | Swarn Mahal Jewellers Ambikapur",
     "badge": "NEW CURATION • LUXURY COLLECTION",
@@ -97,6 +144,7 @@
   },
   "necklace": {
     "slug": "necklace",
+    "parentSlug": "gold",
     "title": "Necklace",
     "pageTitle": "Necklace | Swarn Mahal Jewellers Ambikapur",
     "badge": "NEW CURATION • LUXURY COLLECTION",
@@ -109,6 +157,7 @@
   },
   "bracelet": {
     "slug": "bracelet",
+    "parentSlug": "gold",
     "title": "Bracelet",
     "pageTitle": "Bracelet | Swarn Mahal Jewellers Ambikapur",
     "badge": "NEW CURATION • LUXURY COLLECTION",
@@ -118,5 +167,44 @@
     "thumbnail_image": "/uploads/1787348950913_JT02841-1YS300_1_lar.jpg",
     "guideTitle": "Bracelet Buying & Care Guide",
     "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
+  "diamond-rings": {
+    "slug": "diamond-rings",
+    "parentSlug": "diamond",
+    "title": "Diamond Rings & Solitaires",
+    "pageTitle": "Diamond Rings & Solitaires | Swarn Mahal Ambikapur",
+    "badge": "IGI CERTIFIED • VVS-VS DIAMONDS",
+    "subtitle": "Solitaire engagement rings, diamond bands, and halo solitaire rings in 18K white, rose, and yellow gold.",
+    "heroBg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "thumbnail_image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "guideTitle": "Solitaire Ring Buying & Carat Guide",
+    "guideDesc": "Every diamond solitaire comes with international gemological laboratory certification."
+  },
+  "diamond-earrings": {
+    "slug": "diamond-earrings",
+    "parentSlug": "diamond",
+    "title": "Diamond Earrings",
+    "pageTitle": "Diamond Earrings & Studs | Swarn Mahal Ambikapur",
+    "badge": "FINEST BRILLIANCE • 18K GOLD",
+    "subtitle": "Sparkling diamond studs, chandelier drop earrings, and huggie hoops crafted with certified diamonds.",
+    "heroBg": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=200&q=80",
+    "thumbnail_image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=200&q=80",
+    "guideTitle": "Diamond Earrings Styling Guide",
+    "guideDesc": "Learn about secure screw posts and daily wear comfort settings."
+  },
+  "silver-payal": {
+    "slug": "silver-payal",
+    "parentSlug": "silver",
+    "title": "Silver Payal & Anklets",
+    "pageTitle": "925 Silver Payal & Anklets | Swarn Mahal Ambikapur",
+    "badge": "PURE 925 CHANDI • TRADITIONAL & MODERN",
+    "subtitle": "Traditional ghungroo payals, minimal daily wear silver anklets, and bridal chandi payal sets.",
+    "heroBg": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "guideTitle": "Silver Payal Care & Shine Guide",
+    "guideDesc": "Pure 925 hallmarked silver anklets designed for long-lasting shine and comfortable fit."
   }
 }

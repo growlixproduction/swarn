@@ -46,7 +46,8 @@ const POPULAR_SEARCH_TAGS = [
 export default function Header() {
   const router = useRouter();
   const { bullionRates, products, cartCount, openCartDrawer, searchQuery, setSearchQuery } = useApp();
-  const [navCategories, setNavCategories] = useState<Array<{ slug: string; title: string; icon: string }>>(DEFAULT_NAV_ITEMS);
+  const [categoriesMap, setCategoriesMap] = useState<Record<string, any>>({});
+  const [navCategories, setNavCategories] = useState<Array<{ slug: string; title: string; icon: string; parentSlug?: string }>>(DEFAULT_NAV_ITEMS);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -55,9 +56,11 @@ export default function Header() {
       .then(res => res.json())
       .then(data => {
         if (data && data.categories) {
+          setCategoriesMap(data.categories);
           const list = Object.values(data.categories).map((cat: any) => ({
             slug: cat.slug,
             title: cat.title || cat.name,
+            parentSlug: cat.parentSlug || "",
             icon: CATEGORY_ICONS[cat.slug] || "fa-gem"
           }));
           if (list.length > 0) {
@@ -342,14 +345,50 @@ export default function Header() {
           </form>
         </div>
 
-        {/* Tier 2: Dynamic Category Navigation Strip (Desktop Nav) */}
+        {/* Tier 2: Dynamic Category Navigation Strip (Desktop Nav with Sub-Collection Dropdowns) */}
         <nav className="tanishq-category-strip">
-          <div className="tanishq-cat-inner">
-            {navCategories.map(cat => (
-              <Link key={cat.slug} href={`/collections/${cat.slug}`} className="tanishq-cat-item">
-                <i className={`fa-solid ${cat.icon}`}></i> {cat.title}
-              </Link>
-            ))}
+          <div className="tanishq-cat-inner" style={{ flexWrap: "nowrap", overflowX: "auto" }}>
+            {/* Top-Level Categories Filtering */}
+            {navCategories.filter(c => !c.parentSlug).map(cat => {
+              const children = navCategories.filter(sub => sub.parentSlug === cat.slug);
+              return (
+                <div key={cat.slug} className="tanishq-cat-dropdown-wrapper" style={{ position: "relative" }}>
+                  <Link href={`/collections/${cat.slug}`} className="tanishq-cat-item" style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
+                    <i className={`fa-solid ${cat.icon}`}></i>
+                    <span>{cat.title}</span>
+                    {children.length > 0 && <i className="fa-solid fa-chevron-down" style={{ fontSize: "0.62rem", opacity: 0.8, marginLeft: "2px" }}></i>}
+                  </Link>
+
+                  {/* Floating Luxury Hover Dropdown for Sub-Collections */}
+                  {children.length > 0 && (
+                    <div className="tanishq-cat-dropdown-menu">
+                      {children.map(sub => (
+                        <Link
+                          key={sub.slug}
+                          href={`/collections/${sub.slug}`}
+                          className="tanishq-dropdown-item"
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.6rem",
+                            padding: "0.55rem 0.85rem",
+                            fontSize: "0.83rem",
+                            color: "var(--text-primary)",
+                            textDecoration: "none",
+                            borderRadius: "6px",
+                            transition: "background 0.2s ease"
+                          }}
+                        >
+                          <i className={`fa-solid ${sub.icon}`} style={{ color: "var(--gold-deep)", fontSize: "0.78rem" }}></i>
+                          <span>{sub.title}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+
             <Link href="/about" className="tanishq-cat-item" style={{ color: "var(--gold-deep)", fontWeight: 700 }}>
               <i className="fa-solid fa-circle-info"></i> About Us
             </Link>
@@ -401,61 +440,93 @@ export default function Header() {
               </button>
             </div>
 
-            {/* Drawer Navigation Links (Exact list requested by user) */}
+            {/* Drawer Navigation Links */}
             <div style={{ padding: "1.25rem 1rem", display: "flex", flexDirection: "column", gap: "0.6rem", flex: 1, overflowY: "auto" }}>
               <div style={{ fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "1.2px", color: "#8C827A", fontWeight: 700, marginBottom: "0.35rem", paddingLeft: "0.5rem" }}>
-                Menu & Sections
+                Menu & Collections
               </div>
 
-              {/* 1. About Us */}
+              {/* About Us */}
               <Link
                 href="/about"
-                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.85rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#832729", fontWeight: 700, textDecoration: "none", fontSize: "0.95rem" }}
+                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.75rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#832729", fontWeight: 700, textDecoration: "none", fontSize: "0.92rem" }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <i className="fa-solid fa-circle-info" style={{ color: "#C59B27", fontSize: "1.15rem" }}></i>
+                <i className="fa-solid fa-circle-info" style={{ color: "#C59B27", fontSize: "1.1rem" }}></i>
                 <span>About Us</span>
               </Link>
 
-              {/* 2. Gold Calculator */}
+              {/* Gold Calculator */}
               <Link
                 href="/calculator"
-                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.85rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#832729", fontWeight: 700, textDecoration: "none", fontSize: "0.95rem" }}
+                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.75rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#832729", fontWeight: 700, textDecoration: "none", fontSize: "0.92rem" }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <i className="fa-solid fa-calculator" style={{ color: "#C59B27", fontSize: "1.15rem" }}></i>
+                <i className="fa-solid fa-calculator" style={{ color: "#C59B27", fontSize: "1.1rem" }}></i>
                 <span>Gold Calculator</span>
               </Link>
 
-              {/* 3. Gold Section */}
-              <Link
-                href="/collections/gold"
-                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.85rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#1C1917", fontWeight: 600, textDecoration: "none", fontSize: "0.95rem" }}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <span style={{ fontSize: "1.15rem" }}>🟡</span>
-                <span>Gold Section</span>
-              </Link>
+              {/* Dynamic Main Metal & Custom Collections with Sub-collections */}
+              {navCategories.filter(c => !c.parentSlug && c.slug !== "all").map(mainCat => {
+                const subItems = navCategories.filter(sub => sub.parentSlug === mainCat.slug);
+                return (
+                  <div key={mainCat.slug} style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
+                    <Link
+                      href={`/collections/${mainCat.slug}`}
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        padding: "0.75rem 1rem",
+                        borderRadius: "10px",
+                        background: "#FAF6F2",
+                        color: "#1C1917",
+                        fontWeight: 700,
+                        textDecoration: "none",
+                        fontSize: "0.92rem"
+                      }}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                        <i className={`fa-solid ${mainCat.icon}`} style={{ color: "var(--gold-deep)" }}></i>
+                        <span>{mainCat.title}</span>
+                      </div>
+                      {subItems.length > 0 && (
+                        <span style={{ fontSize: "0.7rem", color: "var(--gold-dark)", background: "rgba(197, 168, 128, 0.2)", padding: "0.15rem 0.5rem", borderRadius: "10px" }}>
+                          {subItems.length} items
+                        </span>
+                      )}
+                    </Link>
 
-              {/* 4. Diamond Section */}
-              <Link
-                href="/collections/diamond"
-                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.85rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#1C1917", fontWeight: 600, textDecoration: "none", fontSize: "0.95rem" }}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <span style={{ fontSize: "1.15rem" }}>💎</span>
-                <span>Diamond Section</span>
-              </Link>
-
-              {/* 5. Silver Section */}
-              <Link
-                href="/collections/silverware"
-                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.85rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#1C1917", fontWeight: 600, textDecoration: "none", fontSize: "0.95rem" }}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                <span style={{ fontSize: "1.15rem" }}>⚪</span>
-                <span>Silver Section</span>
-              </Link>
+                    {/* Sub-Collection List under Main Collection */}
+                    {subItems.length > 0 && (
+                      <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem", paddingLeft: "1.5rem", borderLeft: "2px solid var(--border-gold-subtle)", marginLeft: "1rem" }}>
+                        {subItems.map(sub => (
+                          <Link
+                            key={sub.slug}
+                            href={`/collections/${sub.slug}`}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "0.5rem",
+                              padding: "0.45rem 0.75rem",
+                              borderRadius: "6px",
+                              color: "var(--text-secondary)",
+                              fontSize: "0.84rem",
+                              fontWeight: 500,
+                              textDecoration: "none"
+                            }}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            <i className={`fa-solid ${sub.icon}`} style={{ fontSize: "0.7rem", color: "var(--gold-deep)" }}></i>
+                            <span>{sub.title}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
 
             {/* Drawer Footer Call & Store Action */}
