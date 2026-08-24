@@ -105,10 +105,19 @@ const CategoryStories: React.FC = () => {
 
   const handleTouchEnd = () => {
     if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
-    // Resume auto-scroll after 2.5 seconds of user release
+    // Instantly resume auto-rotation (300ms) after finger release so auto-rotate continues seamlessly!
     resumeTimeoutRef.current = setTimeout(() => {
       isInteractingRef.current = false;
-    }, 2500);
+    }, 300);
+  };
+
+  const handleScroll = () => {
+    if (isInteractingRef.current) {
+      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+      resumeTimeoutRef.current = setTimeout(() => {
+        isInteractingRef.current = false;
+      }, 350);
+    }
   };
 
   const marqueeList = [...stories, ...stories];
@@ -140,6 +149,7 @@ const CategoryStories: React.FC = () => {
 
           <div
             ref={scrollRef}
+            onScroll={handleScroll}
             onTouchStart={handleTouchStart}
             onTouchEnd={handleTouchEnd}
             onMouseDown={handleTouchStart}
