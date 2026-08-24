@@ -50,6 +50,7 @@ export default function Header() {
   const [navCategories, setNavCategories] = useState<Array<{ slug: string; title: string; icon: string; parentSlug?: string }>>(DEFAULT_NAV_ITEMS);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeMobileAccordion, setActiveMobileAccordion] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/categories")
@@ -474,54 +475,87 @@ export default function Header() {
               {/* Dynamic Main Metal Collections with Expandable Accordion */}
               {navCategories.filter(c => !c.parentSlug && c.slug !== "all").map(mainCat => {
                 const subItems = navCategories.filter(sub => sub.parentSlug === mainCat.slug);
+                const isExpanded = activeMobileAccordion === mainCat.slug;
                 return (
                   <div
                     key={mainCat.slug}
                     style={{
                       background: "#FAF6F2",
-                      border: "1px solid rgba(197, 168, 128, 0.35)",
+                      border: isExpanded ? "1.5px solid #832729" : "1px solid rgba(197, 168, 128, 0.35)",
                       borderRadius: "14px",
                       overflow: "hidden",
-                      boxShadow: "0 2px 8px rgba(0,0,0,0.02)"
+                      boxShadow: isExpanded ? "0 4px 15px rgba(131, 39, 41, 0.12)" : "0 2px 6px rgba(0,0,0,0.02)",
+                      transition: "all 0.2s ease"
                     }}
                   >
                     <div
+                      onClick={() => setActiveMobileAccordion(prev => prev === mainCat.slug ? null : mainCat.slug)}
                       style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
                         padding: "0.85rem 1rem",
-                        background: "linear-gradient(135deg, #FAF6F2 0%, #F5EAD6 100%)"
+                        background: isExpanded ? "linear-gradient(135deg, #F5EAD6 0%, #E8D9BF 100%)" : "linear-gradient(135deg, #FAF6F2 0%, #F5EAD6 100%)",
+                        cursor: "pointer"
                       }}
                     >
-                      <Link
-                        href={`/collections/${mainCat.slug}`}
-                        style={{ display: "flex", alignItems: "center", gap: "0.75rem", textDecoration: "none", color: "#1C1917", fontWeight: 700, fontSize: "0.95rem" }}
-                        onClick={() => setIsMobileMenuOpen(false)}
-                      >
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
                         <i className={`fa-solid ${mainCat.icon}`} style={{ color: "#832729", fontSize: "1.1rem" }}></i>
-                        <span>{mainCat.title}</span>
-                      </Link>
+                        <span style={{ color: "#1C1917", fontWeight: 700, fontSize: "0.95rem" }}>{mainCat.title}</span>
+                      </div>
 
-                      {subItems.length > 0 && (
-                        <span style={{ fontSize: "0.7rem", color: "#832729", background: "#FFFFFF", border: "1px solid rgba(197, 168, 128, 0.4)", padding: "0.2rem 0.6rem", borderRadius: "12px", fontWeight: 700 }}>
-                          {subItems.length} items
-                        </span>
-                      )}
+                      <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                        {subItems.length > 0 && (
+                          <span style={{ fontSize: "0.7rem", color: "#832729", background: "#FFFFFF", border: "1px solid rgba(197, 168, 128, 0.4)", padding: "0.15rem 0.55rem", borderRadius: "12px", fontWeight: 700 }}>
+                            {subItems.length} items
+                          </span>
+                        )}
+                        <i
+                          className="fa-solid fa-chevron-down"
+                          style={{
+                            fontSize: "0.75rem",
+                            color: "#832729",
+                            transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                            transition: "transform 0.25s ease"
+                          }}
+                        ></i>
+                      </div>
                     </div>
 
-                    {/* Sub-Collections Chips Grid inside Drawer */}
-                    {subItems.length > 0 && (
+                    {/* Collapsible Sub-Collections Grid inside Drawer */}
+                    {isExpanded && subItems.length > 0 && (
                       <div
                         style={{
                           padding: "0.75rem 0.85rem 0.85rem",
                           background: "#FFFFFF",
-                          borderTop: "1px solid rgba(197, 168, 128, 0.2)",
+                          borderTop: "1px solid rgba(197, 168, 128, 0.3)",
                           display: "grid",
                           gridTemplateColumns: "1fr 1fr",
                           gap: "0.45rem"
                         }}
                       >
+                        <Link
+                          href={`/collections/${mainCat.slug}`}
+                          style={{
+                            gridColumn: "1 / -1",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "0.45rem",
+                            padding: "0.5rem",
+                            borderRadius: "8px",
+                            background: "linear-gradient(135deg, #832729 0%, #5E1A1B 100%)",
+                            color: "#FFFFFF",
+                            fontSize: "0.82rem",
+                            fontWeight: 700,
+                            textDecoration: "none",
+                            marginBottom: "0.2rem"
+                          }}
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          <span>Explore All {mainCat.title} &rarr;</span>
+                        </Link>
+
                         {subItems.map(sub => (
                           <Link
                             key={sub.slug}
@@ -537,8 +571,7 @@ export default function Header() {
                               color: "#4A3E3D",
                               fontSize: "0.8rem",
                               fontWeight: 600,
-                              textDecoration: "none",
-                              transition: "all 0.15s ease"
+                              textDecoration: "none"
                             }}
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
