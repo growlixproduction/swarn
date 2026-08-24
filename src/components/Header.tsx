@@ -400,29 +400,28 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* ☰ 3-Line Hamburger Navigation Drawer Modal (Full-Width Top-to-Bottom Slide Down Sheet!) */}
+      {/* ☰ 3-Line Hamburger Navigation Drawer Modal (Side Slide-In Drawer from Right - Full Height 100vh!) */}
       {isMobileMenuOpen && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 999999, display: "flex", flexDirection: "column" }}>
+        <div style={{ position: "fixed", inset: 0, zIndex: 999999, display: "flex", justifyContent: "flex-end" }}>
           {/* Dark Backdrop */}
           <div
-            style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(5px)" }}
+            style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }}
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
-          {/* Full-Width Slide Down Sheet FROM TOP */}
+          {/* Side Slide-in Drawer FROM RIGHT */}
           <div
-            className="mobile-slide-down-drawer"
             style={{
               position: "relative",
-              width: "100%",
-              maxHeight: "88vh",
+              width: "320px",
+              maxWidth: "85vw",
+              height: "100vh",
               background: "#FFFFFF",
-              borderRadius: "0 0 24px 24px",
-              boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
+              boxShadow: "-8px 0 36px rgba(0,0,0,0.35)",
               display: "flex",
               flexDirection: "column",
               zIndex: 2,
-              overflow: "hidden"
+              animation: "slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1)"
             }}
           >
             {/* Drawer Header */}
