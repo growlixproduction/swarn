@@ -16,6 +16,7 @@ export default function CollectionPage() {
 
   // Dynamic Category Metadata State
   const [categoriesMap, setCategoriesMap] = useState<Record<string, any>>(CATEGORY_METADATA);
+  const [pageBanners, setPageBanners] = useState<Record<string, any>>({});
 
   useEffect(() => {
     fetch("/api/categories")
@@ -26,6 +27,15 @@ export default function CollectionPage() {
         }
       })
       .catch(err => console.warn("Failed to load collection metadata:", err));
+
+    fetch("/api/banners")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.pageBanners) {
+          setPageBanners(data.pageBanners);
+        }
+      })
+      .catch(err => console.warn("Failed to load live banners:", err));
   }, []);
 
   // Compute active metadata
@@ -41,11 +51,13 @@ export default function CollectionPage() {
 
   const formattedName = currentMeta?.title || (categorySlug !== "all" ? formatSlugToTitle(categorySlug) : "All Jewellery");
 
+  // Active page banner from Admin vs Category metadata
+  const adminBanner = pageBanners[categorySlug];
   const meta = {
-    title: formattedName,
-    badge: currentMeta?.badge || "BIS 916 HALLMARKED • 100% PURITY",
-    subtitle: currentMeta?.subtitle || `Explore handcrafted ${formattedName} in pure 22K hallmarked gold and certified diamonds.`,
-    heroBg: currentMeta?.heroBg || currentMeta?.circleImg || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    title: adminBanner?.title || formattedName,
+    badge: adminBanner?.badge || currentMeta?.badge || "BIS 916 HALLMARKED • 100% PURITY",
+    subtitle: adminBanner?.subtitle || currentMeta?.subtitle || `Explore handcrafted ${formattedName} in pure 22K hallmarked gold and certified diamonds.`,
+    heroBg: adminBanner?.backgroundImage || currentMeta?.heroBg || currentMeta?.circleImg || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
     guideTitle: currentMeta?.guideTitle || `${formattedName} Buying & Care Guide`,
     guideDesc: currentMeta?.guideDesc || "Every Swarn Mahal piece is accompanied by a BIS 916 purity hallmark and authentic certificate of quality."
   };

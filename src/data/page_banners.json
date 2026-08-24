@@ -1,0 +1,112 @@
+{
+  "heroSlides": [
+    {
+      "id": "hero-slide-1",
+      "order": 1,
+      "isActive": true,
+      "tagBadge": "BRIDAL COUTURE 2026",
+      "titleMain": "ROYAL HEIRLOOMS &",
+      "titleItalic": "BRIDAL KUNDAN",
+      "description": "Intricately woven 22K gold with uncut diamonds, emeralds & pearls crafted for brides.",
+      "buttonText": "EXPLORE HERITAGE",
+      "buttonLink": "/collections/wedding",
+      "backgroundImage": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+      "overlayGradient": "linear-gradient(90deg, rgba(16, 12, 10, 0.94) 0%, rgba(16, 12, 10, 0.78) 45%, rgba(16, 12, 10, 0.25) 78%, transparent 100%)"
+    },
+    {
+      "id": "hero-slide-2",
+      "order": 2,
+      "isActive": true,
+      "tagBadge": "FESTIVE COLLECTION • FLAT 20% OFF",
+      "titleMain": "SWARN MAHAL",
+      "titleItalic": "THE FESTIVE EDIT",
+      "description": "Flat 20% Off on making charges across all 22K Hallmark gold & bridal rani haar suites.",
+      "buttonText": "SHOP FESTIVE",
+      "buttonLink": "/collections/gold",
+      "backgroundImage": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
+      "overlayGradient": "linear-gradient(90deg, rgba(16, 12, 10, 0.94) 0%, rgba(16, 12, 10, 0.78) 45%, rgba(16, 12, 10, 0.25) 78%, transparent 100%)"
+    },
+    {
+      "id": "hero-slide-3",
+      "order": 3,
+      "isActive": true,
+      "tagBadge": "STARTING FROM ₹14,999",
+      "titleMain": "MINIMAL LUXE &",
+      "titleItalic": "SOLITAIRES",
+      "description": "Handcrafted 18K & 22K gold rings and lightweight hoop earrings for dynamic lifestyles.",
+      "buttonText": "EXPLORE MINIMAL",
+      "buttonLink": "/collections/diamond",
+      "backgroundImage": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
+      "overlayGradient": "linear-gradient(90deg, rgba(16, 12, 10, 0.94) 0%, rgba(16, 12, 10, 0.78) 45%, rgba(16, 12, 10, 0.25) 78%, transparent 100%)"
+    },
+    {
+      "id": "hero-slide-4",
+      "order": 4,
+      "isActive": true,
+      "tagBadge": "ESTABLISHED 2015 • AMBIKAPUR",
+      "titleMain": "TIMELESS TRUST &",
+      "titleItalic": "100% TRANSPARENCY",
+      "description": "North Chhattisgarh's benchmark showroom on Church Road, Joda Pipal, Maharaja Gali.",
+      "buttonText": "VISIT SHOWROOM",
+      "buttonLink": "/#showroom-section",
+      "backgroundImage": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (10).jpeg",
+      "overlayGradient": "linear-gradient(90deg, rgba(16, 12, 10, 0.94) 0%, rgba(16, 12, 10, 0.78) 45%, rgba(16, 12, 10, 0.25) 78%, transparent 100%)"
+    }
+  ],
+  "pageBanners": {
+    "about": {
+      "pageKey": "about",
+      "pageName": "About Us Page",
+      "badge": "OUR HERITAGE & LEGACY",
+      "title": "Crafting Timeless Elegance Since 2015",
+      "subtitle": "Swarn Mahal Jewellers Ambikapur represents purity, craftsmanship, and trust.",
+      "backgroundImage": "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=1600&q=85",
+      "overlayGradient": "linear-gradient(135deg, rgba(28, 25, 23, 0.95) 0%, rgba(17, 14, 12, 0.88) 100%)"
+    },
+    "calculator": {
+      "pageKey": "calculator",
+      "pageName": "Live Rate Calculator Page",
+      "badge": "TRANSPARENT 100% CUSTOMIZABLE LIVE BILLING ENGINE",
+      "title": "Gold & Silver Rate Calculator",
+      "subtitle": "Enter custom rates (per 1g, 10g, or 1Kg), custom weights, custom purity percentages, custom making charges (₹/g or %), and custom GST to calculate exact itemized jewellery costs.",
+      "backgroundImage": "https://images.unsplash.com/photo-1611591475140-be3a7fcfb088?auto=format&fit=crop&w=1600&q=85",
+      "overlayGradient": "linear-gradient(135deg, rgba(28, 25, 23, 0.95) 0%, rgba(17, 14, 12, 0.88) 100%)"
+    },
+    "gold": {
+      "pageKey": "gold",
+      "pageName": "Gold Collection Page",
+      "badge": "22K BIS 916 HALLMARKED GOLD",
+      "title": "Pure Gold Collection",
+      "subtitle": "Explore handcrafted 22K BIS 916 hallmarked necklaces, bangles, chains, earrings, and traditional rani haars.",
+      "backgroundImage": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+      "overlayGradient": "linear-gradient(135deg, rgba(28, 25, 23, 0.92) 0%, rgba(131, 39, 41, 0.85) 100%)"
+    },
+    "diamond": {
+      "pageKey": "diamond",
+      "pageName": "Diamond Collection Page",
+      "badge": "CERTIFIED VVS-EF SOLITAIRES & DIAMONDS",
+      "title": "Solitaire & Diamond Collection",
+      "subtitle": "Brilliant VVS-EF clarity diamonds set in 18K gold. Certified by international assay laboratories.",
+      "backgroundImage": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
+      "overlayGradient": "linear-gradient(135deg, rgba(24, 24, 27, 0.94) 0%, rgba(42, 36, 33, 0.88) 100%)"
+    },
+    "silver": {
+      "pageKey": "silver",
+      "pageName": "Silver Collection Page",
+      "badge": "925 STERLING SILVER & PAYAL SUITES",
+      "title": "Fine 925 Silver Collection",
+      "subtitle": "Intricately designed 925 sterling silver payal, kadas, utensils, and gifting artifacts.",
+      "backgroundImage": "https://images.unsplash.com/photo-1611591475140-be3a7fcfb088?auto=format&fit=crop&w=1600&q=85",
+      "overlayGradient": "linear-gradient(135deg, rgba(24, 24, 27, 0.94) 0%, rgba(63, 63, 70, 0.88) 100%)"
+    },
+    "all": {
+      "pageKey": "all",
+      "pageName": "All Jewellery Page",
+      "badge": "CURATED HEIRLOOM CATALOG",
+      "title": "Entire Jewellery Catalog",
+      "subtitle": "Discover our complete master collection of Gold, Diamond, and Silver ornaments.",
+      "backgroundImage": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=85",
+      "overlayGradient": "linear-gradient(135deg, rgba(28, 25, 23, 0.92) 0%, rgba(17, 14, 12, 0.88) 100%)"
+    }
+  }
+}

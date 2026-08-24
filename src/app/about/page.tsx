@@ -14,6 +14,13 @@ export default function AboutUsPage() {
   const { bullionRates } = useApp();
   const [activeTab, setActiveTab] = useState<MaterialTab>("gold");
   const [productsList, setProductsList] = useState<Product[]>(PRODUCTS_CATALOG);
+  const [pageBanner, setPageBanner] = useState<any>({
+    badge: "OUR HERITAGE & LEGACY",
+    title: "Crafting Timeless Elegance Since 2015",
+    subtitle: "Swarn Mahal Jewellers Ambikapur represents purity, craftsmanship, and trust.",
+    backgroundImage: "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=1600&q=85",
+    overlayGradient: "linear-gradient(135deg, rgba(28, 25, 23, 0.95) 0%, rgba(17, 14, 12, 0.88) 100%)"
+  });
 
   useEffect(() => {
     fetch("/api/products")
@@ -24,6 +31,15 @@ export default function AboutUsPage() {
         }
       })
       .catch(err => console.warn("Failed to fetch live products for About Us:", err));
+
+    fetch("/api/banners")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.pageBanners && data.pageBanners.about) {
+          setPageBanner(data.pageBanners.about);
+        }
+      })
+      .catch(err => console.warn("Failed to fetch live banners for About Us:", err));
   }, []);
 
   // Helper to infer product material
@@ -62,7 +78,49 @@ export default function AboutUsPage() {
 
   return (
     <div>
-      {/* 1. Showroom Story & Heritage Section (Moved from Homepage) */}
+      {/* Dynamic Header Banner (Editable from Admin Panel) */}
+      <section
+        style={{
+          position: "relative",
+          backgroundImage: `url(${pageBanner.backgroundImage || "https://images.unsplash.com/photo-1573408301185-9146fe634ad0?auto=format&fit=crop&w=1600&q=85"})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          padding: "4rem 1rem",
+          color: "#FFFFFF",
+          textAlign: "center",
+          borderBottom: "1px solid var(--border-gold-subtle)"
+        }}
+      >
+        <div style={{ position: "absolute", inset: 0, background: pageBanner.overlayGradient || "linear-gradient(135deg, rgba(28, 25, 23, 0.95) 0%, rgba(17, 14, 12, 0.88) 100%)" }} />
+        <div className="container" style={{ position: "relative", zIndex: 2, maxWidth: "800px" }}>
+          {pageBanner.badge && (
+            <span
+              style={{
+                display: "inline-block",
+                background: "rgba(197, 168, 128, 0.2)",
+                border: "1px solid var(--gold-primary)",
+                padding: "0.25rem 0.75rem",
+                borderRadius: "20px",
+                fontSize: "0.72rem",
+                letterSpacing: "0.15em",
+                color: "var(--gold-light)",
+                marginBottom: "0.85rem",
+                fontWeight: 700
+              }}
+            >
+              {pageBanner.badge}
+            </span>
+          )}
+          <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, marginBottom: "0.5rem" }}>
+            {pageBanner.title}
+          </h1>
+          <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.85)", margin: 0 }}>
+            {pageBanner.subtitle}
+          </p>
+        </div>
+      </section>
+
+      {/* 1. Showroom Story & Heritage Section */}
       <ShowroomSection />
 
       {/* 2. Material Collection Tabs Section */}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useApp } from "@/context/AppContext";
 import { KaratType } from "@/lib/types";
@@ -8,6 +8,25 @@ import { PricingEngine } from "@/lib/pricingEngine";
 
 export default function CalculatorPage() {
   const { bullionRates } = useApp();
+
+  const [pageBanner, setPageBanner] = useState<any>({
+    badge: "TRANSPARENT 100% CUSTOMIZABLE LIVE BILLING ENGINE",
+    title: "Gold & Silver Rate Calculator",
+    subtitle: "Enter custom rates (per 1g, 10g, or 1Kg), custom weights, custom purity percentages, custom making charges (₹/g or %), and custom GST to calculate exact itemized jewellery costs.",
+    backgroundImage: "https://images.unsplash.com/photo-1611591475140-be3a7fcfb088?auto=format&fit=crop&w=1600&q=85",
+    overlayGradient: "linear-gradient(135deg, rgba(28, 25, 23, 0.95) 0%, rgba(17, 14, 12, 0.88) 100%)"
+  });
+
+  useEffect(() => {
+    fetch("/api/banners")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.pageBanners && data.pageBanners.calculator) {
+          setPageBanner(data.pageBanners.calculator);
+        }
+      })
+      .catch(err => console.warn("Failed to fetch live banner for Calculator:", err));
+  }, []);
 
   // ==========================================
   // TOOL 1: GOLD JEWELLERY & BULLION ESTIMATOR
@@ -133,37 +152,44 @@ export default function CalculatorPage() {
 
   return (
     <div>
-      {/* Header Banner */}
+      {/* Header Banner (Editable from Admin Panel) */}
       <section
         style={{
-          background: "linear-gradient(135deg, #1C1917 0%, #110E0C 100%)",
+          position: "relative",
+          backgroundImage: `url(${pageBanner.backgroundImage || "https://images.unsplash.com/photo-1611591475140-be3a7fcfb088?auto=format&fit=crop&w=1600&q=85"})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
           padding: "3.5rem 1rem",
           color: "#FFFFFF",
           textAlign: "center",
           borderBottom: "1px solid var(--border-gold-subtle)"
         }}
       >
-        <div className="container" style={{ maxWidth: "850px" }}>
-          <span
-            style={{
-              display: "inline-block",
-              background: "rgba(197, 168, 128, 0.2)",
-              border: "1px solid var(--gold-primary)",
-              padding: "0.25rem 0.75rem",
-              borderRadius: "20px",
-              fontSize: "0.72rem",
-              letterSpacing: "0.15em",
-              color: "var(--gold-light)",
-              marginBottom: "0.85rem"
-            }}
-          >
-            TRANSPARENT 100% CUSTOMIZABLE LIVE BILLING ENGINE
-          </span>
+        <div style={{ position: "absolute", inset: 0, background: pageBanner.overlayGradient || "linear-gradient(135deg, rgba(28, 25, 23, 0.95) 0%, rgba(17, 14, 12, 0.88) 100%)" }} />
+        <div className="container" style={{ position: "relative", zIndex: 2, maxWidth: "850px" }}>
+          {pageBanner.badge && (
+            <span
+              style={{
+                display: "inline-block",
+                background: "rgba(197, 168, 128, 0.2)",
+                border: "1px solid var(--gold-primary)",
+                padding: "0.25rem 0.75rem",
+                borderRadius: "20px",
+                fontSize: "0.72rem",
+                letterSpacing: "0.15em",
+                color: "var(--gold-light)",
+                marginBottom: "0.85rem",
+                fontWeight: 700
+              }}
+            >
+              {pageBanner.badge}
+            </span>
+          )}
           <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, marginBottom: "0.5rem" }}>
-            Gold & Silver Rate Calculator
+            {pageBanner.title}
           </h1>
           <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.85)", margin: 0 }}>
-            Enter custom rates (per 1g, 10g, or 1Kg), custom weights, custom purity percentages, custom making charges (₹/g or %), and custom GST to calculate exact itemized jewellery costs.
+            {pageBanner.subtitle}
           </p>
         </div>
       </section>
