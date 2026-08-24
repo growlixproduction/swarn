@@ -51,6 +51,32 @@
     "guideTitle": "925 Silver Purity & Care Guide",
     "guideDesc": "92.5% pure sterling silver crafted with tarnish-resistant coating for lasting brilliance and everyday beauty."
   },
+  "rings": {
+    "slug": "rings",
+    "parentSlug": "gold",
+    "title": "Rings & Bands",
+    "pageTitle": "Gold & Diamond Rings | Swarn Mahal Ambikapur",
+    "badge": "BIS 916 HALLMARKED • ELEGANT DESIGNS",
+    "subtitle": "Handcrafted gold rings, solitaire engagement bands, and daily-wear cocktail rings in 22K & 18K gold.",
+    "heroBg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "thumbnail_image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "guideTitle": "Ring Sizing & Purity Guide",
+    "guideDesc": "Find your accurate ring size and explore BIS hallmarked pure gold rings."
+  },
+  "necklace": {
+    "slug": "necklace",
+    "parentSlug": "gold",
+    "title": "Necklace & Rani Haar",
+    "pageTitle": "Necklace & Rani Haar | Swarn Mahal Jewellers Ambikapur",
+    "badge": "NEW CURATION • LUXURY COLLECTION",
+    "subtitle": "Explore handcrafted bridal rani haars, choker sets, and lightweight gold chains in pure BIS 916 gold.",
+    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/uploads/1787348852881_red_white.avif",
+    "thumbnail_image": "/uploads/1787348852881_red_white.avif",
+    "guideTitle": "Necklace Buying & Care Guide",
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+  },
   "earrings": {
     "slug": "earrings",
     "parentSlug": "gold",
@@ -62,7 +88,7 @@
     "circleImg": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
     "thumbnail_image": "/uploads/1787345946257_FLOwYflNl8_20231121163028.webp",
     "guideTitle": "Earrings Styling & Face Silhouette Guide",
-    "guideDesc": "Discover which earring shapes best complement oval, round, and heart-shaped faces, along with secure screw-back locking mechanisms."
+    "guideDesc": "Discover which earring shapes best complement oval, round, and heart-shaped faces."
   },
   "nose-pins": {
     "slug": "nose-pins",
@@ -70,7 +96,7 @@
     "title": "Nose Pins",
     "pageTitle": "Nose Pins & Bridal Naths | Swarn Mahal Ambikapur",
     "badge": "BIS 916 HALLMARKED • CERTIFIED DIAMONDS & GEMSTONES",
-    "subtitle": "Discover delicate diamond nose studs, traditional bridal naths, and minimal 22K gold wire nose pins. Crafted for seamless comfort.",
+    "subtitle": "Discover delicate diamond nose studs, traditional bridal naths, and minimal 22K gold wire nose pins.",
     "heroBg": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1600&q=85",
     "circleImg": "/uploads/1787346906675_C004610__1_1.webp",
     "thumbnail_image": "/uploads/1787346906675_C004610__1_1.webp",
@@ -88,7 +114,7 @@
     "circleImg": "/uploads/1787348208245_images.jpg",
     "thumbnail_image": "/uploads/1787348208245_images.jpg",
     "guideTitle": "Gold Hoops & Balis Buying & Care Guide",
-    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
   },
   "pendants": {
     "slug": "pendants",
@@ -101,7 +127,7 @@
     "circleImg": "/uploads/1787348362518_BIIP0359P04_YAA14DIG6XXXXXXXX_ABCD00-PICS-00004-1024-35451.jpg",
     "thumbnail_image": "/uploads/1787348362518_BIIP0359P04_YAA14DIG6XXXXXXXX_ABCD00-PICS-00004-1024-35451.jpg",
     "guideTitle": "Pendants Buying & Care Guide",
-    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
   },
   "mangalsutra": {
     "slug": "mangalsutra",
@@ -114,7 +140,7 @@
     "circleImg": "/uploads/1787348617000_A4700723_1.webp",
     "thumbnail_image": "/uploads/1787348617000_A4700723_1.webp",
     "guideTitle": "Mangalsutra Buying & Care Guide",
-    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
   },
   "chains": {
     "slug": "chains",
@@ -127,33 +153,20 @@
     "circleImg": "/uploads/1787348725596_513220CLQAA00_1.webp",
     "thumbnail_image": "/uploads/1787348725596_513220CLQAA00_1.webp",
     "guideTitle": "Chains Buying & Care Guide",
-    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
   },
   "bangles": {
     "slug": "bangles",
     "parentSlug": "gold",
-    "title": "Bangles",
-    "pageTitle": "Bangles | Swarn Mahal Jewellers Ambikapur",
+    "title": "Bangles & Kadas",
+    "pageTitle": "Bangles & Kadas | Swarn Mahal Jewellers Ambikapur",
     "badge": "NEW CURATION • LUXURY COLLECTION",
-    "subtitle": "Explore handcrafted Bangles in pure BIS 916 gold and authentic gemstones.",
+    "subtitle": "Explore handcrafted Bangles & Kadas in pure BIS 916 gold and authentic gemstones.",
     "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
     "circleImg": "/uploads/1787348810380_511183VAA2A00_1.webp",
     "thumbnail_image": "/uploads/1787348810380_511183VAA2A00_1.webp",
     "guideTitle": "Bangles Buying & Care Guide",
-    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
-  },
-  "necklace": {
-    "slug": "necklace",
-    "parentSlug": "gold",
-    "title": "Necklace",
-    "pageTitle": "Necklace | Swarn Mahal Jewellers Ambikapur",
-    "badge": "NEW CURATION • LUXURY COLLECTION",
-    "subtitle": "Explore handcrafted Necklace in pure BIS 916 gold and authentic gemstones.",
-    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
-    "circleImg": "/uploads/1787348852881_red_white.avif",
-    "thumbnail_image": "/uploads/1787348852881_red_white.avif",
-    "guideTitle": "Necklace Buying & Care Guide",
-    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
   },
   "bracelet": {
     "slug": "bracelet",
@@ -166,12 +179,12 @@
     "circleImg": "/uploads/1787348950913_JT02841-1YS300_1_lar.jpg",
     "thumbnail_image": "/uploads/1787348950913_JT02841-1YS300_1_lar.jpg",
     "guideTitle": "Bracelet Buying & Care Guide",
-    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity and accompanied by an authentic purity certificate."
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
   },
   "diamond-rings": {
     "slug": "diamond-rings",
     "parentSlug": "diamond",
-    "title": "Diamond Rings & Solitaires",
+    "title": "Rings & Solitaires",
     "pageTitle": "Diamond Rings & Solitaires | Swarn Mahal Ambikapur",
     "badge": "IGI CERTIFIED • VVS-VS DIAMONDS",
     "subtitle": "Solitaire engagement rings, diamond bands, and halo solitaire rings in 18K white, rose, and yellow gold.",
@@ -194,6 +207,19 @@
     "guideTitle": "Diamond Earrings Styling Guide",
     "guideDesc": "Learn about secure screw posts and daily wear comfort settings."
   },
+  "diamond-pendants": {
+    "slug": "diamond-pendants",
+    "parentSlug": "diamond",
+    "title": "Diamond Pendants",
+    "pageTitle": "Diamond Pendants | Swarn Mahal Ambikapur",
+    "badge": "FINEST BRILLIANCE • Certified Diamonds",
+    "subtitle": "Sparkling solitaire pendants and diamond drop necklaces.",
+    "heroBg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "thumbnail_image": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=200&q=80",
+    "guideTitle": "Diamond Pendants Guide",
+    "guideDesc": "Certified VVS-VS clarity diamonds set in hallmarked 18K gold."
+  },
   "silver-payal": {
     "slug": "silver-payal",
     "parentSlug": "silver",
@@ -205,6 +231,32 @@
     "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
     "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
     "guideTitle": "Silver Payal Care & Shine Guide",
-    "guideDesc": "Pure 925 hallmarked silver anklets designed for long-lasting shine and comfortable fit."
+    "guideDesc": "Pure 925 hallmarked silver anklets designed for long-lasting shine."
+  },
+  "silverware": {
+    "slug": "silverware",
+    "parentSlug": "silver",
+    "title": "Silverware & Coins",
+    "pageTitle": "925 Silverware & Coins | Swarn Mahal Ambikapur",
+    "badge": "PURE 999 & 925 SILVER • POOJA & GIFTING",
+    "subtitle": "Silver pooja thalis, 999 silver coins & bullion bars, ghungroo glasses, and silver gifting heirlooms.",
+    "heroBg": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "guideTitle": "Silverware Care & Purity Guide",
+    "guideDesc": "Authentic 92.5% and 99.9% pure silver products for pooja and auspicious occasions."
+  },
+  "silver-rings": {
+    "slug": "silver-rings",
+    "parentSlug": "silver",
+    "title": "Silver Rings",
+    "pageTitle": "925 Silver Rings | Swarn Mahal Ambikapur",
+    "badge": "PURE 925 STERLING SILVER",
+    "subtitle": "Contemporary 925 sterling silver rings, band rings, and gemstone silver rings.",
+    "heroBg": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "thumbnail_image": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg",
+    "guideTitle": "Silver Rings Care Guide",
+    "guideDesc": "Tarnish-free 925 sterling silver crafted for daily luxury."
   }
 }

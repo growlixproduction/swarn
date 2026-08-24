@@ -128,6 +128,7 @@ export default function AdminNewProductPage() {
     slug: (title || "new-item").toLowerCase().replace(/[^a-z0-9]+/g, "-"),
     collection,
     category: category as any,
+    subCategory,
     primaryMaterial,
     navCategories,
     isFeatured: true,

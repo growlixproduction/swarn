@@ -28,6 +28,7 @@ export interface Product {
   title: string;
   slug: string;
   category: string;
+  subCategory?: string;
   navCategories: string[];
   collection: string;
   description: string;

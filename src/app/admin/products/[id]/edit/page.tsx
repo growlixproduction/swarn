@@ -70,7 +70,7 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
           setTitle(targetProduct.title);
           setCollection(targetProduct.collection || "General Collection");
           setCategory(targetProduct.category);
-          setPrimaryMaterial(targetProduct.primaryMaterial || (targetProduct.diamondSpecs ? "diamond" : targetProduct.category === "silverware" ? "silver" : "gold"));
+          setPrimaryMaterial((targetProduct.primaryMaterial as any) || (targetProduct.diamondSpecs ? "diamond" : targetProduct.category === "silverware" ? "silver" : "gold"));
           setNavCategories(targetProduct.navCategories || ["all"]);
           setNetGoldWeight(targetProduct.netGoldWeightGrams || 4.5);
           setDefaultKarat(targetProduct.defaultKarat || "22K");
@@ -187,6 +187,7 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
     slug: (title || "item").toLowerCase().replace(/[^a-z0-9]+/g, "-"),
     collection,
     category: category as any,
+    subCategory,
     primaryMaterial,
     navCategories,
     isFeatured: true,

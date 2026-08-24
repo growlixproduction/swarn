@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { PRODUCTS_CATALOG } from "../../../lib/catalogData";
 import pool from "../../../lib/db";
 import { getCustomProducts, updateOrAddProduct } from "../../../lib/productsStore";
+import { getCategoriesFromStore, saveCategoryToStore } from "../../../lib/jsonStore";
 
 export async function GET() {
   // 1. First try MySQL Database
@@ -75,8 +76,8 @@ export async function GET() {
 
       return NextResponse.json({ success: true, products: dbProducts, source: 'database' });
     }
-  } catch (error) {
-    console.warn("DB fetch failed, falling back to persistent JSON store:", error);
+  } catch (err: any) {
+    console.warn("DB fetch failed, falling back to persistent JSON store:", err.message);
   }
 
   // 2. Fallback to persistent JSON store
@@ -92,6 +93,8 @@ export async function POST(request: Request) {
       title,
       slug,
       category,
+      subCategory,
+      navCategories,
       primaryMaterial,
       collection,
       description,
@@ -110,14 +113,16 @@ export async function POST(request: Request) {
     } = body;
 
     const productId = id || `SM-${Math.floor(100 + Math.random() * 900)}`;
+    const metalMat = primaryMaterial || (diamondSpecs ? "diamond" : category === "silverware" ? "silver" : "gold");
 
     const newProduct = {
       id: productId,
       title: title || "New Jewellery Product",
       slug: slug || title?.toLowerCase().replace(/[^a-z0-9]+/g, '-') || productId.toLowerCase(),
       category: category || 'rings',
-      primaryMaterial: primaryMaterial || (diamondSpecs ? "diamond" : category === "silverware" ? "silver" : "gold"),
-      navCategories: ["all", category || 'rings'],
+      subCategory: subCategory || "",
+      primaryMaterial: metalMat,
+      navCategories: Array.isArray(navCategories) && navCategories.length > 0 ? navCategories : ["all", metalMat, category || 'rings'],
       collection: collection || 'General Collection',
       description: description || '',
       dimensions: dimensions || '',
@@ -139,6 +144,20 @@ export async function POST(request: Request) {
       images: images || { yellow: "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM.jpeg" },
       diamondSpecs
     };
+
+    // Auto-sync sub-category to categories.json if set
+    if (subCategory) {
+      const subSlug = subCategory.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      const currentCats = getCategoriesFromStore();
+      if (!currentCats[subSlug]) {
+        saveCategoryToStore({
+          slug: subSlug,
+          parentSlug: metalMat,
+          title: subCategory,
+          subtitle: `Explore handcrafted ${subCategory} in pure ${metalMat.toUpperCase()} collection.`
+        }).catch(err => console.warn("Failed to auto-register category:", err));
+      }
+    }
 
     // 1. Save to persistent JSON store first
     updateOrAddProduct(newProduct as any);

@@ -56,13 +56,68 @@ export default function CollectionPage() {
   const [maxPrice, setMaxPrice] = useState<number>(350000);
   const [selectedKarats, setSelectedKarats] = useState<KaratType[]>([]);
   const [selectedColor, setSelectedColor] = useState<string>("all");
-  const [sortBy, setSortBy] = useState<string>("recommended");  // Compute parent & child sub-collections for current category
+  const [sortBy, setSortBy] = useState<string>("recommended");
+
+  // Compute parent & child sub-collections for current category dynamically
   const allCategories = Object.values(categoriesMap);
   const parentSlug = currentMeta?.parentSlug || "";
   const effectiveParentSlug = parentSlug || (allCategories.some((c: any) => c.parentSlug === categorySlug) ? categorySlug : "");
-  const subCollections = effectiveParentSlug
+
+  // 1. Direct sub-categories from categoriesMap
+  const mapSubCategories = effectiveParentSlug
     ? allCategories.filter((c: any) => c.parentSlug === effectiveParentSlug)
     : [];
+
+  // 2. Dynamic sub-categories derived from products in current collection
+  const subCollectionsMap = new Map<string, any>();
+  mapSubCategories.forEach((c: any) => subCollectionsMap.set(c.slug, c));
+
+  const currentMetal = (categorySlug === "all" || categorySlug === effectiveParentSlug) ? effectiveParentSlug : "";
+  products.forEach(p => {
+    const isProductInParent = 
+      categorySlug === "all" ||
+      !currentMetal ||
+      p.collection.toLowerCase().includes(currentMetal) ||
+      p.navCategories.map(c => c.toLowerCase()).includes(currentMetal) ||
+      p.category.toLowerCase().includes(currentMetal) ||
+      (currentMetal === "gold" && p.supportedKarats.some(k => ["22K", "24K", "18K", "14K"].includes(k))) ||
+      (currentMetal === "diamond" && Boolean(p.diamondSpecs));
+
+    if (isProductInParent) {
+      p.navCategories.forEach(cat => {
+        const norm = cat.toLowerCase();
+        if (norm !== "all" && norm !== currentMetal && norm !== categorySlug && norm !== "necklaces" && norm !== "rings") {
+          if (!subCollectionsMap.has(norm)) {
+            const knownMeta = categoriesMap[norm];
+            if (knownMeta) {
+              subCollectionsMap.set(norm, knownMeta);
+            } else {
+              const formattedTitle = norm.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+              subCollectionsMap.set(norm, {
+                slug: norm,
+                title: formattedTitle,
+                parentSlug: effectiveParentSlug
+              });
+            }
+          }
+        }
+      });
+      if (p.subCategory) {
+        const normSub = p.subCategory.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+        if (normSub && normSub !== currentMetal && normSub !== categorySlug) {
+          if (!subCollectionsMap.has(normSub)) {
+            subCollectionsMap.set(normSub, {
+              slug: normSub,
+              title: p.subCategory,
+              parentSlug: effectiveParentSlug
+            });
+          }
+        }
+      }
+    }
+  });
+
+  const subCollections = Array.from(subCollectionsMap.values());
   const parentMeta = parentSlug ? categoriesMap[parentSlug] : null;
 
   // Filter Catalog
