@@ -24,9 +24,6 @@ const DEFAULT_STORIES: StoryItem[] = [
 
 const MAIN_STORY_ORDER = [
   "all",
-  "gold",
-  "diamond",
-  "silver",
   "rings",
   "necklace",
   "earrings",
@@ -39,6 +36,8 @@ const MAIN_STORY_ORDER = [
   "bracelet"
 ];
 
+const EXCLUDED_STORY_SLUGS = ["gold", "diamond", "silver", "other"];
+
 const CategoryStories: React.FC = () => {
   const [stories, setStories] = useState<StoryItem[]>(DEFAULT_STORIES);
   const [scrollSpeed, setScrollSpeed] = useState<number>(25);
@@ -50,8 +49,9 @@ const CategoryStories: React.FC = () => {
       .then(data => {
         if (data && data.categories) {
           const catsObj = data.categories;
-          // Filter to only main story slugs or categories without parentSlug (or parentSlug === 'gold')
+          // Filter out main metal parents (gold, diamond, silver) and prefixed duplicates
           const filteredCats = Object.values(catsObj).filter((cat: any) => {
+            if (EXCLUDED_STORY_SLUGS.includes(cat.slug)) return false;
             if (MAIN_STORY_ORDER.includes(cat.slug)) return true;
             if (!cat.parentSlug || cat.parentSlug === "" || cat.parentSlug === "gold") {
               return !cat.slug.startsWith("silver-") && !cat.slug.startsWith("diamond-");
