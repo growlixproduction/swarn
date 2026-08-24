@@ -413,11 +413,11 @@ export default function Header() {
           <div
             style={{
               position: "relative",
-              width: "320px",
-              maxWidth: "85vw",
+              width: "350px",
+              maxWidth: "90vw",
               height: "100vh",
               background: "#FFFFFF",
-              boxShadow: "-8px 0 36px rgba(0,0,0,0.35)",
+              boxShadow: "-10px 0 40px rgba(0,0,0,0.4)",
               display: "flex",
               flexDirection: "column",
               zIndex: 2,
@@ -493,14 +493,14 @@ export default function Header() {
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        padding: "0.85rem 1rem",
+                        padding: "0.9rem 1.1rem",
                         background: isExpanded ? "linear-gradient(135deg, #F5EAD6 0%, #E8D9BF 100%)" : "linear-gradient(135deg, #FAF6F2 0%, #F5EAD6 100%)",
                         cursor: "pointer"
                       }}
                     >
                       <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                        <i className={`fa-solid ${mainCat.icon}`} style={{ color: "#832729", fontSize: "1.1rem" }}></i>
-                        <span style={{ color: "#1C1917", fontWeight: 700, fontSize: "0.95rem" }}>{mainCat.title}</span>
+                        <i className={`fa-solid ${mainCat.icon}`} style={{ color: "#832729", fontSize: "1.15rem" }}></i>
+                        <span style={{ color: "#1C1917", fontWeight: 700, fontSize: "0.98rem" }}>{mainCat.title}</span>
                       </div>
 
                       <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
@@ -521,38 +521,36 @@ export default function Header() {
                       </div>
                     </div>
 
-                    {/* Collapsible Sub-Collections Grid inside Drawer */}
+                    {/* Collapsible Sub-Collections List inside Drawer */}
                     {isExpanded && subItems.length > 0 && (
                       <div
                         style={{
-                          padding: "0.75rem 0.85rem 0.85rem",
+                          padding: "0.6rem 0.75rem 0.75rem",
                           background: "#FFFFFF",
                           borderTop: "1px solid rgba(197, 168, 128, 0.3)",
-                          display: "grid",
-                          gridTemplateColumns: "1fr 1fr",
+                          display: "flex",
+                          flexDirection: "column",
                           gap: "0.45rem"
                         }}
                       >
                         <Link
                           href={`/collections/${mainCat.slug}`}
                           style={{
-                            gridColumn: "1 / -1",
                             display: "flex",
                             alignItems: "center",
-                            justifyContent: "center",
-                            gap: "0.45rem",
-                            padding: "0.5rem",
+                            justifyContent: "space-between",
+                            padding: "0.6rem 0.85rem",
                             borderRadius: "8px",
                             background: "linear-gradient(135deg, #832729 0%, #5E1A1B 100%)",
                             color: "#FFFFFF",
-                            fontSize: "0.82rem",
+                            fontSize: "0.85rem",
                             fontWeight: 700,
-                            textDecoration: "none",
-                            marginBottom: "0.2rem"
+                            textDecoration: "none"
                           }}
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
-                          <span>Explore All {mainCat.title} &rarr;</span>
+                          <span>Explore All {mainCat.title}</span>
+                          <i className="fa-solid fa-arrow-right" style={{ fontSize: "0.8rem" }}></i>
                         </Link>
 
                         {subItems.map(sub => (
@@ -562,20 +560,23 @@ export default function Header() {
                             style={{
                               display: "flex",
                               alignItems: "center",
-                              gap: "0.45rem",
-                              padding: "0.45rem 0.65rem",
+                              justifyContent: "space-between",
+                              padding: "0.6rem 0.85rem",
                               borderRadius: "8px",
                               background: "#FAF6F2",
                               border: "1px solid rgba(197, 168, 128, 0.25)",
-                              color: "#4A3E3D",
-                              fontSize: "0.8rem",
+                              color: "#332927",
+                              fontSize: "0.88rem",
                               fontWeight: 600,
                               textDecoration: "none"
                             }}
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
-                            <i className={`fa-solid ${sub.icon}`} style={{ fontSize: "0.72rem", color: "#C59B27" }}></i>
-                            <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{sub.title}</span>
+                            <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
+                              <i className={`fa-solid ${sub.icon}`} style={{ fontSize: "0.85rem", color: "#832729", width: "18px", textAlign: "center" }}></i>
+                              <span>{sub.title}</span>
+                            </div>
+                            <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.7rem", color: "#C59B27" }}></i>
                           </Link>
                         ))}
                       </div>
