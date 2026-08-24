@@ -436,17 +436,15 @@ img {
 }
 
 .reveal-left {
-  opacity: 0;
-  transform: translateX(-50px);
+  opacity: 1;
+  transform: translateX(0);
   transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
 }
 
 .reveal-right {
-  opacity: 0;
-  transform: translateX(50px);
+  opacity: 1;
+  transform: translateX(0);
   transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
 }
 
 .reveal-scale {

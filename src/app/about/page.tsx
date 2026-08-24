@@ -111,10 +111,10 @@ export default function AboutUsPage() {
               {pageBanner.badge}
             </span>
           )}
-          <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, marginBottom: "0.5rem" }}>
+          <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, marginBottom: "0.5rem", color: "#FFFFFF", textShadow: "0 2px 12px rgba(0,0,0,0.6)" }}>
             {pageBanner.title}
           </h1>
-          <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.85)", margin: 0 }}>
+          <p style={{ fontSize: "0.95rem", color: "#F5EAD6", margin: 0, textShadow: "0 1px 6px rgba(0,0,0,0.6)" }}>
             {pageBanner.subtitle}
           </p>
         </div>
