@@ -347,12 +347,12 @@ export default function Header() {
 
         {/* Tier 2: Dynamic Category Navigation Strip (Desktop Nav with Sub-Collection Dropdowns) */}
         <nav className="tanishq-category-strip">
-          <div className="tanishq-cat-inner" style={{ flexWrap: "nowrap", overflowX: "auto" }}>
+          <div className="tanishq-cat-inner">
             {/* Top-Level Categories Filtering */}
             {navCategories.filter(c => !c.parentSlug).map(cat => {
               const children = navCategories.filter(sub => sub.parentSlug === cat.slug);
               return (
-                <div key={cat.slug} className="tanishq-cat-dropdown-wrapper" style={{ position: "relative" }}>
+                <div key={cat.slug} className="tanishq-cat-dropdown-wrapper">
                   <Link href={`/collections/${cat.slug}`} className="tanishq-cat-item" style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem" }}>
                     <i className={`fa-solid ${cat.icon}`}></i>
                     <span>{cat.title}</span>
@@ -399,108 +399,129 @@ export default function Header() {
         </nav>
       </header>
 
-      {/* ☰ 3-Line Hamburger Navigation Drawer Modal (Mobile Drawer - Opens From Right!) */}
+      {/* ☰ 3-Line Hamburger Navigation Drawer Modal (Full-Width Top-to-Bottom Slide Down Sheet!) */}
       {isMobileMenuOpen && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 99999, display: "flex", justifyContent: "flex-end" }}>
+        <div style={{ position: "fixed", inset: 0, zIndex: 999999, display: "flex", flexDirection: "column" }}>
           {/* Dark Backdrop */}
           <div
-            style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }}
+            style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.7)", backdropFilter: "blur(5px)" }}
             onClick={() => setIsMobileMenuOpen(false)}
           />
 
-          {/* Slide-in Drawer FROM RIGHT */}
-          <div style={{
-            position: "relative",
-            width: "300px",
-            maxWidth: "85vw",
-            height: "100%",
-            background: "#FFFFFF",
-            boxShadow: "-6px 0 28px rgba(0,0,0,0.3)",
-            display: "flex",
-            flexDirection: "column",
-            zIndex: 2,
-            animation: "slideInRight 0.25s ease-out"
-          }}>
+          {/* Full-Width Slide Down Sheet FROM TOP */}
+          <div
+            className="mobile-slide-down-drawer"
+            style={{
+              position: "relative",
+              width: "100%",
+              maxHeight: "88vh",
+              background: "#FFFFFF",
+              borderRadius: "0 0 24px 24px",
+              boxShadow: "0 20px 60px rgba(0,0,0,0.4)",
+              display: "flex",
+              flexDirection: "column",
+              zIndex: 2,
+              overflow: "hidden"
+            }}
+          >
             {/* Drawer Header */}
-            <div style={{ padding: "1.25rem 1rem", borderBottom: "1px solid #F0ECE8", display: "flex", alignItems: "center", justifyContent: "space-between", background: "#FAF6F2" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+            <div style={{ padding: "1.1rem 1.25rem", borderBottom: "1px solid #F0ECE8", display: "flex", alignItems: "center", justifyContent: "space-between", background: "linear-gradient(180deg, #FAF6F2 0%, #F5EAD6 100%)" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src="/asset/logo.png" alt="Swarn Mahal" style={{ height: "38px" }} />
                 <div style={{ display: "flex", flexDirection: "column" }}>
-                  <span style={{ fontFamily: "serif", fontWeight: 700, color: "#832729", fontSize: "1.1rem", lineHeight: 1.1 }}>स्वर्ण महल</span>
-                  <span style={{ fontSize: "0.58rem", color: "#C59B27", letterSpacing: "1px", fontWeight: 600 }}>SWARN MAHAL</span>
+                  <span style={{ fontFamily: "serif", fontWeight: 700, color: "#832729", fontSize: "1.15rem", lineHeight: 1.1 }}>स्वर्ण महल</span>
+                  <span style={{ fontSize: "0.58rem", color: "#C59B27", letterSpacing: "1px", fontWeight: 700 }}>SWARN MAHAL JEWELLERS</span>
                 </div>
               </div>
+
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(false)}
-                style={{ width: "32px", height: "32px", borderRadius: "50%", border: "none", background: "#EAE3DA", color: "#832729", cursor: "pointer", fontSize: "1rem" }}
+                style={{ width: "36px", height: "36px", borderRadius: "50%", border: "none", background: "#832729", color: "#FFFFFF", cursor: "pointer", fontSize: "1.1rem", display: "flex", alignItems: "center", justifyContent: "center", boxShadow: "0 4px 10px rgba(131, 39, 41, 0.3)" }}
               >
                 <i className="fa-solid fa-xmark"></i>
               </button>
             </div>
 
-            {/* Drawer Navigation Links */}
-            <div style={{ padding: "1.25rem 1rem", display: "flex", flexDirection: "column", gap: "0.6rem", flex: 1, overflowY: "auto" }}>
-              <div style={{ fontSize: "0.68rem", textTransform: "uppercase", letterSpacing: "1.2px", color: "#8C827A", fontWeight: 700, marginBottom: "0.35rem", paddingLeft: "0.5rem" }}>
-                Menu & Collections
-              </div>
-
-              {/* About Us */}
+            {/* Quick Action Pills: About & Calculator */}
+            <div style={{ padding: "0.85rem 1.25rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem", background: "#FAF6F2", borderBottom: "1px solid #EAE3DA" }}>
               <Link
                 href="/about"
-                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.75rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#832729", fontWeight: 700, textDecoration: "none", fontSize: "0.92rem" }}
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", padding: "0.6rem 0.85rem", borderRadius: "12px", background: "#FFFFFF", border: "1px solid rgba(197, 168, 128, 0.4)", color: "#832729", fontWeight: 700, textDecoration: "none", fontSize: "0.84rem", boxShadow: "0 2px 6px rgba(0,0,0,0.03)" }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <i className="fa-solid fa-circle-info" style={{ color: "#C59B27", fontSize: "1.1rem" }}></i>
+                <i className="fa-solid fa-circle-info" style={{ color: "#C59B27" }}></i>
                 <span>About Us</span>
               </Link>
 
-              {/* Gold Calculator */}
               <Link
                 href="/calculator"
-                style={{ display: "flex", alignItems: "center", gap: "0.85rem", padding: "0.75rem 1rem", borderRadius: "10px", background: "#FAF6F2", color: "#832729", fontWeight: 700, textDecoration: "none", fontSize: "0.92rem" }}
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", padding: "0.6rem 0.85rem", borderRadius: "12px", background: "#FFFFFF", border: "1px solid rgba(197, 168, 128, 0.4)", color: "#832729", fontWeight: 700, textDecoration: "none", fontSize: "0.84rem", boxShadow: "0 2px 6px rgba(0,0,0,0.03)" }}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                <i className="fa-solid fa-calculator" style={{ color: "#C59B27", fontSize: "1.1rem" }}></i>
+                <i className="fa-solid fa-calculator" style={{ color: "#C59B27" }}></i>
                 <span>Gold Calculator</span>
               </Link>
+            </div>
 
-              {/* Dynamic Main Metal & Custom Collections with Sub-collections */}
+            {/* Drawer Navigation Links Scroll Area */}
+            <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", gap: "0.75rem", flex: 1, overflowY: "auto" }}>
+              <div style={{ fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "1.2px", color: "#832729", fontWeight: 800, marginBottom: "0.1rem" }}>
+                Browse Collections & Sub-Categories:
+              </div>
+
+              {/* Dynamic Main Metal Collections with Expandable Accordion */}
               {navCategories.filter(c => !c.parentSlug && c.slug !== "all").map(mainCat => {
                 const subItems = navCategories.filter(sub => sub.parentSlug === mainCat.slug);
                 return (
-                  <div key={mainCat.slug} style={{ display: "flex", flexDirection: "column", gap: "0.35rem" }}>
-                    <Link
-                      href={`/collections/${mainCat.slug}`}
+                  <div
+                    key={mainCat.slug}
+                    style={{
+                      background: "#FAF6F2",
+                      border: "1px solid rgba(197, 168, 128, 0.35)",
+                      borderRadius: "14px",
+                      overflow: "hidden",
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.02)"
+                    }}
+                  >
+                    <div
                       style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
-                        padding: "0.75rem 1rem",
-                        borderRadius: "10px",
-                        background: "#FAF6F2",
-                        color: "#1C1917",
-                        fontWeight: 700,
-                        textDecoration: "none",
-                        fontSize: "0.92rem"
+                        padding: "0.85rem 1rem",
+                        background: "linear-gradient(135deg, #FAF6F2 0%, #F5EAD6 100%)"
                       }}
-                      onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
-                        <i className={`fa-solid ${mainCat.icon}`} style={{ color: "var(--gold-deep)" }}></i>
+                      <Link
+                        href={`/collections/${mainCat.slug}`}
+                        style={{ display: "flex", alignItems: "center", gap: "0.75rem", textDecoration: "none", color: "#1C1917", fontWeight: 700, fontSize: "0.95rem" }}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <i className={`fa-solid ${mainCat.icon}`} style={{ color: "#832729", fontSize: "1.1rem" }}></i>
                         <span>{mainCat.title}</span>
-                      </div>
+                      </Link>
+
                       {subItems.length > 0 && (
-                        <span style={{ fontSize: "0.7rem", color: "var(--gold-dark)", background: "rgba(197, 168, 128, 0.2)", padding: "0.15rem 0.5rem", borderRadius: "10px" }}>
+                        <span style={{ fontSize: "0.7rem", color: "#832729", background: "#FFFFFF", border: "1px solid rgba(197, 168, 128, 0.4)", padding: "0.2rem 0.6rem", borderRadius: "12px", fontWeight: 700 }}>
                           {subItems.length} items
                         </span>
                       )}
-                    </Link>
+                    </div>
 
-                    {/* Sub-Collection List under Main Collection */}
+                    {/* Sub-Collections Chips Grid inside Drawer */}
                     {subItems.length > 0 && (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem", paddingLeft: "1.5rem", borderLeft: "2px solid var(--border-gold-subtle)", marginLeft: "1rem" }}>
+                      <div
+                        style={{
+                          padding: "0.75rem 0.85rem 0.85rem",
+                          background: "#FFFFFF",
+                          borderTop: "1px solid rgba(197, 168, 128, 0.2)",
+                          display: "grid",
+                          gridTemplateColumns: "1fr 1fr",
+                          gap: "0.45rem"
+                        }}
+                      >
                         {subItems.map(sub => (
                           <Link
                             key={sub.slug}
@@ -508,18 +529,21 @@ export default function Header() {
                             style={{
                               display: "flex",
                               alignItems: "center",
-                              gap: "0.5rem",
-                              padding: "0.45rem 0.75rem",
-                              borderRadius: "6px",
-                              color: "var(--text-secondary)",
-                              fontSize: "0.84rem",
-                              fontWeight: 500,
-                              textDecoration: "none"
+                              gap: "0.45rem",
+                              padding: "0.45rem 0.65rem",
+                              borderRadius: "8px",
+                              background: "#FAF6F2",
+                              border: "1px solid rgba(197, 168, 128, 0.25)",
+                              color: "#4A3E3D",
+                              fontSize: "0.8rem",
+                              fontWeight: 600,
+                              textDecoration: "none",
+                              transition: "all 0.15s ease"
                             }}
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
-                            <i className={`fa-solid ${sub.icon}`} style={{ fontSize: "0.7rem", color: "var(--gold-deep)" }}></i>
-                            <span>{sub.title}</span>
+                            <i className={`fa-solid ${sub.icon}`} style={{ fontSize: "0.72rem", color: "#C59B27" }}></i>
+                            <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{sub.title}</span>
                           </Link>
                         ))}
                       </div>
@@ -529,10 +553,27 @@ export default function Header() {
               })}
             </div>
 
-            {/* Drawer Footer Call & Store Action */}
-            <div style={{ padding: "1rem", borderTop: "1px solid #F0ECE8", background: "#FAF6F2" }}>
-              <a href="tel:+919999777740" className="btn btn-gold" style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.5rem", width: "100%", padding: "0.75rem", borderRadius: "8px", textDecoration: "none", fontSize: "0.85rem", fontWeight: 700 }}>
-                <i className="fa-solid fa-phone"></i> Call Store: +91 9999P-7774
+            {/* Drawer Footer Store Call Action */}
+            <div style={{ padding: "1rem 1.25rem", borderTop: "1px solid #F0ECE8", background: "#FAF6F2" }}>
+              <a
+                href="tel:+919999777740"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: "0.6rem",
+                  width: "100%",
+                  padding: "0.8rem",
+                  borderRadius: "12px",
+                  background: "linear-gradient(135deg, #832729 0%, #5E1A1B 100%)",
+                  color: "#FFFFFF",
+                  textDecoration: "none",
+                  fontSize: "0.9rem",
+                  fontWeight: 700,
+                  boxShadow: "0 4px 15px rgba(131, 39, 41, 0.3)"
+                }}
+              >
+                <i className="fa-solid fa-phone"></i> Call Store: +91 99997-77740
               </a>
             </div>
           </div>

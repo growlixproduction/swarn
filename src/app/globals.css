@@ -5337,6 +5337,23 @@ img {
 }
 
 /* Luxury Category Hover Dropdowns for Sub-Collections */
+.tanishq-header {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: #FFFFFF;
+}
+
+.tanishq-category-strip {
+  position: relative;
+  z-index: 9999;
+  overflow: visible !important;
+}
+
+.tanishq-cat-inner {
+  overflow: visible !important;
+}
+
 .tanishq-cat-dropdown-wrapper {
   position: relative;
   display: inline-block;
@@ -5345,33 +5362,49 @@ img {
 .tanishq-cat-dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
-  min-width: 210px;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  min-width: 230px;
   background: #FFFFFF;
-  border: 1px solid var(--border-gold);
-  border-radius: 10px;
-  box-shadow: 0 12px 32px rgba(131, 39, 41, 0.15);
-  padding: 0.5rem;
+  border: 1.5px solid var(--gold-deep);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(131, 39, 41, 0.25);
+  padding: 0.65rem;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.25rem;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(8px);
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 999;
+  z-index: 999999 !important;
 }
 
 .tanishq-cat-dropdown-wrapper:hover .tanishq-cat-dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 .tanishq-dropdown-item:hover {
   background: #FAF6F2 !important;
   color: var(--gold-deep) !important;
   padding-left: 1.1rem !important;
+}
+
+/* Slide Down Animation for Full-Width Mobile Navigation Drawer */
+@keyframes slideDownDrawer {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.mobile-slide-down-drawer {
+  animation: slideDownDrawer 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* No Scrollbar Utility for Mobile Carousels & Sub-Collections Bar */
