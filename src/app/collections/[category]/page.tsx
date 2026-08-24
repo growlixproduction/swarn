@@ -81,6 +81,12 @@ export default function CollectionPage() {
   const [selectedKarats, setSelectedKarats] = useState<KaratType[]>([]);
   const [selectedColor, setSelectedColor] = useState<string>("all");
   const [sortBy, setSortBy] = useState<string>("recommended");
+  const [isFilterModalOpen, setIsFilterModalOpen] = useState<boolean>(false);
+
+  const activeFilterCount =
+    selectedKarats.length +
+    (selectedColor !== "all" ? 1 : 0) +
+    (maxPrice < 350000 ? 1 : 0);
 
   // Compute parent & child sub-collections for current category dynamically
   const allCategories = Object.values(categoriesMap);
@@ -266,10 +272,39 @@ export default function CollectionPage() {
             <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>{meta.title}</span>
           </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", flexWrap: "wrap" }}>
             <span style={{ fontSize: "0.85rem", color: "var(--text-secondary)" }}>
-              Showing <strong>{filtered.length}</strong> Handcrafted Designs
+              Showing <strong>{filtered.length}</strong> Designs
             </span>
+
+            {/* Filter Drawer Trigger Button */}
+            <button
+              type="button"
+              onClick={() => setIsFilterModalOpen(true)}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.45rem",
+                padding: "0.5rem 0.95rem",
+                borderRadius: "8px",
+                border: activeFilterCount > 0 ? "1.5px solid var(--gold-deep)" : "1px solid var(--border-light)",
+                background: activeFilterCount > 0 ? "var(--bg-tint-gold)" : "#FFFFFF",
+                color: "var(--text-primary)",
+                fontSize: "0.82rem",
+                fontWeight: 600,
+                cursor: "pointer",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.04)"
+              }}
+            >
+              <i className="fa-solid fa-sliders" style={{ color: "var(--gold-deep)" }}></i>
+              <span>Filters</span>
+              {activeFilterCount > 0 && (
+                <span style={{ background: "var(--gold-deep)", color: "#FFFFFF", borderRadius: "50%", width: "20px", height: "20px", fontSize: "0.7rem", display: "inline-flex", alignItems: "center", justifyContent: "center", fontWeight: 700 }}>
+                  {activeFilterCount}
+                </span>
+              )}
+            </button>
+
             <select
               value={sortBy}
               onChange={e => setSortBy(e.target.value)}
@@ -365,116 +400,193 @@ export default function CollectionPage() {
           </div>
         )}
 
-        {/* 2-Column Split: Sidebar + Products Grid */}
-        <div className="plp-layout-container">
-          {/* Faceted Filter Sidebar */}
-          <aside className="plp-sidebar">
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem", borderBottom: "1px solid var(--border-light)", paddingBottom: "0.75rem" }}>
-              <strong style={{ fontSize: "0.95rem", color: "var(--text-primary)" }}>
-                <i className="fa-solid fa-sliders" style={{ color: "var(--gold-deep)", marginRight: "0.4rem" }}></i>
-                Filters
-              </strong>
-              <button
-                type="button"
-                onClick={resetFilters}
-                style={{ background: "none", border: "none", color: "var(--rose-gold)", fontSize: "0.75rem", fontWeight: 600, cursor: "pointer" }}
-              >
-                Reset All
+        {/* Products Master Grid */}
+        <div style={{ minHeight: "400px" }}>
+          {filtered.length === 0 ? (
+            <div style={{ textAlign: "center", padding: "5rem 1rem", background: "#FFFFFF", borderRadius: "14px", border: "1px solid var(--border-light)" }}>
+              <i className="fa-solid fa-filter" style={{ fontSize: "2.5rem", color: "var(--gold-light)", marginBottom: "1rem" }}></i>
+              <h3 style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>No Jewellery Designs Found</h3>
+              <p style={{ color: "var(--text-muted)", fontSize: "0.88rem", marginBottom: "1.5rem" }}>
+                Try resetting your price slider or karat filters to view more handcrafted heirlooms.
+              </p>
+              <button type="button" className="btn btn-gold btn-sm" onClick={resetFilters}>
+                Reset All Filters
               </button>
             </div>
-
-            {/* Price Filter */}
-            <div style={{ marginBottom: "1.5rem" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.82rem", fontWeight: 600, marginBottom: "0.4rem" }}>
-                <span>Max Price Limit:</span>
-                <span style={{ color: "var(--gold-deep)" }}>₹{maxPrice.toLocaleString("en-IN")}</span>
-              </div>
-              <input
-                type="range"
-                min="20000"
-                max="500000"
-                step="5000"
-                value={maxPrice}
-                onChange={e => setMaxPrice(Number(e.target.value))}
-                style={{ width: "100%", accentColor: "var(--gold-deep)", cursor: "pointer" }}
-              />
-            </div>
-
-            {/* Karat Filter */}
-            <div style={{ marginBottom: "1.5rem" }}>
-              <label style={{ display: "block", fontSize: "0.82rem", fontWeight: 600, marginBottom: "0.6rem" }}>
-                Gold Purity (Karat):
-              </label>
-              {(["24K", "22K", "18K", "14K"] as KaratType[]).map(k => (
-                <label key={k} style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.82rem", color: "var(--text-secondary)", marginBottom: "0.45rem", cursor: "pointer" }}>
-                  <input
-                    type="checkbox"
-                    checked={selectedKarats.includes(k)}
-                    onChange={() => toggleKarat(k)}
-                    style={{ accentColor: "var(--gold-deep)" }}
-                  />
-                  <span>{k} Pure Gold</span>
-                </label>
+          ) : (
+            <div className="products-grid">
+              {filtered.map(product => (
+                <ProductCard key={product.id} product={product} />
               ))}
             </div>
+          )}
+        </div>
 
-            {/* Precious Metal Tone */}
-            <div style={{ marginBottom: "1rem" }}>
-              <label style={{ display: "block", fontSize: "0.82rem", fontWeight: 600, marginBottom: "0.6rem" }}>
-                Precious Metal Tone:
-              </label>
-              <div style={{ display: "flex", gap: "0.4rem", flexWrap: "wrap" }}>
-                {[
-                  { label: "All", key: "all" },
-                  { label: "Yellow", key: "yellow" },
-                  { label: "Rose", key: "rose" },
-                  { label: "White", key: "white" }
-                ].map(c => (
-                  <button
-                    key={c.key}
-                    type="button"
-                    className={`filter-color-pill ${selectedColor === c.key ? "active" : ""}`}
-                    style={{
-                      padding: "0.3rem 0.6rem",
-                      borderRadius: "4px",
-                      fontSize: "0.74rem",
-                      fontWeight: 600,
-                      border: "1px solid var(--border-light)",
-                      background: selectedColor === c.key ? "var(--gold-deep)" : "#FFFFFF",
-                      color: selectedColor === c.key ? "#FFFFFF" : "var(--text-secondary)",
-                      cursor: "pointer"
-                    }}
-                    onClick={() => setSelectedColor(c.key)}
-                  >
-                    {c.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </aside>
-
-          {/* Products Grid */}
-          <div>
-            {filtered.length === 0 ? (
-              <div style={{ textAlign: "center", padding: "5rem 1rem", background: "#FFFFFF", borderRadius: "14px", border: "1px solid var(--border-light)" }}>
-                <i className="fa-solid fa-filter" style={{ fontSize: "2.5rem", color: "var(--gold-light)", marginBottom: "1rem" }}></i>
-                <h3 style={{ fontSize: "1.2rem", marginBottom: "0.5rem" }}>No Jewellery Designs Found</h3>
-                <p style={{ color: "var(--text-muted)", fontSize: "0.88rem", marginBottom: "1.5rem" }}>
-                  Try resetting your price slider or karat filters to view more handcrafted heirlooms.
-                </p>
-                <button type="button" className="btn btn-gold btn-sm" onClick={resetFilters}>
-                  Reset All Filters
+        {/* SLIDE-UP FILTER MODAL POPUP DRAWER */}
+        {isFilterModalOpen && (
+          <div
+            style={{
+              position: "fixed",
+              inset: 0,
+              background: "rgba(0, 0, 0, 0.65)",
+              backdropFilter: "blur(4px)",
+              zIndex: 999999,
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "center"
+            }}
+            onClick={() => setIsFilterModalOpen(false)}
+          >
+            <div
+              style={{
+                width: "100%",
+                maxWidth: "540px",
+                background: "#FFFFFF",
+                borderTopLeftRadius: "24px",
+                borderTopRightRadius: "24px",
+                padding: "1.5rem 1.25rem",
+                boxShadow: "0 -10px 40px rgba(0,0,0,0.35)",
+                maxHeight: "85vh",
+                overflowY: "auto",
+                animation: "slideUpDrawer 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards"
+              }}
+              onClick={e => e.stopPropagation()}
+            >
+              {/* Modal Header */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.25rem", borderBottom: "1px solid var(--border-light)", paddingBottom: "0.85rem" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                  <i className="fa-solid fa-sliders" style={{ color: "var(--gold-deep)", fontSize: "1.1rem" }}></i>
+                  <h3 style={{ fontSize: "1.1rem", fontWeight: 700, margin: 0, color: "var(--text-primary)" }}>Filter Collection</h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setIsFilterModalOpen(false)}
+                  style={{ background: "none", border: "none", fontSize: "1.2rem", color: "#832729", cursor: "pointer", padding: "0.2rem 0.5rem" }}
+                >
+                  <i className="fa-solid fa-xmark"></i>
                 </button>
               </div>
-            ) : (
-              <div className="products-grid">
-                {filtered.map(product => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
+
+              {/* Price Filter */}
+              <div style={{ marginBottom: "1.5rem", background: "var(--bg-tint-gold)", padding: "1rem", borderRadius: "12px", border: "1px solid var(--border-gold-subtle)" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.88rem", fontWeight: 700, marginBottom: "0.5rem" }}>
+                  <span>Max Price Limit:</span>
+                  <span style={{ color: "var(--gold-deep)", fontSize: "1rem" }}>₹{maxPrice.toLocaleString("en-IN")}</span>
+                </div>
+                <input
+                  type="range"
+                  min="20000"
+                  max="500000"
+                  step="5000"
+                  value={maxPrice}
+                  onChange={e => setMaxPrice(Number(e.target.value))}
+                  style={{ width: "100%", accentColor: "var(--gold-deep)", cursor: "pointer" }}
+                />
               </div>
-            )}
+
+              {/* Karat Filter */}
+              <div style={{ marginBottom: "1.5rem" }}>
+                <label style={{ display: "block", fontSize: "0.88rem", fontWeight: 700, marginBottom: "0.75rem", color: "var(--text-primary)" }}>
+                  Gold Purity (Karat):
+                </label>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.6rem" }}>
+                  {(["24K", "22K", "18K", "14K"] as KaratType[]).map(k => {
+                    const isChecked = selectedKarats.includes(k);
+                    return (
+                      <div
+                        key={k}
+                        onClick={() => toggleKarat(k)}
+                        style={{
+                          padding: "0.65rem 0.85rem",
+                          borderRadius: "10px",
+                          border: isChecked ? "1.5px solid var(--gold-deep)" : "1px solid var(--border-light)",
+                          background: isChecked ? "var(--bg-tint-gold)" : "#FFFFFF",
+                          cursor: "pointer",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.5rem"
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => {}}
+                          style={{ accentColor: "var(--gold-deep)", cursor: "pointer" }}
+                        />
+                        <span style={{ fontSize: "0.84rem", fontWeight: isChecked ? 700 : 500, color: isChecked ? "var(--gold-deep)" : "var(--text-primary)" }}>
+                          {k} Pure Gold
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Precious Metal Tone */}
+              <div style={{ marginBottom: "1.75rem" }}>
+                <label style={{ display: "block", fontSize: "0.88rem", fontWeight: 700, marginBottom: "0.75rem", color: "var(--text-primary)" }}>
+                  Precious Metal Tone:
+                </label>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr", gap: "0.5rem" }}>
+                  {[
+                    { label: "All", key: "all" },
+                    { label: "Yellow", key: "yellow" },
+                    { label: "Rose", key: "rose" },
+                    { label: "White", key: "white" }
+                  ].map(c => (
+                    <button
+                      key={c.key}
+                      type="button"
+                      style={{
+                        padding: "0.6rem 0.5rem",
+                        borderRadius: "8px",
+                        fontSize: "0.8rem",
+                        fontWeight: selectedColor === c.key ? 700 : 500,
+                        border: selectedColor === c.key ? "1.5px solid var(--gold-deep)" : "1px solid var(--border-light)",
+                        background: selectedColor === c.key ? "var(--gold-deep)" : "#FFFFFF",
+                        color: selectedColor === c.key ? "#FFFFFF" : "var(--text-secondary)",
+                        cursor: "pointer",
+                        textAlign: "center"
+                      }}
+                      onClick={() => setSelectedColor(c.key)}
+                    >
+                      {c.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Modal Actions */}
+              <div style={{ display: "flex", gap: "0.75rem" }}>
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  style={{
+                    flex: 1,
+                    padding: "0.75rem",
+                    borderRadius: "10px",
+                    border: "1px solid var(--border-light)",
+                    background: "#FFFFFF",
+                    color: "var(--rose-gold)",
+                    fontWeight: 700,
+                    fontSize: "0.88rem",
+                    cursor: "pointer"
+                  }}
+                >
+                  Reset All
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setIsFilterModalOpen(false)}
+                  className="btn btn-gold"
+                  style={{ flex: 2, padding: "0.75rem", borderRadius: "10px", fontWeight: 700, fontSize: "0.88rem", textTransform: "none" }}
+                >
+                  Apply & Show ({filtered.length}) Designs
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Category Guide Box */}
         <div

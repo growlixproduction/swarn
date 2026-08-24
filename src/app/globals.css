@@ -5389,6 +5389,17 @@ img {
   padding-left: 1.1rem !important;
 }
 
+@keyframes slideUpDrawer {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 /* Slide Down Animation for Full-Width Mobile Navigation Drawer */
 @keyframes slideDownDrawer {
   from {
