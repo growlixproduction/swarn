@@ -545,33 +545,29 @@ export default function Header() {
                       </div>
                     </div>
 
-                    {/* Collapsible Sub-Collections 2-Column Grid inside Drawer */}
+                    {/* Collapsible Sub-Collections 1-Column Vertical List inside Drawer */}
                     {isExpanded && subItems.length > 0 && (
                       <div
                         style={{
                           padding: "0.65rem 0.75rem 0.85rem",
                           background: "#FFFFFF",
                           borderTop: "1px solid rgba(197, 168, 128, 0.3)",
-                          display: "grid",
-                          gridTemplateColumns: "1fr 1fr",
-                          gap: "0.5rem",
-                          maxHeight: "320px",
-                          overflowY: "auto",
-                          WebkitOverflowScrolling: "touch"
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.5rem"
                         }}
                       >
                         <Link
                           href={`/collections/${mainCat.slug}`}
                           style={{
-                            gridColumn: "1 / -1",
                             display: "flex",
                             alignItems: "center",
                             justifyContent: "space-between",
-                            padding: "0.6rem 0.85rem",
-                            borderRadius: "8px",
+                            padding: "0.65rem 0.85rem",
+                            borderRadius: "10px",
                             background: "linear-gradient(135deg, #832729 0%, #5E1A1B 100%)",
                             color: "#FFFFFF",
-                            fontSize: "0.85rem",
+                            fontSize: "0.86rem",
                             fontWeight: 700,
                             textDecoration: "none"
                           }}
@@ -588,20 +584,23 @@ export default function Header() {
                             style={{
                               display: "flex",
                               alignItems: "center",
-                              gap: "0.5rem",
-                              padding: "0.55rem 0.65rem",
-                              borderRadius: "8px",
+                              justifyContent: "space-between",
+                              padding: "0.65rem 0.85rem",
+                              borderRadius: "10px",
                               background: "#FAF6F2",
                               border: "1px solid rgba(197, 168, 128, 0.25)",
                               color: "#332927",
-                              fontSize: "0.81rem",
+                              fontSize: "0.88rem",
                               fontWeight: 600,
                               textDecoration: "none"
                             }}
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
-                            <i className={`fa-solid ${sub.icon}`} style={{ fontSize: "0.78rem", color: "#832729", minWidth: "16px", textAlign: "center" }}></i>
-                            <span style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{sub.title}</span>
+                            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+                              <i className={`fa-solid ${sub.icon}`} style={{ fontSize: "0.85rem", color: "#832729", width: "20px", textAlign: "center" }}></i>
+                              <span>{sub.title}</span>
+                            </div>
+                            <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.72rem", color: "#C59B27" }}></i>
                           </Link>
                         ))}
                       </div>
