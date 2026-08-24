@@ -16,12 +16,15 @@ export default function CalculatorPage() {
   const [customGstPercent, setCustomGstPercent] = useState<number>(3);
   const [makingChargePercent, setMakingChargePercent] = useState<number>(10);
   
-  // Custom Gold Rate Override State
+  // Custom Gold Rate Override State (Unit: per 1g or per 10g)
   const [useCustomGoldRate, setUseCustomGoldRate] = useState<boolean>(false);
-  const [custom24kRate, setCustom24kRate] = useState<number>(bullionRates.gold24k || 15920);
+  const [goldRateUnit, setGoldRateUnit] = useState<"1g" | "10g">("1g");
+  const [customGoldInput, setCustomGoldInput] = useState<number>(bullionRates.gold24k || 15920);
 
   // Active Gold Rate Calculation
-  const active24kRate = useCustomGoldRate ? custom24kRate : bullionRates.gold24k;
+  const custom24kRatePerGram = goldRateUnit === "10g" ? customGoldInput / 10 : customGoldInput;
+  const active24kRate = useCustomGoldRate ? custom24kRatePerGram : bullionRates.gold24k;
+  
   const ratePerGram =
     karat === "24K"
       ? active24kRate
@@ -44,11 +47,19 @@ export default function CalculatorPage() {
   const [includeSilverGst, setIncludeSilverGst] = useState<boolean>(true);
   const [silverMakingPercent, setSilverMakingPercent] = useState<number>(12);
 
-  // Custom Silver Rate Override State
+  // Custom Silver Rate Override State (Unit: per 1g, per 10g, or per 1kg)
   const [useCustomSilverRate, setUseCustomSilverRate] = useState<boolean>(false);
-  const [customSilver925Rate, setCustomSilver925Rate] = useState<number>(bullionRates.silver925 || 180);
+  const [silverRateUnit, setSilverRateUnit] = useState<"1g" | "10g" | "1kg">("1g");
+  const [customSilverInput, setCustomSilverInput] = useState<number>(bullionRates.silver925 || 180);
 
-  const activeSilver925Rate = useCustomSilverRate ? customSilver925Rate : (bullionRates.silver925 || 180);
+  const customSilver925RatePerGram =
+    silverRateUnit === "1kg"
+      ? customSilverInput / 1000
+      : silverRateUnit === "10g"
+      ? customSilverInput / 10
+      : customSilverInput;
+  const activeSilver925Rate = useCustomSilverRate ? customSilver925RatePerGram : (bullionRates.silver925 || 180);
+  
   const silverBaseRatePerGram = Math.round(activeSilver925Rate * (silverPurity / 0.925));
   const rawSilverCost = silverWeightGrams * silverBaseRatePerGram;
   const silverMakingAmount = Math.round(rawSilverCost * (silverMakingPercent / 100));
@@ -98,7 +109,7 @@ export default function CalculatorPage() {
             Gold & Silver Rate Calculator
           </h1>
           <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.85)", margin: 0 }}>
-            Use live market rates or enter your own custom Gold & Silver rates to calculate exact itemized jewellery costs, making charges, GST, and old gold exchange value.
+            Use live market rates or enter your own custom Gold & Silver rates (per gram, per 10g, or per Kg) to calculate exact itemized jewellery costs, making charges, GST, and old gold exchange value.
           </p>
         </div>
       </section>
@@ -119,7 +130,7 @@ export default function CalculatorPage() {
               </p>
             </div>
 
-            {/* Gold Rate Source Selector (Live vs Custom Rate) */}
+            {/* Gold Rate Benchmark Selector (Live vs Custom Rate) */}
             <div className="tool-form-group" style={{ marginBottom: "1.25rem" }}>
               <label style={{ display: "block", marginBottom: "0.4rem", fontWeight: 700, fontSize: "0.85rem" }}>
                 Gold Rate Benchmark:
@@ -157,38 +168,94 @@ export default function CalculatorPage() {
                     background: useCustomGoldRate ? "var(--gold-deep)" : "#FFFFFF",
                     color: useCustomGoldRate ? "#FFFFFF" : "var(--text-primary)"
                   }}
-                  onClick={() => setUseCustomGoldRate(true)}
+                  onClick={() => {
+                    setUseCustomGoldRate(true);
+                    if (goldRateUnit === "10g" && customGoldInput < 20000) {
+                      setCustomGoldInput(bullionRates.gold24k * 10);
+                    }
+                  }}
                 >
                   <i className="fa-solid fa-pen-to-square" style={{ marginRight: "0.35rem" }}></i>
                   Custom Gold Rate
                 </button>
               </div>
 
-              {/* Custom Gold Rate Input Box */}
+              {/* Custom Gold Rate Input Box + Unit Selector */}
               {useCustomGoldRate && (
-                <div style={{ padding: "0.75rem", borderRadius: "10px", background: "#FAF6F2", border: "1px solid var(--border-gold)" }}>
-                  <label style={{ display: "block", fontSize: "0.78rem", fontWeight: 600, color: "var(--gold-deep)", marginBottom: "0.3rem" }}>
-                    Enter Custom 24K Gold Rate (₹ per gram):
-                  </label>
+                <div style={{ padding: "0.85rem", borderRadius: "10px", background: "#FAF6F2", border: "1px solid var(--border-gold)" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.4rem" }}>
+                    <label style={{ fontSize: "0.78rem", fontWeight: 700, color: "var(--gold-deep)" }}>
+                      Select Weight Basis:
+                    </label>
+                    <div style={{ display: "flex", gap: "0.25rem" }}>
+                      <button
+                        type="button"
+                        style={{
+                          padding: "0.25rem 0.65rem",
+                          borderRadius: "4px",
+                          fontSize: "0.74rem",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                          border: "1px solid var(--gold-deep)",
+                          background: goldRateUnit === "1g" ? "var(--gold-deep)" : "#FFFFFF",
+                          color: goldRateUnit === "1g" ? "#FFFFFF" : "var(--gold-deep)"
+                        }}
+                        onClick={() => {
+                          if (goldRateUnit === "10g") {
+                            setCustomGoldInput(Math.round(customGoldInput / 10));
+                          }
+                          setGoldRateUnit("1g");
+                        }}
+                      >
+                        ₹ / 1 Gram
+                      </button>
+
+                      <button
+                        type="button"
+                        style={{
+                          padding: "0.25rem 0.65rem",
+                          borderRadius: "4px",
+                          fontSize: "0.74rem",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                          border: "1px solid var(--gold-deep)",
+                          background: goldRateUnit === "10g" ? "var(--gold-deep)" : "#FFFFFF",
+                          color: goldRateUnit === "10g" ? "#FFFFFF" : "var(--gold-deep)"
+                        }}
+                        onClick={() => {
+                          if (goldRateUnit === "1g") {
+                            setCustomGoldInput(Math.round(customGoldInput * 10));
+                          }
+                          setGoldRateUnit("10g");
+                        }}
+                      >
+                        ₹ / 10 Grams
+                      </button>
+                    </div>
+                  </div>
+
                   <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
                     <input
                       type="number"
-                      value={custom24kRate}
-                      step="50"
-                      style={{ flex: 1, padding: "0.5rem", borderRadius: "6px", border: "1px solid var(--border-gold)", fontSize: "0.95rem", fontWeight: 700 }}
-                      onChange={e => setCustom24kRate(Math.max(1, parseFloat(e.target.value) || 0))}
+                      value={customGoldInput}
+                      step={goldRateUnit === "10g" ? "500" : "50"}
+                      style={{ flex: 1, padding: "0.55rem", borderRadius: "6px", border: "1px solid var(--border-gold)", fontSize: "0.95rem", fontWeight: 700 }}
+                      onChange={e => setCustomGoldInput(Math.max(1, parseFloat(e.target.value) || 0))}
                     />
                     <button
                       type="button"
-                      style={{ padding: "0.5rem 0.75rem", borderRadius: "6px", background: "#FFFFFF", border: "1px solid var(--border-gold)", fontSize: "0.74rem", fontWeight: 700, cursor: "pointer", color: "var(--gold-deep)" }}
-                      onClick={() => setCustom24kRate(bullionRates.gold24k)}
+                      style={{ padding: "0.55rem 0.75rem", borderRadius: "6px", background: "#FFFFFF", border: "1px solid var(--border-gold)", fontSize: "0.74rem", fontWeight: 700, cursor: "pointer", color: "var(--gold-deep)" }}
+                      onClick={() => {
+                        setCustomGoldInput(goldRateUnit === "10g" ? bullionRates.gold24k * 10 : bullionRates.gold24k);
+                      }}
                     >
                       Reset Live
                     </button>
                   </div>
-                  <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: "0.25rem", display: "block" }}>
-                    Equivalents: 22K (916) = ₹{Math.round(custom24kRate * 0.916).toLocaleString("en-IN")}/g • 18K = ₹{Math.round(custom24kRate * 0.75).toLocaleString("en-IN")}/g
-                  </span>
+
+                  <div style={{ marginTop: "0.4rem", padding: "0.35rem 0.5rem", borderRadius: "6px", background: "#FFFFFF", border: "1px dashed var(--border-gold)", fontSize: "0.74rem", color: "var(--gold-deep)", fontWeight: 600 }}>
+                    Calculated Per-Gram Rate: <strong>₹{custom24kRatePerGram.toLocaleString("en-IN")}/g</strong> (24K) • 22K (916) = ₹{Math.round(custom24kRatePerGram * 0.916).toLocaleString("en-IN")}/g
+                  </div>
                 </div>
               )}
             </div>
@@ -345,7 +412,7 @@ export default function CalculatorPage() {
               </p>
             </div>
 
-            {/* Silver Rate Source Selector (Live vs Custom Rate) */}
+            {/* Silver Rate Benchmark Selector (Live vs Custom Rate) */}
             <div className="tool-form-group" style={{ marginBottom: "1.25rem" }}>
               <label style={{ display: "block", marginBottom: "0.4rem", fontWeight: 700, fontSize: "0.85rem" }}>
                 Silver Rate Benchmark:
@@ -383,38 +450,114 @@ export default function CalculatorPage() {
                     background: useCustomSilverRate ? "#3F3F46" : "#FFFFFF",
                     color: useCustomSilverRate ? "#FFFFFF" : "var(--text-primary)"
                   }}
-                  onClick={() => setUseCustomSilverRate(true)}
+                  onClick={() => {
+                    setUseCustomSilverRate(true);
+                    if (silverRateUnit === "1kg" && customSilverInput < 10000) {
+                      setCustomSilverInput((bullionRates.silver925 || 180) * 1000);
+                    }
+                  }}
                 >
                   <i className="fa-solid fa-pen-to-square" style={{ marginRight: "0.35rem" }}></i>
                   Custom Silver Rate
                 </button>
               </div>
 
-              {/* Custom Silver Rate Input Box */}
+              {/* Custom Silver Rate Input Box + Unit Selector */}
               {useCustomSilverRate && (
-                <div style={{ padding: "0.75rem", borderRadius: "10px", background: "#F4F4F5", border: "1px solid #D4D4D8" }}>
-                  <label style={{ display: "block", fontSize: "0.78rem", fontWeight: 600, color: "#27272A", marginBottom: "0.3rem" }}>
-                    Enter Custom 925 Silver Rate (₹ per gram):
-                  </label>
+                <div style={{ padding: "0.85rem", borderRadius: "10px", background: "#F4F4F5", border: "1px solid #D4D4D8" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.4rem" }}>
+                    <label style={{ fontSize: "0.78rem", fontWeight: 700, color: "#27272A" }}>
+                      Select Weight Basis:
+                    </label>
+                    <div style={{ display: "flex", gap: "0.25rem" }}>
+                      <button
+                        type="button"
+                        style={{
+                          padding: "0.25rem 0.5rem",
+                          borderRadius: "4px",
+                          fontSize: "0.72rem",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                          border: "1px solid #3F3F46",
+                          background: silverRateUnit === "1g" ? "#3F3F46" : "#FFFFFF",
+                          color: silverRateUnit === "1g" ? "#FFFFFF" : "#3F3F46"
+                        }}
+                        onClick={() => {
+                          if (silverRateUnit === "1kg") setCustomSilverInput(Math.round(customSilverInput / 1000));
+                          if (silverRateUnit === "10g") setCustomSilverInput(Math.round(customSilverInput / 10));
+                          setSilverRateUnit("1g");
+                        }}
+                      >
+                        ₹ / 1g
+                      </button>
+
+                      <button
+                        type="button"
+                        style={{
+                          padding: "0.25rem 0.5rem",
+                          borderRadius: "4px",
+                          fontSize: "0.72rem",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                          border: "1px solid #3F3F46",
+                          background: silverRateUnit === "10g" ? "#3F3F46" : "#FFFFFF",
+                          color: silverRateUnit === "10g" ? "#FFFFFF" : "#3F3F46"
+                        }}
+                        onClick={() => {
+                          if (silverRateUnit === "1g") setCustomSilverInput(Math.round(customSilverInput * 10));
+                          if (silverRateUnit === "1kg") setCustomSilverInput(Math.round(customSilverInput / 100));
+                          setSilverRateUnit("10g");
+                        }}
+                      >
+                        ₹ / 10g
+                      </button>
+
+                      <button
+                        type="button"
+                        style={{
+                          padding: "0.25rem 0.5rem",
+                          borderRadius: "4px",
+                          fontSize: "0.72rem",
+                          fontWeight: 700,
+                          cursor: "pointer",
+                          border: "1px solid #3F3F46",
+                          background: silverRateUnit === "1kg" ? "#3F3F46" : "#FFFFFF",
+                          color: silverRateUnit === "1kg" ? "#FFFFFF" : "#3F3F46"
+                        }}
+                        onClick={() => {
+                          if (silverRateUnit === "1g") setCustomSilverInput(Math.round(customSilverInput * 1000));
+                          if (silverRateUnit === "10g") setCustomSilverInput(Math.round(customSilverInput * 100));
+                          setSilverRateUnit("1kg");
+                        }}
+                      >
+                        ₹ / 1 Kg
+                      </button>
+                    </div>
+                  </div>
+
                   <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
                     <input
                       type="number"
-                      value={customSilver925Rate}
-                      step="5"
-                      style={{ flex: 1, padding: "0.5rem", borderRadius: "6px", border: "1px solid #A1A1AA", fontSize: "0.95rem", fontWeight: 700 }}
-                      onChange={e => setCustomSilver925Rate(Math.max(1, parseFloat(e.target.value) || 0))}
+                      value={customSilverInput}
+                      step={silverRateUnit === "1kg" ? "1000" : "5"}
+                      style={{ flex: 1, padding: "0.55rem", borderRadius: "6px", border: "1px solid #A1A1AA", fontSize: "0.95rem", fontWeight: 700 }}
+                      onChange={e => setCustomSilverInput(Math.max(1, parseFloat(e.target.value) || 0))}
                     />
                     <button
                       type="button"
-                      style={{ padding: "0.5rem 0.75rem", borderRadius: "6px", background: "#FFFFFF", border: "1px solid #A1A1AA", fontSize: "0.74rem", fontWeight: 700, cursor: "pointer", color: "#27272A" }}
-                      onClick={() => setCustomSilver925Rate(bullionRates.silver925 || 180)}
+                      style={{ padding: "0.55rem 0.75rem", borderRadius: "6px", background: "#FFFFFF", border: "1px solid #A1A1AA", fontSize: "0.74rem", fontWeight: 700, cursor: "pointer", color: "#27272A" }}
+                      onClick={() => {
+                        const base = bullionRates.silver925 || 180;
+                        setCustomSilverInput(silverRateUnit === "1kg" ? base * 1000 : silverRateUnit === "10g" ? base * 10 : base);
+                      }}
                     >
                       Reset Live
                     </button>
                   </div>
-                  <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: "0.25rem", display: "block" }}>
-                    Equivalent: 1 Kg Silver = ₹{(customSilver925Rate * 1000).toLocaleString("en-IN")}
-                  </span>
+
+                  <div style={{ marginTop: "0.4rem", padding: "0.35rem 0.5rem", borderRadius: "6px", background: "#FFFFFF", border: "1px dashed #A1A1AA", fontSize: "0.74rem", color: "#27272A", fontWeight: 600 }}>
+                    Calculated Per-Gram Rate: <strong>₹{customSilver925RatePerGram.toLocaleString("en-IN")}/g</strong> (925) • 1 Kg = ₹{(customSilver925RatePerGram * 1000).toLocaleString("en-IN")}
+                  </div>
                 </div>
               )}
             </div>
@@ -504,7 +647,7 @@ export default function CalculatorPage() {
                 style={{ width: "100%", padding: "0.65rem", borderRadius: "8px", border: "1px solid var(--border-light)", fontSize: "0.88rem" }}
                 onChange={e => setSilverPurity(parseFloat(e.target.value))}
               >
-                <option value={0.925}>925 Sterling Silver (92.5%) — ₹{activeSilver925Rate.toLocaleString("en-IN")}/g</option>
+                <option value={0.925}>925 Sterling Silver (92.5%) — ₹{silverBaseRatePerGram.toLocaleString("en-IN")}/g</option>
                 <option value={0.999}>999 Pure Fine Silver (99.9%) — ₹{Math.round(activeSilver925Rate * 1.08).toLocaleString("en-IN")}/g</option>
                 <option value={0.800}>800 Standard Payal Silver (80.0%) — ₹{Math.round(activeSilver925Rate * 0.865).toLocaleString("en-IN")}/g</option>
               </select>
