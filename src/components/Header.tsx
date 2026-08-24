@@ -72,6 +72,21 @@ export default function Header() {
       .catch(err => console.warn("Failed to fetch nav categories:", err));
   }, []);
 
+  // Lock background body scroll when mobile menu drawer is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    } else {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      document.body.style.touchAction = "";
+    };
+  }, [isMobileMenuOpen]);
+
   const formatCurrency = (val: number) => {
     return new Intl.NumberFormat("en-IN", {
       style: "currency",
@@ -466,7 +481,19 @@ export default function Header() {
             </div>
 
             {/* Drawer Navigation Links Scroll Area */}
-            <div style={{ padding: "1.25rem", display: "flex", flexDirection: "column", gap: "0.75rem", flex: 1, overflowY: "auto" }}>
+            <div
+              style={{
+                padding: "1.25rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.75rem",
+                flex: 1,
+                overflowY: "auto",
+                WebkitOverflowScrolling: "touch",
+                overscrollBehavior: "contain",
+                touchAction: "pan-y"
+              }}
+            >
               <div style={{ fontSize: "0.7rem", textTransform: "uppercase", letterSpacing: "1.2px", color: "#832729", fontWeight: 800, marginBottom: "0.1rem" }}>
                 Browse Collections & Sub-Categories:
               </div>
