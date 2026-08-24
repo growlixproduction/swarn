@@ -374,54 +374,131 @@ export default function AdminEditProductPage({ params }: { params: { id: string 
               />
             </div>
 
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
-              <div className="admin-form-group">
-                <label className="admin-label">Primary Material Type *</label>
-                <select
-                  className="admin-select"
-                  value={primaryMaterial}
-                  onChange={e => setPrimaryMaterial(e.target.value as any)}
-                >
-                  <option value="gold">🟡 Gold</option>
-                  <option value="diamond">💎 Diamond</option>
-                  <option value="silver">⚪ Silver</option>
-                  <option value="other">✨ Other / Special</option>
-                </select>
-              </div>
-
-              <div className="admin-form-group">
-                <label className="admin-label">Physical Category *</label>
-                <select
-                  className="admin-select"
-                  value={category}
-                  onChange={e => setCategory(e.target.value)}
-                >
-                  <option value="rings">Rings</option>
-                  <option value="necklaces">Necklaces & Rani Haar</option>
-                  <option value="earrings">Earrings & Jhumkas</option>
-                  <option value="bangles">Bracelets & Kadas</option>
-                  <option value="pendants">Pendants</option>
-                  <option value="bullion">Bullion & 24K Coins</option>
-                  <option value="silverware">925 Silverware</option>
-                  <option value="mens">Men&apos;s Jewellery</option>
-                  <option value="kids">Kids & Nazariya</option>
-                </select>
-              </div>
-
-              <div className="admin-form-group">
-                <label className="admin-label">Sub-Category / Style</label>
-                <input
-                  type="text"
-                  className="admin-input"
-                  value={subCategory}
-                  onChange={e => setSubCategory(e.target.value)}
-                  placeholder="e.g. Solitaire Rings"
-                />
+            {/* Primary Metal Collection Selector Cards (Cream/Gold Luxury Theme) */}
+            <div className="admin-form-group">
+              <label className="admin-label" style={{ color: "#F5EAD6", fontWeight: 700 }}>
+                1. Select Main Metal Collection *
+              </label>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "0.75rem" }}>
+                {[
+                  { key: "gold", title: "Gold Collection", icon: "🟡", desc: "22K/24K Gold Items" },
+                  { key: "diamond", title: "Diamond Collection", icon: "💎", desc: "Solitaires & VVS Items" },
+                  { key: "silver", title: "Silver Collection", icon: "⚪", desc: "925 Silver & Payal" },
+                  { key: "other", title: "Other / Special", icon: "✨", desc: "Custom Heirlooms" }
+                ].map(mat => {
+                  const isSelected = primaryMaterial === mat.key;
+                  return (
+                    <button
+                      key={mat.key}
+                      type="button"
+                      onClick={() => {
+                        setPrimaryMaterial(mat.key as any);
+                        setNavCategories(prev => {
+                          const base = prev.filter(c => !["gold", "diamond", "silver", "other"].includes(c));
+                          return Array.from(new Set([...base, "all", mat.key]));
+                        });
+                      }}
+                      style={{
+                        padding: "0.85rem 0.65rem",
+                        borderRadius: "10px",
+                        textAlign: "left",
+                        background: isSelected ? "linear-gradient(135deg, rgba(245, 234, 214, 0.18) 0%, rgba(197, 168, 128, 0.25) 100%)" : "#110E0C",
+                        border: isSelected ? "2px solid #D4B68A" : "1px solid rgba(197, 168, 128, 0.2)",
+                        color: isSelected ? "#F5EAD6" : "#A3978B",
+                        cursor: "pointer",
+                        transition: "all 0.2s ease",
+                        boxShadow: isSelected ? "0 4px 15px rgba(212, 182, 138, 0.2)" : "none"
+                      }}
+                    >
+                      <div style={{ fontSize: "1.2rem", marginBottom: "0.25rem" }}>{mat.icon}</div>
+                      <strong style={{ display: "block", fontSize: "0.85rem", color: isSelected ? "#F5EAD6" : "#E2D8CC" }}>
+                        {mat.title}
+                      </strong>
+                      <span style={{ fontSize: "0.68rem", opacity: 0.75 }}>{mat.desc}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
+            {/* Sub-Collection Selection Chips (Auto-Maps to Category, SubCategory & NavCategories) */}
             <div className="admin-form-group">
-              <label className="admin-label">Navigational & Filter Collections:</label>
+              <label className="admin-label" style={{ color: "#F5EAD6", fontWeight: 700, display: "flex", alignItems: "center", gap: "0.4rem" }}>
+                <i className="fa-solid fa-layer-group" style={{ color: "#D4B68A" }}></i>
+                2. Choose Sub-Collection / Category *
+              </label>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", padding: "0.75rem", background: "#110E0C", border: "1px solid rgba(197, 168, 128, 0.2)", borderRadius: "10px" }}>
+                {(
+                  primaryMaterial === "gold" ? [
+                    { slug: "necklace", title: "Necklace & Rani Haar", category: "necklaces", icon: "fa-crown" },
+                    { slug: "earrings", title: "Earrings & Tops", category: "earrings", icon: "fa-spa" },
+                    { slug: "nose-pins", title: "Nose Pins", category: "nose-pins", icon: "fa-ring" },
+                    { slug: "gold-hoops-balis", title: "Gold Hoops & Balis", category: "earrings", icon: "fa-circle-notch" },
+                    { slug: "pendants", title: "Pendants", category: "pendants", icon: "fa-gem" },
+                    { slug: "mangalsutra", title: "Mangalsutra", category: "mangalsutra", icon: "fa-heart" },
+                    { slug: "chains", title: "Chains", category: "chains", icon: "fa-link" },
+                    { slug: "bangles", title: "Bangles & Kadas", category: "bangles", icon: "fa-circle" },
+                    { slug: "bracelet", title: "Bracelet", category: "bangles", icon: "fa-ring" }
+                  ] : primaryMaterial === "diamond" ? [
+                    { slug: "diamond-rings", title: "Diamond Rings & Solitaires", category: "rings", icon: "fa-ring" },
+                    { slug: "diamond-earrings", title: "Diamond Earrings", category: "earrings", icon: "fa-gem" },
+                    { slug: "diamond-pendants", title: "Diamond Pendants", category: "pendants", icon: "fa-gem" }
+                  ] : primaryMaterial === "silver" ? [
+                    { slug: "silver-payal", title: "Silver Payal & Anklets", category: "silverware", icon: "fa-spa" },
+                    { slug: "silverware", title: "Silverware & Coins", category: "silverware", icon: "fa-coins" }
+                  ] : [
+                    { slug: "wedding", title: "Bridal / Wedding", category: "necklaces", icon: "fa-gem" },
+                    { slug: "daily-wear", title: "Daily Wear", category: "chains", icon: "fa-spa" },
+                    { slug: "gifting", title: "Gifting Suite", category: "pendants", icon: "fa-gift" }
+                  ]
+                ).map(sub => {
+                  const isSubSelected = navCategories.includes(sub.slug) || category === sub.category;
+                  return (
+                    <button
+                      key={sub.slug}
+                      type="button"
+                      onClick={() => {
+                        setCategory(sub.category);
+                        setSubCategory(sub.title);
+                        setCollection(`${primaryMaterial.toUpperCase()} ${sub.title} Curation`);
+                        setNavCategories(prev => Array.from(new Set([...prev, "all", primaryMaterial, sub.slug, sub.category])));
+                      }}
+                      style={{
+                        padding: "0.45rem 0.85rem",
+                        borderRadius: "20px",
+                        fontSize: "0.8rem",
+                        fontWeight: isSubSelected ? 700 : 500,
+                        background: isSubSelected ? "#F5EAD6" : "rgba(255,255,255,0.04)",
+                        color: isSubSelected ? "#832729" : "#C5B6A6",
+                        border: isSubSelected ? "1.5px solid #D4B68A" : "1px solid rgba(197, 168, 128, 0.2)",
+                        cursor: "pointer",
+                        transition: "all 0.2s ease",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "0.4rem"
+                      }}
+                    >
+                      <i className={`fa-solid ${sub.icon}`} style={{ fontSize: "0.75rem", color: isSubSelected ? "#832729" : "#C5A880" }}></i>
+                      <span>{sub.title}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Live Storefront Placement Preview Summary Box (Cream Theme) */}
+            <div style={{ background: "rgba(245, 234, 214, 0.08)", border: "1.5px solid #D4B68A", borderRadius: "10px", padding: "0.85rem 1.1rem", marginBottom: "1.25rem" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "#F5EAD6", fontWeight: 700, fontSize: "0.86rem" }}>
+                <i className="fa-solid fa-circle-check" style={{ color: "#4ADE80" }}></i>
+                <span>Storefront Auto-Placement Summary:</span>
+              </div>
+              <p style={{ margin: "0.35rem 0 0", fontSize: "0.8rem", color: "#E2D8CC", lineHeight: 1.5 }}>
+                This piece will automatically show under: <strong style={{ color: "#F5EAD6" }}>{primaryMaterial.toUpperCase()} Collection ➔ {subCategory || category}</strong> (/collections/{navCategories.find(c => c !== "all" && c !== primaryMaterial) || category})
+              </p>
+            </div>
+
+            <div className="admin-form-group">
+              <label className="admin-label">Optional Filter Tags (Multi-Select):</label>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
                 {availableCategories.map(c => (
                   <button

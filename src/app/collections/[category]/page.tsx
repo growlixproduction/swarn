@@ -101,11 +101,18 @@ export default function CollectionPage() {
       );
     }
 
+    // Enhanced Sub-Collection Keyword Matching (e.g. necklace vs necklaces, earring vs earrings)
+    const cleanSlug = normSlug.replace(/-s$/, "").replace(/s$/, "");
+
     return (
-      p.navCategories.some(c => c.toLowerCase() === normSlug) ||
-      p.category.toLowerCase() === normSlug ||
-      p.title.toLowerCase().includes(normSlug) ||
-      p.collection.toLowerCase().includes(normSlug)
+      p.navCategories.some(c => {
+        const normC = c.toLowerCase();
+        return normC === normSlug || normC.includes(cleanSlug) || cleanSlug.includes(normC);
+      }) ||
+      p.category.toLowerCase().includes(cleanSlug) ||
+      cleanSlug.includes(p.category.toLowerCase()) ||
+      p.title.toLowerCase().includes(cleanSlug) ||
+      p.collection.toLowerCase().includes(cleanSlug)
     );
   });
 
