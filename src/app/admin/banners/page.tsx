@@ -8,12 +8,15 @@ export default function AdminBannersPage() {
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
+  // File Uploading States
+  const [uploadingField, setUploadingField] = useState<string | null>(null);
+
   // States
   const [heroSlides, setHeroSlides] = useState<any[]>([]);
   const [selectedSlideId, setSelectedSlideId] = useState<string>("");
 
   const [pageBanners, setPageBanners] = useState<Record<string, any>>({});
-  const [selectedPageKey, setSelectedPageKey] = useState<string>("about");
+  const [selectedPageKey, setSelectedPageKey] = useState<string>("calculator");
 
   const [showroomStory, setShowroomStory] = useState<any>({
     badge: "ESTABLISHED 2015 • AMBIKAPUR, CHHATTISGARH",
@@ -57,6 +60,37 @@ export default function AdminBannersPage() {
       console.error("Failed to load banners:", err);
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Upload image from PC
+  const handleDirectPCUpload = async (e: React.ChangeEvent<HTMLInputElement>, fieldKey: string, updateCallback: (url: string) => void) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      setUploadingField(fieldKey);
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success && data.url) {
+        updateCallback(data.url);
+        setSaveMessage({ type: "success", text: `Image "${file.name}" uploaded successfully from PC!` });
+        setTimeout(() => setSaveMessage(null), 3000);
+      } else {
+        setSaveMessage({ type: "error", text: data.error || "Failed to upload image from PC." });
+      }
+    } catch (err: any) {
+      setSaveMessage({ type: "error", text: err.message || "File upload failed" });
+    } finally {
+      setUploadingField(null);
+      e.target.value = "";
     }
   };
 
@@ -104,7 +138,7 @@ export default function AdminBannersPage() {
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        setSaveMessage({ type: "success", text: "All Banners, Page Content & Showroom Story updated live!" });
+        setSaveMessage({ type: "success", text: "All Banners, Calculator & About Page Content updated live!" });
         setTimeout(() => setSaveMessage(null), 3500);
       } else {
         setSaveMessage({ type: "error", text: data.error || "Failed to save data." });
@@ -132,7 +166,7 @@ export default function AdminBannersPage() {
         <div>
           <h1 className="admin-page-title" style={{ fontSize: "1.6rem" }}>Website Banners & Page Content Studio</h1>
           <p className="admin-page-desc" style={{ fontSize: "0.85rem" }}>
-            Customize Homepage Hero Slider, Inner Page Banners (About, Calculator, Collections), and About Us Showroom Story.
+            Customize Homepage Hero Slider, Calculator Page Banner, About Us Page Banner & Story, and Collection Banners with Direct PC Image Upload.
           </p>
         </div>
 
@@ -209,7 +243,7 @@ export default function AdminBannersPage() {
           onClick={() => setActiveTab("pages")}
         >
           <i className="fa-solid fa-heading"></i>
-          <span>Page Top Header Banners (About, Calculator, Collections)</span>
+          <span>Calculator & Page Header Banners</span>
         </button>
 
         <button
@@ -230,7 +264,7 @@ export default function AdminBannersPage() {
           onClick={() => setActiveTab("showroom")}
         >
           <i className="fa-solid fa-store"></i>
-          <span>About Us Showroom Story & Gallery</span>
+          <span>About Us Story & Showroom Gallery</span>
         </button>
       </div>
 
@@ -343,36 +377,99 @@ export default function AdminBannersPage() {
                 </div>
               </div>
 
+              {/* Background Image Input + Direct PC Browse Button */}
               <div className="admin-form-group">
-                <label className="admin-label">Background Image URL</label>
-                <input
-                  type="text"
-                  className="admin-input"
-                  value={currentSlide.backgroundImage || ""}
-                  onChange={e => handleHeroSlideChange("backgroundImage", e.target.value)}
-                />
+                <label className="admin-label">Background Image URL (Or Browse PC File)</label>
+                <div style={{ display: "flex", gap: "0.5rem" }}>
+                  <input
+                    type="text"
+                    className="admin-input"
+                    style={{ flex: 1 }}
+                    value={currentSlide.backgroundImage || ""}
+                    onChange={e => handleHeroSlideChange("backgroundImage", e.target.value)}
+                  />
+                  <label
+                    style={{
+                      padding: "0.55rem 1rem",
+                      borderRadius: "8px",
+                      background: uploadingField === `hero-${currentSlide.id}` ? "rgba(197,168,128,0.2)" : "#C5A880",
+                      color: "#110E0C",
+                      fontSize: "0.8rem",
+                      fontWeight: 700,
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.4rem",
+                      whiteSpace: "nowrap"
+                    }}
+                  >
+                    <i className={uploadingField === `hero-${currentSlide.id}` ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-folder-open"}></i>
+                    <span>{uploadingField === `hero-${currentSlide.id}` ? "Uploading..." : "Browse PC"}</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      style={{ display: "none" }}
+                      disabled={uploadingField === `hero-${currentSlide.id}`}
+                      onChange={e => handleDirectPCUpload(e, `hero-${currentSlide.id}`, url => handleHeroSlideChange("backgroundImage", url))}
+                    />
+                  </label>
+                </div>
+              </div>
+
+              {/* Preview Card */}
+              <div style={{ marginTop: "1.5rem", borderTop: "1px solid rgba(197, 168, 128, 0.2)", paddingTop: "1rem" }}>
+                <label className="admin-label" style={{ color: "#F5EAD6", fontWeight: 700 }}>Live Hero Slide Preview:</label>
+                <div
+                  style={{
+                    position: "relative",
+                    borderRadius: "12px",
+                    overflow: "hidden",
+                    height: "160px",
+                    backgroundImage: `url(${currentSlide.backgroundImage})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "1.25rem",
+                    color: "#FFFFFF"
+                  }}
+                >
+                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 100%)" }} />
+                  <div style={{ position: "relative", zIndex: 2, maxWidth: "80%" }}>
+                    <span style={{ fontSize: "0.65rem", background: "rgba(197, 168, 128, 0.3)", color: "#F5EAD6", border: "1px solid #C5A880", padding: "0.15rem 0.5rem", borderRadius: "10px", fontWeight: 700 }}>
+                      {currentSlide.tagBadge}
+                    </span>
+                    <h4 style={{ fontSize: "1.05rem", fontWeight: 700, marginTop: "0.3rem", marginBottom: "0.2rem" }}>
+                      {currentSlide.titleMain} <span style={{ color: "#C5A880", fontStyle: "italic" }}>{currentSlide.titleItalic}</span>
+                    </h4>
+                    <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.8)", margin: 0 }}>
+                      {currentSlide.description}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           )}
         </div>
       )}
 
-      {/* TAB 2: INNER PAGE TOP BANNERS STUDIO */}
+      {/* TAB 2: CALCULATOR & PAGE HEADER BANNERS STUDIO */}
       {activeTab === "pages" && (
         <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "1.75rem" }}>
+          {/* Page Selector Sidebar */}
           <div className="admin-card">
             <h3 style={{ fontSize: "1.05rem", color: "#F5EAD6", marginBottom: "1rem", fontFamily: "var(--font-serif)" }}>
-              Select Page Top Banner
+              Select Page to Edit Banner
             </h3>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
               {[
-                { key: "about", name: "About Us Page", icon: "fa-circle-info" },
-                { key: "calculator", name: "Live Rate Calculator Page", icon: "fa-calculator" },
-                { key: "gold", name: "Gold Collection Page", icon: "fa-crown" },
-                { key: "diamond", name: "Diamond Collection Page", icon: "fa-gem" },
-                { key: "silver", name: "Silver Collection Page", icon: "fa-ring" },
-                { key: "all", name: "All Jewellery Page", icon: "fa-layer-group" }
+                { key: "calculator", name: "🧮 Calculator Page Banner", icon: "fa-calculator" },
+                { key: "about", name: "ℹ️ About Us Page Banner", icon: "fa-circle-info" },
+                { key: "gold", name: "🟡 Gold Collection Banner", icon: "fa-crown" },
+                { key: "diamond", name: "💎 Diamond Collection Banner", icon: "fa-gem" },
+                { key: "silver", name: "⚪ Silver Collection Banner", icon: "fa-ring" },
+                { key: "all", name: "🛍️ All Jewellery Banner", icon: "fa-layer-group" }
               ].map(p => {
                 const b = pageBanners[p.key];
                 const isSelected = selectedPageKey === p.key;
@@ -383,7 +480,7 @@ export default function AdminBannersPage() {
                     style={{
                       padding: "0.85rem 1rem",
                       borderRadius: "10px",
-                      background: isSelected ? "rgba(197, 168, 128, 0.18)" : "#110E0C",
+                      background: isSelected ? "rgba(197, 168, 128, 0.2)" : "#110E0C",
                       border: isSelected ? "1.5px solid #C5A880" : "1px solid rgba(197, 168, 128, 0.15)",
                       cursor: "pointer",
                       display: "flex",
@@ -391,22 +488,23 @@ export default function AdminBannersPage() {
                       gap: "0.75rem"
                     }}
                   >
-                    <i className={`fa-solid ${p.icon}`} style={{ color: "#C5A880", fontSize: "1.1rem" }}></i>
                     <div style={{ flex: 1 }}>
-                      <strong style={{ display: "block", color: "#FFFFFF", fontSize: "0.88rem" }}>{p.name}</strong>
+                      <strong style={{ display: "block", color: isSelected ? "#C5A880" : "#FFFFFF", fontSize: "0.88rem" }}>{p.name}</strong>
                       <span style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.6)" }}>
-                        {b?.title || "Default Banner"}
+                        {b?.title || "Custom Page Banner"}
                       </span>
                     </div>
+                    <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.75rem", color: "#C5A880" }}></i>
                   </div>
                 );
               })}
             </div>
           </div>
 
+          {/* Right Editor for Selected Page Banner */}
           <div className="admin-card">
             <h3 style={{ fontSize: "1.05rem", color: "#F5EAD6", marginBottom: "1.25rem", fontFamily: "var(--font-serif)" }}>
-              Editing Banner: <span style={{ color: "#C5A880" }}>{currentBanner.pageName || selectedPageKey.toUpperCase()}</span>
+              Editing Page Banner: <span style={{ color: "#C5A880" }}>{currentBanner.pageName || selectedPageKey.toUpperCase()}</span>
             </h3>
 
             <div className="admin-form-group">
@@ -439,14 +537,78 @@ export default function AdminBannersPage() {
               />
             </div>
 
+            {/* Banner Background Image Input + Direct PC Browse Button */}
             <div className="admin-form-group">
-              <label className="admin-label">Background Image URL</label>
-              <input
-                type="text"
-                className="admin-input"
-                value={currentBanner.backgroundImage || ""}
-                onChange={e => handlePageBannerChange("backgroundImage", e.target.value)}
-              />
+              <label className="admin-label">Background Image URL (Or Browse PC File)</label>
+              <div style={{ display: "flex", gap: "0.5rem" }}>
+                <input
+                  type="text"
+                  className="admin-input"
+                  style={{ flex: 1 }}
+                  value={currentBanner.backgroundImage || ""}
+                  onChange={e => handlePageBannerChange("backgroundImage", e.target.value)}
+                />
+                <label
+                  style={{
+                    padding: "0.55rem 1rem",
+                    borderRadius: "8px",
+                    background: uploadingField === `page-${selectedPageKey}` ? "rgba(197,168,128,0.2)" : "#C5A880",
+                    color: "#110E0C",
+                    fontSize: "0.8rem",
+                    fontWeight: 700,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.4rem",
+                    whiteSpace: "nowrap"
+                  }}
+                >
+                  <i className={uploadingField === `page-${selectedPageKey}` ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-folder-open"}></i>
+                  <span>{uploadingField === `page-${selectedPageKey}` ? "Uploading..." : "Browse PC"}</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    style={{ display: "none" }}
+                    disabled={uploadingField === `page-${selectedPageKey}`}
+                    onChange={e => handleDirectPCUpload(e, `page-${selectedPageKey}`, url => handlePageBannerChange("backgroundImage", url))}
+                  />
+                </label>
+              </div>
+            </div>
+
+            {/* Live Banner Preview */}
+            <div style={{ marginTop: "1.5rem", borderTop: "1px solid rgba(197, 168, 128, 0.2)", paddingTop: "1.25rem" }}>
+              <label className="admin-label" style={{ color: "#F5EAD6", fontWeight: 700, marginBottom: "0.5rem" }}>
+                Live Page Banner Preview:
+              </label>
+              <div
+                style={{
+                  position: "relative",
+                  borderRadius: "14px",
+                  overflow: "hidden",
+                  padding: "2.5rem 1.5rem",
+                  backgroundImage: `url(${currentBanner.backgroundImage || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85"})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  color: "#FFFFFF",
+                  textAlign: "center"
+                }}
+              >
+                <div style={{ position: "absolute", inset: 0, background: currentBanner.overlayGradient || "linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.72) 100%)" }} />
+                <div style={{ position: "relative", zIndex: 2, maxWidth: "700px", margin: "0 auto" }}>
+                  {currentBanner.badge && (
+                    <span style={{ display: "inline-block", background: "rgba(197, 168, 128, 0.2)", border: "1px solid #C5A880", padding: "0.2rem 0.65rem", borderRadius: "15px", fontSize: "0.68rem", color: "#F5EAD6", letterSpacing: "1.2px", marginBottom: "0.5rem", fontWeight: 700 }}>
+                      {currentBanner.badge}
+                    </span>
+                  )}
+                  <h3 style={{ fontSize: "1.4rem", fontWeight: 700, marginBottom: "0.35rem", textShadow: "0 2px 10px rgba(0,0,0,0.6)" }}>
+                    {currentBanner.title}
+                  </h3>
+                  <p style={{ fontSize: "0.82rem", color: "#F5EAD6", margin: 0, textShadow: "0 1px 6px rgba(0,0,0,0.6)" }}>
+                    {currentBanner.subtitle}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -456,7 +618,7 @@ export default function AdminBannersPage() {
       {activeTab === "showroom" && (
         <div className="admin-card">
           <h3 style={{ fontSize: "1.1rem", color: "#F5EAD6", marginBottom: "1.25rem", fontFamily: "var(--font-serif)" }}>
-            About Us Showroom Story & Gallery Manager
+            About Us Showroom Story & 3-Mosaic Gallery Manager
           </h3>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
@@ -502,21 +664,34 @@ export default function AdminBannersPage() {
           </div>
 
           <h4 style={{ fontSize: "0.95rem", color: "#C5A880", marginTop: "1.5rem", marginBottom: "1rem", fontWeight: 700 }}>
-            <i className="fa-solid fa-images" style={{ marginRight: "0.4rem" }}></i> Showroom 3 Mosaic Gallery Photos
+            <i className="fa-solid fa-images" style={{ marginRight: "0.4rem" }}></i> Showroom 3 Mosaic Gallery Photos (Browse PC Supported)
           </h4>
 
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
-            {/* Image 1 */}
+            {/* Gallery Image 1 */}
             <div style={{ background: "#110E0C", padding: "1rem", borderRadius: "10px", border: "1px solid rgba(197, 168, 128, 0.2)" }}>
               <strong style={{ color: "#FFFFFF", fontSize: "0.82rem", display: "block", marginBottom: "0.5rem" }}>Gallery Photo 1 (Tall)</strong>
               <div className="admin-form-group" style={{ marginBottom: "0.5rem" }}>
-                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Image URL</label>
-                <input
-                  type="text"
-                  className="admin-input"
-                  value={showroomStory.galleryImg1 || ""}
-                  onChange={e => handleShowroomStoryChange("galleryImg1", e.target.value)}
-                />
+                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Image URL / PC File</label>
+                <div style={{ display: "flex", gap: "0.4rem" }}>
+                  <input
+                    type="text"
+                    className="admin-input"
+                    style={{ flex: 1, fontSize: "0.75rem" }}
+                    value={showroomStory.galleryImg1 || ""}
+                    onChange={e => handleShowroomStoryChange("galleryImg1", e.target.value)}
+                  />
+                  <label style={{ padding: "0.4rem 0.6rem", background: "#C5A880", color: "#110E0C", borderRadius: "6px", fontSize: "0.7rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center" }}>
+                    <i className={uploadingField === "g1" ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-folder-open"}></i>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      style={{ display: "none" }}
+                      disabled={uploadingField === "g1"}
+                      onChange={e => handleDirectPCUpload(e, "g1", url => handleShowroomStoryChange("galleryImg1", url))}
+                    />
+                  </label>
+                </div>
               </div>
               <div className="admin-form-group" style={{ marginBottom: 0 }}>
                 <label className="admin-label" style={{ fontSize: "0.7rem" }}>Tag Badge</label>
@@ -529,17 +704,30 @@ export default function AdminBannersPage() {
               </div>
             </div>
 
-            {/* Image 2 */}
+            {/* Gallery Image 2 */}
             <div style={{ background: "#110E0C", padding: "1rem", borderRadius: "10px", border: "1px solid rgba(197, 168, 128, 0.2)" }}>
               <strong style={{ color: "#FFFFFF", fontSize: "0.82rem", display: "block", marginBottom: "0.5rem" }}>Gallery Photo 2 (Square)</strong>
               <div className="admin-form-group" style={{ marginBottom: "0.5rem" }}>
-                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Image URL</label>
-                <input
-                  type="text"
-                  className="admin-input"
-                  value={showroomStory.galleryImg2 || ""}
-                  onChange={e => handleShowroomStoryChange("galleryImg2", e.target.value)}
-                />
+                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Image URL / PC File</label>
+                <div style={{ display: "flex", gap: "0.4rem" }}>
+                  <input
+                    type="text"
+                    className="admin-input"
+                    style={{ flex: 1, fontSize: "0.75rem" }}
+                    value={showroomStory.galleryImg2 || ""}
+                    onChange={e => handleShowroomStoryChange("galleryImg2", e.target.value)}
+                  />
+                  <label style={{ padding: "0.4rem 0.6rem", background: "#C5A880", color: "#110E0C", borderRadius: "6px", fontSize: "0.7rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center" }}>
+                    <i className={uploadingField === "g2" ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-folder-open"}></i>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      style={{ display: "none" }}
+                      disabled={uploadingField === "g2"}
+                      onChange={e => handleDirectPCUpload(e, "g2", url => handleShowroomStoryChange("galleryImg2", url))}
+                    />
+                  </label>
+                </div>
               </div>
               <div className="admin-form-group" style={{ marginBottom: 0 }}>
                 <label className="admin-label" style={{ fontSize: "0.7rem" }}>Tag Badge</label>
@@ -552,17 +740,30 @@ export default function AdminBannersPage() {
               </div>
             </div>
 
-            {/* Image 3 */}
+            {/* Gallery Image 3 */}
             <div style={{ background: "#110E0C", padding: "1rem", borderRadius: "10px", border: "1px solid rgba(197, 168, 128, 0.2)" }}>
               <strong style={{ color: "#FFFFFF", fontSize: "0.82rem", display: "block", marginBottom: "0.5rem" }}>Gallery Photo 3 (Square)</strong>
               <div className="admin-form-group" style={{ marginBottom: "0.5rem" }}>
-                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Image URL</label>
-                <input
-                  type="text"
-                  className="admin-input"
-                  value={showroomStory.galleryImg3 || ""}
-                  onChange={e => handleShowroomStoryChange("galleryImg3", e.target.value)}
-                />
+                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Image URL / PC File</label>
+                <div style={{ display: "flex", gap: "0.4rem" }}>
+                  <input
+                    type="text"
+                    className="admin-input"
+                    style={{ flex: 1, fontSize: "0.75rem" }}
+                    value={showroomStory.galleryImg3 || ""}
+                    onChange={e => handleShowroomStoryChange("galleryImg3", e.target.value)}
+                  />
+                  <label style={{ padding: "0.4rem 0.6rem", background: "#C5A880", color: "#110E0C", borderRadius: "6px", fontSize: "0.7rem", fontWeight: 700, cursor: "pointer", display: "flex", alignItems: "center" }}>
+                    <i className={uploadingField === "g3" ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-folder-open"}></i>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      style={{ display: "none" }}
+                      disabled={uploadingField === "g3"}
+                      onChange={e => handleDirectPCUpload(e, "g3", url => handleShowroomStoryChange("galleryImg3", url))}
+                    />
+                  </label>
+                </div>
               </div>
               <div className="admin-form-group" style={{ marginBottom: 0 }}>
                 <label className="admin-label" style={{ fontSize: "0.7rem" }}>Tag Badge</label>
