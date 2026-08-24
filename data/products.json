@@ -1,5 +1,101 @@
 [
   {
+    "id": "SM-101",
+    "title": "Rubans Modern Solitaire Ring",
+    "slug": "rubans-modern-solitaire-ring",
+    "collection": "Solitaire Collection",
+    "category": "rings",
+    "navCategories": [
+      "all",
+      "diamond",
+      "daily-wear",
+      "gifting"
+    ],
+    "isFeatured": true,
+    "isNew": true,
+    "rating": 4.9,
+    "reviews": 24,
+    "netGoldWeightGrams": 4.85,
+    "grossWeightGrams": 5.1,
+    "defaultKarat": "18K",
+    "supportedKarats": [
+      "14K",
+      "18K",
+      "22K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow",
+      "rose",
+      "white"
+    ],
+    "makingChargePercent": 14,
+    "discountPercent": 15,
+    "diamondSpecs": {
+      "stoneCount": 1,
+      "totalCaratWeight": 0.35,
+      "clarity": "VVS-EF",
+      "cut": "Round Brilliant",
+      "pricePerCarat": 68000
+    },
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1200&q=85",
+        "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM916A8201",
+    "certificate": "IGI-LG5829104",
+    "description": "Handcrafted 18K gold band crowned with a certified round brilliant solitaire diamond. Designed with tapered knife-edge shoulders for maximum light return.",
+    "dimensions": "Band Width: 2.2mm | Crown Height: 5.5mm"
+  },
+  {
+    "id": "SM-104",
+    "title": "Swarn Mahal 22K Royal Rani Haar",
+    "slug": "swarn-mahal-22k-royal-rani-haar",
+    "collection": "Heritage Ambikapur",
+    "category": "necklaces",
+    "navCategories": [
+      "all",
+      "gold",
+      "wedding"
+    ],
+    "isFeatured": true,
+    "isNew": false,
+    "rating": 5,
+    "reviews": 42,
+    "netGoldWeightGrams": 28.5,
+    "grossWeightGrams": 29.2,
+    "defaultKarat": "22K",
+    "supportedKarats": [
+      "22K"
+    ],
+    "defaultColor": "yellow",
+    "supportedColors": [
+      "yellow"
+    ],
+    "makingChargePercent": 16,
+    "discountPercent": 12,
+    "images": {
+      "yellow": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      "rose": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      "white": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
+      "hover": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=800&q=80",
+      "gallery": [
+        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85"
+      ]
+    },
+    "huid": "SM916RH285",
+    "certificate": "BIS Hallmarked HUID 916",
+    "description": "Authentic 22K gold bridal Rani Haar handcrafted with heritage nakshi, intricate filigree, and floral jali medallions by Swarn Mahal master karigars in Ambikapur.",
+    "dimensions": "Length: 24 Inches Adjustable Dori | Center Pendant: 52mm"
+  },
+  {
     "id": "SM-512",
     "title": "Earings",
     "slug": "earings",
@@ -88,61 +184,6 @@
         "/uploads/1787566443655_JT02841-1YS300_1_lar.jpg"
       ]
     }
-  },
-  {
-    "id": "SM-101",
-    "title": "Rubans Modern Solitaire Ring",
-    "slug": "rubans-modern-solitaire-ring",
-    "collection": "Solitaire Collection",
-    "category": "rings",
-    "navCategories": [
-      "all",
-      "diamond",
-      "daily-wear",
-      "gifting"
-    ],
-    "isFeatured": true,
-    "isNew": true,
-    "rating": 4.9,
-    "reviews": 24,
-    "netGoldWeightGrams": 4.85,
-    "grossWeightGrams": 5.1,
-    "defaultKarat": "18K",
-    "supportedKarats": [
-      "14K",
-      "18K",
-      "22K"
-    ],
-    "defaultColor": "yellow",
-    "supportedColors": [
-      "yellow",
-      "rose",
-      "white"
-    ],
-    "makingChargePercent": 14,
-    "discountPercent": 15,
-    "diamondSpecs": {
-      "stoneCount": 1,
-      "totalCaratWeight": 0.35,
-      "clarity": "VVS-EF",
-      "cut": "Round Brilliant",
-      "pricePerCarat": 68000
-    },
-    "images": {
-      "yellow": "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=800&q=80",
-      "rose": "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=800&q=80",
-      "white": "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=800&q=80",
-      "hover": "https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?auto=format&fit=crop&w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1200&q=85",
-        "https://images.unsplash.com/photo-1603561591411-07134e71a2a9?auto=format&fit=crop&w=1200&q=85",
-        "https://images.unsplash.com/photo-1598560917505-59a3ad559071?auto=format&fit=crop&w=1200&q=85"
-      ]
-    },
-    "huid": "SM916A8201",
-    "certificate": "IGI-LG5829104",
-    "description": "Handcrafted 18K gold band crowned with a certified round brilliant solitaire diamond. Designed with tapered knife-edge shoulders for maximum light return.",
-    "dimensions": "Band Width: 2.2mm | Crown Height: 5.5mm"
   },
   {
     "id": "SM-106",
@@ -304,47 +345,6 @@
     "certificate": "GIA-GEM-89210",
     "description": "An untreated certified natural Zambian emerald surrounded by a scintillating diamond halo, set in warm 18K yellow gold.",
     "dimensions": "Center Stone: 7x5mm Octagon | Band: 2.1mm"
-  },
-  {
-    "id": "SM-104",
-    "title": "Swarn Mahal 22K Royal Rani Haar",
-    "slug": "swarn-mahal-22k-royal-rani-haar",
-    "collection": "Heritage Ambikapur",
-    "category": "necklaces",
-    "navCategories": [
-      "all",
-      "gold",
-      "wedding"
-    ],
-    "isFeatured": true,
-    "isNew": false,
-    "rating": 5,
-    "reviews": 42,
-    "netGoldWeightGrams": 28.5,
-    "grossWeightGrams": 29.2,
-    "defaultKarat": "22K",
-    "supportedKarats": [
-      "22K"
-    ],
-    "defaultColor": "yellow",
-    "supportedColors": [
-      "yellow"
-    ],
-    "makingChargePercent": 16,
-    "discountPercent": 12,
-    "images": {
-      "yellow": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
-      "rose": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
-      "white": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=800&q=80",
-      "hover": "https://images.unsplash.com/photo-1599643477877-530eb83abc8e?auto=format&fit=crop&w=800&q=80",
-      "gallery": [
-        "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1200&q=85"
-      ]
-    },
-    "huid": "SM916RH285",
-    "certificate": "BIS Hallmarked HUID 916",
-    "description": "Authentic 22K gold bridal Rani Haar handcrafted with heritage nakshi, intricate filigree, and floral jali medallions by Swarn Mahal master karigars in Ambikapur.",
-    "dimensions": "Length: 24 Inches Adjustable Dori | Center Pendant: 52mm"
   },
   {
     "id": "SM-105",

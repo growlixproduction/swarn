@@ -71,15 +71,23 @@ export default function AdminProductsPage() {
     new Set(productsList.map(p => p.category).filter(Boolean))
   );
 
-  // Handle Drag & Drop / Directional Reordering
-  const handleReorder = async (fromIdx: number, toIdx: number) => {
-    if (fromIdx < 0 || fromIdx >= productsList.length || toIdx < 0 || toIdx >= productsList.length || fromIdx === toIdx) {
+  // Handle Drag & Drop / Directional Reordering on VISIBLE filtered products
+  const handleReorder = async (fromFilteredIdx: number, toFilteredIdx: number) => {
+    if (fromFilteredIdx < 0 || fromFilteredIdx >= filtered.length || toFilteredIdx < 0 || toFilteredIdx >= filtered.length || fromFilteredIdx === toFilteredIdx) {
       return;
     }
 
+    const itemToMove = filtered[fromFilteredIdx];
+    const itemTarget = filtered[toFilteredIdx];
+
+    const fromMasterIdx = productsList.findIndex(p => p.id === itemToMove.id);
+    const toMasterIdx = productsList.findIndex(p => p.id === itemTarget.id);
+
+    if (fromMasterIdx === -1 || toMasterIdx === -1) return;
+
     const updated = [...productsList];
-    const [movedItem] = updated.splice(fromIdx, 1);
-    updated.splice(toIdx, 0, movedItem);
+    const [movedItem] = updated.splice(fromMasterIdx, 1);
+    updated.splice(toMasterIdx, 0, movedItem);
 
     setProductsList(updated);
 
@@ -359,16 +367,16 @@ export default function AdminProductsPage() {
                   <tr
                     key={p.id}
                     draggable={true}
-                    onDragStart={() => setDraggedIdx(actualIndex)}
+                    onDragStart={() => setDraggedIdx(displayIndex)}
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={() => {
-                      if (draggedIdx !== null && draggedIdx !== actualIndex) {
-                        handleReorder(draggedIdx, actualIndex);
+                      if (draggedIdx !== null && draggedIdx !== displayIndex) {
+                        handleReorder(draggedIdx, displayIndex);
                         setDraggedIdx(null);
                       }
                     }}
                     style={{
-                      background: draggedIdx === actualIndex ? "rgba(197, 168, 128, 0.2)" : "transparent",
+                      background: draggedIdx === displayIndex ? "rgba(197, 168, 128, 0.2)" : "transparent",
                       cursor: "grab"
                     }}
                   >
@@ -383,18 +391,18 @@ export default function AdminProductsPage() {
                         <div style={{ display: "flex", gap: "2px" }}>
                           <button
                             type="button"
-                            disabled={actualIndex === 0}
-                            onClick={() => handleReorder(actualIndex, actualIndex - 1)}
-                            style={{ background: "none", border: "none", color: actualIndex === 0 ? "#444" : "#C5A880", cursor: actualIndex === 0 ? "not-allowed" : "pointer", fontSize: "0.65rem" }}
+                            disabled={displayIndex === 0}
+                            onClick={() => handleReorder(displayIndex, displayIndex - 1)}
+                            style={{ background: "none", border: "none", color: displayIndex === 0 ? "#444" : "#C5A880", cursor: displayIndex === 0 ? "not-allowed" : "pointer", fontSize: "0.65rem" }}
                             title="Move Up"
                           >
                             ▲
                           </button>
                           <button
                             type="button"
-                            disabled={actualIndex === productsList.length - 1}
-                            onClick={() => handleReorder(actualIndex, actualIndex + 1)}
-                            style={{ background: "none", border: "none", color: actualIndex === productsList.length - 1 ? "#444" : "#C5A880", cursor: actualIndex === productsList.length - 1 ? "not-allowed" : "pointer", fontSize: "0.65rem" }}
+                            disabled={displayIndex === filtered.length - 1}
+                            onClick={() => handleReorder(displayIndex, displayIndex + 1)}
+                            style={{ background: "none", border: "none", color: displayIndex === filtered.length - 1 ? "#444" : "#C5A880", cursor: displayIndex === filtered.length - 1 ? "not-allowed" : "pointer", fontSize: "0.65rem" }}
                             title="Move Down"
                           >
                             ▼

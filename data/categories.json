@@ -155,19 +155,6 @@
     "guideTitle": "Chains Buying & Care Guide",
     "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
   },
-  "bangles": {
-    "slug": "bangles",
-    "parentSlug": "gold",
-    "title": "Bangles & Kadas",
-    "pageTitle": "Bangles & Kadas | Swarn Mahal Jewellers Ambikapur",
-    "badge": "NEW CURATION • LUXURY COLLECTION",
-    "subtitle": "Explore handcrafted Bangles & Kadas in pure BIS 916 gold and authentic gemstones.",
-    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
-    "circleImg": "/uploads/1787348810380_511183VAA2A00_1.webp",
-    "thumbnail_image": "/uploads/1787348810380_511183VAA2A00_1.webp",
-    "guideTitle": "Bangles Buying & Care Guide",
-    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
-  },
   "bracelet": {
     "slug": "bracelet",
     "parentSlug": "gold",
@@ -179,6 +166,19 @@
     "circleImg": "/uploads/1787348950913_JT02841-1YS300_1_lar.jpg",
     "thumbnail_image": "/uploads/1787348950913_JT02841-1YS300_1_lar.jpg",
     "guideTitle": "Bracelet Buying & Care Guide",
+    "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
+  },
+  "bangles": {
+    "slug": "bangles",
+    "parentSlug": "gold",
+    "title": "Bangles & Kadas",
+    "pageTitle": "Bangles & Kadas | Swarn Mahal Jewellers Ambikapur",
+    "badge": "NEW CURATION • LUXURY COLLECTION",
+    "subtitle": "Explore handcrafted Bangles & Kadas in pure BIS 916 gold and authentic gemstones.",
+    "heroBg": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
+    "circleImg": "/uploads/1787348810380_511183VAA2A00_1.webp",
+    "thumbnail_image": "/uploads/1787348810380_511183VAA2A00_1.webp",
+    "guideTitle": "Bangles Buying & Care Guide",
     "guideDesc": "Every design is crafted with BIS 916 certified hallmarked purity."
   },
   "diamond-rings": {

@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { CATEGORY_METADATA, PRODUCTS_CATALOG } from "../../../lib/catalogData";
 import { useApp } from "../../../context/AppContext";
 import { PricingEngine } from "../../../lib/pricingEngine";
-import { KaratType, MetalTone } from "../../../lib/types";
+import { KaratType, MetalTone, Product } from "../../../lib/types";
 import ProductCard from "../../../components/ProductCard";
 import { matchesSearchQuery } from "../../../lib/searchMatcher";
 
@@ -51,6 +51,18 @@ export default function CollectionPage() {
   };
 
   const { bullionRates, products, searchQuery, setSearchQuery } = useApp();
+  const [liveProducts, setLiveProducts] = useState<Product[]>(products);
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then(res => res.json())
+      .then(data => {
+        if (data && data.products && Array.isArray(data.products) && data.products.length > 0) {
+          setLiveProducts(data.products);
+        }
+      })
+      .catch(err => console.warn("Failed to load products in CollectionPage:", err));
+  }, []);
 
   // Filters State
   const [maxPrice, setMaxPrice] = useState<number>(350000);
@@ -79,7 +91,7 @@ export default function CollectionPage() {
 
   // 2. Dynamic sub-categories derived from products (e.g. custom sub-collections added in Admin)
   const currentMetal = (categorySlug === "all" || categorySlug === effectiveParentSlug) ? effectiveParentSlug : "";
-  products.forEach(p => {
+  liveProducts.forEach(p => {
     const isProductInParent = 
       categorySlug === "all" ||
       !currentMetal ||
@@ -104,8 +116,8 @@ export default function CollectionPage() {
   const subCollections = Array.from(subCollectionsMap.values());
   const parentMeta = parentSlug ? categoriesMap[parentSlug] : null;
 
-  // Filter Catalog
-  let filtered = products.filter(p => {
+  // Filter Catalog in exact Admin reordered sequence!
+  let filtered = liveProducts.filter(p => {
     if (categorySlug === "all") return true;
     if (categorySlug === "under-50k") {
       const bd = PricingEngine.calculateBreakdown(p, p.defaultKarat, bullionRates);
@@ -117,25 +129,25 @@ export default function CollectionPage() {
     // Main Metal Collection Filters
     if (normSlug === "gold") {
       return (
-        p.supportedKarats.some(k => ["24K", "22K", "18K", "14K"].includes(k)) ||
-        p.collection.toLowerCase().includes("gold") ||
-        p.title.toLowerCase().includes("gold") ||
-        p.category.toLowerCase().includes("gold")
+        p.primaryMaterial === "gold" ||
+        (!p.diamondSpecs && p.category !== "silverware" && !p.id.toLowerCase().startsWith("sil") && p.primaryMaterial !== "silver" && p.primaryMaterial !== "diamond")
       );
     }
     if (normSlug === "diamond") {
       return (
+        p.primaryMaterial === "diamond" ||
         Boolean(p.diamondSpecs) ||
         p.category.toLowerCase().includes("diamond") ||
-        p.title.toLowerCase().includes("diamond") ||
-        p.collection.toLowerCase().includes("diamond")
+        p.collection.toLowerCase().includes("diamond") ||
+        p.id.toLowerCase().includes("dia")
       );
     }
     if (normSlug === "silver") {
       return (
-        p.title.toLowerCase().includes("silver") ||
+        p.primaryMaterial === "silver" ||
         p.category.toLowerCase().includes("silver") ||
         p.collection.toLowerCase().includes("silver") ||
+        p.id.toLowerCase().startsWith("sil") ||
         p.title.toLowerCase().includes("payal")
       );
     }
