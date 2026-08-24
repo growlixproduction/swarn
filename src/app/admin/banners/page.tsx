@@ -3,19 +3,37 @@
 import React, { useState, useEffect } from "react";
 
 export default function AdminBannersPage() {
-  const [activeTab, setActiveTab] = useState<"hero" | "pages">("hero");
+  const [activeTab, setActiveTab] = useState<"hero" | "pages" | "showroom">("hero");
   const [loading, setLoading] = useState<boolean>(true);
   const [isSaving, setIsSaving] = useState<boolean>(false);
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
-  // Hero Slides & Page Banners State
+  // States
   const [heroSlides, setHeroSlides] = useState<any[]>([]);
   const [selectedSlideId, setSelectedSlideId] = useState<string>("");
 
   const [pageBanners, setPageBanners] = useState<Record<string, any>>({});
   const [selectedPageKey, setSelectedPageKey] = useState<string>("about");
 
-  // Fetch live banners on mount
+  const [showroomStory, setShowroomStory] = useState<any>({
+    badge: "ESTABLISHED 2015 • AMBIKAPUR, CHHATTISGARH",
+    title: "Welcome to Swarn Mahal Luxury Jewellers",
+    description: "Located at Church Road, Joda Pipal, Maharaja Gali, Ambikapur, Swarn Mahal has been the benchmark of purity, trust, and transparent pricing in North Chhattisgarh for over a decade.",
+    phone: "+91 99997 77740",
+    feature1Title: "100% BIS 916 Hallmarked Gold",
+    feature1Desc: "Every single gold ornament carries a verifiable 6-digit laser HUID stamp.",
+    feature2Title: "Certified Precision Weighing & Assay",
+    feature2Desc: "Zero wastage manipulation. Digital weights and karat purity tested right in front of you.",
+    feature3Title: "Lowest & Fair Making Charges",
+    feature3Desc: "Direct artisan pricing with transparent formula billing and zero hidden surcharges.",
+    galleryImg1: "/asset/WhatsApp%20Image%202026-08-13%20at%2012.17.43%20PM%20(10).jpeg",
+    galleryTag1: "Ambikapur Main Floor",
+    galleryImg2: "/asset/WhatsApp%20Image%202026-08-13%20at%2012.17.43%20PM%20(11).jpeg",
+    galleryTag2: "Live Karat Assay",
+    galleryImg3: "/asset/WhatsApp%20Image%202026-08-13%20at%2012.17.43%20PM%20(3).jpeg",
+    galleryTag3: "Bridal Trousseau Lounge"
+  });
+
   useEffect(() => {
     fetchBanners();
   }, []);
@@ -31,6 +49,9 @@ export default function AdminBannersPage() {
           setSelectedSlideId(data.heroSlides[0].id);
         }
         setPageBanners(data.pageBanners || {});
+        if (data.showroomStory && data.showroomStory.title) {
+          setShowroomStory(data.showroomStory);
+        }
       }
     } catch (err) {
       console.error("Failed to load banners:", err);
@@ -39,10 +60,8 @@ export default function AdminBannersPage() {
     }
   };
 
-  // Active Hero Slide Data
   const currentSlide = heroSlides.find(s => s.id === selectedSlideId) || heroSlides[0];
 
-  // Active Page Banner Data
   const currentBanner = pageBanners[selectedPageKey] || {
     pageKey: selectedPageKey,
     pageName: `${selectedPageKey.toUpperCase()} Page`,
@@ -50,17 +69,15 @@ export default function AdminBannersPage() {
     title: "Page Header Banner Title",
     subtitle: "Page banner subtitle description...",
     backgroundImage: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85",
-    overlayGradient: "linear-gradient(135deg, rgba(28, 25, 23, 0.95) 0%, rgba(17, 14, 12, 0.88) 100%)"
+    overlayGradient: "linear-gradient(180deg, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0.72) 100%)"
   };
 
-  // Update Hero Slide State
   const handleHeroSlideChange = (field: string, value: any) => {
     setHeroSlides(prev =>
       prev.map(s => (s.id === selectedSlideId ? { ...s, [field]: value } : s))
     );
   };
 
-  // Update Page Banner State
   const handlePageBannerChange = (field: string, value: any) => {
     setPageBanners(prev => ({
       ...prev,
@@ -72,7 +89,10 @@ export default function AdminBannersPage() {
     }));
   };
 
-  // Save all banners to API
+  const handleShowroomStoryChange = (field: string, value: any) => {
+    setShowroomStory((prev: any) => ({ ...prev, [field]: value }));
+  };
+
   const handleSaveAll = async () => {
     try {
       setIsSaving(true);
@@ -80,17 +100,17 @@ export default function AdminBannersPage() {
       const res = await fetch("/api/banners", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ heroSlides, pageBanners })
+        body: JSON.stringify({ heroSlides, pageBanners, showroomStory })
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        setSaveMessage({ type: "success", text: "All Banners & Page Headers updated live!" });
+        setSaveMessage({ type: "success", text: "All Banners, Page Content & Showroom Story updated live!" });
         setTimeout(() => setSaveMessage(null), 3500);
       } else {
-        setSaveMessage({ type: "error", text: data.error || "Failed to save banners." });
+        setSaveMessage({ type: "error", text: data.error || "Failed to save data." });
       }
     } catch (err: any) {
-      setSaveMessage({ type: "error", text: err.message || "Failed to save banners." });
+      setSaveMessage({ type: "error", text: err.message || "Failed to save data." });
     } finally {
       setIsSaving(false);
     }
@@ -100,7 +120,7 @@ export default function AdminBannersPage() {
     return (
       <div style={{ padding: "3rem", textAlign: "center", color: "#C5A880" }}>
         <i className="fa-solid fa-circle-notch fa-spin" style={{ fontSize: "2rem", marginBottom: "1rem" }}></i>
-        <p>Loading Banner & Hero Slider Studio...</p>
+        <p>Loading Banner & Website Content Studio...</p>
       </div>
     );
   }
@@ -110,9 +130,9 @@ export default function AdminBannersPage() {
       {/* Header */}
       <div className="admin-page-header" style={{ marginBottom: "1.5rem" }}>
         <div>
-          <h1 className="admin-page-title" style={{ fontSize: "1.6rem" }}>Hero Slider & Page Banners Studio</h1>
+          <h1 className="admin-page-title" style={{ fontSize: "1.6rem" }}>Website Banners & Page Content Studio</h1>
           <p className="admin-page-desc" style={{ fontSize: "0.85rem" }}>
-            Customize Homepage Hero Curved Slides and Top Banners for About Us, Calculator, Gold, Diamond, and Silver pages.
+            Customize Homepage Hero Slider, Inner Page Banners (About, Calculator, Collections), and About Us Showroom Story.
           </p>
         </div>
 
@@ -123,7 +143,7 @@ export default function AdminBannersPage() {
           disabled={isSaving}
         >
           {isSaving ? <i className="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-floppy-disk"></i>}
-          <span>{isSaving ? "Saving Live..." : "Save All Banners Live"}</span>
+          <span>{isSaving ? "Saving Live..." : "Save All Live"}</span>
         </button>
       </div>
 
@@ -148,14 +168,14 @@ export default function AdminBannersPage() {
         </div>
       )}
 
-      {/* Main Mode Tabs (Homepage Hero Slides vs Inner Page Top Banners) */}
-      <div style={{ display: "flex", gap: "1rem", marginBottom: "1.5rem", borderBottom: "1px solid rgba(197, 168, 128, 0.2)", paddingBottom: "0.75rem" }}>
+      {/* Main Mode Tabs */}
+      <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1.5rem", borderBottom: "1px solid rgba(197, 168, 128, 0.2)", paddingBottom: "0.75rem", flexWrap: "wrap" }}>
         <button
           type="button"
           style={{
             padding: "0.65rem 1.25rem",
             borderRadius: "10px",
-            fontSize: "0.9rem",
+            fontSize: "0.88rem",
             fontWeight: 700,
             cursor: "pointer",
             border: activeTab === "hero" ? "1.5px solid #C5A880" : "1px solid rgba(197, 168, 128, 0.25)",
@@ -176,7 +196,7 @@ export default function AdminBannersPage() {
           style={{
             padding: "0.65rem 1.25rem",
             borderRadius: "10px",
-            fontSize: "0.9rem",
+            fontSize: "0.88rem",
             fontWeight: 700,
             cursor: "pointer",
             border: activeTab === "pages" ? "1.5px solid #C5A880" : "1px solid rgba(197, 168, 128, 0.25)",
@@ -189,7 +209,28 @@ export default function AdminBannersPage() {
           onClick={() => setActiveTab("pages")}
         >
           <i className="fa-solid fa-heading"></i>
-          <span>Inner Page Top Banners (About, Calculator, Collections)</span>
+          <span>Page Top Header Banners (About, Calculator, Collections)</span>
+        </button>
+
+        <button
+          type="button"
+          style={{
+            padding: "0.65rem 1.25rem",
+            borderRadius: "10px",
+            fontSize: "0.88rem",
+            fontWeight: 700,
+            cursor: "pointer",
+            border: activeTab === "showroom" ? "1.5px solid #C5A880" : "1px solid rgba(197, 168, 128, 0.25)",
+            background: activeTab === "showroom" ? "#C5A880" : "#110E0C",
+            color: activeTab === "showroom" ? "#110E0C" : "#FFFFFF",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.5rem"
+          }}
+          onClick={() => setActiveTab("showroom")}
+        >
+          <i className="fa-solid fa-store"></i>
+          <span>About Us Showroom Story & Gallery</span>
         </button>
       </div>
 
@@ -311,41 +352,6 @@ export default function AdminBannersPage() {
                   onChange={e => handleHeroSlideChange("backgroundImage", e.target.value)}
                 />
               </div>
-
-              {/* Live Preview Card */}
-              <div style={{ marginTop: "1.5rem", borderTop: "1px solid rgba(197, 168, 128, 0.2)", paddingTop: "1.25rem" }}>
-                <label className="admin-label" style={{ color: "#F5EAD6", fontWeight: 700, marginBottom: "0.5rem" }}>
-                  Live Slide Preview:
-                </label>
-                <div
-                  style={{
-                    position: "relative",
-                    borderRadius: "14px",
-                    overflow: "hidden",
-                    height: "180px",
-                    backgroundImage: `url(${currentSlide.backgroundImage})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    display: "flex",
-                    alignItems: "center",
-                    padding: "1.5rem",
-                    color: "#FFFFFF"
-                  }}
-                >
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 100%)" }} />
-                  <div style={{ position: "relative", zIndex: 2, maxWidth: "80%" }}>
-                    <span style={{ fontSize: "0.65rem", background: "rgba(197, 168, 128, 0.3)", color: "#F5EAD6", border: "1px solid #C5A880", padding: "0.15rem 0.5rem", borderRadius: "10px", fontWeight: 700 }}>
-                      {currentSlide.tagBadge}
-                    </span>
-                    <h4 style={{ fontSize: "1.1rem", fontWeight: 700, marginTop: "0.35rem", marginBottom: "0.25rem" }}>
-                      {currentSlide.titleMain} <span style={{ color: "#C5A880", fontStyle: "italic" }}>{currentSlide.titleItalic}</span>
-                    </h4>
-                    <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.8)", margin: 0, lineClamp: 2, overflow: "hidden" }}>
-                      {currentSlide.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
             </div>
           )}
         </div>
@@ -354,7 +360,6 @@ export default function AdminBannersPage() {
       {/* TAB 2: INNER PAGE TOP BANNERS STUDIO */}
       {activeTab === "pages" && (
         <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: "1.75rem" }}>
-          {/* Left Page Selector List */}
           <div className="admin-card">
             <h3 style={{ fontSize: "1.05rem", color: "#F5EAD6", marginBottom: "1rem", fontFamily: "var(--font-serif)" }}>
               Select Page Top Banner
@@ -393,17 +398,15 @@ export default function AdminBannersPage() {
                         {b?.title || "Default Banner"}
                       </span>
                     </div>
-                    <i className="fa-solid fa-chevron-right" style={{ fontSize: "0.75rem", color: "#C5A880" }}></i>
                   </div>
                 );
               })}
             </div>
           </div>
 
-          {/* Right Editor for Selected Page Banner */}
           <div className="admin-card">
             <h3 style={{ fontSize: "1.05rem", color: "#F5EAD6", marginBottom: "1.25rem", fontFamily: "var(--font-serif)" }}>
-              Editing Page Banner: <span style={{ color: "#C5A880" }}>{currentBanner.pageName || selectedPageKey.toUpperCase()}</span>
+              Editing Banner: <span style={{ color: "#C5A880" }}>{currentBanner.pageName || selectedPageKey.toUpperCase()}</span>
             </h3>
 
             <div className="admin-form-group">
@@ -445,39 +448,130 @@ export default function AdminBannersPage() {
                 onChange={e => handlePageBannerChange("backgroundImage", e.target.value)}
               />
             </div>
+          </div>
+        </div>
+      )}
 
-            {/* Live Page Banner Preview */}
-            <div style={{ marginTop: "1.5rem", borderTop: "1px solid rgba(197, 168, 128, 0.2)", paddingTop: "1.25rem" }}>
-              <label className="admin-label" style={{ color: "#F5EAD6", fontWeight: 700, marginBottom: "0.5rem" }}>
-                Live Page Banner Preview:
-              </label>
-              <div
-                style={{
-                  position: "relative",
-                  borderRadius: "14px",
-                  overflow: "hidden",
-                  padding: "2.5rem 1.5rem",
-                  backgroundImage: `url(${currentBanner.backgroundImage || "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1600&q=85"})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  color: "#FFFFFF",
-                  textAlign: "center"
-                }}
-              >
-                <div style={{ position: "absolute", inset: 0, background: currentBanner.overlayGradient || "linear-gradient(135deg, rgba(28, 25, 23, 0.95) 0%, rgba(17, 14, 12, 0.88) 100%)" }} />
-                <div style={{ position: "relative", zIndex: 2, maxWidth: "700px", margin: "0 auto" }}>
-                  {currentBanner.badge && (
-                    <span style={{ display: "inline-block", background: "rgba(197, 168, 128, 0.2)", border: "1px solid #C5A880", padding: "0.2rem 0.65rem", borderRadius: "15px", fontSize: "0.68rem", color: "#F5EAD6", letterSpacing: "1.2px", marginBottom: "0.5rem", fontWeight: 700 }}>
-                      {currentBanner.badge}
-                    </span>
-                  )}
-                  <h3 style={{ fontSize: "1.4rem", fontWeight: 700, marginBottom: "0.35rem" }}>
-                    {currentBanner.title}
-                  </h3>
-                  <p style={{ fontSize: "0.82rem", color: "rgba(255,255,255,0.85)", margin: 0 }}>
-                    {currentBanner.subtitle}
-                  </p>
-                </div>
+      {/* TAB 3: ABOUT US SHOWROOM STORY & GALLERY */}
+      {activeTab === "showroom" && (
+        <div className="admin-card">
+          <h3 style={{ fontSize: "1.1rem", color: "#F5EAD6", marginBottom: "1.25rem", fontFamily: "var(--font-serif)" }}>
+            About Us Showroom Story & Gallery Manager
+          </h3>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1.25rem" }}>
+            <div className="admin-form-group">
+              <label className="admin-label">Showroom Tag Badge</label>
+              <input
+                type="text"
+                className="admin-input"
+                value={showroomStory.badge || ""}
+                onChange={e => handleShowroomStoryChange("badge", e.target.value)}
+              />
+            </div>
+
+            <div className="admin-form-group">
+              <label className="admin-label">Store Phone Number</label>
+              <input
+                type="text"
+                className="admin-input"
+                value={showroomStory.phone || ""}
+                onChange={e => handleShowroomStoryChange("phone", e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="admin-form-group">
+            <label className="admin-label">Showroom Welcome Heading</label>
+            <input
+              type="text"
+              className="admin-input"
+              value={showroomStory.title || ""}
+              onChange={e => handleShowroomStoryChange("title", e.target.value)}
+            />
+          </div>
+
+          <div className="admin-form-group">
+            <label className="admin-label">Main Showroom Description Story</label>
+            <textarea
+              rows={3}
+              className="admin-textarea"
+              value={showroomStory.description || ""}
+              onChange={e => handleShowroomStoryChange("description", e.target.value)}
+            />
+          </div>
+
+          <h4 style={{ fontSize: "0.95rem", color: "#C5A880", marginTop: "1.5rem", marginBottom: "1rem", fontWeight: 700 }}>
+            <i className="fa-solid fa-images" style={{ marginRight: "0.4rem" }}></i> Showroom 3 Mosaic Gallery Photos
+          </h4>
+
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1rem" }}>
+            {/* Image 1 */}
+            <div style={{ background: "#110E0C", padding: "1rem", borderRadius: "10px", border: "1px solid rgba(197, 168, 128, 0.2)" }}>
+              <strong style={{ color: "#FFFFFF", fontSize: "0.82rem", display: "block", marginBottom: "0.5rem" }}>Gallery Photo 1 (Tall)</strong>
+              <div className="admin-form-group" style={{ marginBottom: "0.5rem" }}>
+                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Image URL</label>
+                <input
+                  type="text"
+                  className="admin-input"
+                  value={showroomStory.galleryImg1 || ""}
+                  onChange={e => handleShowroomStoryChange("galleryImg1", e.target.value)}
+                />
+              </div>
+              <div className="admin-form-group" style={{ marginBottom: 0 }}>
+                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Tag Badge</label>
+                <input
+                  type="text"
+                  className="admin-input"
+                  value={showroomStory.galleryTag1 || ""}
+                  onChange={e => handleShowroomStoryChange("galleryTag1", e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Image 2 */}
+            <div style={{ background: "#110E0C", padding: "1rem", borderRadius: "10px", border: "1px solid rgba(197, 168, 128, 0.2)" }}>
+              <strong style={{ color: "#FFFFFF", fontSize: "0.82rem", display: "block", marginBottom: "0.5rem" }}>Gallery Photo 2 (Square)</strong>
+              <div className="admin-form-group" style={{ marginBottom: "0.5rem" }}>
+                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Image URL</label>
+                <input
+                  type="text"
+                  className="admin-input"
+                  value={showroomStory.galleryImg2 || ""}
+                  onChange={e => handleShowroomStoryChange("galleryImg2", e.target.value)}
+                />
+              </div>
+              <div className="admin-form-group" style={{ marginBottom: 0 }}>
+                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Tag Badge</label>
+                <input
+                  type="text"
+                  className="admin-input"
+                  value={showroomStory.galleryTag2 || ""}
+                  onChange={e => handleShowroomStoryChange("galleryTag2", e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Image 3 */}
+            <div style={{ background: "#110E0C", padding: "1rem", borderRadius: "10px", border: "1px solid rgba(197, 168, 128, 0.2)" }}>
+              <strong style={{ color: "#FFFFFF", fontSize: "0.82rem", display: "block", marginBottom: "0.5rem" }}>Gallery Photo 3 (Square)</strong>
+              <div className="admin-form-group" style={{ marginBottom: "0.5rem" }}>
+                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Image URL</label>
+                <input
+                  type="text"
+                  className="admin-input"
+                  value={showroomStory.galleryImg3 || ""}
+                  onChange={e => handleShowroomStoryChange("galleryImg3", e.target.value)}
+                />
+              </div>
+              <div className="admin-form-group" style={{ marginBottom: 0 }}>
+                <label className="admin-label" style={{ fontSize: "0.7rem" }}>Tag Badge</label>
+                <input
+                  type="text"
+                  className="admin-input"
+                  value={showroomStory.galleryTag3 || ""}
+                  onChange={e => handleShowroomStoryChange("galleryTag3", e.target.value)}
+                />
               </div>
             </div>
           </div>

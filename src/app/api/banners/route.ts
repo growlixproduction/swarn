@@ -55,6 +55,7 @@ export async function GET() {
         banners: heroSlides,
         heroSlides: heroSlides,
         pageBanners: localData?.pageBanners || {},
+        showroomStory: localData?.showroomStory || {},
         source: 'database'
       });
     }
@@ -67,6 +68,7 @@ export async function GET() {
     banners: localData?.heroSlides || [],
     heroSlides: localData?.heroSlides || [],
     pageBanners: localData?.pageBanners || {},
+    showroomStory: localData?.showroomStory || {},
     source: 'file'
   });
 }
@@ -74,13 +76,14 @@ export async function GET() {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { heroSlides, pageBanners } = body;
+    const { heroSlides, pageBanners, showroomStory } = body;
 
     const currentData = readBannersFromFile() || {};
 
     const updatedData = {
       heroSlides: heroSlides || currentData.heroSlides || [],
-      pageBanners: pageBanners || currentData.pageBanners || {}
+      pageBanners: pageBanners || currentData.pageBanners || {},
+      showroomStory: showroomStory || currentData.showroomStory || {}
     };
 
     const saved = saveBannersToFile(updatedData);
@@ -88,7 +91,7 @@ export async function POST(req: Request) {
     if (saved) {
       return NextResponse.json({
         success: true,
-        message: "All Banners and Hero Slides updated successfully!",
+        message: "All Banners, Page Contents, and Showroom Story updated successfully!",
         data: updatedData
       });
     } else {

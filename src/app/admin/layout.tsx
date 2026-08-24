@@ -21,7 +21,7 @@ export default function AdminLayout({
     { label: "Add New Product", href: "/admin/products/new", icon: "fa-plus-circle" },
     { label: "Categories & Collections", href: "/admin/collections", icon: "fa-folder-tree" },
     { label: "Gifting & Occasion Suite", href: "/admin/gifting", icon: "fa-gift" },
-    { label: "Banners & Hero Slider", href: "/admin/banners", icon: "fa-image" },
+    { label: "Banners & Page Content", href: "/admin/banners", icon: "fa-sliders" },
     { label: "Bullion Rates & Policy", href: "/admin/rates", icon: "fa-coins" },
     { label: "UGC Video Reels & Shorts", href: "/admin/gallery", icon: "fa-film" }
   ];

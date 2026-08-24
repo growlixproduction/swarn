@@ -23,7 +23,7 @@
       "description": "Flat 20% Off on making charges across all 22K Hallmark gold & bridal rani haar suites.",
       "buttonText": "SHOP FESTIVE",
       "buttonLink": "/collections/gold",
-      "backgroundImage": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (1).jpeg",
+      "backgroundImage": "/asset/WhatsApp%20Image%202026-08-13%20at%2012.17.43%20PM%20(1).jpeg",
       "overlayGradient": "linear-gradient(90deg, rgba(16, 12, 10, 0.85) 0%, rgba(16, 12, 10, 0.6) 50%, transparent 100%)"
     },
     {
@@ -49,14 +49,14 @@
       "description": "North Chhattisgarh's benchmark showroom on Church Road, Joda Pipal, Maharaja Gali.",
       "buttonText": "VISIT SHOWROOM",
       "buttonLink": "/#showroom-section",
-      "backgroundImage": "/asset/WhatsApp Image 2026-08-13 at 12.17.43 PM (10).jpeg",
+      "backgroundImage": "/asset/WhatsApp%20Image%202026-08-13%20at%2012.17.43%20PM%20(10).jpeg",
       "overlayGradient": "linear-gradient(90deg, rgba(16, 12, 10, 0.85) 0%, rgba(16, 12, 10, 0.6) 50%, transparent 100%)"
     }
   ],
   "pageBanners": {
     "about": {
       "pageKey": "about",
-      "pageName": "About Us Page",
+      "pageName": "About Us Page Header",
       "badge": "OUR HERITAGE & LEGACY",
       "title": "Crafting Timeless Elegance Since 2015",
       "subtitle": "Swarn Mahal Jewellers Ambikapur represents purity, craftsmanship, and trust.",
@@ -108,5 +108,23 @@
       "backgroundImage": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=1600&q=85",
       "overlayGradient": "linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(17, 14, 12, 0.75) 100%)"
     }
+  },
+  "showroomStory": {
+    "badge": "ESTABLISHED 2015 • AMBIKAPUR, CHHATTISGARH",
+    "title": "Welcome to Swarn Mahal Luxury Jewellers",
+    "description": "Located at Church Road, Joda Pipal, Maharaja Gali, Ambikapur, Swarn Mahal has been the benchmark of purity, trust, and transparent pricing in North Chhattisgarh for over a decade.",
+    "phone": "+91 99997 77740",
+    "feature1Title": "100% BIS 916 Hallmarked Gold",
+    "feature1Desc": "Every single gold ornament carries a verifiable 6-digit laser HUID stamp.",
+    "feature2Title": "Certified Precision Weighing & Assay",
+    "feature2Desc": "Zero wastage manipulation. Digital weights and karat purity tested right in front of you.",
+    "feature3Title": "Lowest & Fair Making Charges",
+    "feature3Desc": "Direct artisan pricing with transparent formula billing and zero hidden surcharges.",
+    "galleryImg1": "/asset/WhatsApp%20Image%202026-08-13%20at%2012.17.43%20PM%20(10).jpeg",
+    "galleryTag1": "Ambikapur Main Floor",
+    "galleryImg2": "/asset/WhatsApp%20Image%202026-08-13%20at%2012.17.43%20PM%20(11).jpeg",
+    "galleryTag2": "Live Karat Assay",
+    "galleryImg3": "/asset/WhatsApp%20Image%202026-08-13%20at%2012.17.43%20PM%20(3).jpeg",
+    "galleryTag3": "Bridal Trousseau Lounge"
   }
 }
