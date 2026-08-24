@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 
 interface StoryItem {
@@ -22,25 +22,12 @@ const DEFAULT_STORIES: StoryItem[] = [
   { label: "Bracelet", href: "/collections/bracelet", img: "/uploads/1787348950913_JT02841-1YS300_1_lar.jpg" }
 ];
 
-const MAIN_STORY_ORDER = [
-  "all",
-  "rings",
-  "necklace",
-  "earrings",
-  "nose-pins",
-  "gold-hoops-balis",
-  "pendants",
-  "mangalsutra",
-  "chains",
-  "bangles",
-  "bracelet"
-];
-
-const EXCLUDED_STORY_SLUGS = ["gold", "diamond", "silver", "other"];
-
 const CategoryStories: React.FC = () => {
   const [stories, setStories] = useState<StoryItem[]>(DEFAULT_STORIES);
   const [scrollSpeed, setScrollSpeed] = useState<number>(25);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const isInteractingRef = useRef<boolean>(false);
+  const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     // Load categories from API in exact Admin reordered sequence
@@ -81,13 +68,55 @@ const CategoryStories: React.FC = () => {
       .catch(err => console.warn("Failed to load settings:", err));
   }, []);
 
-  // Duplicate list to create a seamless infinite loop for mobile marquee
+  // Smooth Auto-Scroll Loop with Touch Pause & Native Drag Support
+  useEffect(() => {
+    let animId: number;
+    let lastTime = performance.now();
+
+    // Pixels per second based on scrollSpeed setting
+    const pixelsPerSecond = Math.max(12, 500 / scrollSpeed);
+
+    const step = (now: number) => {
+      const dt = (now - lastTime) / 1000;
+      lastTime = now;
+
+      if (!isInteractingRef.current && scrollRef.current) {
+        const el = scrollRef.current;
+        const maxScroll = el.scrollWidth / 2;
+        el.scrollLeft += pixelsPerSecond * dt;
+
+        // Loop seamlessly when half of duplicate list is scrolled
+        if (el.scrollLeft >= maxScroll) {
+          el.scrollLeft -= maxScroll;
+        }
+      }
+
+      animId = requestAnimationFrame(step);
+    };
+
+    animId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animId);
+  }, [scrollSpeed, stories]);
+
+  const handleTouchStart = () => {
+    isInteractingRef.current = true;
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+  };
+
+  const handleTouchEnd = () => {
+    if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+    // Resume auto-scroll after 2.5 seconds of user release
+    resumeTimeoutRef.current = setTimeout(() => {
+      isInteractingRef.current = false;
+    }, 2500);
+  };
+
   const marqueeList = [...stories, ...stories];
 
   return (
-    <section className="category-stories-section reveal-up">
+    <section className="category-stories-section reveal-up" style={{ padding: "1.5rem 0 1rem" }}>
       <div className="container">
-        {/* DESKTOP STATIC CENTERED ROW (No Auto-Scroll on Desktop Screens) */}
+        {/* DESKTOP STATIC CENTERED ROW */}
         <div className="desktop-category-stories-track">
           {stories.map((s, idx) => (
             <Link key={idx} href={s.href} className="category-story-card">
@@ -100,18 +129,33 @@ const CategoryStories: React.FC = () => {
           ))}
         </div>
 
-        {/* MOBILE CONTINUOUS MARQUEE TRACK (Only Auto-Scrolls on Mobile Phones < 768px) */}
-        <div className="mobile-category-stories-wrapper">
+        {/* MOBILE CONTINUOUS & NATIVE TOUCH SCROLLABLE TRACK */}
+        <div
+          className="mobile-category-stories-wrapper"
+          style={{ position: "relative", overflow: "hidden" }}
+        >
           {/* Gradient Edge Blurs */}
-          <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: "30px", background: "linear-gradient(to right, var(--bg-primary) 0%, transparent 100%)", zIndex: 3, pointerEvents: "none" }} />
-          <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: "30px", background: "linear-gradient(to left, var(--bg-primary) 0%, transparent 100%)", zIndex: 3, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: "24px", background: "linear-gradient(to right, var(--bg-primary) 0%, transparent 100%)", zIndex: 3, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: "24px", background: "linear-gradient(to left, var(--bg-primary) 0%, transparent 100%)", zIndex: 3, pointerEvents: "none" }} />
 
           <div
-            className="category-stories-marquee-track"
-            style={{ animationDuration: `${scrollSpeed}s` }}
+            ref={scrollRef}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+            onMouseDown={handleTouchStart}
+            onMouseUp={handleTouchEnd}
+            style={{
+              display: "flex",
+              gap: "1.2rem",
+              overflowX: "auto",
+              padding: "0.5rem 0.75rem 0.85rem",
+              WebkitOverflowScrolling: "touch",
+              cursor: "grab"
+            }}
+            className="no-scrollbar"
           >
             {marqueeList.map((s, idx) => (
-              <Link key={idx} href={s.href} className="category-story-card">
+              <Link key={idx} href={s.href} className="category-story-card" style={{ flexShrink: 0 }}>
                 <div className="story-avatar-wrap category-story-ring">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={s.img} alt={s.label} className="story-avatar-img category-story-img" />
