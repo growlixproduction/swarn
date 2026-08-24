@@ -428,12 +428,15 @@ export default function Header() {
               width: "350px",
               maxWidth: "90vw",
               height: "100vh",
+              maxHeight: "100vh",
               background: "#FFFFFF",
               boxShadow: "-10px 0 40px rgba(0,0,0,0.4)",
               display: "flex",
               flexDirection: "column",
               zIndex: 2,
-              animation: "slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1)"
+              animation: "slideInRight 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+              overflowY: "auto",
+              WebkitOverflowScrolling: "touch"
             }}
           >
             {/* Drawer Header */}
@@ -545,7 +548,7 @@ export default function Header() {
                       </div>
                     </div>
 
-                    {/* Collapsible Sub-Collections 1-Column Vertical List inside Drawer */}
+                    {/* Collapsible Sub-Collections 1-Column Vertical Scrollable List inside Drawer */}
                     {isExpanded && subItems.length > 0 && (
                       <div
                         style={{
@@ -554,7 +557,11 @@ export default function Header() {
                           borderTop: "1px solid rgba(197, 168, 128, 0.3)",
                           display: "flex",
                           flexDirection: "column",
-                          gap: "0.5rem"
+                          gap: "0.5rem",
+                          maxHeight: "260px",
+                          overflowY: "auto",
+                          WebkitOverflowScrolling: "touch",
+                          overscrollBehaviorY: "contain"
                         }}
                       >
                         <Link
