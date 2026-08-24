@@ -215,6 +215,35 @@ export default function ProductDetailPage() {
               </div>
               <strong style={{ color: "var(--gold-deep)" }}>{formatTimer(priceLockSeconds)}</strong>
             </div>
+
+            {/* PROMINENT DIAMOND / SOLITAIRE DETAILS CARD */}
+            {product.diamondSpecs && (product.diamondSpecs.totalCaratWeight > 0 || (product.diamondSpecs as any).carat > 0) && (
+              <div style={{ background: "linear-gradient(135deg, #1C1917 0%, #2A2421 100%)", borderRadius: "10px", padding: "0.85rem 1rem", marginTop: "0.75rem", border: "1.5px solid var(--gold-primary)", color: "#FFFFFF", boxShadow: "0 4px 15px rgba(0,0,0,0.15)" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.4rem" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                    <i className="fa-solid fa-gem" style={{ color: "#E0E7FF", fontSize: "1.1rem" }}></i>
+                    <span style={{ fontSize: "0.88rem", fontWeight: 700, color: "#F5EAD6" }}>Diamond / Solitaire Included</span>
+                  </div>
+                  <span style={{ fontSize: "0.72rem", background: "rgba(197, 168, 128, 0.25)", color: "var(--gold-light)", padding: "0.15rem 0.55rem", borderRadius: "12px", border: "1px solid var(--gold-primary)", fontWeight: 700 }}>
+                    {product.diamondSpecs.clarity || "VVS-EF"} ({product.diamondSpecs.cut || "Round"})
+                  </span>
+                </div>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.5rem", fontSize: "0.78rem", color: "rgba(255,255,255,0.85)", paddingTop: "0.4rem", borderTop: "1px dashed rgba(197, 168, 128, 0.3)" }}>
+                  <div>
+                    <span style={{ display: "block", fontSize: "0.68rem", color: "var(--gold-light)" }}>Carat Weight</span>
+                    <strong style={{ fontSize: "0.92rem", color: "#FFFFFF" }}>{product.diamondSpecs.totalCaratWeight} ct</strong>
+                  </div>
+                  <div>
+                    <span style={{ display: "block", fontSize: "0.68rem", color: "var(--gold-light)" }}>Price / Carat</span>
+                    <strong style={{ fontSize: "0.92rem", color: "#FFFFFF" }}>₹{product.diamondSpecs.pricePerCarat?.toLocaleString("en-IN")}/ct</strong>
+                  </div>
+                  <div>
+                    <span style={{ display: "block", fontSize: "0.68rem", color: "var(--gold-light)" }}>Diamond Value</span>
+                    <strong style={{ fontSize: "0.92rem", color: "#F5EAD6" }}>₹{(product.diamondSpecs.totalCaratWeight * product.diamondSpecs.pricePerCarat)?.toLocaleString("en-IN")}</strong>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
 

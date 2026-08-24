@@ -180,7 +180,7 @@ export default function Header() {
             </div>
 
             {/* Center Search Box with Live Auto-Complete Dropdown */}
-            <div className="tanishq-search-box">
+            <div className="tanishq-search-box" style={{ position: "relative", zIndex: 999999 }}>
               <form onSubmit={handleSearchSubmit} className="tanishq-search-input-wrap">
                 <i className="fa-solid fa-magnifying-glass search-icon-left"></i>
                 <input
@@ -205,7 +205,24 @@ export default function Header() {
 
               {/* Live Search Results Dropdown Overlay */}
               {isSearchFocused && (
-                <div className="tanishq-search-dropdown" style={{ display: "block" }}>
+                <div
+                  className="tanishq-search-dropdown"
+                  style={{
+                    position: "absolute",
+                    top: "calc(100% + 8px)",
+                    left: 0,
+                    right: 0,
+                    minWidth: "350px",
+                    background: "#FFFFFF",
+                    borderRadius: "14px",
+                    boxShadow: "0 20px 50px rgba(0, 0, 0, 0.35)",
+                    border: "1.5px solid var(--gold-deep)",
+                    zIndex: 9999999,
+                    padding: "1rem",
+                    maxHeight: "450px",
+                    overflowY: "auto"
+                  }}
+                >
                   {searchQuery.trim() ? (
                     <div>
                       <div className="tanishq-dropdown-title">
