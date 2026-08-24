@@ -406,7 +406,7 @@ export default function Header() {
               <i className="fa-solid fa-circle-info"></i> About Us
             </Link>
             <Link href="/calculator" className="tanishq-cat-item" style={{ color: "var(--gold-deep)", fontWeight: 700 }}>
-              <i className="fa-solid fa-calculator"></i> Gold Calculator
+              <i className="fa-solid fa-calculator"></i> Calculator
             </Link>
           </div>
         </nav>
@@ -476,7 +476,7 @@ export default function Header() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 <i className="fa-solid fa-calculator" style={{ color: "#C59B27" }}></i>
-                <span>Gold Calculator</span>
+                <span>Calculator</span>
               </Link>
             </div>
 

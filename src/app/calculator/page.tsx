@@ -9,14 +9,14 @@ import { PricingEngine } from "@/lib/pricingEngine";
 export default function CalculatorPage() {
   const { bullionRates } = useApp();
 
-  // Calculator State
+  // Tool 1: Gold Jewellery & Bullion Estimator
   const [weightGrams, setWeightGrams] = useState<number>(10);
   const [karat, setKarat] = useState<KaratType>("22K");
   const [includeGst, setIncludeGst] = useState<boolean>(true);
   const [customGstPercent, setCustomGstPercent] = useState<number>(3);
   const [makingChargePercent, setMakingChargePercent] = useState<number>(10);
 
-  // Active Rate Per Gram
+  // Active Gold Rate Per Gram
   const ratePerGram =
     karat === "24K"
       ? bullionRates.gold24k
@@ -42,6 +42,20 @@ export default function CalculatorPage() {
   const grossScrapValue = oldGoldResult.grossValue;
   const customRefiningFee = Math.round(grossScrapValue * (refiningFeePercent / 100));
   const netExchangeCredit = Math.max(0, grossScrapValue - customRefiningFee);
+
+  // Tool 3: Live 925 Silver Jewellery & Bullion Estimator
+  const [silverWeightGrams, setSilverWeightGrams] = useState<number>(50);
+  const [silverPurity, setSilverPurity] = useState<number>(0.925);
+  const [includeSilverGst, setIncludeSilverGst] = useState<boolean>(true);
+  const [silverMakingPercent, setSilverMakingPercent] = useState<number>(12);
+
+  const base925Rate = bullionRates.silver925 || 180;
+  const silverBaseRatePerGram = Math.round(base925Rate * (silverPurity / 0.925));
+  const rawSilverCost = silverWeightGrams * silverBaseRatePerGram;
+  const silverMakingAmount = Math.round(rawSilverCost * (silverMakingPercent / 100));
+  const silverSubtotal = rawSilverCost + silverMakingAmount;
+  const silverGstAmount = includeSilverGst ? Math.round(silverSubtotal * 0.03) : 0;
+  const finalSilverCost = silverSubtotal + silverGstAmount;
 
   return (
     <div>
@@ -69,33 +83,34 @@ export default function CalculatorPage() {
               marginBottom: "0.85rem"
             }}
           >
-            TRANSPARENT BILLING ENGINE
+            TRANSPARENT LIVE BILLING ENGINE
           </span>
           <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(1.8rem, 3.5vw, 2.8rem)", fontWeight: 700, marginBottom: "0.5rem" }}>
-            Gold Rate & Purity Calculator
+            Live Gold & Silver Calculator
           </h1>
           <p style={{ fontSize: "0.95rem", color: "rgba(255,255,255,0.85)", margin: 0 }}>
-            Calculate exact jewellery & bullion costs with live market rates, customizable GST (3% / 0%), making charges, and old gold scrap exchange estimates.
+            Calculate exact jewellery & bullion costs with live market rates for Gold and Silver, customizable GST (3% / 0%), making charges, and old gold exchange estimates.
           </p>
         </div>
       </section>
 
       {/* Main Calculators Section */}
       <div className="container" style={{ padding: "3rem 1rem 5rem" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))", gap: "2rem" }}>
-          {/* Calculator 1: Gold Jewellery & Bullion Estimator */}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(330px, 1fr))", gap: "2rem" }}>
+          
+          {/* Tool 1: Gold Jewellery & Bullion Estimator */}
           <div className="tool-card" style={{ background: "#FFFFFF", borderRadius: "16px", padding: "1.75rem", border: "1px solid var(--border-light)", boxShadow: "0 10px 30px rgba(0,0,0,0.05)" }}>
             <div style={{ marginBottom: "1.25rem", borderBottom: "1px solid var(--border-light)", paddingBottom: "1rem" }}>
-              <h2 style={{ fontSize: "1.25rem", color: "var(--text-primary)", fontFamily: "var(--font-heading)", marginBottom: "0.35rem" }}>
-                <i className="fa-solid fa-calculator" style={{ color: "var(--gold-deep)", marginRight: "0.5rem" }}></i>
+              <h2 style={{ fontSize: "1.2rem", color: "var(--text-primary)", fontFamily: "var(--font-heading)", marginBottom: "0.35rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <i className="fa-solid fa-calculator" style={{ color: "var(--gold-deep)" }}></i>
                 Gold Jewellery & Bullion Estimator
               </h2>
               <p style={{ fontSize: "0.82rem", color: "var(--text-muted)", margin: 0 }}>
-                Calculate exact pure metal cost, making charges, and GST breakdown.
+                Calculate exact pure gold metal cost, making charges, and GST breakdown.
               </p>
             </div>
 
-            {/* GST Add / Remove Toggle Switcher */}
+            {/* GST Tax Mode */}
             <div className="tool-form-group" style={{ marginBottom: "1.25rem" }}>
               <label style={{ display: "block", marginBottom: "0.5rem", fontWeight: 700, fontSize: "0.85rem" }}>
                 GST Tax Mode:
@@ -223,23 +238,174 @@ export default function CalculatorPage() {
 
               <div style={{ borderTop: "1px solid var(--gold-primary)", paddingTop: "0.75rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div>
-                  <span style={{ fontSize: "0.76rem", color: "var(--text-muted)", display: "block" }}>ESTIMATED TOTAL VALUE</span>
+                  <span style={{ fontSize: "0.76rem", color: "var(--text-muted)", display: "block" }}>ESTIMATED GOLD TOTAL</span>
                   <strong style={{ fontSize: "1.35rem", color: "var(--gold-deep)" }}>
                     {PricingEngine.formatINR(finalTotalCost)}
                   </strong>
                 </div>
-                <Link href="/#products-section" className="btn btn-gold btn-sm">
-                  View Designs
+                <Link href="/collections/gold" className="btn btn-gold btn-sm">
+                  View Gold Designs
                 </Link>
               </div>
             </div>
           </div>
 
-          {/* Calculator 2: Old Gold Exchange & Scrap Calculator */}
+          {/* Tool 2: Live Silver Jewellery & Bullion Estimator (NEW) */}
           <div className="tool-card" style={{ background: "#FFFFFF", borderRadius: "16px", padding: "1.75rem", border: "1px solid var(--border-light)", boxShadow: "0 10px 30px rgba(0,0,0,0.05)" }}>
             <div style={{ marginBottom: "1.25rem", borderBottom: "1px solid var(--border-light)", paddingBottom: "1rem" }}>
-              <h2 style={{ fontSize: "1.25rem", color: "var(--text-primary)", fontFamily: "var(--font-heading)", marginBottom: "0.35rem" }}>
-                <i className="fa-solid fa-coins" style={{ color: "var(--rose-gold)", marginRight: "0.5rem" }}></i>
+              <h2 style={{ fontSize: "1.2rem", color: "var(--text-primary)", fontFamily: "var(--font-heading)", marginBottom: "0.35rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <i className="fa-solid fa-ring" style={{ color: "#71717A" }}></i>
+                Live Silver Jewellery & Bullion Estimator
+              </h2>
+              <p style={{ fontSize: "0.82rem", color: "var(--text-muted)", margin: 0 }}>
+                Calculate exact 925 sterling & 999 silver metal cost, making charges, and GST.
+              </p>
+            </div>
+
+            {/* GST Tax Mode */}
+            <div className="tool-form-group" style={{ marginBottom: "1.25rem" }}>
+              <label style={{ display: "block", marginBottom: "0.5rem", fontWeight: 700, fontSize: "0.85rem" }}>
+                GST Tax Mode:
+              </label>
+              <div style={{ display: "flex", gap: "0.5rem" }}>
+                <button
+                  type="button"
+                  style={{
+                    flex: 1,
+                    padding: "0.6rem 0.8rem",
+                    borderRadius: "8px",
+                    fontSize: "0.8rem",
+                    fontWeight: 700,
+                    cursor: "pointer",
+                    border: "1.5px solid #71717A",
+                    background: includeSilverGst ? "#3F3F46" : "#FFFFFF",
+                    color: includeSilverGst ? "#FFFFFF" : "var(--text-primary)",
+                    transition: "all 0.2s ease"
+                  }}
+                  onClick={() => setIncludeSilverGst(true)}
+                >
+                  <i className="fa-solid fa-check" style={{ marginRight: "0.35rem" }}></i>
+                  Include 3% GST
+                </button>
+
+                <button
+                  type="button"
+                  style={{
+                    flex: 1,
+                    padding: "0.6rem 0.8rem",
+                    borderRadius: "8px",
+                    fontSize: "0.8rem",
+                    fontWeight: 700,
+                    cursor: "pointer",
+                    border: "1.5px solid #71717A",
+                    background: !includeSilverGst ? "#3F3F46" : "#FFFFFF",
+                    color: !includeSilverGst ? "#FFFFFF" : "var(--text-primary)",
+                    transition: "all 0.2s ease"
+                  }}
+                  onClick={() => setIncludeSilverGst(false)}
+                >
+                  <i className="fa-solid fa-ban" style={{ marginRight: "0.35rem" }}></i>
+                  Remove GST (0%)
+                </button>
+              </div>
+            </div>
+
+            {/* Silver Weight Input + Quick Pills */}
+            <div className="tool-form-group" style={{ marginBottom: "1.25rem" }}>
+              <label style={{ display: "block", marginBottom: "0.4rem", fontWeight: 600, fontSize: "0.85rem" }}>
+                Net Silver Weight (Grams):
+              </label>
+              <input
+                type="number"
+                value={silverWeightGrams}
+                min="1"
+                step="1"
+                style={{ width: "100%", padding: "0.65rem", borderRadius: "8px", border: "1px solid var(--border-light)", fontSize: "1rem", fontWeight: 700 }}
+                onChange={e => setSilverWeightGrams(Math.max(0, parseFloat(e.target.value) || 0))}
+              />
+              <div style={{ display: "flex", gap: "0.35rem", marginTop: "0.45rem", flexWrap: "wrap" }}>
+                {[10, 25, 50, 100, 250, 500, 1000].map(w => (
+                  <button
+                    key={w}
+                    type="button"
+                    style={{ padding: "0.2rem 0.55rem", borderRadius: "4px", border: "1px solid var(--border-light)", background: "#F4F4F5", fontSize: "0.74rem", fontWeight: 600, cursor: "pointer" }}
+                    onClick={() => setSilverWeightGrams(w)}
+                  >
+                    {w >= 1000 ? `${w / 1000}kg` : `${w}g`}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Silver Purity Selector */}
+            <div className="tool-form-group" style={{ marginBottom: "1.25rem" }}>
+              <label style={{ display: "block", marginBottom: "0.4rem", fontWeight: 600, fontSize: "0.85rem" }}>
+                Silver Purity Standard:
+              </label>
+              <select
+                value={silverPurity}
+                style={{ width: "100%", padding: "0.65rem", borderRadius: "8px", border: "1px solid var(--border-light)", fontSize: "0.88rem" }}
+                onChange={e => setSilverPurity(parseFloat(e.target.value))}
+              >
+                <option value={0.925}>925 Sterling Silver (92.5%) — ₹{base925Rate.toLocaleString("en-IN")}/g</option>
+                <option value={0.999}>999 Pure Fine Silver (99.9%) — ₹{Math.round(base925Rate * 1.08).toLocaleString("en-IN")}/g</option>
+                <option value={0.800}>800 Standard Payal Silver (80.0%) — ₹{Math.round(base925Rate * 0.865).toLocaleString("en-IN")}/g</option>
+              </select>
+            </div>
+
+            {/* Silver Making Charge Percent */}
+            <div className="tool-form-group" style={{ marginBottom: "1.5rem" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.85rem", fontWeight: 600, marginBottom: "0.4rem" }}>
+                <span>Making Charges (%):</span>
+                <span style={{ color: "#3F3F46" }}>{silverMakingPercent}% (₹{silverMakingAmount.toLocaleString("en-IN")})</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="30"
+                step="1"
+                value={silverMakingPercent}
+                onChange={e => setSilverMakingPercent(Number(e.target.value))}
+                style={{ width: "100%", accentColor: "#3F3F46", cursor: "pointer" }}
+              />
+            </div>
+
+            {/* Silver Receipt Breakdown */}
+            <div style={{ background: "#F4F4F5", borderRadius: "12px", padding: "1.25rem", border: "1px solid #E4E4E7" }}>
+              <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem", fontSize: "0.82rem", marginBottom: "0.85rem" }}>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span>Base Silver Metal ({silverWeightGrams}g × ₹{silverBaseRatePerGram.toLocaleString("en-IN")}/g):</span>
+                  <strong>{PricingEngine.formatINR(rawSilverCost)}</strong>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between" }}>
+                  <span>Making Charges ({silverMakingPercent}%):</span>
+                  <strong>{PricingEngine.formatINR(silverMakingAmount)}</strong>
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-between", color: includeSilverGst ? "#27272A" : "var(--text-muted)" }}>
+                  <span>GST ({includeSilverGst ? "3%" : "0% Excluded"}):</span>
+                  <strong>{PricingEngine.formatINR(silverGstAmount)}</strong>
+                </div>
+              </div>
+
+              <div style={{ borderTop: "1px solid #A1A1AA", paddingTop: "0.75rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <span style={{ fontSize: "0.76rem", color: "var(--text-muted)", display: "block" }}>ESTIMATED SILVER TOTAL</span>
+                  <strong style={{ fontSize: "1.35rem", color: "#18181B" }}>
+                    {PricingEngine.formatINR(finalSilverCost)}
+                  </strong>
+                </div>
+                <Link href="/collections/silver" className="btn btn-outline btn-sm">
+                  View Silver Designs
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Tool 3: Old Gold Exchange & Scrap Calculator */}
+          <div className="tool-card" style={{ background: "#FFFFFF", borderRadius: "16px", padding: "1.75rem", border: "1px solid var(--border-light)", boxShadow: "0 10px 30px rgba(0,0,0,0.05)" }}>
+            <div style={{ marginBottom: "1.25rem", borderBottom: "1px solid var(--border-light)", paddingBottom: "1rem" }}>
+              <h2 style={{ fontSize: "1.2rem", color: "var(--text-primary)", fontFamily: "var(--font-heading)", marginBottom: "0.35rem", display: "flex", alignItems: "center", gap: "0.5rem" }}>
+                <i className="fa-solid fa-coins" style={{ color: "var(--rose-gold)" }}></i>
                 Old Gold Scrap Exchange Calculator
               </h2>
               <p style={{ fontSize: "0.82rem", color: "var(--text-muted)", margin: 0 }}>
@@ -318,6 +484,7 @@ export default function CalculatorPage() {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
